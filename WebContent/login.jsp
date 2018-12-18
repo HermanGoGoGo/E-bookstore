@@ -132,7 +132,7 @@
         	});
 			flag = true;
 		}
-		//用户名只能是15位以下的字母或数字
+		//一卡通只能是10位数字
 		var regExp = new RegExp("^[0-9_]{10,10}$");
 		if(!regExp.test(username)){
 			$.pt({
@@ -160,26 +160,31 @@
 				dataType:'json',
 				success:function(data){
 					console.log(data);
-					spop({			
-						template: '<h4 class="spop-title">登录成功</h4>即将3秒后前往首页',
-						position: 'top-center',
-						style: 'success',
-						autoclose: 3000,
-						onOpen : function(){
-							var second = 2;
-							var showPop = setInterval(function(){
-								if(second == 0){
-									clearInterval(showPop);
-								}
-								$('.spop-body').html('<h4 class="spop-title">注册成功</h4>即将于'+second+'秒后返回登录');
-								second--;
-							},1000);
-						},
-						onClose : function(){
-							goto_login();
-						}
-					});
-					return false;
+					console.log(data.obj);
+					if(data.value=="1"){
+						spop({			
+							template: '<h4 class="spop-title">登录成功</h4>即将3秒后前往首页',
+							position: 'top-center',
+							style: 'success',
+							autoclose: 3000,
+							onOpen : function(){
+								var second = 2;
+								var showPop = setInterval(function(){
+									if(second == 0){
+										clearInterval(showPop);
+									}
+									$('.spop-body').html('<h4 class="spop-title">登录成功</h4>即将于'+second+'秒后前往首页');
+									second--;
+								},1000);
+							},
+							onClose : function(){
+								window.location.href = "<%=path %>/toHomePage.action";
+							}
+						});
+					}else{
+						alert('登录失败');
+						goto_login();
+					}	
 				},
 				error:function(){
 					alert('登录失败');

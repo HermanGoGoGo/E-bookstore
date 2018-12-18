@@ -2,6 +2,8 @@ package com.herman.ebookstore.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.herman.ebookstore.pojo.User;
 
 /**

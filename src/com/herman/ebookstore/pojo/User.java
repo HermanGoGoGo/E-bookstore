@@ -20,7 +20,7 @@ public class User {
 	@Field
 	private Date updatetime;
 	@Field
-	private String role;
+	private String rolecode;
 
 	public int getId() {
 		return id;
@@ -62,12 +62,12 @@ public class User {
 		this.updatetime = updatetime;
 	}
 
-	public String getRole() {
-		return role;
+	public String getRolecode() {
+		return rolecode;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setRolecode(String rolecode) {
+		this.rolecode = rolecode;
 	}
 
 	public String getUsercode() {
@@ -81,9 +81,8 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", usercode=" + usercode + ", password=" + password
-				+ ", createtime=" + createtime + ", updatetime=" + updatetime + ", role=" + role + "]";
+				+ ", createtime=" + createtime + ", updatetime=" + updatetime + ", rolecode=" + rolecode + "]";
 	}
-	
 	
 
 }

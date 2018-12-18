@@ -12,7 +12,18 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
-	<!-- 核心控制器 -->
+	<!-- springmvc配置 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:spring/applicationContext*.xml,classpath:spring/mongoDB.xml</param-value>
+	</context-param>
+	
+	<!-- 使用监听器加载Spring配置文件 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<!-- 配置前端控制器 -->
 	<servlet>	
 		<servlet-name>springmvc</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -22,7 +33,8 @@
 		<param-value>classpath:spring/springmvc.xml</param-value>
 		</init-param>
 	</servlet>
-	<!-- 前端拦截器 -->
+	
+	<!-- 配置前端拦截路径-->
 	<servlet-mapping>
 		<servlet-name>springmvc</servlet-name>
 		<url-pattern>*.action</url-pattern>
