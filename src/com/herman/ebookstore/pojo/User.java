@@ -7,14 +7,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 @Document
 public class User {
-	@Id
-	private int id;
 	@Field
 	private String username;
-	@Field
+	@Id
 	private String usercode;
 	@Field
 	private String password;
+	@Field
+	private String phonenumber;
 	@Field
 	private Date createtime;
 	@Field
@@ -22,13 +22,6 @@ public class User {
 	@Field
 	private String rolecode;
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public String getUsername() {
 		return username;
@@ -44,6 +37,14 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public String getPhonenumber() {
+		return phonenumber;
+	}
+
+	public void setPhonenumber(String phonenumber) {
+		this.phonenumber = phonenumber;
 	}
 
 	public Date getCreatetime() {
@@ -80,9 +81,10 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", usercode=" + usercode + ", password=" + password
-				+ ", createtime=" + createtime + ", updatetime=" + updatetime + ", rolecode=" + rolecode + "]";
+		return "User [username=" + username + ", usercode=" + usercode + ", password=" + password + ", createtime="
+				+ createtime + ", updatetime=" + updatetime + ", rolecode=" + rolecode + "]";
 	}
+
 	
 
 }

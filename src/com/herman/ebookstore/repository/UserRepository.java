@@ -17,14 +17,6 @@ import com.herman.ebookstore.pojo.User;
  */
 public interface UserRepository extends CrudRepository<User, String> {
 	
-	/** 
-	 * @Method_Name: findById 
-	 * @Description: 通过id查询用户信息 * @param id
-	 * @Description: * @return User
-	 * @date Nov 23, 2018
-	 * @author 黄金宝 
-	 */
-	public User findById(int Id);
 	
 	/** 
 	 * @Method_Name: findByUsercode 
@@ -33,7 +25,7 @@ public interface UserRepository extends CrudRepository<User, String> {
 	 * @date 2018年11月27日
 	 * @author 黄金宝 
 	 */
-	public List<User> findByUsercode(String Usercode);
+	public User findByUsercode(String Usercode);
 	
 	
 
