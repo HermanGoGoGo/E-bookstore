@@ -59,7 +59,9 @@ public class LoginController extends BaseForSDK {
 				if (user.getPassword().equals(MD5Util.MD5Encode(password,"utf8"))) {
 					this.userRepository.save(user);
 					User user2 = this.userRepository.findByUsercode(user.getUsercode());
+					Long list= this.userRepository.count();
 					System.out.println(user2);
+					System.out.println(list);
 					json.setValue("1");
 					json.setObj(user);
 					break;
