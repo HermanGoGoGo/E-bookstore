@@ -13,7 +13,7 @@
     <!-- Default bean name is 'mongo' -->
     <mongo:mongo-client host="112.74.53.101" port="27017" id="mongo"/>
     
-    <mongo:db-factory dbname="user" mongo-ref="mongo" />
+    <mongo:db-factory dbname="Ebookstore" mongo-ref="mongo" />
 
 	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
 	  <constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
