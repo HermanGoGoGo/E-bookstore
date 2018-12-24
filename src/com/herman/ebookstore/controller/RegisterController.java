@@ -8,13 +8,12 @@ import java.util.Random;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.ibatis.annotations.Lang;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.alibaba.fastjson.JSON;
 import com.herman.ebookstore.base.BaseForSDK;
-import com.herman.ebookstore.pojo.SDKInfo;
 import com.herman.ebookstore.pojo.User;
 import com.herman.ebookstore.repository.UserRepository;
 import com.herman.ebookstore.sdk.impl.JsonReqClient;
@@ -42,17 +41,11 @@ public class RegisterController extends BaseForSDK {
 	private UserService userService;
 
 	@RequestMapping("getVerificationCode")
-	public String getVerificationCode(String phonenumber,String usercode, HttpServletResponse response) {
+	public String getVerificationCode(String phonenumber, HttpServletResponse response) {
 		System.out.println((int)((Math.random()*9+1)*100000)); 
 		String getPatam = String.valueOf(new Random().nextInt(899999) + 100000);
-		String result = this.jsonReqClient.sendSms(ACCOUNT_SID, AUTH_TOKEN, APPID, TEMPLATEID, getPatam , phonenumber, usercode);
+		String result = this.jsonReqClient.sendSms(ACCOUNT_SID, AUTH_TOKEN, APPID, TEMPLATEID, getPatam , phonenumber, "");
 		System.out.println("Response content is: " + result);
-		SDKInfo pushMsgContent =  JSON.parseObject(result,SDKInfo.class);
-		if(!"".equals(pushMsgContent.getUid()) && pushMsgContent.getUid() != null){
-			pushMsgContent.setParam(getPatam);
-		}
-		param=getPatam;
-		System.out.println(pushMsgContent);
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter writer = null;
 		try {
