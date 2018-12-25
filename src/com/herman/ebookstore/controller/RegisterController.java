@@ -43,15 +43,14 @@ public class RegisterController extends BaseForSDK {
 
 	@RequestMapping("getVerificationCode")
 	public String getVerificationCode(String phonenumber,String usercode, HttpServletResponse response) {
-		System.out.println((int)((Math.random()*9+1)*100000)); 
 		String getPatam = String.valueOf(new Random().nextInt(899999) + 100000);
 		String result = this.jsonReqClient.sendSms(ACCOUNT_SID, AUTH_TOKEN, APPID, TEMPLATEID, getPatam , phonenumber, usercode);
 		System.out.println("Response content is: " + result);
 		SDKInfo pushMsgContent =  JSON.parseObject(result,SDKInfo.class);
 		if(!"".equals(pushMsgContent.getUid()) && pushMsgContent.getUid() != null){
 			pushMsgContent.setParam(getPatam);
+			param=getPatam;
 		}
-		param=getPatam;
 		System.out.println(pushMsgContent);
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter writer = null;
@@ -79,22 +78,26 @@ public class RegisterController extends BaseForSDK {
 		json.setValue(StringUtils.EMPTY);
 		PrintWriter writer = null;
 		if(usercode !=null && !"".equals(usercode)){
-			user.setUsercode(usercode);
-			index = this.userService.getUserListWhere(user);
-			if(index == 0){
-				user.setUsername(username);
+			if(code.equals(param)) {
 				user.setUsercode(usercode);
-				user.setPassword(MD5Util.MD5Encode(password,"utf8"));
-				user.setPhonenumber(phonenumber);
-				user.setRolecode("user");
-				index = this.userService.insertNewUser(user);
-				if(index ==1){
-					json.setValue("1");
-				}else{				
-					json.setValue("3");
+				index = this.userService.getUserListWhere(user);
+				if(index == 0){
+					user.setUsername(username);
+					user.setUsercode(usercode);
+					user.setPassword(MD5Util.MD5Encode(password,"utf8"));
+					user.setPhonenumber(phonenumber);
+					user.setRolecode("user");
+					index = this.userService.insertNewUser(user);
+					if(index ==1){
+						json.setValue("1");
+					}else{				
+						json.setValue("3");
+					}
+				}else{
+					json.setValue("2");
 				}
-			}else{
-				json.setValue("2");
+			}else {
+				json.setValue("4");
 			}
 			try {
 				writer = response.getWriter();

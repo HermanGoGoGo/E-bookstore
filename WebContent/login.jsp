@@ -452,6 +452,7 @@
 						},
 						dataType: 'json',
 						success: function(data) {
+							console.log(data.value);
 							if(data.value == "1") {
 								spop({
 									template: '<h4 class="spop-title">注册成功</h4>即将3秒后前往登录界面',
@@ -494,6 +495,17 @@
 									content: "注册失败"
 								});
 								goto_register();
+								return false;
+							}else if(data.value == "4") {
+								$.pt({
+									target: $("#register-code"),
+									position: 'r',
+									align: 't',
+									width: 'auto',
+									height: 'auto',
+									content: "验证码输入错误请重新输入"
+								});
+								//goto_register();
 								return false;
 							}
 
@@ -999,10 +1011,8 @@
 														"phonenumber": phonenumber
 													},
 													dataType: 'json',
-													success: function(
-														data) {
-														console
-															.log(data);
+													success: function(data) {
+														//console.log(data);
 														if(data.code == "000000") {
 															$.pt({
 																target: $("#register-code"),
