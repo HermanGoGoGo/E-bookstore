@@ -46,7 +46,6 @@ public class RegisterController extends BaseForSDK {
 		String getPatam = String.valueOf(new Random().nextInt(899999) + 100000);
 		String result = this.jsonReqClient.sendSms(ACCOUNT_SID, AUTH_TOKEN, APPID, TEMPLATEID, getPatam , phonenumber, usercode);
 		System.out.println("Response content is: " + result);
-		System.out.println("Response content is: " + result);
 		SDKInfo pushMsgContent =  JSON.parseObject(result,SDKInfo.class);
 		if(!"".equals(pushMsgContent.getUid()) && pushMsgContent.getUid() != null){
 			pushMsgContent.setParam(getPatam);
