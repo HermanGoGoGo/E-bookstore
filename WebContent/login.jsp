@@ -204,6 +204,17 @@
 								});
 								goto_login();
 								return false;
+							} else{
+								$.pt({
+									target: $("#login-username"),
+									position: 'r',
+									align: 't',
+									width: 'auto',
+									height: 'auto',
+									content: "登陆失败"
+								});
+								goto_login();
+								return false;
 							}
 
 						},

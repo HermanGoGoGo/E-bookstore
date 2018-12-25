@@ -18,6 +18,7 @@ import com.herman.ebookstore.pojo.SDKInfo;
 import com.herman.ebookstore.pojo.User;
 import com.herman.ebookstore.repository.UserRepository;
 import com.herman.ebookstore.sdk.impl.JsonReqClient;
+import com.herman.ebookstore.service.SDKInfoService;
 import com.herman.ebookstore.service.UserService;
 import com.herman.ebookstore.util.IlismJSONEncoder;
 import com.herman.ebookstore.util.MD5Util;
@@ -40,6 +41,8 @@ public class RegisterController extends BaseForSDK {
 	
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private SDKInfoService sdkInfoService;
 
 	@RequestMapping("getVerificationCode")
 	public String getVerificationCode(String phonenumber,String usercode, HttpServletResponse response) {
@@ -50,6 +53,8 @@ public class RegisterController extends BaseForSDK {
 		if(!"".equals(pushMsgContent.getUid()) && pushMsgContent.getUid() != null){
 			pushMsgContent.setParam(getPatam);
 			param=getPatam;
+			int a = sdkInfoService.insertNewSDKInfo(pushMsgContent);
+			System.out.println(a);
 		}
 		System.out.println(pushMsgContent);
 		response.setContentType("text/html;charset=utf-8");

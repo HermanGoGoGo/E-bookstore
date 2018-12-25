@@ -1,5 +1,6 @@
 package com.herman.ebookstore.service;
 
+import com.herman.ebookstore.pojo.SDKInfo;
 
 /**
  * @ClassName: SDKInfoService
@@ -9,5 +10,5 @@ package com.herman.ebookstore.service;
  *
  */
 public interface SDKInfoService {
-
+	Integer insertNewSDKInfo(SDKInfo sdkInfo);
 }

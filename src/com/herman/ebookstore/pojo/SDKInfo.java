@@ -15,7 +15,7 @@ public class SDKInfo {
 	@Field
 	private String param;
 	@Field
-	private String create_date;
+	private String createdate;
 	@Field
 	private String mobile;
 	@Field
@@ -57,12 +57,15 @@ public class SDKInfo {
 		this.param = param;
 	}
 
-	public String getCreate_date() {
-		return create_date;
+
+	
+
+	public String getCreatedate() {
+		return createdate;
 	}
 
-	public void setCreate_date(String create_date) {
-		this.create_date = create_date;
+	public void setCreatedate(String createdate) {
+		this.createdate = createdate;
 	}
 
 	public String getMobile() {
@@ -99,8 +102,9 @@ public class SDKInfo {
 
 	@Override
 	public String toString() {
-		return "SDKInfo [code=" + code + ", count=" + count + ", create_date=" + create_date + ", mobile=" + mobile
-				+ ", msg=" + msg + ", smsid=" + smsid + ", uid=" + uid + "]";
+		return "SDKInfo [id=" + id + ", code=" + code + ", count=" + count + ", param=" + param + ", createdate="
+				+ createdate + ", mobile=" + mobile + ", msg=" + msg + ", smsid=" + smsid + ", uid=" + uid + "]";
 	}
 
+	
 }
