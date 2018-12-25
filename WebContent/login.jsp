@@ -12,7 +12,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		<title>登录6666666</title>
+		<title>登录777</title>
 		<link rel="stylesheet" href="<%=path%>/css/normalize.css">
 		<link rel="stylesheet" href="<%=path%>/css/login.css">
 		<link rel="stylesheet" href="<%=path%>/css/sign-up-login.css">
