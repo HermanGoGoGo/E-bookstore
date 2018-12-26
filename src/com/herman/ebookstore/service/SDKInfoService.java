@@ -11,4 +11,5 @@ import com.herman.ebookstore.pojo.SDKInfo;
  */
 public interface SDKInfoService {
 	Integer insertNewSDKInfo(SDKInfo sdkInfo);
+	SDKInfo selectOneSDKInfo(SDKInfo sdkInfo);
 }

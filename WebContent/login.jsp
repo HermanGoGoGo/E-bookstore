@@ -84,12 +84,12 @@
 			});
 
 			function goto_register() {
-				$("#register-username").val("");
+				/* $("#register-username").val("");
 				$("#register-password").val("");
 				$("#register-repassword").val("");
 				$("#register-code").val("");
 				$("#register-phone").val("");
-				$("#register-usercode").val("");
+				$("#register-usercode").val(""); */
 				$("#tab-2").prop("checked", true);
 			}
 
@@ -235,114 +235,6 @@
 			}
 
 			//注册
-			function verification() {
-				var username = $("#register-username").val(),
-					usercode = $("#register-usercode").val(),
-					password = $("#register-password").val(),
-					repassword = $("#register-repassword").val(),
-					phonenumber = $("#register-phone").val(),
-					code = $("#register-code").val(),
-					flag = false,
-					validatecode = null;
-				var regUsercode = new RegExp("^[0-9_]{10,10}$");
-				var regPassword = new RegExp("^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$");
-				//判断用户名密码是否为空
-
-				if(username == "") {
-					$.pt({
-						target: $("#register-username"),
-						position: 'r',
-						align: 't',
-						width: 'auto',
-						height: 'auto',
-						content: "用户名不能为空"
-					});
-					flag = true;
-				} else if(usercode == "") {
-					$.pt({
-						target: $("#register-usercode"),
-						position: 'r',
-						align: 't',
-						width: 'auto',
-						height: 'auto',
-						content: "一卡通账号不能为空"
-					});
-					flag = true;
-				} else if(!regUsercode.test(usercode)) {
-					$.pt({
-						target: $("#register-usercode"),
-						position: 'r',
-						align: 't',
-						width: 'auto',
-						height: 'auto',
-						content: "请输入正确的10位一卡通账号"
-					});
-					flag = true;
-				} else if(password == "") {
-					$.pt({
-						target: $("#register-password"),
-						position: 'r',
-						align: 't',
-						width: 'auto',
-						height: 'auto',
-						content: "密码不能为空"
-					});
-					flag = true;
-				} else if(!regPassword.test(password)) {
-					$.pt({
-						target: $("#register-password"),
-						position: 'r',
-						align: 't',
-						width: 'auto',
-						height: 'auto',
-						content: "请输入6-16位由数字及字母组成的密码"
-					});
-					flag = true;
-				} else if(password != repassword) {
-					$.pt({
-						target: $("#register-repassword"),
-						position: 'r',
-						align: 't',
-						width: 'auto',
-						height: 'auto',
-						content: "两次输入的密码不一致"
-					});
-					flag = true;
-				} else if(password == "") {
-					$.pt({
-						target: $("#register-password"),
-						position: 'r',
-						align: 't',
-						width: 'auto',
-						height: 'auto',
-						content: "密码不能为空"
-					});
-					flag = true;
-				} else if(phonenumber == "") {
-					$.pt({
-						target: $("#register-phone"),
-						position: 'r',
-						align: 't',
-						width: 'auto',
-						height: 'auto',
-						content: "电话号码不能为空"
-					});
-					flag = true;
-				} else if(code == "") {
-					$.pt({
-						target: $("#register-code"),
-						position: 'r',
-						align: 't',
-						width: 'auto',
-						height: 'auto',
-						content: "验证码不能为空"
-					});
-					flag = true;
-				}
-
-				return flag;
-
-			}
 
 			function register() {
 					var username = $("#register-username").val(),
@@ -498,12 +390,12 @@
 								return false;
 							} else if(data.value == "3") {
 								$.pt({
-									target: $("#register-usercode"),
+									target: $("#register-code"),
 									position: 'r',
 									align: 't',
 									width: 'auto',
 									height: 'auto',
-									content: "注册失败"
+									content: "请点击获取验证码"
 								});
 								goto_register();
 								return false;
@@ -514,7 +406,7 @@
 									align: 't',
 									width: 'auto',
 									height: 'auto',
-									content: "验证码输入错误请重新输入"
+									content: "验证码获取错误，请重新点击获取验证码"
 								});
 								//goto_register();
 								return false;
@@ -752,7 +644,7 @@
 						<div class="pad input-container">
 							<section class="content">
 								<span class="input input--hideo"> 
-									<input class="input__field input__field--hideo" type="text" id="register-username" utocomplete="off" placeholder="请输入用户名" maxlength="15" onkeyup="show_yhm(this.value)" /> 
+									<input class="input__field input__field--hideo" type="text" id="register-username" utocomplete="off" placeholder="请输入用户名" maxlength="15" onkeyup="show_yhm(this.value)" value="测试用户名" /> 
 									<script type="text/javascript">
 										function show_yhm(str){
 											//var reg = /^[0-9]{10}$/;
@@ -775,7 +667,7 @@
 								 	</label>
 								</span> 
 								<span class="input input--hideo"> 
-									<input class="input__field input__field--hideo" type="text" id="register-usercode" autocomplete="off" placeholder="请输入一卡通账号" maxlength="10" onkeyup="show_ykt(this.value)" /> 
+									<input class="input__field input__field--hideo" type="text" id="register-usercode" autocomplete="off" placeholder="请输入一卡通账号" maxlength="10" onkeyup="show_ykt(this.value)" value="2201504242" /> 
 									<script type="text/javascript">
 										function show_ykt(str){
 											var reg = new RegExp("^[0-9_]{10}$");
@@ -808,7 +700,7 @@
 									</label>
 								</span> 
 								<span class="input input--hideo"> 
-									<input class="input__field input__field--hideo" type="password" id="register-password" placeholder="请输入密码" maxlength="16" onkeyup="show_mm(this.value)" /> 
+									<input class="input__field input__field--hideo" type="password" id="register-password" placeholder="请输入密码" maxlength="16" onkeyup="show_mm(this.value)" value="123456"/> 
 									<script type="text/javascript">
 										function show_mm(str){
 											var reg = new RegExp("^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$");
@@ -841,14 +733,14 @@
 									</label>
 								</span> 
 								<span class="input input--hideo"> 
-									<input class="input__field input__field--hideo" type="password" id="register-repassword" placeholder="请确认密码" maxlength="16" />
+									<input class="input__field input__field--hideo" type="password" id="register-repassword" placeholder="请确认密码" maxlength="16" value="123456"/>
 									<label class="input__label input__label--hideo" for="register-repassword"> 
 										<i class="fa fa-fw fa-lock icon icon--hideo"></i> 
 										<span class="input__label-content input__label-content--hideo"></span>
 									</label>
 								</span> 
 								<span class="input input--hideo"> 
-									<input class="input__field input__field--hideo" type="text" id="register-phone" autocomplete="off" placeholder="请输入手机号" maxlength="15" onkeyup="show_sjh(this.value)"/> 
+									<input class="input__field input__field--hideo" type="text" id="register-phone" autocomplete="off" placeholder="请输入手机号" maxlength="15" onkeyup="show_sjh(this.value)" value="13507064221"/> 
 									<script type="text/javascript">
 										function show_sjh(str){
 											var reg = new RegExp("^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199|(147))\\d{8}$");
@@ -881,7 +773,7 @@
 									</label>
 								</span> 
 								<span class="input input--hideo"> 
-									<input class="input__field input__field--hideo" type="text" id="register-code" autocomplete="off" placeholder="请输入验证码" maxlength="6" /> 
+									<input class="input__field input__field--hideo" type="text" id="register-code" autocomplete="off" placeholder="请输入验证码" maxlength="6" value="443322"/> 
 									<label class="input__label input__label--hideo" for="register-code">
 										<i class="fa fa-fw fa-send-o icon icon--hideo"></i> 
 										<span class="input__label-content input__label-content--hideo"></span>

@@ -28,6 +28,6 @@ public class BaseForSDK {
 	/**
 	 * @Fields field:field:{todo}(默认模板编号)
 	 */
-	public final static String TEMPLATEID = "408872";
+	public final static String TEMPLATEID = "414612";
 
 }

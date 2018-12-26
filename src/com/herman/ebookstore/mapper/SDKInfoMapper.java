@@ -19,4 +19,13 @@ public interface SDKInfoMapper {
 	 * @author 黄金宝 
 	 */
 	Integer insertNewSDKInfo(SDKInfo sdkInfo);
+	
+	/** 
+	 * @Method_Name: selectOneSDKInfo 
+	 * @Description: * @param sdkInfo
+	 * @Description: * @return SDKInfo
+	 * @date 2018年12月26日
+	 * @author 黄金宝 
+	 */
+	SDKInfo selectOneSDKInfo(SDKInfo sdkInfo);
 }

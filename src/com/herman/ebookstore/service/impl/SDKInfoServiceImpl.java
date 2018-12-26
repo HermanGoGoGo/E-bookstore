@@ -12,10 +12,16 @@ public class SDKInfoServiceImpl implements SDKInfoService {
 
 	@Autowired
 	private SDKInfoMapper sdkInfoMapper;
+	
 	@Override
 	public Integer insertNewSDKInfo(SDKInfo sdkInfo) {
 		// TODO Auto-generated method stub
 		return sdkInfoMapper.insertNewSDKInfo(sdkInfo);
+	}
+	@Override
+	public SDKInfo selectOneSDKInfo(SDKInfo sdkInfo) {
+		// TODO Auto-generated method stub
+		return sdkInfoMapper.selectOneSDKInfo(sdkInfo);
 	}
 
 }

@@ -20,4 +20,14 @@
 		MSTB_SDKINFO(code,param,count,createdate,mobile,msg,smsid,uid)
 		values(#{code},#{param},#{count},sysdate(),#{mobile},#{msg},#{smsid},#{uid})
 	</insert>
+	<select id="selectOneSDKInfo" parameterType="com.herman.ebookstore.pojo.SDKInfo" resultMap="BaseResultMap">
+		select 
+		<include refid="Base_Column_List"></include>
+		from MSTB_SDKINFO 
+		where id=(
+					select MAX(id) 
+					from MSTB_SDKINFO 
+					where uid= #{uid} and mobile=#{mobile}
+				 )
+	</select>
 </mapper>

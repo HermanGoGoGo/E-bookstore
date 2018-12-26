@@ -39,11 +39,6 @@ public class LoginController extends BaseForSDK {
 
 	@RequestMapping("toLoginPage")
 	public String toLoginPage() {
-
-		// String result = this.jsonReqClient.sendSms(ACCOUNT_SID, AUTH_TOKEN,
-		// APPID, TEMPLATEID, "888", "18507043734","");
-		// System.out.println("Response content is: " + result);n
-		System.out.println("1");
 		return "login";
 	}
 

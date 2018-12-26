@@ -52,11 +52,8 @@ public class RegisterController extends BaseForSDK {
 		SDKInfo pushMsgContent =  JSON.parseObject(result,SDKInfo.class);
 		if(!"".equals(pushMsgContent.getUid()) && pushMsgContent.getUid() != null){
 			pushMsgContent.setParam(getPatam);
-			param=getPatam;
-			int a = sdkInfoService.insertNewSDKInfo(pushMsgContent);
-			System.out.println(a);
+			this.sdkInfoService.insertNewSDKInfo(pushMsgContent);
 		}
-		System.out.println(pushMsgContent);
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter writer = null;
 		try {
@@ -76,33 +73,40 @@ public class RegisterController extends BaseForSDK {
 	@RequestMapping("register")
 	public String register(String username, String password, String usercode, String phonenumber, String code,HttpServletResponse response) {	
 		User user =new User();
+		SDKInfo sdkInfo = new SDKInfo();
 		int index = -1;
-		System.out.println(param);
 		response.setContentType("text/html;charset=utf-8");
 		ReturnJson json = new ReturnJson(true);
 		json.setValue(StringUtils.EMPTY);
 		PrintWriter writer = null;
 		if(usercode !=null && !"".equals(usercode)){
-			if(code.equals(param)) {
-				user.setUsercode(usercode);
-				index = this.userService.getUserListWhere(user);
-				if(index == 0){
-					user.setUsername(username);
+			sdkInfo.setUid(usercode);
+			sdkInfo.setMobile(phonenumber);
+			sdkInfo=this.sdkInfoService.selectOneSDKInfo(sdkInfo);
+			try {
+				if(!"".equals(sdkInfo.getSmsid()) && "000000".equals(sdkInfo.getCode()) && code.equals(sdkInfo.getParam())) {
 					user.setUsercode(usercode);
-					user.setPassword(MD5Util.MD5Encode(password,"utf8"));
-					user.setPhonenumber(phonenumber);
-					user.setRolecode("user");
-					index = this.userService.insertNewUser(user);
-					if(index ==1){
-						json.setValue("1");
-					}else{				
-						json.setValue("3");
+					index = this.userService.getUserListWhere(user);
+					if(index == 0){
+						user.setUsername(username);
+						user.setUsercode(usercode);
+						user.setPassword(MD5Util.MD5Encode(password,"utf8"));
+						user.setPhonenumber(phonenumber);
+						user.setRolecode("user");
+						index = this.userService.insertNewUser(user);
+						if(index ==1){
+							json.setValue("1");
+						}
+					}else {
+						json.setValue("2");
 					}
-				}else{
-					json.setValue("2");
+				}else {
+					json.setValue("4");
 				}
-			}else {
-				json.setValue("4");
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+				json.setValue("3");
 			}
 			try {
 				writer = response.getWriter();
