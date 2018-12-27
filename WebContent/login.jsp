@@ -429,6 +429,8 @@
 				}
 			}
 
+			
+			
 			//重置密码
 			function forget() {
 				var usercode = $("#forget-usercode").val(),
@@ -446,6 +448,16 @@
 						width: 'auto',
 						height: 'auto',
 						content: "一卡通账号不能为空"
+					});
+					flag = true;
+				}else if(!regUsercode.test(usercode)) {
+					$.pt({
+						target: $("#forget-usercode"),
+						position: 'r',
+						align: 't',
+						width: 'auto',
+						height: 'auto',
+						content: "请输入正确的10位一卡通账号"
 					});
 					flag = true;
 				}
@@ -482,20 +494,8 @@
 					});
 					flag = true;
 				}
-				//用户名只能是15位以下的字母或数字
-				var regExp = new RegExp("^[a-zA-Z0-9_]{1,15}$");
-				if(!regExp.test(username)) {
-					$.pt({
-						target: $("#forget-username"),
-						position: 'r',
-						align: 't',
-						width: 'auto',
-						height: 'auto',
-						content: "用户名必须为15位以下的字母或数字"
-					});
-					flag = true;
-				}
-				//检查用户名是否存在
+				
+				//检查一卡通是否存在
 				//调后台方法
 
 				//检查注册码是否正确
