@@ -767,7 +767,7 @@
 												time(this);
 												$.ajax({
 													type: "post",
-													url: "<%=path%>/register/getVerificationCode.action",
+													url: "<%=path%>/forget/getVerificationCode.action",
 													data: {
 														"usercode" : usercode,
 														"phonenumber": phonenumber
