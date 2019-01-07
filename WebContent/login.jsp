@@ -774,7 +774,7 @@
 													},
 													dataType: 'json',
 													success: function(data) {
-														//console.log(data);
+														console.log(data);
 														if(data.code == "000000") {
 															$.pt({
 																target: $("#forget-phone"),

@@ -30,6 +30,7 @@ import com.herman.ebookstore.util.ReturnJson;
  *
  */
 @Controller
+@RequestMapping("forget")
 public class ForgetController extends BaseForSDK{
 	
 	JsonReqClient jsonReqClient = new JsonReqClient();
@@ -46,6 +47,8 @@ public class ForgetController extends BaseForSDK{
 		String getPatam = String.valueOf(new Random().nextInt(899999) + 100000);
 		String result = this.jsonReqClient.sendSms(ACCOUNT_SID, AUTH_TOKEN, APPID, TEMPLATEID, getPatam , phonenumber, usercode);
 		SDKInfo pushMsgContent =  JSON.parseObject(result,SDKInfo.class);
+		ReturnJson json = new ReturnJson(true);
+		json.setValue(StringUtils.EMPTY);
 		if(!"".equals(pushMsgContent.getUid()) && pushMsgContent.getUid() != null){
 			pushMsgContent.setParam(getPatam);
 			this.sdkInfoService.insertNewSDKInfo(pushMsgContent);
