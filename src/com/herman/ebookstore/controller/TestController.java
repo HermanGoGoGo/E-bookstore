@@ -10,22 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.herman.springmvc.exception.MyException;
 
-/**
-* @ClassName: homeController
-* @Description: TODO()
-* @author 黄金宝
-* @date 2018年12月28日
-*
-*/
 @Controller
-@RequestMapping("home")
-public class homeController {
-
-	@RequestMapping("toHomepage")
-	public String toHomepage(String searchByBookName) {
-		return "index";
-	}
-	
+public class TestController {
 	@RequestMapping("test")
 	public void test(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// 假设这里是跟据id查询商品信息，搜索不到商品

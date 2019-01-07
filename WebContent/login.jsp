@@ -547,7 +547,7 @@
 				background-repeat: no-repeat;
 				background-position: center center #2D0F0F;
 				background-color: #00BDDC;
-				background-image: url(images/snow.jpg);
+				background-image: url(<%=path%>/images/snow.jpg);
 				background-size: 100% 100%;
 			}
 			

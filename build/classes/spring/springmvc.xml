@@ -12,8 +12,12 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
-			<mvc:exclude-mapping path="/toLoginPage.action" />
-			<bean class="com.herman.ebookstore.interceptor.LoginInterceptor" />
+			<mvc:exclude-mapping path="/toLoginPage.action"/>
+			<mvc:exclude-mapping path="/toHome.action"/>
+			<mvc:exclude-mapping path="/toHomePage.action"/>
+			<mvc:exclude-mapping path="/home/*" />
+			<mvc:exclude-mapping path="/register/*" />
+			<bean class="com.herman.ebookstore.interceptor.UserLoginInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 	<!-- 扫描controller -->
