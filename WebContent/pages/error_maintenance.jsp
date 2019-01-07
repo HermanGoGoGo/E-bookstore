@@ -17,7 +17,7 @@
     <meta name="author" content="">
     <link rel="icon" href="<%=path%>/images/favicon.ico">
 
-    <title>Ebookstore - Under maintenance </title>
+    <title>e书网 - 正在维护中 </title>
   
 	<!-- Bootstrap 4.0-->
 	<link rel="stylesheet" href="<%=path%>/assets/vendor_components/bootstrap/dist/css/bootstrap.min.css">
@@ -48,9 +48,9 @@
 				  <div class="b-double border-gray rounded bg-secondary">
 					  <h1 class="text-white font-size-180 font-weight-bold error-page-title"> <i class="fa fa-gear fa-spin"></i></h1>
 					  <h1>${msg}</h1>
-					  <h3>We're sorry for the inconvenience.</h3>
-					  <h4 class="mb-25">Please check back later.</h4>	
-					  <div class="my-30"><a href="<%=path%>/toHomePage.action" class="btn btn-info btn-lg">Back to dashboard</a></div>
+					  <h3>给您带来不便，我们深表歉意。</h3>
+					  <h4 class="mb-25">请稍后再尝试。</h4>	
+					  <div class="my-30"><a href="<%=path%>/toHomePage.action" class="btn btn-info btn-lg">返回首页</a></div>
 				  </div>
 			  </div>				
 		  </div>
