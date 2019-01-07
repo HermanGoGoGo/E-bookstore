@@ -25,25 +25,4 @@ public class homeController {
 	public String toHomepage(String searchByBookName) {
 		return "index";
 	}
-	
-	@RequestMapping("test")
-	public void test(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// 假设这里是跟据id查询商品信息，搜索不到商品
-				if (true) {
-					throw new MyException("你查找的商品不存在，请确认信息！");
-				}
-
-				int i = 1 / 0;
-
-				// response响应用户请求
-				// response.sendRedirect("itemList.action");
-
-				// 设置响应的字符编码
-				// response.setContentType("text/html;charset=utf-8");
-				response.setCharacterEncoding("utf-8");
-
-				PrintWriter printWriter = response.getWriter();
-
-				printWriter.println("这个是response打印的消息");
-	}
 }
