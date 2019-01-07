@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,7 @@ public class LoginController extends BaseForSDK {
 	}
 
 	@RequestMapping("toHome")
-	public String toHome(String username, String password, HttpServletResponse response) {
+	public void toHome(String username, String password, HttpServletResponse response ,HttpSession session) {
 		List<User> userList = this.userService.getUserList();
 		response.setContentType("text/html;charset=utf-8");
 		ReturnJson json = new ReturnJson(true);
@@ -57,8 +58,9 @@ public class LoginController extends BaseForSDK {
 					Long list= this.userRepository.count();
 					System.out.println(user2);
 					System.out.println(list);
+					session.setAttribute("username", username);
 					json.setValue("1");
-					json.setObj(user);
+					//json.setObj(user);
 					break;
 				} else {
 					json.setValue("3");
@@ -79,13 +81,12 @@ public class LoginController extends BaseForSDK {
 			if (writer != null)
 				writer.close();
 		}
-		return null;
 	}
 
 	@RequestMapping("toHomePage")
 	public String toHomePage() {
 
-		return "home";
+		return "index";
 	}
 
 }

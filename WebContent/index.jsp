@@ -1,10 +1,11 @@
-﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+﻿﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 
 <%@ page contentType="text/html;charset=utf-8"%>
 <%
 	String path = request.getContextPath();
 
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+	
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,13 +17,13 @@
     <meta name="author" content="">
     <link rel="icon" href="<%=path%>/images/favicon.ico">
 
-    <title>Ekan Admin - Dashboard</title>
+    <title>e书网 - 首页</title>
     
 	<!-- Bootstrap 4.0-->
 	<link rel="stylesheet" href="<%=path%>/assets/vendor_components/bootstrap/dist/css/bootstrap.css">
 	
 	<!-- daterange picker -->	
-	<link rel="stylesheet" href="<%=path%>/assets/vendor_components/bootstrap-daterangepicker/daterangepicker.css">
+	<%-- <link rel="stylesheet" href="<%=path%>/assets/vendor_components/bootstrap-daterangepicker/daterangepicker.css"> --%>
 	
     <!-- c3 CSS -->
     <link rel="stylesheet" type="text/css" href="<%=path%>/assets/vendor_components/c3/c3.min.css">
@@ -52,7 +53,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index.html" class="logo">
+    <a href="<%=path%>/toHomePage.action" class="logo">
       <!-- mini logo -->
 	  <div class="logo-mini">
 		  <span class="light-logo"><img src="<%=path%>/images/logo-light.png" alt="logo"></span>
@@ -74,7 +75,7 @@
 		  <a id="toggle_res_search" data-toggle="collapse" data-target="#search_form" class="res-only-view" href="javascript:void(0);"><i class="mdi mdi-magnify"></i></a>
 		  <form id="search_form" role="search" class="top-nav-search pull-left collapse ml-20">
 				<div class="input-group">
-					<input type="text" name="exampleInput1Group2" class="form-control" placeholder="Search">
+					<input type="text" name="searchByBookName" class="form-control" placeholder="Search">
 						<span class="input-group-btn">
 							<button type="button" class="btn  btn-default" data-target="#search_form" data-toggle="collapse" aria-label="Close" aria-expanded="true" ><i class="mdi mdi-magnify"></i></button>
 						</span>
@@ -109,9 +110,7 @@
 				<ul class="menu sm-scrol">
 				  <li><!-- start message -->
 					<a href="#">
-					  <div class="pull-left">
-						<img src="<%=path%>/images/user2-160x160.jpg" class="rounded-circle" alt="User Image">
-					  </div>
+
 					  <div class="mail-contnet">
 						 <h4>
 						  Lorem Ipsum
@@ -186,192 +185,6 @@
 			  </li>
 			</ul>
 		  </li>
-		  <!-- Notifications -->
-		  <li class="dropdown notifications-menu">
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-			  <i class="mdi mdi-bell"></i>
-			</a>
-			<ul class="dropdown-menu animated bounceIn">
-
-			  <li class="header">
-				<div class="bg-light p-20">
-					<div class="flexbox">
-						<div>
-							<h4 class="mb-0 mt-0">Notifications</h4>
-						</div>
-						<div>
-							<a href="#" class="text-danger">Clear All</a>
-						</div>
-					</div>
-				</div>
-			  </li>
-
-			  <li>
-				<!-- inner menu: contains the actual data -->
-				<ul class="menu sm-scrol">
-				  <li>
-					<a href="#">
-					  <i class="fa fa-users text-info"></i> Curabitur id eros quis nunc suscipit blandit.
-					</a>
-				  </li>
-				  <li>
-					<a href="#">
-					  <i class="fa fa-warning text-warning"></i> Duis malesuada justo eu sapien elementum, in semper diam posuere.
-					</a>
-				  </li>
-				  <li>
-					<a href="#">
-					  <i class="fa fa-users text-danger"></i> Donec at nisi sit amet tortor commodo porttitor pretium a erat.
-					</a>
-				  </li>
-				  <li>
-					<a href="#">
-					  <i class="fa fa-shopping-cart text-success"></i> In gravida mauris et nisi
-					</a>
-				  </li>
-				  <li>
-					<a href="#">
-					  <i class="fa fa-user text-danger"></i> Praesent eu lacus in libero dictum fermentum.
-					</a>
-				  </li>
-				  <li>
-					<a href="#">
-					  <i class="fa fa-user text-primary"></i> Nunc fringilla lorem 
-					</a>
-				  </li>
-				  <li>
-					<a href="#">
-					  <i class="fa fa-user text-success"></i> Nullam euismod dolor ut quam interdum, at scelerisque ipsum imperdiet.
-					</a>
-				  </li>
-				</ul>
-			  </li>
-			  <li class="footer">
-				  <a href="#" class="bg-light">View all</a>
-			  </li>
-			</ul>
-		  </li>
-		  <!-- Tasks-->
-		  <li class="dropdown tasks-menu">
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-			  <i class="mdi mdi-bulletin-board"></i>
-			</a>
-			<ul class="dropdown-menu animated bounceIn">
-
-			  <li class="header">
-				<div class="p-20 bg-light">
-					<div class="flexbox">
-						<div>
-							<h4 class="mb-0 mt-0">Tasks</h4>
-						</div>
-						<div>
-							<a href="#" class="text-danger">Clear All</a>
-						</div>
-					</div>
-				</div>
-			  </li>
-
-			  <li>
-				<!-- inner menu: contains the actual data -->
-				<ul class="menu sm-scrol">
-				  <li><!-- Task item -->
-					<a href="#">
-					  <h3>
-						Lorem ipsum dolor sit amet
-						<small class="pull-right">30%</small>
-					  </h3>
-					  <div class="progress xs">
-						<div class="progress-bar progress-bar-danger" style="width: 30%" role="progressbar"
-							 aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-						  <span class="sr-only">30% Complete</span>
-						</div>
-					  </div>
-					</a>
-				  </li>
-				  <!-- end task item -->
-				  <li><!-- Task item -->
-					<a href="#">
-					  <h3>
-						Vestibulum nec ligula
-						<small class="pull-right">20%</small>
-					  </h3>
-					  <div class="progress xs">
-						<div class="progress-bar progress-bar-info" style="width: 20%" role="progressbar"
-							 aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-						  <span class="sr-only">20% Complete</span>
-						</div>
-					  </div>
-					</a>
-				  </li>
-				  <!-- end task item -->
-				  <li><!-- Task item -->
-					<a href="#">
-					  <h3>
-						Donec id leo ut ipsum
-						<small class="pull-right">70%</small>
-					  </h3>
-					  <div class="progress xs">
-						<div class="progress-bar progress-bar-success" style="width: 70%" role="progressbar"
-							 aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-						  <span class="sr-only">70% Complete</span>
-						</div>
-					  </div>
-					</a>
-				  </li>
-				  <!-- end task item -->
-				  <li><!-- Task item -->
-					<a href="#">
-					  <h3>
-						Praesent vitae tellus
-						<small class="pull-right">40%</small>
-					  </h3>
-					  <div class="progress xs">
-						<div class="progress-bar progress-bar-warning" style="width: 40%" role="progressbar"
-							 aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-						  <span class="sr-only">40% Complete</span>
-						</div>
-					  </div>
-					</a>
-				  </li>
-				  <!-- end task item -->
-				  <li><!-- Task item -->
-					<a href="#">
-					  <h3>
-						Nam varius sapien
-						<small class="pull-right">80%</small>
-					  </h3>
-					  <div class="progress xs">
-						<div class="progress-bar progress-bar-primary" style="width: 80%" role="progressbar"
-							 aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-						  <span class="sr-only">80% Complete</span>
-						</div>
-					  </div>
-					</a>
-				  </li>
-				  <!-- end task item -->
-				  <li><!-- Task item -->
-					<a href="#">
-					  <h3>
-						Nunc fringilla
-						<small class="pull-right">90%</small>
-					  </h3>
-					  <div class="progress xs">
-						<div class="progress-bar progress-bar-info" style="width: 90%" role="progressbar"
-							 aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-						  <span class="sr-only">90% Complete</span>
-						</div>
-					  </div>
-					</a>
-				  </li>
-				  <!-- end task item -->
-				</ul>
-			  </li>
-			  <li class="footer">
-				  <a href="#" class="bg-light">View all tasks</a>
-			  </li>
-			</ul>
-		  </li>	
-		  
 		  <!-- User Account-->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -379,11 +192,11 @@
             </a>
             <ul class="dropdown-menu animated flipInX">
               <!-- User image -->
-              <li class="user-header bg-img" style="background-image: url(<%=path%>/images/user-info.jpg)" data-overlay="3">
+              <li class="user-header bg-img" style="background-image: url(<%=path%>/images/logo-big.png)" data-overlay="3">
 				  <div class="flexbox align-self-center">					  
 				  	<img src="<%=path%>/images/avatar/7.jpg" class="float-left rounded-circle" alt="User Image">					  
 					<h4 class="user-name align-self-center">
-					  <span>Samuel Brus</span>
+					  <span class="username">Samuel Brus</span>
 					  <small>samuel@gmail.com</small>
 					</h4>
 				  </div>
@@ -394,7 +207,7 @@
 					<a class="dropdown-item" href="javascript:void(0)"><i class="ion ion-bag"></i> My Balance</a>
 					<a class="dropdown-item" href="javascript:void(0)"><i class="ion ion-email-unread"></i> Inbox</a>
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="javascript:void(0)"><i class="ion ion-settings"></i> Account Setting</a>
+					<a class="dropdown-item" href="javascript:void(0)" data-toggle="control-sidebar"><i class="ion ion-settings"></i> Account Setting</a>
 					<div class="dropdown-divider"></div>
 					<a class="dropdown-item" href="javascript:void(0)"><i class="ion-log-out"></i> Logout</a>
 					<div class="dropdown-divider"></div>
@@ -425,6 +238,7 @@
           <img src="<%=path%>/images/logo-big.png" class="rounded-circle" alt="User Image">
         </div>
         <div class="info">
+       	    <a class="dropdown-item" ><i class="username"></i></a>
 			<a href="" class="link" data-toggle="tooltip" title="" data-original-title="Settings"><i class="ion ion-gear-b"></i></a>
             <a href="" class="link" data-toggle="tooltip" title="" data-original-title="Email"><i class="ion ion-android-mail"></i></a>
             <a href="" class="link" data-toggle="tooltip" title="" data-original-title="Logout"><i class="ion ion-power"></i></a>
@@ -578,212 +392,7 @@
             <li><a href="pages/members_list.html"><i class="ti-more"></i>Members List</a></li>
             <li><a href="pages/member_profile.html"><i class="ti-more"></i>Member Profile</a></li>			  
           </ul>
-        </li>	  
-		
-        <li class="header nav-small-cap">UI ELEMENTS</li>		  
-		  
-        <li class="treeview">
-          <a href="#">
-            <i class="ti-pencil-alt"></i>
-            <span>Elements</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/ui_badges.html"><i class="ti-more"></i>Badges</a></li>
-            <li><a href="pages/ui_border_utilities.html"><i class="ti-more"></i>Border</a></li>
-            <li><a href="pages/ui_buttons.html"><i class="ti-more"></i>Buttons</a></li>	
-            <li><a href="pages/ui_color_utilities.html"><i class="ti-more"></i>Color</a></li>
-            <li><a href="pages/ui_dropdown.html"><i class="ti-more"></i>Dropdown</a></li>
-            <li><a href="pages/ui_dropdown_grid.html"><i class="ti-more"></i>Dropdown Grid</a></li>
-            <li><a href="pages/ui_typography.html"><i class="ti-more"></i>Typography</a></li>
-            <li><a href="pages/ui_progress_bars.html"><i class="ti-more"></i>Progress Bars</a></li>
-            <li><a href="pages/ui_grid.html"><i class="ti-more"></i>Grid</a></li>
-            <li><a href="pages/ui_ribbons.html"><i class="ti-more"></i>Ribbons</a></li>
-            <li><a href="pages/ui_sliders.html"><i class="ti-more"></i>Sliders</a></li>
-            <li><a href="pages/ui_tab.html"><i class="ti-more"></i>Tabs</a></li>
-            <li><a href="pages/ui_timeline.html"><i class="ti-more"></i>Timeline</a></li>
-            <li><a href="pages/ui_timeline_horizontal.html"><i class="ti-more"></i>Timeline Horizontal</a></li>
-            <li><a href="pages/component_bootstrap_switch.html"><i class="ti-more"></i>Bootstrap Switch</a></li>
-            <li><a href="pages/component_media_advanced.html"><i class="ti-more"></i>Advanced Medias</a></li>
-			<li><a href="pages/component_modals.html"><i class="ti-more"></i>Modals</a></li>
-            <li><a href="pages/component_notification.html"><i class="ti-more"></i>Notification</a></li>
-            <li><a href="pages/component_portlet_draggable.html"><i class="ti-more"></i>Draggable Portlets</a></li>
-            <li><a href="pages/component_sweatalert.html"><i class="ti-more"></i>Sweet Alert</a></li>
-            <li><a href="pages/component_rangeslider.html"><i class="ti-more"></i>Range Slider</a></li>
-            <li><a href="pages/component_rating.html"><i class="ti-more"></i>Ratings</a></li>
-            <li><a href="pages/component_animations.html"><i class="ti-more"></i>Animations</a></li>
-			<li><a href="pages/box_advanced.html"><i class="ti-more"></i>Advanced Card</a></li>
-            <li><a href="pages/box_basic.html"><i class="ti-more"></i>Basic Card</a></li>
-            <li><a href="pages/box_color.html"><i class="ti-more"></i>Card Color</a></li>
-          </ul>
-        </li>  
-		
-		<li class="treeview">
-          <a href="#">
-            <i class="ti-smallcap"></i>
-            <span>Icons</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/icons_fontawesome.html"><i class="ti-more"></i>Font Awesome</a></li>
-            <li><a href="pages/icons_glyphicons.html"><i class="ti-more"></i>Glyphicons</a></li>
-            <li><a href="pages/icons_material.html"><i class="ti-more"></i>Material Icons</a></li>	
-            <li><a href="pages/icons_themify.html"><i class="ti-more"></i>Themify Icons</a></li>
-            <li><a href="pages/icons_simpleline.html"><i class="ti-more"></i>Simple Line Icons</a></li>
-            <li><a href="pages/icons_cryptocoins.html"><i class="ti-more"></i>Cryptocoins Icons</a></li>
-            <li><a href="pages/icons_flag.html"><i class="ti-more"></i>Flag Icons</a></li>
-            <li><a href="pages/icons_weather.html"><i class="ti-more"></i>Weather Icons</a></li>
-          </ul>
-        </li> 		  
-		  
-		<li class="treeview">
-          <a href="#">
-            <i class="ti-palette"></i>
-            <span>Widgets</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/widgets_blog.html"><i class="ti-more"></i>Blog</a></li>
-            <li><a href="pages/widgets_chart.html"><i class="ti-more"></i>Chart</a></li>
-            <li><a href="pages/widgets.html"><i class="ti-more"></i>Widgets</a></li>
-          </ul>
-        </li>
-		  
-		
-        <li class="header nav-small-cap">FORMS And TABLES</li> 
-		
-		
-        <li class="treeview">
-          <a href="#">
-            <i class="ti-write"></i>
-			<span>Forms</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/forms_advanced.html"><i class="ti-more"></i>Advanced Elements</a></li>
-            <li><a href="pages/forms_editors.html"><i class="ti-more"></i>Editors</a></li>
-            <li><a href="pages/forms_validation.html"><i class="ti-more"></i>Form Validation</a></li>
-            <li><a href="pages/forms_wizard.html"><i class="ti-more"></i>Form Wizard</a></li>
-            <li><a href="pages/forms_general.html"><i class="ti-more"></i>General Elements</a></li>
-            <li><a href="pages/forms_mask.html"><i class="ti-more"></i>Formatter</a></li>
-            <li><a href="pages/forms_dropzone.html"><i class="ti-more"></i>Dropzone</a></li>
-          </ul>
-        </li>
-		  
-        <li class="treeview">
-          <a href="#">
-            <i class="ti-layout-grid4"></i>
-			<span>Tables</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/tables_simple.html"><i class="ti-more"></i>Simple tables</a></li>
-            <li><a href="pages/tables_data.html"><i class="ti-more"></i>Data tables</a></li>
-          </ul>
-        </li> 		  
-		  
-		<li class="header nav-small-cap">SAMPLE PAGES</li>			  
-		  
-		<li class="treeview">
-          <a href="#">
-            <i class="ti-shield"></i>
-			<span>Authentication</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/auth_login.html"><i class="ti-more"></i>Login</a></li>
-            <li><a href="pages/auth_login2.html"><i class="ti-more"></i>Login 2</a></li>
-			<li><a href="pages/auth_register.html"><i class="ti-more"></i>Register</a></li>
-			<li><a href="pages/auth_register2.html"><i class="ti-more"></i>Register 2</a></li>
-			<li><a href="pages/auth_lockscreen.html"><i class="ti-more"></i>Lockscreen</a></li>
-			<li><a href="pages/auth_user_pass.html"><i class="ti-more"></i>Recover password</a></li>	
-          </ul>
-        </li> 		  
-		  
-		<li class="treeview">
-          <a href="#">
-            <i class="ti-alert"></i>
-			<span>Error Pages</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-			<li><a href="pages/error_400.html"><i class="ti-more"></i>Error 400</a></li>
-			<li><a href="pages/error_403.html"><i class="ti-more"></i>Error 403</a></li>
-			<li><a href="pages/error_404.html"><i class="ti-more"></i>Error 404</a></li>
-			<li><a href="pages/error_500.html"><i class="ti-more"></i>Error 500</a></li>
-			<li><a href="pages/error_503.html"><i class="ti-more"></i>Error 503</a></li>
-			<li><a href="pages/error_maintenance.html"><i class="ti-more"></i>Maintenance</a></li>	
-          </ul>
-        </li>   
-		  
-		<li class="treeview">
-          <a href="#">
-            <i class="ti-files"></i>
-			<span>Sample Pages</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/sample_blank.html"><i class="ti-more"></i>Blank</a></li>
-            <li><a href="pages/sample_coming_soon.html"><i class="ti-more"></i>Coming Soon</a></li>
-			<li><a href="pages/sample_pricing.html"><i class="ti-more"></i>Pricing</a></li>
-			<li><a href="pages/sample_faq.html"><i class="ti-more"></i>FAQ</a></li>
-            <li><a href="pages/email_index.html"><i class="ti-more"></i>Emails</a></li>
-          </ul>
-        </li>
-		  
-		  
-		<li class="header nav-small-cap">EXTRA</li>		  
-		  
-        <li class="treeview">
-          <a href="#">
-            <i class="ti-view-list"></i>
-			<span>Multilevel</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#">Level One</a></li>
-            <li class="treeview">
-              <a href="#">Level One
-                <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
-            </span>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="#">Level Two</a></li>
-                <li class="treeview">
-                  <a href="#">Level Two
-                    <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
-            </span>
-                  </a>
-                  <ul class="treeview-menu">
-                    <li><a href="#">Level Three</a></li>
-                    <li><a href="#">Level Three</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-            <li><a href="#">Level One</a></li>
-          </ul>
-        </li>  
+        </li>	 
         
       </ul>
     </section>
@@ -813,17 +422,6 @@
 							</ol>
 						</nav>
 					</div>
-				</div>
-				<div class="right-title w-170">
-					<span class="subheader_daterange font-weight-600" id="dashboard_daterangepicker">
-						<span class="subheader_daterange-label">
-							<span class="subheader_daterange-title"></span>
-							<span class="subheader_daterange-date text-info"></span>
-						</span>
-						<a href="#" class="btn btn-sm btn-info">
-							<i class="fa fa-angle-down"></i>
-						</a>
-					</span>
 				</div>
 			</div>
 		</div>
@@ -866,33 +464,9 @@
 		    </div>					
 			
 			<div class="row">
-				<div class="col-xl-7 col-12">
-					<div class="box">
-					  <div class="box-header with-border">
-						<h4 class="box-title">Data Overview</h4>
-					  </div>
-
-					  <div class="box-body">
-						  <div id="e_chart_1" class="chart" style="height:400px;"></div>
-					  </div>
-					</div>
-				</div>
-
-				<div class="col-xl-5 col-12">			
-				  <!-- Chart -->
-				  <div class="box">
-					<div class="box-header with-border">
-					  <h4 class="box-title">Social Ads Campaigns</h4>
-					</div>
-					<div class="box-body">
-						<div id="e_chart_2" class="chart" style="height:400px;"></div>
-					</div>
-					<!-- /.box-body -->
-				  </div>
-				  <!-- /.box -->
-				</div>
+			
 				
-				<div class="col-xl-8 col-12">
+				<div class="col-xl-12 col-12">
 					<div class="box">
 					  <div class="box-header">
 						<h4 class="box-title">Recent Orders</h4>
@@ -902,7 +476,7 @@
 						  <table class="table table-hover mb-5">
 							<thead>
 							  <tr>
-								<th>SKU</th>
+								<th>你好</th>
 								<th>Invoice#</th>
 								<th>Customer Name</th>
 								<th>Status</th>
@@ -970,211 +544,6 @@
 					  </div>
 					</div>
 				  </div>
-				<div class="col-xl-4 col-12">
-					<div class="box">
-					  <div class="box-header">
-						<h4 class="box-title">Recent Buyers</h4>
-					  </div>
-					  <div class="box-body px-1">
-						<div id="recent-buyers" class="media-list">
-						  <a href="#" class="media xs-media p-5">
-							<div class="media-left pr-1">
-							  <span class="avatar avatar-lg">
-								<img class="media-object" src="<%=path%>/images/avatar/1.jpg" alt="Generic placeholder image">
-								<i></i>
-							  </span>
-							</div>
-							<div class="media-body w-100">
-							  <h6 class="list-group-item-heading">Kristopher Candy
-								<span class="float-right pt-1">$1,021</span>
-							  </h6>
-							  <p class="list-group-item-text mt-5 mb-0">
-								<span class="badge badge-primary">Electronics</span>
-								<span class="badge badge-warning ml-1">Decor</span>
-							  </p>
-							</div>
-						  </a>
-						  <a href="#" class="media xs-media p-5">
-							<div class="media-left pr-1">
-							  <span class="avatar avatar-lg">
-								<img class="media-object" src="<%=path%>/images/avatar/2.jpg" alt="Generic placeholder image">
-								<i></i>
-							  </span>
-							</div>
-							<div class="media-body w-100">
-							  <h6 class="list-group-item-heading">Lawrence Fowler
-								<span class="float-right pt-1">$2,021</span>
-							  </h6>
-							  <p class="list-group-item-text mt-5 mb-0">
-								<span class="badge badge-danger">Appliances</span>
-							  </p>
-							</div>
-						  </a>
-						  <a href="#" class="media xs-media p-5">
-							<div class="media-left pr-1">
-							  <span class="avatar avatar-lg">
-								<img class="media-object" src="<%=path%>/images/avatar/3.jpg" alt="Generic placeholder image">
-								<i></i>
-							  </span>
-							</div>
-							<div class="media-body w-100">
-							  <h6 class="list-group-item-heading">Linda Olson
-								<span class="float-right pt-1">$1,112</span>
-							  </h6>
-							  <p class="list-group-item-text mt-5 mb-0">
-								<span class="badge badge-primary">Electronics</span>
-								<span class="badge badge-success ml-1">Office</span>
-							  </p>
-							</div>
-						  </a>
-						  <a href="#" class="media xs-media p-5">
-							<div class="media-left pr-1">
-							  <span class="avatar avatar-lg">
-								<img class="media-object" src="<%=path%>/images/avatar/4.jpg" alt="Generic placeholder image">
-								<i></i>
-							  </span>
-							</div>
-							<div class="media-body w-100">
-							  <h6 class="list-group-item-heading">Roy Clark
-								<span class="float-right pt-1">$2,815</span>
-							  </h6>
-							  <p class="list-group-item-text mt-5 mb-0">
-								<span class="badge badge-warning">Decor</span>
-								<span class="badge badge-danger ml-1">Appliances</span>
-							  </p>
-							</div>
-						  </a>
-						  <a href="#" class="media xs-media p-5">
-							<div class="media-left pr-1">
-							  <span class="avatar avatar-lg">
-								<img class="media-object" src="<%=path%>/images/avatar/5.jpg" alt="Generic placeholder image">
-								<i></i>
-							  </span>
-							</div>
-							<div class="media-body w-100">
-							  <h6 class="list-group-item-heading">Kristopher Candy
-								<span class="float-right pt-1">$2,021</span>
-							  </h6>
-							  <p class="list-group-item-text mt-5 mb-0">
-								<span class="badge badge-primary">Electronics</span>
-								<span class="badge badge-warning ml-1">Decor</span>
-							  </p>
-							</div>
-						  </a>
-						  <a href="#" class="media xs-media p-5">
-							<div class="media-left pr-1">
-							  <span class="avatar avatar-lg">
-								<img class="media-object" src="<%=path%>/images/avatar/6.jpg" alt="Generic placeholder image">
-								<i></i>
-							  </span>
-							</div>
-							<div class="media-body w-100">
-							  <h6 class="list-group-item-heading">Lawrence Fowler
-								<span class="float-right pt-1">$1,321</span>
-							  </h6>
-							  <p class="list-group-item-text mt-5 mb-0">
-								<span class="badge badge-danger">Appliances</span>
-							  </p>
-							</div>
-						  </a>
-						  </div>
-					  </div>
-					</div>
-				</div>
-				<div class="col-12">
-					<div class="box">
-					  <div class="box-header with-border">
-						<h4 class="box-title">Weekly Status</h4>
-					  </div>
-
-					  <div class="box-body">
-
-						  <div class="row">
-							<div class="col-12 col-lg-9">
-								<div id="stacked-column" style="height:400px;"></div>
-							</div>
-							<div class="col-12 col-lg-3">
-							  <h3 class="text-center mb-15">Goal Completion</h3>
-
-							  <div class="progress-group mb-40">
-								<span class="progress-text">Add Products to Bag</span>
-								<span class="progress-number"><b>140</b>/200</span>
-
-								<div class="progress h-30">
-								  <div class="progress-bar progress-bar-info progress-bar-striped progress-bar-animated" style="width: 70%;"></div>
-								</div>
-							  </div>
-							  <!-- /.progress-group -->
-							  <div class="progress-group mb-40">
-								<span class="progress-text">Complete Purchase</span>
-								<span class="progress-number"><b>300</b>/400</span>
-
-								<div class="progress h-30">
-								  <div class="progress-bar progress-bar-danger progress-bar-striped progress-bar-animated" style="width: 75%"></div>
-								</div>
-							  </div>
-							  <!-- /.progress-group -->
-							  <div class="progress-group mb-40">
-								<span class="progress-text">Visit Page</span>
-								<span class="progress-number"><b>400</b>/800</span>
-
-								<div class="progress h-30">
-								  <div class="progress-bar progress-bar-success progress-bar-striped progress-bar-animated" style="width: 50%"></div>
-								</div>
-							  </div>
-							  <!-- /.progress-group -->
-							  <div class="progress-group mb-40">
-								<span class="progress-text">Send Inquiries</span>
-								<span class="progress-number"><b>425</b>/500</span>
-
-								<div class="progress h-30">
-								  <div class="progress-bar progress-bar-warning progress-bar-striped progress-bar-animated" style="width: 85%"></div>
-								</div>
-							  </div>
-							  <!-- /.progress-group -->
-							</div>
-						  </div>
-
-						  <div class="row mt-30">
-							<div class="col-6 col-md-3">
-							  <div class="description-block">
-								<span class="text-success"><i class="fa fa-caret-up"></i> <span class="countnm per">17</span></span>
-								<h5 class="description-header">$3,249.43</h5>
-								<span class="description-text">TOTAL REVENUE</span>
-							  </div>
-							  <!-- /.description-block -->
-							</div>
-							<!-- /.col -->
-							<div class="col-6 col-md-3">
-							  <div class="description-block">
-								<span class="text-warning"><i class="fa fa-caret-left"></i> <span class="countnm per">70</span></span>
-								<h5 class="description-header">$2,376.90</h5>
-								<span class="description-text">TOTAL COST</span>
-							  </div>
-							  <!-- /.description-block -->
-							</div>
-							<!-- /.col -->
-							<div class="col-6 col-md-3">
-							  <div class="description-block">
-								<span class="text-primary"><i class="fa fa-caret-up"></i> <span class="countnm per">80</span></span>
-								<h5 class="description-header">$1,795.53</h5>
-								<span class="description-text">TOTAL PROFIT</span>
-							  </div>
-							  <!-- /.description-block -->
-							</div>
-							<!-- /.col -->
-							<div class="col-6 col-md-3">
-							  <div class="description-block">
-								<span class="text-danger"><i class="fa fa-caret-down"></i> <span class="countnm per">28</span></span>
-								<h5 class="description-header">1800</h5>
-								<span class="description-text">GOAL COMPLETIONS</span>
-							  </div>
-							  <!-- /.description-block -->
-							</div>
-						  </div>
-					  </div>
-					</div>
-				</div>
 			</div>
 			
 		</section>
@@ -1483,8 +852,8 @@
 	<script src="<%=path%>/assets/vendor_components/bootstrap/dist/js/bootstrap.js"></script>	
 	
 	<!-- date-range-picker -->
-	<script src="<%=path%>/assets/vendor_components/moment/min/moment.min.js"></script>
-	<script src="<%=path%>/assets/vendor_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+<%-- 	<script src="<%=path%>/assets/vendor_components/moment/min/moment.min.js"></script>
+	<script src="<%=path%>/assets/vendor_components/bootstrap-daterangepicker/daterangepicker.js"></script> --%>
 	
 	<!-- Slimscroll -->
 	<script src="<%=path%>/assets/vendor_components/jquery-slimscroll/jquery.slimscroll.js"></script>
@@ -1493,7 +862,7 @@
 	<script src="<%=path%>/assets/vendor_components/fastclick/lib/fastclick.js"></script>
 	
     <!-- eChart Plugins -->
-    <script src="<%=path%>/assets/vendor_components/echarts/dist/echarts-en.min.js"></script>
+    <%-- <script src="<%=path%>/assets/vendor_components/echarts/dist/echarts-en.min.js"></script> --%>
 	
     <!-- C3 Plugins -->
     <script src="<%=path%>/assets/vendor_components/c3/d3.min.js"></script>
@@ -1503,12 +872,46 @@
 	<script src="<%=path%>/main/js/template.js"></script>
 	
 	<!-- Ekan Admin dashboard demo (This is only for demo purposes) -->
-	<script src="<%=path%>/main/js/pages/dashboard.js"></script>
-	<script src="<%=path%>/main/js/pages/dashboard-chart.js"></script>
+	<%-- <script src="<%=path%>/main/js/pages/dashboard.js"></script>
+	<script src="<%=path%>/main/js/pages/dashboard-chart.js"></script> --%>
 	
 	<!-- Ekan Admin for demo purposes -->
 	<script src="<%=path%>/main/js/demo.js"></script>	
 	
+	<!-- Prompting -->
+    <script src="<%=path%>/assets/vendor_components/hullabaloo/hullabaloo.js"></script>
+    
+    <script type="text/javascript">
+			$.hulla = new hullabaloo();
+			setTimeout(function() {
+				$.hulla.send("Hi！这里是jQuery之家！", "success");
+			}, 1000);
+			function checkTime(){			
+		        var nowtime=Date.parse(new Date());
+		        $(".username").html("详细地址不能为空");
+		        console.log(nowtime);	
+		        <%-- $.ajax( {
+
+		           // "dataType" : 'json',
+
+		            "type" : "POST",
+
+		            "url" : "<%=path%>/toHomepage.action",
+
+		            "data" : { "searchByBookName" : "123" },
+
+		            "success" : function(  ) {           
+
+		            	$("#username").value== "详细地址不能为空";
+		            	console.log("new");
+		            }
+
+		         } ); --%>
+		    }
+		
+		    //setInterval("checkTime()","5000");
+
+		</script>
 	
 </body>
 </html>

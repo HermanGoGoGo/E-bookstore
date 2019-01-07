@@ -7,6 +7,15 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+    <!-- 配置拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/toLoginPage.action" />
+			<bean class="com.herman.ebookstore.interceptor.LoginInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
 	<!-- 扫描controller -->
 	<context:component-scan
 		base-package="com.herman.ebookstore.controller">
@@ -16,4 +25,6 @@
 		<property name="prefix" value="/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
+	<!-- 配置全局异常处理器 -->
+	<bean class="com.herman.springmvc.exception.CustomerExceptionResolver"></bean>
 </beans>

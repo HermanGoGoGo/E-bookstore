@@ -6623,7 +6623,7 @@ ul.flexbox {
 .dropdown-item {
     color: #747e8e;
     font-weight: 300;
-    padding: 4px 12px;
+    padding: 4px 4px;
     width: auto;
     margin: 4px;
     -webkit-transition: 0.15s linear;
