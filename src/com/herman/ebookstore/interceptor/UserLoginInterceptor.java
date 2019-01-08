@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class UserLoginInterceptor extends HandlerInterceptorAdapter{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception{
         // equalsIgnoreCase 与 equals的区别？
-		Object object = request.getSession().getAttribute("username");
+		Object object = request.getSession().getAttribute("usercode");
 		if(object == null){
 			response.sendRedirect(request.getContextPath() + "/toLoginPage.action");
 		}
