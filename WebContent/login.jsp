@@ -514,27 +514,91 @@
 				if(flag) {
 					return false;
 				} else { //重置密码
-					spop({
-						template: '<h4 class="spop-title">重置密码成功</h4>即将于3秒后返回登录',
-						position: 'top-center',
-						style: 'success',
-						autoclose: 3000,
-						onOpen: function() {
-							var second = 2;
-							var showPop = setInterval(function() {
-								if(second == 0) {
-									clearInterval(showPop);
-								}
-								$('.spop-body').html('<h4 class="spop-title">重置密码成功</h4>即将于' + second + '秒后返回登录');
-								second--;
-							}, 1000);
+					$.ajax({
+						type: "post",
+						url: "<%=path%>/forget/forget.action",
+						data: {
+							"usercode": usercode,
+							"phonenumber": phonenumber,
+							"code": code,
+							"password": password							
 						},
-						onClose: function() {
-							goto_login();
+						dataType: 'json',
+						success: function(data) {
+							console.log(data.value);
+							if(data.value == "1") { 
+								spop({
+									template: '<h4 class="spop-title">重置密码成功</h4>即将于3秒后返回登录',
+									position: 'top-center',
+									style: 'success',
+									autoclose: 3000,
+									onOpen: function() {
+										var second = 2;
+										var showPop = setInterval(function() {
+											if(second == 0) {
+												clearInterval(showPop);
+											}
+											$('.spop-body').html('<h4 class="spop-title">重置密码成功</h4>即将于' + second + '秒后返回登录');
+											second--;
+										}, 1000);
+									},
+									onClose: function() {
+										goto_login();
+									}
+								});
+								return false;
+							} else if(data.value == "2") {
+								$.pt({
+									target: $("#forget-usercode"),
+									position: 'r',
+									align: 't',
+									width: 'auto',
+									height: 'auto',
+									content: "该一卡通账号已被注册，请重新输入或者直接登录"
+								});
+								//goto_register();
+								return false;
+							} else if(data.value == "3") {
+								$.pt({
+									target: $("#forget-phone"),
+									position: 'r',
+									align: 't',
+									width: 'auto',
+									height: 'auto',
+									content: "请点击获取验证码"
+								});
+								goto_register();
+								return false;
+							}else if(data.value == "4") {
+								$.pt({
+									target: $("#forget-code"),
+									position: 'r',
+									align: 't',
+									width: 'auto',
+									height: 'auto',
+									content: "验证码获取错误，请重新点击获取验证码"
+								});
+								//goto_register();
+								return false;
+							}
+
+						},
+						error: function() {
+							$.pt({
+								target: $("#forget-usercode"),
+								position: 'r',
+								align: 't',
+								width: 'auto',
+								height: 'auto',
+								content: "注册失败"
+							});
+							goto_register();
+							return false;
 						}
 					});
-					return false;
 				}
+				
+						
 			}
 		</script>
 		<style type="text/css">

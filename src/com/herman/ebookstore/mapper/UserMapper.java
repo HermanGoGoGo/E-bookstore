@@ -30,4 +30,13 @@ public interface UserMapper {
 	 * @author 黄金宝 
 	 */
 	Integer insertNewUser(User user);
+	
+	/** 
+	 * @Method_Name: updatePassword 
+	 * @Description: * @param user
+	 * @Description: * @return Integer
+	 * @date 2018年12月26日
+	 * @author 黄金宝 
+	 */
+	Integer updatePassword(User user);
 }

@@ -70,7 +70,7 @@ public class ForgetController extends BaseForSDK{
 	}
 	
 	@RequestMapping("forget")
-	public String forget(String usercode, String phonenumber, String code,String password, HttpServletResponse response) {
+	public String forget(String usercode, String phonenumber, String code, String password, HttpServletResponse response) {
 		User user =new User();
 		SDKInfo sdkInfo = new SDKInfo();
 		int index = -1;
@@ -85,12 +85,10 @@ public class ForgetController extends BaseForSDK{
 			try {
 				if(!"".equals(sdkInfo.getSmsid()) && "000000".equals(sdkInfo.getCode()) && code.equals(sdkInfo.getParam())) {
 					user.setUsercode(usercode);
-					index = this.userService.getUserListWhere(user);
+					user.setPhonenumber(phonenumber);
 					if(index == 0){
-						user.setUsercode(usercode);
-						user.setPhonenumber(phonenumber);
 						user.setPassword(MD5Util.MD5Encode(password,"utf8"));
-						index = this.userService.insertNewUser(user);
+						index = this.userService.updatePassword(user);
 						if(index ==1){
 							json.setValue("1");
 						}
@@ -100,7 +98,7 @@ public class ForgetController extends BaseForSDK{
 				}else {
 					json.setValue("4");
 				}
-			}catch(Exception e) {
+			}catch(Exception e) { 
 				// TODO: handle exception
 				e.printStackTrace();
 				json.setValue("3");
