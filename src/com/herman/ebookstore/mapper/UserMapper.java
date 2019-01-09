@@ -47,7 +47,7 @@ public interface UserMapper {
 	 * @date 2018年12月30日
 	 * @author 黄金宝 
 	 */
-	Integer getUsercodeMobileWhere(User user);
+	User getUsercodeMobileWhere(User user);
 
 	/**
 	* @Title: getOneUser

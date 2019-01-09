@@ -39,15 +39,15 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Integer getUsercodeMobileWhere(User user) {
-		// TODO Auto-generated method stub
-		return this.userMapper.getUsercodeMobileWhere(user);
-	}
-
-	@Override
 	public User getOneUser(User user) {
 		// TODO Auto-generated method stub
 		return this.userMapper.getOneUser(user);
+	}
+
+	@Override
+	public User getUsercodeMobileWhere(User user) {
+		// TODO Auto-generated method stub
+		return this.userMapper.getUsercodeMobileWhere(user);
 	}
 
 }

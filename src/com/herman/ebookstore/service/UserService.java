@@ -55,7 +55,7 @@ public interface UserService {
 	 * @date 2018年12月26日
 	 * @author 黄金宝 
 	 */
-	Integer getUsercodeMobileWhere(User user);
+	User getUsercodeMobileWhere(User user);
 	
 	/**
 	* @Title: getOneUser
