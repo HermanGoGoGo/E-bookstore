@@ -1,4 +1,4 @@
-package com.herman.springmvc.exception;
+package com.herman.ebookstore.exception;
 
 /**
  * 自定异常
