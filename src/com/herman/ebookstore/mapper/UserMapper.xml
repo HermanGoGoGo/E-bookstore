@@ -54,13 +54,23 @@
 	</update>
 	
 	<select id="getUsercodeMobileWhere" parameterType="com.herman.ebookstore.pojo.User" resultType="java.lang.Integer" >
-		select usercode, phonenumber from MSTB_USER
+		select usercode , phonenumber from MSTB_USER
 		<where>
 			<if test="usercode != null and usercode !=''">
 				and usercode = #{usercode}
 			</if>
 			<if test="phonenumber != null and phonenumber !=''">
 				and phonenumber = #{phonenumber}
+			</if>
+		</where>
+	</select>
+	<select id="getOneUser" parameterType="com.herman.ebookstore.pojo.User" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"></include>
+		from MSTB_USER
+		<where>
+			<if test="usercode != null and usercode !=''">
+				and usercode = #{usercode}
 			</if>
 		</where>
 	</select>
