@@ -16,6 +16,7 @@
 			<mvc:exclude-mapping path="/verificationLogin.action"/>
 			<mvc:exclude-mapping path="/home/*" />
 			<mvc:exclude-mapping path="/register/*" />
+			<mvc:exclude-mapping path="/forget/*" />
 			<bean class="com.herman.ebookstore.interceptor.UserLoginInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
