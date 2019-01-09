@@ -49,4 +49,13 @@ public interface UserMapper {
 	 */
 	Integer getUsercodeMobileWhere(User user);
 
+	/**
+	* @Title: getOneUser
+	* @Description: TODO()
+	* @param @param user
+	* @param @return    
+	* @return User    
+	* @throws
+	*/
+	User getOneUser(User user);
 }

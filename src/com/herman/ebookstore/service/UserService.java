@@ -52,7 +52,7 @@ public interface UserService {
 	 * @Method_Name: getUsercodeMobileWhere 
 	 * @Description: * @param user
 	 * @Description: * @return Integer
-	 * @date 2018年12月30日
+	 * @date 2018年12月26日
 	 * @author 黄金宝 
 	 */
 	Integer getUsercodeMobileWhere(User user);
