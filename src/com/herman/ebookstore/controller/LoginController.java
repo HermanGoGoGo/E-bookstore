@@ -43,8 +43,8 @@ public class LoginController extends BaseForSDK {
 		return "login";
 	}
 
-	@RequestMapping("toHome")
-	public void toHome(String username, String password, HttpServletResponse response ,HttpSession session) {
+	@RequestMapping("verificationLogin")
+	public void verificationLogin(String username, String password, HttpServletResponse response ,HttpSession session) {
 		List<User> userList = this.userService.getUserList();
 		response.setContentType("text/html;charset=utf-8");
 		ReturnJson json = new ReturnJson(true);
@@ -58,7 +58,7 @@ public class LoginController extends BaseForSDK {
 					Long list= this.userRepository.count();
 					System.out.println(user2);
 					System.out.println(list);
-					session.setAttribute("username", username);
+					session.setAttribute("usercode", username);
 					json.setValue("1");
 					//json.setObj(user);
 					break;
@@ -81,12 +81,6 @@ public class LoginController extends BaseForSDK {
 			if (writer != null)
 				writer.close();
 		}
-	}
-
-	@RequestMapping("toHomePage")
-	public String toHomePage() {
-
-		return "index";
 	}
 
 }

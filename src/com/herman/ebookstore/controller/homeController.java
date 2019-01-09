@@ -1,6 +1,7 @@
 package com.herman.ebookstore.controller;
 
 import java.io.PrintWriter;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.herman.springmvc.exception.MyException;
 
 /**
 * @ClassName: homeController
@@ -18,31 +18,20 @@ import com.herman.springmvc.exception.MyException;
 *
 */
 @Controller
+@RequestMapping("home")
 public class homeController {
 
-	@RequestMapping("toHomepage")
-	public String toHomepage(String searchByBookName) {
-		return "index";
-	}
-	
-	@RequestMapping("test")
-	public void test(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// 假设这里是跟据id查询商品信息，搜索不到商品
-				if (true) {
-					throw new MyException("你查找的商品不存在，请确认信息！");
-				}
-
-				int i = 1 / 0;
-
-				// response响应用户请求
-				// response.sendRedirect("itemList.action");
-
-				// 设置响应的字符编码
-				// response.setContentType("text/html;charset=utf-8");
-				response.setCharacterEncoding("utf-8");
-
-				PrintWriter printWriter = response.getWriter();
-
-				printWriter.println("这个是response打印的消息");
+	@RequestMapping("toHomePage")
+	public String toHomepage(String searchByBookName,HttpServletRequest request) {
+		Object usercode = request.getSession().getAttribute("usercode");
+		try {
+			TimeUnit.SECONDS.sleep(3);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}//秒
+		System.out.println(searchByBookName);
+		System.out.println(usercode);
+		return "home";
 	}
 }

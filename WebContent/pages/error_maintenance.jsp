@@ -17,7 +17,7 @@
     <meta name="author" content="">
     <link rel="icon" href="<%=path%>/images/favicon.ico">
 
-    <title>Ebookstore - Under maintenance </title>
+    <title>e书网 - 正在维护中 </title>
   
 	<!-- Bootstrap 4.0-->
 	<link rel="stylesheet" href="<%=path%>/assets/vendor_components/bootstrap/dist/css/bootstrap.min.css">
@@ -39,7 +39,7 @@
 	<![endif]-->
 
 </head>
-<body class="hold-transition bg-img" style="background-image: url(<%=path%>/images/auth-bg/bg-1.jpg);" data-overlay="1">
+<body class="hold-transition bg-img" style="background-image: url(<%=path%>/images/snow.jpg;" data-overlay="1">
 	
 	<section class="error-page h-p100">
 		<div class="container h-p100">
@@ -47,10 +47,10 @@
 			  <div class="col-lg-7 col-md-10 col-12">
 				  <div class="b-double border-gray rounded bg-secondary">
 					  <h1 class="text-white font-size-180 font-weight-bold error-page-title"> <i class="fa fa-gear fa-spin"></i></h1>
-					  <h1>${msg}</h1>
-					  <h3>We're sorry for the inconvenience.</h3>
-					  <h4 class="mb-25">Please check back later.</h4>	
-					  <div class="my-30"><a href="<%=path%>/toHomePage.action" class="btn btn-info btn-lg">Back to dashboard</a></div>
+					  <h1>系统异常,请稍后再尝试！</h1>
+					  <h2>如有需要请联系管理员！</h2>
+					  <h4 class="mb-25"><i class="fa fa-qq"></i> 1146465559</h4>	
+					  <div class="my-30"><a href="<%=path%>/home/toHomePage.action" class="btn btn-info btn-lg">返回首页</a></div>
 				  </div>
 			  </div>				
 		  </div>

@@ -12,7 +12,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		<title>登录</title>
+		<title>e书网-登录</title>
 		<link rel="stylesheet" href="<%=path%>/css/normalize.css">
 		<link rel="stylesheet" href="<%=path%>/css/login.css">
 		<link rel="stylesheet" href="<%=path%>/css/sign-up-login.css">
@@ -20,6 +20,7 @@
 		<link rel="stylesheet" href="<%=path%>/css/inputEffect.css" />
 		<link rel="stylesheet" href="<%=path%>/css/tooltips.css" />
 		<link rel="stylesheet" href="<%=path%>/css/spop.min.css" />
+		<link rel="icon" href="<%=path%>/images/favicon.ico">
 
 		<script src="<%=path%>/js/jquery.min.js"></script>
 		<script src="<%=path%>/js/snow.js"></script>
@@ -154,7 +155,7 @@
 					//调用后台登录验证的方法
 					$.ajax({
 						type: "post",
-						url: "<%=path%>/toHome.action",
+						url: "<%=path%>/verificationLogin.action",
 						data: {
 							"username": username,
 							"password": password
@@ -178,7 +179,7 @@
 										}, 1000);
 									},
 									onClose: function() {
-										window.location.href = "<%=path%>/toHomePage.action";
+										window.location.href = "<%=path%>/home/toHomePage.action";
 										return false;
 									}
 								});
@@ -547,7 +548,7 @@
 				background-repeat: no-repeat;
 				background-position: center center #2D0F0F;
 				background-color: #00BDDC;
-				background-image: url(images/snow.jpg);
+				background-image: url(<%=path%>/images/snow.jpg);
 				background-size: 100% 100%;
 			}
 			

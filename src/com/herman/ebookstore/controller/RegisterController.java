@@ -83,7 +83,7 @@ public class RegisterController extends BaseForSDK {
 			sdkInfo.setMobile(phonenumber);
 			sdkInfo=this.sdkInfoService.selectOneSDKInfo(sdkInfo);
 			try {
-				if(!"".equals(sdkInfo.getSmsid()) && "000000".equals(sdkInfo.getCode()) && code.equals(sdkInfo.getParam())) {
+				if("000000".equals(sdkInfo.getCode()) && code.equals(sdkInfo.getParam())) {
 					user.setUsercode(usercode);
 					index = this.userService.getUserListWhere(user);
 					if(index == 0){

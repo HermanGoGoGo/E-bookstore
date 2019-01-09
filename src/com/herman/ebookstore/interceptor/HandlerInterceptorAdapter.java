@@ -7,13 +7,13 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
-* @ClassName: LoginInterceptor
+* @ClassName: HandlerInterceptorAdapter 
 * @Description: TODO(检查是否登录)
 * @author 黄金宝
 * @date 2019年1月4日
 *
 */
-public class LoginInterceptor implements HandlerInterceptor {
+public class HandlerInterceptorAdapter  implements HandlerInterceptor {
 
 	//方法执行后被执行
 	//处理异常，清资源，记录日志等等
@@ -36,14 +36,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 	//进入方法前被执行
 	//登录拦截，权限验证等等
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object arg2) throws Exception {
-		//判断用户有没有登录
-				Object object = request.getSession().getAttribute("username");
-				if(object == null){
-					response.sendRedirect(request.getContextPath() + "/toLoginPage.action");
-				}
-				//true放行,false拦截
-				return true;
-	}
-
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception{
+        return true;
+    }
 }
