@@ -39,4 +39,15 @@
 		(username,usercode,password,phonenumber,createtime,updatetime,rolecode)
 		values(#{username},#{usercode},#{password},#{phonenumber},sysdate(),null,#{rolecode})
 	</insert>
+	
+	<select id="getOneUser" parameterType="com.herman.ebookstore.pojo.User" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"></include>
+		from MSTB_USER
+		<where>
+			<if test="usercode != null and usercode !=''">
+				and usercode = #{usercode}
+			</if>
+		</where>
+	</select>
 </mapper>

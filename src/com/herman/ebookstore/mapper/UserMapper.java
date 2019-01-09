@@ -30,4 +30,14 @@ public interface UserMapper {
 	 * @author 黄金宝 
 	 */
 	Integer insertNewUser(User user);
+	
+	/**
+	* @Title: getOneUser
+	* @Description: TODO()
+	* @param @param user
+	* @param @return    
+	* @return User    
+	* @throws
+	*/
+	User getOneUser(User user);
 }
