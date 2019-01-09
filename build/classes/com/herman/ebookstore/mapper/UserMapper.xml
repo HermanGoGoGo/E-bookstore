@@ -54,7 +54,7 @@
 	</update>
 	
 	<select id="getUsercodeMobileWhere" parameterType="com.herman.ebookstore.pojo.User" resultType="java.lang.Integer" >
-		select usercode, phonenumber from MSTB_USER
+		select count(*) from MSTB_USER
 		<where>
 			<if test="usercode != null and usercode !=''">
 				and usercode = #{usercode}
