@@ -22,13 +22,14 @@ import com.herman.ebookstore.util.IlismJSONEncoder;
 import com.herman.ebookstore.util.MD5Util;
 import com.herman.ebookstore.util.ReturnJson;
 
+
 /**
- * @ClassName: RegisterController
- * @Description: TODO(忘记密码控制层)
- * @author 黄金宝
- * @date 2018年12月27日
- *
- */
+* @ClassName: ForgetController
+* @Description: TODO()
+* @author Franklin
+* @date 9 Jan. 2019
+*
+*/
 @Controller
 @RequestMapping("forget")
 public class ForgetController extends BaseForSDK{
@@ -42,31 +43,66 @@ public class ForgetController extends BaseForSDK{
 	@Autowired
 	private SDKInfoService sdkInfoService;
 	
+	/**
+	* @Title: getVerificationCode
+	* @Description: TODO(获取验证码)
+	* @param @param phonenumber
+	* @param @param usercode
+	* @param @param response
+	* @param @return    
+	* @return String    
+	* @throws
+	*/
+	
 	@RequestMapping("getVerificationCode")
 	public String getVerificationCode(String phonenumber,String usercode, HttpServletResponse response) {
-		String getPatam = String.valueOf(new Random().nextInt(899999) + 100000);
-		String result = this.jsonReqClient.sendSms(ACCOUNT_SID, AUTH_TOKEN, APPID, TEMPLATEID, getPatam , phonenumber, usercode);
-		SDKInfo pushMsgContent =  JSON.parseObject(result,SDKInfo.class);
-		if(!"".equals(pushMsgContent.getUid()) && pushMsgContent.getUid() != null){
-			pushMsgContent.setParam(getPatam);
-			this.sdkInfoService.insertNewSDKInfo(pushMsgContent);
+		User user =new User();
+		user.setUsercode(usercode);
+		user.setPhonenumber(phonenumber);
+		int index = -1;
+		index = this.userService.getUsercodeMobileWhere(user);
+		ReturnJson json = new ReturnJson(true);
+		json.setValue(StringUtils.EMPTY);
+		if(index == 1) {
+			String getPatam = String.valueOf(new Random().nextInt(899999) + 100000);
+			String result = this.jsonReqClient.sendSms(ACCOUNT_SID, AUTH_TOKEN, APPID, TEMPLATEID, getPatam , phonenumber, usercode);
+			SDKInfo pushMsgContent =  JSON.parseObject(result,SDKInfo.class);
+			if(!"".equals(pushMsgContent.getUid()) && pushMsgContent.getUid() != null){
+				pushMsgContent.setParam(getPatam);
+				this.sdkInfoService.insertNewSDKInfo(pushMsgContent);
+			}
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter writer = null;
+			try {
+				writer = response.getWriter();
+				writer.write(result);
+				writer.flush();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if (writer != null)
+					writer.close();
+			}
+		}else {
+			json.setValue("2");
 		}
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter writer = null;
-		try {
-			writer = response.getWriter();
-			writer.write(result);
-			writer.flush();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if (writer != null)
-				writer.close();
-		}
+		
 		return null;
 	}
 	
+	/** 
+	 * @Method_Name: forget 
+	 * @Description: TODO()
+	 * @Description: * @param usercode
+	 * @Description: * @param phonenumber
+	 * @Description: * @param code
+	 * @Description: * @param password
+	 * @Description: * @param response
+	 * @Description: * @return String
+	 * @date 9 Jan. 2019
+	 * @author Franklin 
+	 */
 	@RequestMapping("forget")
 	public String forget(String usercode, String phonenumber, String code, String password, HttpServletResponse response) {
 		User user =new User();
@@ -84,7 +120,8 @@ public class ForgetController extends BaseForSDK{
 				if(!"".equals(sdkInfo.getSmsid()) && "000000".equals(sdkInfo.getCode()) && code.equals(sdkInfo.getParam())) {
 					user.setUsercode(usercode);
 					user.setPhonenumber(phonenumber);
-					if(index == 0){
+					index = this.userService.getUserListWhere(user);
+					if(index == 1){
 						user.setPassword(MD5Util.MD5Encode(password,"utf8"));
 						index = this.userService.updatePassword(user);
 						if(index ==1){

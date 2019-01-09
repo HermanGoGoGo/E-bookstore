@@ -443,7 +443,7 @@
 					phone = $("#forget-phone").val(),
 					code = $("#forget-code").val(),
 					password = $("#forget-password").val(),
-					repassword = $("#register-repassword").val(),
+					repassword = $("#forget-repassword").val(),
 					flag = false,
 					validatecode = null;
 				//判断用户名密码是否为空
@@ -467,8 +467,7 @@
 						content: "请输入正确的10位一卡通账号"
 					});
 					flag = true;
-				}
-				if(phone == "") {
+				}else if(phone == "") {
 					$.pt({
 						target: $("#forget-phone"),
 						position: 'r',
@@ -478,8 +477,7 @@
 						content: "手机号不能为空"
 					});
 					flag = true;
-				}
-				if(code == "") {
+				}else if(code == "") {
 					$.pt({
 						target: $("#forget-code"),
 						position: 'r',
@@ -489,8 +487,7 @@
 						content: "验证码不能为空"
 					});
 					flag = true;
-				}
-				if(password == "") {
+				}else if(password == "") {
 					$.pt({
 						target: $("#forget-password"),
 						position: 'r',
@@ -500,7 +497,7 @@
 						content: "密码不能为空"
 					});
 					flag = true;
-				} if(!regPassword.test(password)) {
+				}else if(!regPassword.test(password)) {
 					$.pt({
 						target: $("#forget-password"),
 						position: 'r',
@@ -510,7 +507,7 @@
 						content: "请输入6-16位由数字及字母组成的密码"
 					});
 					flag = true;
-				}  if(password != repassword) {
+				}else if(password != repassword) {
 					$.pt({
 						target: $("#forget-repassword"),
 						position: 'r',
@@ -526,7 +523,7 @@
 				//调后台方法
 
 				//检查注册码是否正确
-				if(code != '11111111') {
+				/* if(code != '11111111') {
 					$.pt({
 						target: $("#forget-code"),
 						position: 'r',
@@ -536,7 +533,7 @@
 						content: "注册码不正确"
 					});
 					flag = true;
-				}
+				} */
 
 				if(flag) {
 					return false;
@@ -576,23 +573,23 @@
 								return false;
 							} else if(data.value == "2") {
 								$.pt({
-									target: $("#forget-usercode"),
+									target: $("#forget-usercode, #forget-phone"),
 									position: 'r',
 									align: 't',
 									width: 'auto',
 									height: 'auto',
-									content: "该一卡通账号已被注册，请重新输入或者直接登录"
+									content: "该一卡通账号或电话不正确，请重新输入或者直接登录"
 								});
 								//goto_register();
 								return false;
 							} else if(data.value == "3") {
 								$.pt({
-									target: $("#forget-phone"),
+									target: $("#forget-password"),
 									position: 'r',
 									align: 't',
 									width: 'auto',
 									height: 'auto',
-									content: "请点击获取验证码"
+									content: "更改密码失败"
 								});
 								goto_register();
 								return false;
@@ -603,7 +600,7 @@
 									align: 't',
 									width: 'auto',
 									height: 'auto',
-									content: "验证码获取错误，请重新点击获取验证码"
+									content: "验证码获取错误，请重新获取验证码"
 								});
 								//goto_register();
 								return false;
@@ -721,7 +718,7 @@
 						<div class="pad input-container">
 							<section class="content">
 								<span class="input input--hideo"> 
-									<input class="input__field input__field--hideo" type="text" id="forget-usercode" autocomplete="off" placeholder="请输入一卡通账号" onkeyup="show_yhm2(this.value)"/>
+									<input class="input__field input__field--hideo" type="text" id="forget-usercode" autocomplete="off" placeholder="请输入一卡通账号" onkeyup="show_yhm2(this.value)" value="2201504200"/>
 									<script type="text/javascript">
 										function show_yhm2(str){
 											//var reg = /^[0-9]{10}$/;
@@ -741,10 +738,10 @@
 									<label class="input__label input__label--hideo" for="forget-usercode"> 
 										<i class="fa fa-fw fa-user icon icon--hideo"></i> 
 										<span class="input__label-content input__label-content--hideo"></span>
-								</label>
+									</label>
 								</span>
 								<span class="input input--hideo"> 
-									<input class="input__field input__field--hideo" type="text" id="forget-phone" autocomplete="off" placeholder="请输入手机号" maxlength="15" onkeyup="show_sjh2(this.value)" value="13507064221"/> 
+									<input class="input__field input__field--hideo" type="text" id="forget-phone" autocomplete="off" placeholder="请输入手机号" maxlength="15" onkeyup="show_sjh2(this.value)" value="15626100176"/> 
 									<script type="text/javascript">
 										function show_sjh2(str){
 											var reg = new RegExp("^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199|(147))\\d{8}$");
