@@ -12,8 +12,11 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
-			<mvc:exclude-mapping path="/toLoginPage.action" />
-			<bean class="com.herman.ebookstore.interceptor.LoginInterceptor" />
+			<mvc:exclude-mapping path="/toLoginPage.action"/>
+			<mvc:exclude-mapping path="/verificationLogin.action"/>
+			<mvc:exclude-mapping path="/home/*" />
+			<mvc:exclude-mapping path="/register/*" />
+			<bean class="com.herman.ebookstore.interceptor.UserLoginInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 	<!-- 扫描controller -->
@@ -26,5 +29,5 @@
 		<property name="suffix" value=".jsp"></property>
 	</bean>
 	<!-- 配置全局异常处理器 -->
-	<bean class="com.herman.springmvc.exception.CustomerExceptionResolver"></bean>
+	<bean class="com.herman.ebookstore.exception.CustomerExceptionResolver"></bean>
 </beans>
