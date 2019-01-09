@@ -43,6 +43,7 @@ public class homeController {
 		User currentUser =new User();
 		if(usercode != null && !"".equals(usercode)) {
 			currentUser.setUsercode(usercode.toString());
+			currentUser =this.userService.getOneUser(currentUser);
 			
 			model.addAttribute("currentUser", currentUser);
 		}else {

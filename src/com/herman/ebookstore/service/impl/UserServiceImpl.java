@@ -44,4 +44,10 @@ public class UserServiceImpl implements UserService {
 		return this.userMapper.getUsercodeMobileWhere(user);
 	}
 
+	@Override
+	public User getOneUser(User user) {
+		// TODO Auto-generated method stub
+		return this.userMapper.getOneUser(user);
+	}
+
 }
