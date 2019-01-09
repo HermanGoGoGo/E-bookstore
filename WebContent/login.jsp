@@ -869,7 +869,7 @@
 														console.log(data);
 														if(data.code == "000000") {
 															$.pt({
-																target: $("#forget-phone"),
+																target: $("#forget-code"),
 																position: 'r',
 																align: 't',
 																width: 'auto',
@@ -878,7 +878,7 @@
 															});
 														} else {
 															$.pt({
-																target: $("#forget-phone"),
+																target: $("#forget-code"),
 																position: 'r',
 																align: 't',
 																width: 'auto',
