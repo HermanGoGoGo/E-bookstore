@@ -38,4 +38,10 @@ public class UserServiceImpl implements UserService {
 		return this.userMapper.updatePassword(user);
 	}
 
+	@Override
+	public Integer getUsercodeMobileWhere(User user) {
+		// TODO Auto-generated method stub
+		return this.userMapper.getUsercodeMobileWhere(user);
+	}
+
 }

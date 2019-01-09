@@ -39,4 +39,14 @@ public interface UserMapper {
 	 * @author 黄金宝 
 	 */
 	Integer updatePassword(User user);
+	
+	/** 
+	 * @Method_Name: getUsercodeMobileWhere 
+	 * @Description: * @param user
+	 * @Description: * @return Integer
+	 * @date 2018年12月30日
+	 * @author 黄金宝 
+	 */
+	Integer getUsercodeMobileWhere(User user);
+
 }

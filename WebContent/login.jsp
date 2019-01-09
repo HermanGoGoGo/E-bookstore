@@ -81,6 +81,11 @@
 				}).blur(function() {
 					$('.forget-owl').removeClass('password');
 				});
+				$('#login #forget-repassword').focus(function() {
+					$('.forget-owl').addClass('password');
+				}).blur(function() {
+					$('.forget-owl').removeClass('password');
+				});
 			});
 
 			function goto_register() {
@@ -437,6 +442,7 @@
 					phone = $("#forget-phone").val(),
 					code = $("#forget-code").val(),
 					password = $("#forget-password").val(),
+					repassword = $("#register-repassword").val(),
 					flag = false,
 					validatecode = null;
 				//判断用户名密码是否为空
@@ -493,7 +499,27 @@
 						content: "密码不能为空"
 					});
 					flag = true;
-				}
+				} if(!regPassword.test(password)) {
+					$.pt({
+						target: $("#forget-password"),
+						position: 'r',
+						align: 't',
+						width: 'auto',
+						height: 'auto',
+						content: "请输入6-16位由数字及字母组成的密码"
+					});
+					flag = true;
+				}  if(password != repassword) {
+					$.pt({
+						target: $("#forget-repassword"),
+						position: 'r',
+						align: 't',
+						width: 'auto',
+						height: 'auto',
+						content: "两次输入的密码不一致"
+					});
+					flag = true;
+				} 
 				
 				//检查一卡通是否存在
 				//调后台方法
@@ -716,13 +742,6 @@
 										<span class="input__label-content input__label-content--hideo"></span>
 								</label>
 								</span>
-								<!-- <span class="input input--hideo"> 
-									<input class="input__field input__field--hideo" type="text" id="forget-code" autocomplete="off" placeholder="请输入注册码" /> 
-									<label class="input__label input__label--hideo" for="forget-code">
-									<i class="fa fa-fw fa-wifi icon icon--hideo"></i> 
-									<span class="input__label-content input__label-content--hideo"></span>
-								</label>
-								</span> -->
 								<span class="input input--hideo"> 
 									<input class="input__field input__field--hideo" type="text" id="forget-phone" autocomplete="off" placeholder="请输入手机号" maxlength="15" onkeyup="show_sjh2(this.value)" value="13507064221"/> 
 									<script type="text/javascript">
@@ -755,7 +774,15 @@
 										<i class="fa fa-fw fa-mobile-phone icon icon--hideo"></i> 
 										<span class="input__label-content input__label-content--hideo"></span>
 									</label>
-									<input type="button" id="btn1" class="input__field input__field--madoka hqyzm" style="position: absolute; right: 0px; top: 0px; width: 30%; height: 97%; border: 2px solid #B0E0E6; text-align: center;" value="短信验证码" />
+									
+								</span>
+								<span class="input input--hideo"> 
+									<input class="input__field input__field--hideo" type="text" id="forget-code" autocomplete="off" placeholder="请输入验证码" maxlength="6" value="443322"/> 
+									<label class="input__label input__label--hideo" for="forget-code">
+										<i class="fa fa-fw fa-send-o icon icon--hideo"></i> 
+										<span class="input__label-content input__label-content--hideo"></span>
+								   	</label>
+								   	<input type="button" id="btn1" class="input__field input__field--madoka hqyzm" style="position: absolute; right: 0px; top: 0px; width: 30%; height: 97%; border: 2px solid #B0E0E6; text-align: center;" value="短信验证码" />
 									<script type="text/javascript">
 										//发送验证码
 										var wait = 60;
@@ -861,20 +888,13 @@
 	
 													},
 													error: function() {
-														alert('登录失败');
+														alert('重置密码失败');
 														return false;
 													}
 												});
 											}
 										})
-									</script>
-								</span>
-								<span class="input input--hideo"> 
-									<input class="input__field input__field--hideo" type="text" id="forget-code" autocomplete="off" placeholder="请输入验证码" maxlength="6" value="443322"/> 
-									<label class="input__label input__label--hideo" for="forget-code">
-										<i class="fa fa-fw fa-send-o icon icon--hideo"></i> 
-										<span class="input__label-content input__label-content--hideo"></span>
-								   	</label> 
+									</script> 
 								</span>
 								<span class="input input--hideo">
 									<input class="input__field input__field--hideo" type="password" id="forget-password" placeholder="请重置密码" /> 
@@ -882,7 +902,13 @@
 										<i class="fa fa-fw fa-lock icon icon--hideo"></i> 
 										<span class="input__label-content input__label-content--hideo"></span>
 									</label>
-									
+								</span>
+								<span class="input input--hideo"> 
+									<input class="input__field input__field--hideo" type="password" id="forget-repassword" placeholder="请确认密码" maxlength="16" />
+									<label class="input__label input__label--hideo" for="register-repassword"> 
+										<i class="fa fa-fw fa-lock icon icon--hideo"></i> 
+										<span class="input__label-content input__label-content--hideo"></span>
+									</label>
 								</span>
 							</section>
 						</div>
