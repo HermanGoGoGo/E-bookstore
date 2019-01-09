@@ -57,14 +57,15 @@ public interface UserService {
 	 */
 	Integer getUsercodeMobileWhere(User user);
 	
-	/**
-	* @Title: getOneUser
-	* @Description: TODO()
-	* @param @param user
-	* @param @return    
-	* @return User    
-	* @throws
-	*/
+	
+	/** 
+	 * @Method_Name: getOneUser 
+	 * @Description: TODO(获取单个user实体)
+	 * @Description: * @param user
+	 * @Description: * @return User
+	 * @date 2019年1月9日
+	 * @author 黄金宝 
+	 */
 	User getOneUser(User user);
 	
 	
