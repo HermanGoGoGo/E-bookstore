@@ -680,7 +680,7 @@
 						<div class="pad input-container">
 							<section class="content">
 								<span class="input input--hideo"> 
-									<input class="input__field input__field--hideo" type="text" id="login-username" autocomplete="off" placeholder="请输入用户名" tabindex="1" maxlength="15" /> 
+									<input class="input__field input__field--hideo" type="text" id="login-username" autocomplete="off" placeholder="请输入用户名" tabindex="1" maxlength="15" value="2201504200"/> 
 									<label class="input__label input__label--hideo" for="login-username">
 										<i class="fa fa-fw fa-user icon icon--hideo"></i> 
 										<span class="input__label-content input__label-content--hideo"></span>
