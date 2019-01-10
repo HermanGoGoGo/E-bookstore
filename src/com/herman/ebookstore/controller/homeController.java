@@ -47,7 +47,9 @@ public class homeController {
 			
 			model.addAttribute("currentUser", currentUser);
 		}else {
-			currentUser.setUsercode("请登录后获取");
+			currentUser.setUsername("请登录后获取");
+			currentUser.setUsercode("管理qq：1146465559");
+			model.addAttribute("currentUser", currentUser);
 		}
 		
 		return "home";
