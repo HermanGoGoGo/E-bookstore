@@ -22,8 +22,8 @@
 	<!-- Bootstrap 4.0-->
 	<link rel="stylesheet" href="<%=path%>/assets/vendor_components/bootstrap/dist/css/bootstrap.css">
 	
-	<!-- daterange picker -->	
-	<%-- <link rel="stylesheet" href="<%=path%>/assets/vendor_components/bootstrap-daterangepicker/daterangepicker.css"> --%>
+	<!-- paging -->	
+	<link rel="stylesheet" href="<%=path%>/assets/vendor_components/paging/paging.css">
 	
     <!-- c3 CSS -->
     <link rel="stylesheet" type="text/css" href="<%=path%>/assets/vendor_components/c3/c3.min.css">
@@ -542,6 +542,9 @@
 						  </table>
 						</div>
 					  </div>
+					 <div class="box-header">
+						<div class="fenye" id="fenye"></div>
+					 </div>
 					</div>
 				  </div>
 			</div>
@@ -861,8 +864,8 @@
 	<!-- FastClick -->
 	<script src="<%=path%>/assets/vendor_components/fastclick/lib/fastclick.js"></script>
 	
-    <!-- eChart Plugins -->
-    <%-- <script src="<%=path%>/assets/vendor_components/echarts/dist/echarts-en.min.js"></script> --%>
+    <!-- paging -->
+    <script src="<%=path%>/assets/vendor_components/paging/paging.js"></script>
 	
     <!-- C3 Plugins -->
     <script src="<%=path%>/assets/vendor_components/c3/d3.min.js"></script>
@@ -911,7 +914,24 @@
 		
 		    //setInterval("checkTime()","5000");
 
-		</script>
-	
+	</script>
+	<!-- 分页 -->
+	<script type="text/javascript">
+	$(function () {
+		var myName="<%=session.getAttribute("usercode")%>"; 
+	   　　console.log(myName);
+        var setTotalCount = 300;
+        $('#fenye').paging({
+            initPageNo: 1, // 初始页码
+            totalPages: 30, //总页数
+            totalCount: '合计' + setTotalCount + '条数据', // 条目总数
+            slideSpeed: 600, // 缓动速度。单位毫秒
+            jump: true, //是否支持跳转
+            callback: function(page) { // 回调函数
+                console.log(page);
+            }
+        })
+	});
+    </script>
 </body>
 </html>
