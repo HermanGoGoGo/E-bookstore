@@ -38,4 +38,35 @@ public interface UserService {
 	 * @author 黄金宝 
 	 */
 	Integer insertNewUser(User user);
+	
+	/** 
+	 * @Method_Name: updatePassword 
+	 * @Description: * @param user
+	 * @Description: * @return Integer
+	 * @date 2018年12月26日
+	 * @author 黄金宝 
+	 */
+	Integer updatePassword(User user);
+
+	/** 
+	 * @Method_Name: getUsercodeMobileWhere 
+	 * @Description: * @param user
+	 * @Description: * @return Integer
+	 * @date 2018年12月26日
+	 * @author 黄金宝 
+	 */
+	Integer getUsercodeMobileWhere(User user);
+	
+	
+	/** 
+	 * @Method_Name: getOneUser 
+	 * @Description: TODO(获取单个user实体)
+	 * @Description: * @param user
+	 * @Description: * @return User
+	 * @date 2019年1月9日
+	 * @author 黄金宝 
+	 */
+	User getOneUser(User user);
+	
+	
 }

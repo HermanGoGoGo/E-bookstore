@@ -32,4 +32,22 @@ public class UserServiceImpl implements UserService {
 		return this.userMapper.insertNewUser(user);
 	}
 
+	@Override
+	public Integer updatePassword(User user) {
+		// TODO Auto-generated method stub
+		return this.userMapper.updatePassword(user);
+	}
+
+	@Override
+	public User getOneUser(User user) {
+		// TODO Auto-generated method stub
+		return this.userMapper.getOneUser(user);
+	}
+
+	@Override
+	public Integer getUsercodeMobileWhere(User user) {
+		// TODO Auto-generated method stub
+		return this.userMapper.getUsercodeMobileWhere(user);
+	}
+
 }

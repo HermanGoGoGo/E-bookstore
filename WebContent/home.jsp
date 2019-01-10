@@ -196,8 +196,8 @@
 				  <div class="flexbox align-self-center">					  
 				  	<img src="<%=path%>/images/avatar/7.jpg" class="float-left rounded-circle" alt="User Image">					  
 					<h4 class="user-name align-self-center">
-					  <span class="username">Samuel Brus</span>
-					  <small>samuel@gmail.com</small>
+					  <span>${currentUser.username}</span>
+					  <small>${currentUser.phonenumber}</small>
 					</h4>
 				  </div>
               </li>
@@ -238,7 +238,7 @@
           <img src="<%=path%>/images/logo-big.png" class="rounded-circle" alt="User Image">
         </div>
         <div class="info">
-       	    <a class="dropdown-item" ><i class="username"></i></a>
+       	    <a class="dropdown-item" ><i>${currentUser.username}</i></a>
 			<a href="" class="link" data-toggle="tooltip" title="" data-original-title="Settings"><i class="ion ion-gear-b"></i></a>
             <a href="" class="link" data-toggle="tooltip" title="" data-original-title="Email"><i class="ion ion-android-mail"></i></a>
             <a href="<%=path%>/toLoginPage.action" class="link" data-toggle="tooltip" title="" data-original-title="Logout"><i class="ion ion-power"></i></a>
