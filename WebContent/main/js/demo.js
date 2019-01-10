@@ -70,7 +70,6 @@ $(function () {
       $pushMenu.expandOnHover()
       $layout.activate()
     }
-    $controlSidebar.fix()
   }
   /**
    * Replaces the old skin with the new skin
