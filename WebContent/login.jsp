@@ -440,12 +440,14 @@
 			//重置密码
 			function forget() {
 				var usercode = $("#forget-usercode").val(),
-					phone = $("#forget-phone").val(),
+					phonenumber = $("#forget-phone").val(),
 					code = $("#forget-code").val(),
 					password = $("#forget-password").val(),
 					repassword = $("#forget-repassword").val(),
 					flag = false,
 					validatecode = null;
+				var regUsercode = new RegExp("^[0-9_]{10,10}$");
+				var regPassword = new RegExp("^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$");
 				//判断用户名密码是否为空
 				if(usercode == "") {
 					$.pt({
@@ -467,7 +469,7 @@
 						content: "请输入正确的10位一卡通账号"
 					});
 					flag = true;
-				}else if(phone == "") {
+				}else if(phonenumber == "") {
 					$.pt({
 						target: $("#forget-phone"),
 						position: 'r',

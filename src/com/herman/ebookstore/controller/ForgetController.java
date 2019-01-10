@@ -117,16 +117,17 @@ public class ForgetController extends BaseForSDK{
 			sdkInfo.setMobile(phonenumber);
 			sdkInfo=this.sdkInfoService.selectOneSDKInfo(sdkInfo);
 			try {
-				if(!"".equals(sdkInfo.getSmsid()) && "000000".equals(sdkInfo.getCode()) && code.equals(sdkInfo.getParam())) {
+				if(/*!"".equals(sdkInfo.getSmsid()) && "000000".equals(sdkInfo.getCode()) && */code.equals(sdkInfo.getParam())) {
 					user.setUsercode(usercode);
 					user.setPhonenumber(phonenumber);
 					index = this.userService.getUserListWhere(user);
 					if(index == 1){
 						user.setPassword(MD5Util.MD5Encode(password,"utf8"));
 						index = this.userService.updatePassword(user);
-						if(index ==1){
+						if(index ==1) {
 							json.setValue("1");
 						}
+						
 					}else {
 						json.setValue("2");
 					}
