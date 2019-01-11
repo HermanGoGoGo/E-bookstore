@@ -29,7 +29,7 @@ public class BookVo {
 	@Field
 	private String bookPrice;//售价
 	@Field
-	private int status;//出售状态
+	private String status;//出售状态
 	@Field
 	private String bookDescription;//书描述
 	@Field
@@ -91,10 +91,10 @@ public class BookVo {
 	public void setBookPrice(String bookPrice) {
 		this.bookPrice = bookPrice;
 	}
-	public int getStatus() {
+	public String getStatus() {
 		return status;
 	}
-	public void setStatus(int status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 	public String getBookDescription() {
