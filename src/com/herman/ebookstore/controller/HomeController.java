@@ -1,17 +1,13 @@
 package com.herman.ebookstore.controller;
 
-import java.io.PrintWriter;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.herman.ebookstore.pojo.BookVo;
 import com.herman.ebookstore.pojo.User;
@@ -41,13 +37,6 @@ public class HomeController {
 		BookVo bookVo =new BookVo();
 		List<BookVo> bookVoList = this.bookVoService.getBooKVoList(bookVo);
 		model.addAttribute("bookVoList", bookVoList);
-		System.out.println(bookVoList);
-		try {
-			TimeUnit.SECONDS.sleep(3);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}//秒
 		User currentUser =new User();
 		if(usercode != null && !"".equals(usercode)) {
 			currentUser.setUsercode(usercode.toString());

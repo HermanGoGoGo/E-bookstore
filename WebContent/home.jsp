@@ -36,8 +36,8 @@
 	<!-- Ekan Admin skins -->
 	<link rel="stylesheet" href="<%=path%>/main/css/skins/_all-skins.css">
 	
-    <!-- paging -->	
-	<link rel="stylesheet" href="<%=path%>/assets/vendor_components/paging/paging.css">
+    <!-- Data Table-->
+	<link rel="stylesheet" type="text/css" href="<%=path%>/assets/vendor_components/datatable/datatables.min.css"/>
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -464,47 +464,57 @@
 		    </div>					
 			
 			<div class="row">
-			
-				
-				<div class="col-xl-12 col-12">
-					<div class="box">
-					  <div class="box-header">
-						<h4 class="box-title">Recent Orders</h4>
-					  </div>
-					  <div class="box-body">
+				<div class="col-12">
+	
+				 <div class="box">
+					<div class="box-header with-border">
+					  <h3 class="box-title">Data Table With Full Features</h3>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
 						<div class="table-responsive">
-						  <table class="table table-hover mb-5">
+						  <table id="example1" class="table table-bordered table-striped">
 							<thead>
-							  <tr>
-								<th>你好</th>
-								<th>Invoice#</th>
-								<th>Customer Name</th>
-								<th>Status</th>
-								<th>SellUser</th>
-								<th>Amount</th>
-							  </tr>
+								<tr>
+									<th>编号</th>
+									<th>名称</th>
+									<th>作者</th>
+									<th>描述</th>
+									<th>出售人</th>
+									<th>价钱</th>
+								</tr>
 							</thead>
 							<tbody>
-							 <c:forEach items="${bookVoList }" var="book" varStatus="status">
-								  <tr>
-									<td>${book.bookId}</td>
-									<td><a href="<%=path%>/home/toHomePage.action?id=${book.bookId}">${book.bookname}</a></td>
-									<td>${book.bookAuthor}</td>
-									<td>
-									  <span class="badge badge-success">${book.bookDescription}</span>
-									</td>
-									<td>${book.user.username}</td>
-									<td>$ ${book.bookPrice}</td>
-								  </tr>
-							  </c:forEach>
+								<c:forEach items="${bookVoList }" var="book" varStatus="status">
+									  <tr>
+										<td>${book.bookId}</td>
+										<td><a href="<%=path%>/home/toHomePage.action?id=${book.bookId}">${book.bookname}</a></td>
+										<td>${book.bookAuthor}</td>
+										<td>
+										  <span class="badge badge-success">${book.bookDescription}</span>
+										</td>
+										<td>${book.user.username}</td>
+										<td>$ ${book.bookPrice}</td>
+									  </tr>
+								</c:forEach>
 							</tbody>
+							<tfoot>
+								<tr>
+									<th>编号</th>
+									<th>名称</th>
+									<th>作者</th>
+									<th>描述</th>
+									<th>出售人</th>
+									<th>价钱</th>
+								</tr>
+							</tfoot>
 						  </table>
 						</div>
-					  </div>
-					 <div class="box-header">
-						<div class="fenye" id="fenye"></div>
-					 </div>
 					</div>
+					<!-- /.box-body -->
+				  </div>
+				  <!-- /.box -->
+					<!-- /.box-body -->
 				  </div>
 			</div>
 			
@@ -589,15 +599,16 @@
 	<!-- FastClick -->
 	<script src="<%=path%>/assets/vendor_components/fastclick/lib/fastclick.js"></script>
 	
-    <!-- paging -->
-    <script src="<%=path%>/assets/vendor_components/paging/paging.js"></script>
-	
     <!-- C3 Plugins -->
     <script src="<%=path%>/assets/vendor_components/c3/d3.min.js"></script>
     <script src="<%=path%>/assets/vendor_components/c3/c3.min.js"></script>
 	
 	<!-- Ekan Admin App -->
 	<script src="<%=path%>/main/js/template.js"></script>
+	
+	<!-- This is data table -->
+    <script src="<%=path%>/assets/vendor_components/datatable/datatables.min.js"></script>
+	<script src="<%=path%>/main/js/pages/data-table.js"></script>
 	
 	<!-- Ekan Admin dashboard demo (This is only for demo purposes) -->
 	<%-- <script src="<%=path%>/main/js/pages/dashboard.js"></script>
@@ -640,23 +651,5 @@
 		    //setInterval("checkTime()","5000");
 
 	</script>
-	<!-- 分页 -->
-	<script type="text/javascript">
-	$(function () {
-		var myName="<%=session.getAttribute("usercode")%>"; 
-	   　　console.log(myName);
-        var setTotalCount = 300;
-        $('#fenye').paging({
-            initPageNo: 1, // 初始页码
-            totalPages: 30, //总页数
-            totalCount: '合计' + setTotalCount + '条数据', // 条目总数
-            slideSpeed: 600, // 缓动速度。单位毫秒
-            jump: true, //是否支持跳转
-            callback: function(page) { // 回调函数
-                console.log(page);
-            }
-        })
-	});
-    </script>
 </body>
 </html>
