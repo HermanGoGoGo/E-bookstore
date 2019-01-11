@@ -17,8 +17,8 @@
 	</sql>
 	<insert id="insertNewErrorLog"  parameterType="com.herman.ebookstore.pojo.ErrorLog" >
 		insert into 
-		MSTB_ERROR_LOG_INFO(createdtime,createduserid,eventaction,eventtype,errorlogcontent,errorlogtime,errorlogtimemonth,remark)
-		values(sysdate(),#{createduserid},#{eventaction},#{eventtype},#{errorlogcontent},#{errorlogtime},#{errorlogtimemonth}),#{remark})
+		MSTB_ERROR_LOG_INFO(createdTime,createdUserId,eventAction,eventType,errorLogContent,errorLogTime,errorLogTimeMonth,remark)
+		values(sysdate(),#{createdUserId},#{eventAction},#{eventType},#{errorLogContent},#{errorLogTime},#{errorLogTimeMonth},#{remark})
 	</insert>
 	<select id="selectOneErrorLog" parameterType="com.herman.ebookstore.pojo.ErrorLog" resultMap="BaseResultMap">
 		select 

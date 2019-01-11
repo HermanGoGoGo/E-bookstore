@@ -45,7 +45,7 @@ public class CustomerExceptionResolver implements HandlerExceptionResolver {
 		Date date = new Date();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
-		int month = cal.get(Calendar.MONTH);
+		int month = cal.get(Calendar.MONTH) + 1;
 		ErrorLog errorLog = new ErrorLog();
 		errorLog.setCreatedUserId(String.valueOf(request.getSession().getAttribute("usercode")));
 		errorLog.setEventAction(request.getRequestURI());
