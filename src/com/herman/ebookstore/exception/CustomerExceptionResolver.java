@@ -54,8 +54,7 @@ public class CustomerExceptionResolver implements HandlerExceptionResolver {
 		errorLog.setErrorLogTime(date.toString());
 		errorLog.setErrorLogTimeMonth(Integer.toString(month));
 		//errorLog.setRemark(remark);
-		int index = -1;
-		index = this.errorLogService.insertNewErrorLog(errorLog);
+		this.errorLogService.insertNewErrorLog(errorLog);
 		//自定义异常处理
 		if(ex instanceof MyException){
 			result = ((MyException)ex).getMsg();

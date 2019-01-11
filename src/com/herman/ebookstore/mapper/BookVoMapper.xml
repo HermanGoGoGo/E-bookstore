@@ -14,13 +14,14 @@
 		<result column="BOOKCONDITION" property="bookCondition" jdbcType="VARCHAR" />
 		<result column="BOOKEDITION" property="bookEdition" jdbcType="VARCHAR" />
 		<result column="BOOKSEMESTER" property="bookSemester" jdbcType="VARCHAR" />
+		<result column="BOOKCOURSE" property="bookCourse" jdbcType="VARCHAR" />
 		<result column="BOOKTRANSACTION" property="bookTransaction" jdbcType="VARCHAR" />
 		<result column="PURCHASERID" property="purchaserId" jdbcType="VARCHAR" />
 		<result column="UPDATETIME" property="updatetime" jdbcType="TIMESTAMP" />
 	</resultMap>
 	
 	<sql id="Base_Column_List">
-		bookId,createdtime,userId,bookname,bookAuthor,bookOriginalPrice,bookPrice,status,bookDescription,bookCondition,bookEdition,bookSemester,purchaserId,updatetime
+		bookId,createdtime,userId,bookname,bookAuthor,bookOriginalPrice,bookPrice,status,bookDescription,bookCondition,bookEdition,bookSemester,bookCourse,bookTransaction,purchaserId,updatetime
 	</sql>
 	<!-- 查询书本信息 -->
 	<select id="getBooKVoList" parameterType="com.herman.ebookstore.pojo.BookVo" resultMap="BaseResultMap">

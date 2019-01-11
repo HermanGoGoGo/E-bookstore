@@ -21,38 +21,34 @@ public class BookVo {
 	@Field
 	private String userId;
 	@Field
-	private String bookname;
+	private String bookname;//书名
 	@Field
-	private String bookAuthor;
+	private String bookAuthor;//作者
 	@Field
-	private String bookOriginalPrice;
+	private String bookOriginalPrice;//原价
 	@Field
-	private String bookPrice;
+	private String bookPrice;//售价
 	@Field
-	private String status;
+	private int status;//出售状态
 	@Field
-	private String bookDescription;
+	private String bookDescription;//书描述
 	@Field
-	private String bookCondition;
+	private String bookCondition;//书本质量
 	@Field
-	private String bookEdition;
+	private String bookEdition;//版本
 	@Field
-	private String bookSemester;
+	private String bookSemester;//学期
 	@Field
-	private String bookTransaction;
+	private String bookCourse;//课程
 	@Field
-	private String purchaserId;
+	private String bookTransaction;//交易方式
 	@Field
-	private String updatetime;
+	private String purchaserId;//购买者ID
 	@Field
-	private User user;
+	private String updatetime;//更新时间
+	@Field
+	private User user;//用户
 	
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
 	public String getBookId() {
 		return bookId;
 	}
@@ -95,10 +91,10 @@ public class BookVo {
 	public void setBookPrice(String bookPrice) {
 		this.bookPrice = bookPrice;
 	}
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 	public String getBookDescription() {
@@ -125,6 +121,12 @@ public class BookVo {
 	public void setBookSemester(String bookSemester) {
 		this.bookSemester = bookSemester;
 	}
+	public String getBookCourse() {
+		return bookCourse;
+	}
+	public void setBookCourse(String bookCourse) {
+		this.bookCourse = bookCourse;
+	}
 	public String getBookTransaction() {
 		return bookTransaction;
 	}
@@ -143,13 +145,20 @@ public class BookVo {
 	public void setUpdatetime(String updatetime) {
 		this.updatetime = updatetime;
 	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	@Override
 	public String toString() {
 		return "BookVo [bookId=" + bookId + ", createdtime=" + createdtime + ", userId=" + userId + ", bookname="
 				+ bookname + ", bookAuthor=" + bookAuthor + ", bookOriginalPrice=" + bookOriginalPrice + ", bookPrice="
 				+ bookPrice + ", status=" + status + ", bookDescription=" + bookDescription + ", bookCondition="
-				+ bookCondition + ", bookEdition=" + bookEdition + ", bookSemester=" + bookSemester
-				+ ", bookTransaction=" + bookTransaction + ", purchaserId=" + purchaserId + ", updatetime=" + updatetime
-				+ ", user=" + user + "]";
+				+ bookCondition + ", bookEdition=" + bookEdition + ", bookSemester=" + bookSemester + ", bookCourse="
+				+ bookCourse + ", bookTransaction=" + bookTransaction + ", purchaserId=" + purchaserId + ", updatetime="
+				+ updatetime + ", user=" + user + "]";
 	}
-}
+	
+}	
