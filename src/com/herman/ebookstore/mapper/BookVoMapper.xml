@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.herman.ebookstore.mapper.BookVoMapper">
+	<resultMap type="com.herman.ebookstore.pojo.BookVo" id="BaseResultMap">
+		<id column="BOOKID" property="bookId" jdbcType="INTEGER" />
+		<result column="CREATEDTIME" property="createdtime" jdbcType="TIMESTAMP" />
+		<result column="USERID" property="userId" jdbcType="VARCHAR" />
+		<result column="BOOKNAME" property="bookname" jdbcType="VARCHAR" />
+		<result column="BOOKAUTHOR" property="bookAuthor" jdbcType="VARCHAR" />
+		<result column="BOOKORIGINALPRICE" property="bookOriginalPrice" jdbcType="DECIMAL" />
+		<result column="BOOKPRICE" property="bookPrice" jdbcType="DECIMAL" />
+		<result column="STATUS" property="status" jdbcType="INTEGER" />
+		<result column="BOOKDESCRIPTION" property="bookDescription" jdbcType="VARCHAR" />
+		<result column="BOOKCONDITION" property="bookCondition" jdbcType="VARCHAR" />
+		<result column="BOOKEDITION" property="bookEdition" jdbcType="VARCHAR" />
+		<result column="BOOKSEMESTER" property="bookSemester" jdbcType="VARCHAR" />
+		<result column="BOOKTRANSACTION" property="bookTransaction" jdbcType="VARCHAR" />
+		<result column="PURCHASERID" property="purchaserId" jdbcType="VARCHAR" />
+		<result column="UPDATETIME" property="updatetime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		bookId,createdtime,userId,bookname,bookAuthor,bookOriginalPrice,bookPrice,status,bookDescription,bookCondition,bookEdition,bookSemester,purchaserId,updatetime
+	</sql>
+	<!-- 查询书本信息 -->
+	<select id="getBooKVoList" parameterType="com.herman.ebookstore.pojo.BookVo" resultMap="BaseResultMap">
+	  select
+		<include refid="Base_Column_List"></include>
+		from MSTB_SELL_BOOK
+		<where>
+			<if test="bookId != null and bookId !=''">
+				and bookId = #{bookId}
+			</if>
+			<if test="createdtime != null and createdtime !=''">
+				and createdtime = #{createdtime}
+			</if>
+			<if test="bookname != null and bookname !=''">
+				and bookname = #{bookname}
+			</if>
+		</where>
+	</select>
+</mapper>

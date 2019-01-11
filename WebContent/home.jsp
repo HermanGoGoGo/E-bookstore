@@ -1,6 +1,8 @@
 ﻿﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 
 <%@ page contentType="text/html;charset=utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
 <%
 	String path = request.getContextPath();
 
@@ -478,64 +480,23 @@
 								<th>Invoice#</th>
 								<th>Customer Name</th>
 								<th>Status</th>
+								<th>SellUser</th>
 								<th>Amount</th>
 							  </tr>
 							</thead>
 							<tbody>
-							  <tr>
-								<td>PO-10521</td>
-								<td><a href="#">INV-001001</a></td>
-								<td>Elizabeth W.</td>
-								<td>
-								  <span class="badge badge-success">Paid</span>
-								</td>
-								<td>$ 1200.00</td>
-							  </tr>
-							  <tr>
-								<td>PO-532521</td>
-								<td><a href="#">INV-01112</a></td>
-								<td>Doris R.</td>
-								<td>
-								  <span class="badge badge-warning">Overdue</span>
-								</td>
-								<td>$ 5685.00</td>
-							  </tr>
-							  <tr>
-								<td>PO-05521</td>
-								<td><a href="#">INV-001012</a></td>
-								<td>Andrew D.</td>
-								<td>
-								  <span class="badge badge-success">Paid</span>
-								</td>
-								<td>$ 152.00</td>
-							  </tr>
-							  <tr>
-								<td>PO-15521</td>
-								<td><a href="#">INV-001401</a></td>
-								<td>Megan S.</td>
-								<td>
-								  <span class="badge badge-success">Paid</span>
-								</td>
-								<td>$ 1450.00</td>
-							  </tr>
-							  <tr>
-								<td>PO-32521</td>
-								<td><a href="#">INV-008101</a></td>
-								<td>Walter R.</td>
-								<td>
-								  <span class="badge badge-warning">Overdue</span>
-								</td>
-								<td>$ 685.00</td>
-							  </tr>
-							  <tr>
-								<td>PO-532521</td>
-								<td><a href="#">INV-01112</a></td>
-								<td>Doris R.</td>
-								<td>
-								  <span class="badge badge-warning">Overdue</span>
-								</td>
-								<td>$ 5685.00</td>
-							  </tr>
+							 <c:forEach items="${bookVoList }" var="book" varStatus="status">
+								  <tr>
+									<td>${book.bookId}</td>
+									<td><a href="<%=path%>/home/toHomePage.action?id=${book.bookId}">${book.bookname}</a></td>
+									<td>${book.bookAuthor}</td>
+									<td>
+									  <span class="badge badge-success">${book.bookDescription}</span>
+									</td>
+									<td>${book.user.username}</td>
+									<td>$ ${book.bookPrice}</td>
+								  </tr>
+							  </c:forEach>
 							</tbody>
 						  </table>
 						</div>
