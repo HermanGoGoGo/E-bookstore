@@ -26,7 +26,7 @@ import com.herman.ebookstore.service.UserService;
 */
 @Controller
 @RequestMapping("home")
-public class homeController {
+public class HomeController {
 
 	@Autowired
 	private UserService userService;
