@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.plugin.Intercepts;
 import org.apache.ibatis.plugin.Signature;
+import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -18,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 * @date 2019年1月7日
 *
 */
-public class UserLoginInterceptor extends HandlerInterceptorAdapter{
+public class UserLoginInterceptor implements HandlerInterceptor{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception{
         // equalsIgnoreCase 与 equals的区别？
 		Object object = request.getSession().getAttribute("usercode");

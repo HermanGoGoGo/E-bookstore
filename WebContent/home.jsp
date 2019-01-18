@@ -24,6 +24,8 @@
 	<!-- Bootstrap 4.0-->
 	<link rel="stylesheet" href="<%=path%>/assets/vendor_components/bootstrap/dist/css/bootstrap.css">
 	
+	<link rel="stylesheet"  type="text/css" href="<%=path%>/main/css/style-1.css">	
+	
     <!-- c3 CSS -->
     <link rel="stylesheet" type="text/css" href="<%=path%>/assets/vendor_components/c3/c3.min.css">
 	
@@ -36,6 +38,7 @@
 	<!-- Ekan Admin skins -->
 	<link rel="stylesheet" href="<%=path%>/main/css/skins/_all-skins.css">
 	
+
     <!-- Data Table-->
 	<link rel="stylesheet" type="text/css" href="<%=path%>/assets/vendor_components/datatable/datatables.min.css"/>
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -49,8 +52,43 @@
   </head>
 
 <body class="hold-transition skin-info dark-sidebar light sidebar-mini">
-<div class="wrapper">
-
+<!-- loading -->
+		<div class="loader">
+			<div class="text">Loading...</div>
+			<div class="horizontal">
+				<div class="circlesup">
+					<div class="circle"></div>
+					<div class="circle"></div>
+					<div class="circle"></div>
+					<div class="circle"></div>
+					<div class="circle"></div>
+				</div>
+				<div class="circlesdwn">
+					<div class="circle"></div>
+					<div class="circle"></div>
+					<div class="circle"></div>
+					<div class="circle"></div>
+					<div class="circle"></div>
+				</div>
+			</div>
+			<div class="vertical">
+				<div class="circlesup">
+					<div class="circle"></div>
+					<div class="circle"></div>
+					<div class="circle"></div>
+					<div class="circle"></div>
+					<div class="circle"></div>
+				</div>
+				<div class="circlesdwn">
+					<div class="circle"></div>
+					<div class="circle"></div>
+					<div class="circle"></div>
+					<div class="circle"></div>
+					<div class="circle"></div>
+				</div>
+			</div>
+		</div>
+<div class="wrapper" >
   <header class="main-header">
     <!-- Logo -->
     <a href="<%=path%>/home/toHomePage.action" class="logo">
@@ -407,7 +445,7 @@
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="content-wrapper"  style="display: none;">
 	  <div class="container-full">
 		<!-- Content Header (Page header) -->	  
 		<div class="content-header">
@@ -575,10 +613,15 @@
 </div>
 <!-- ./wrapper -->
   	
-	 
-	  
 	<!-- jQuery 3 -->
 	<script src="<%=path%>/assets/vendor_components/jquery-3.3.1/jquery-3.3.1.js"></script>
+		<script type="text/javascript">
+		window.onload=function(){
+		    $(".loader").fadeOut();
+		    $(".content-wrapper").show();
+		}
+	</script>
+	  
 	
 	<!-- jQuery UI 1.11.4 -->
 	<script src="<%=path%>/assets/vendor_components/jquery-ui/jquery-ui.js"></script>
