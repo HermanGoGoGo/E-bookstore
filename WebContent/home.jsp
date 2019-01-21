@@ -286,151 +286,22 @@
       <!-- sidebar menu-->
       <ul class="sidebar-menu" data-widget="tree">
 		  
-        <li class="header nav-small-cap">PERSONAL</li>
+        <li class="header nav-small-cap">选项</li>
 		
 		<li class="treeview active">
           <a href="#">
             <i class="ti-dashboard"></i>
-            <span>Dashboard</span>
+            <span></span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="index.html"><i class="ti-more"></i>Main Dashboard</a></li>
-            <li><a href="index-2.html"><i class="ti-more"></i>Dashboard 2</a></li>
-            <li><a href="index-3.html"><i class="ti-more"></i>Dashboard 3</a></li>
-            <li><a href="index-4.html"><i class="ti-more"></i>Dashboard 4</a></li>
-            <li><a href="index-5.html"><i class="ti-more"></i>Dashboard 5</a></li>
+            <li class="active"><a href="<%=path%>/home/toHomePage.action"><i class="ti-more"></i>购买书</a></li>
+            <li><a href="#"><i class="ti-more"></i>出售书</a></li>
+            <li><a href="#"><i class="ti-more"></i>出售书</a></li>
           </ul>
-        </li> 
-		  
-		<li class="header nav-small-cap">CHARTS</li>  
-		  
-        <li class="treeview">
-          <a href="#">
-            <i class="ti-stats-up"></i>
-			<span>C3 Charts</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/charts_c3_axis.html"><i class="ti-more"></i>Axis Chart</a></li>
-            <li><a href="pages/charts_c3_bar.html"><i class="ti-more"></i>Bar Chart</a></li>
-            <li><a href="pages/charts_c3_data.html"><i class="ti-more"></i>Data Chart</a></li>
-            <li><a href="pages/charts_c3_line.html"><i class="ti-more"></i>Line Chart</a></li>
-          </ul>
-        </li>
-		  
-        <li class="treeview">
-          <a href="#">
-            <i class="ti-pie-chart"></i>
-			<span>Echarts</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/charts_echarts_basic.html"><i class="ti-more"></i>Basic Charts</a></li>
-            <li><a href="pages/charts_echarts_bar.html"><i class="ti-more"></i>Bar Chart</a></li>
-            <li><a href="pages/charts_echarts_pie_doughnut.html"><i class="ti-more"></i>Pie & Doughnut Chart</a></li>
-          </ul>
-        </li>
-		  
-        <li class="treeview">
-          <a href="#">
-            <i class="ti-pie-chart"></i>
-			<span>AM Chart</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/charts_amCharts.html"><i class="ti-more"></i>amCharts Charts</a></li>
-            <li><a href="pages/charts_amCharts_stock.html"><i class="ti-more"></i>amCharts Stock Charts</a></li>
-            <li><a href="pages/charts_amCharts_maps.html"><i class="ti-more"></i>amCharts Maps</a></li>
-          </ul>
-        </li>
-		  
-        <li class="treeview">
-          <a href="#">
-            <i class="ti-pie-chart"></i>
-			<span>Extra Chart</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/charts_chartjs.html"><i class="ti-more"></i>ChartJS</a></li>
-            <li><a href="pages/charts_flot.html"><i class="ti-more"></i>Flot</a></li>
-            <li><a href="pages/charts_inline.html"><i class="ti-more"></i>Inline charts</a></li>
-            <li><a href="pages/charts_morris.html"><i class="ti-more"></i>Morris</a></li>
-            <li><a href="pages/charts_peity.html"><i class="ti-more"></i>Peity</a></li>
-            <li><a href="pages/charts_chartist.html"><i class="ti-more"></i>Chartist</a></li>
-            <li><a href="pages/charts_rickshaw.html"><i class="ti-more"></i>Rickshaw Charts</a></li>
-            <li><a href="pages/charts_nvd3.html"><i class="ti-more"></i>NVD3 Charts</a></li>
-          </ul>
-        </li>	  
-		  
-		<li class="treeview">
-          <a href="#">
-            <i class="ti-receipt"></i>
-			<span>Invoice</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-			<li><a href="pages/invoice.html"><i class="ti-more"></i>Invoice</a></li>
-			<li><a href="pages/invoicelist.html"><i class="ti-more"></i>Invoice List</a></li>	
-          </ul>
-        </li>			  
-		  
-        <li class="header nav-small-cap">APPS</li>
-		  
-        <li class="treeview">
-          <a href="#">
-            <i class="ti-layout-grid2"></i>
-            <span>Extra</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-			<li><a href="pages/extra_calendar.html"><i class="ti-more"></i>Calendar</a></li>
-            <li><a href="pages/extra_taskboard.html"><i class="ti-more"></i>Project DashBoard</a></li>
-          </ul>
-        </li>
-		  
-        <li class="treeview">
-          <a href="#">
-            <i class="ti-email"></i> <span>Mailbox</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/mailbox_inbox.html"><i class="ti-more"></i>Inbox</a></li>
-            <li><a href="pages/mailbox_compose.html"><i class="ti-more"></i>Compose</a></li>
-            <li><a href="pages/mailbox_read_mail.html"><i class="ti-more"></i>Read</a></li>
-          </ul>
-        </li>
-		  
-		<li class="treeview">
-          <a href="#">
-            <i class="ti-user"></i>
-            <span>Members</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/members.html"><i class="ti-more"></i>Members Grid</a></li>
-            <li><a href="pages/members_list.html"><i class="ti-more"></i>Members List</a></li>
-            <li><a href="pages/member_profile.html"><i class="ti-more"></i>Member Profile</a></li>			  
-          </ul>
-        </li>	 
+        </li>  
         
       </ul>
     </section>
@@ -451,12 +322,12 @@
 		<div class="content-header">
 			<div class="d-flex align-items-center">
 				<div class="mr-auto">
-					<h3 class="page-title">Dashboard</h3>
+					<h3 class="page-title">购买书</h3>
 					<div class="d-inline-block align-items-center">
 						<nav>
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="#"><i class="mdi mdi-home-outline"></i></a></li>
-								<li class="breadcrumb-item active" aria-current="page">Control</li>
+								<li class="breadcrumb-item active" aria-current="page">书籍信息显示</li>
 							</ol>
 						</nav>
 					</div>
@@ -470,7 +341,7 @@
 			<div class="row">
 				<div class="col-xl-4 col-12">
 					<div class="box box-body">
-					  <h6 class="text-uppercase">EMPLOYEES</h6>
+					  <h6 class="text-uppercase">全部</h6>
 					  <div class="flexbox mt-2">
 						<span class=" font-size-30">85,987</span>
 						<span class="ion ion-person text-danger font-size-40"></span>
@@ -481,7 +352,7 @@
 
 				<div class="col-xl-4 col-12">
 					<div class="box box-body">
-					  <h6 class="text-uppercase">MESSAGES</h6>
+					  <h6 class="text-uppercase">全市</h6>
 					  <div class="flexbox mt-2">
 						<span class=" font-size-30">2,951</span>
 						<span class="ion ion-email text-info font-size-40"></span>
@@ -491,7 +362,7 @@
 				<!-- /.col -->
 				<div class="col-xl-4 col-12">
 					<div class="box box-body">
-					  <h6 class="text-uppercase">VISITORS</h6>
+					  <h6 class="text-uppercase">全校</h6>
 					  <div class="flexbox mt-2">
 						<span class=" font-size-30">15,845</span>
 						<span class="ion ion-document text-primary font-size-40"></span>
@@ -506,7 +377,7 @@
 	
 				 <div class="box">
 					<div class="box-header with-border">
-					  <h3 class="box-title">Data Table With Full Features</h3>
+					  <h3 class="box-title">出售书籍展示</h3>
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
@@ -566,14 +437,14 @@
     <div class="pull-right d-none d-sm-inline-block">
         <ul class="nav nav-primary nav-dotted nav-dot-separated justify-content-center justify-content-md-end">
 		  <li class="nav-item">
-			<a class="nav-link" href="javascript:void(0)">FAQ</a>
+			<a class="nav-link" href="javascript:void(0)">常见问题</a>
 		  </li>
 		  <li class="nav-item">
-			<a class="nav-link" href="#">Purchase Now</a>
+			<a class="nav-link" href="#">谢谢支持</a>
 		  </li>
 		</ul>
     </div>
-	  &copy; 2018 <a href="http://www.bootstrapmb.com/">Multi-Purpose Themes</a>. All Rights Reserved.
+	  &copy; 2019 <a href="#">0154242黄金宝</a>. 毕业设计.
   </footer>
 
   <!-- Control Sidebar -->
