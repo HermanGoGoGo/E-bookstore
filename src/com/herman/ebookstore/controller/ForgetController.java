@@ -26,8 +26,8 @@ import com.herman.ebookstore.util.ReturnJson;
 /**
 * @ClassName: ForgetController
 * @Description: TODO()
-* @author Franklin
-* @date 9 Jan. 2019
+* @author 黄金宝
+* @date 2019年01月09日
 *
 */
 @Controller
