@@ -344,7 +344,7 @@
 					  <h6 class="text-uppercase">全部</h6>
 					  <div class="flexbox mt-2">
 						<span class=" font-size-30">85,987</span>
-						<span class="ion ion-person text-danger font-size-40"></span>
+						<span class="ion ion-ios-bookmarks-outline text-danger font-size-40"></span>
 					  </div>
 					</div>
 				</div>
@@ -355,7 +355,7 @@
 					  <h6 class="text-uppercase">全市</h6>
 					  <div class="flexbox mt-2">
 						<span class=" font-size-30">2,951</span>
-						<span class="ion ion-email text-info font-size-40"></span>
+						<span class="ion ion-ribbon-a text-info font-size-40"></span>
 					  </div>
 					</div>
 				</div>
@@ -365,7 +365,7 @@
 					  <h6 class="text-uppercase">全校</h6>
 					  <div class="flexbox mt-2">
 						<span class=" font-size-30">15,845</span>
-						<span class="ion ion-document text-primary font-size-40"></span>
+						<span class="ion ion-university text-primary font-size-40"></span>
 					  </div>
 					</div>
 				</div>
@@ -377,12 +377,12 @@
 	
 				 <div class="box">
 					<div class="box-header with-border">
-					  <h3 class="box-title">出售书籍展示</h3>
+					  <h3 class="box-title">书籍展示</h3>
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
 						<div class="table-responsive">
-						  <table id="example1" class="table table-bordered table-striped">
+						  <table id="example5" class="table table-bordered table-striped">
 							<thead>
 								<tr>
 									<th>编号</th>
