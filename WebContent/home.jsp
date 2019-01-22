@@ -135,10 +135,10 @@
 				<div class="p-20 bg-light">
 					<div class="flexbox">
 						<div>
-							<h4 class="mb-0 mt-0">Messages</h4>
+							<h4 class="mb-0 mt-0">最新消息</h4>
 						</div>
 						<div>
-							<a href="#" class="text-danger">Clear All</a>
+							<a href="#" class="text-danger">清除</a>
 						</div>
 					</div>
 				</div>
@@ -173,53 +173,10 @@
 					  </div>
 					</a>
 				  </li>
-				  <li>
-					<a href="#">
-					  <div class="pull-left">
-						<img src="<%=path%>/images/user4-128x128.jpg" class="rounded-circle" alt="User Image">
-					  </div>
-					  <div class="mail-contnet">
-						 <h4>
-						  Proin venenatis
-						  <small><i class="fa fa-clock-o"></i> Today</small>
-						 </h4>
-						 <span>Vestibulum nec ligula nec quam sodales rutrum sed luctus.</span>
-					  </div>
-					</a>
-				  </li>
-				  <li>
-					<a href="#">
-					  <div class="pull-left">
-						<img src="<%=path%>/images/user3-128x128.jpg" class="rounded-circle" alt="User Image">
-					  </div>
-					  <div class="mail-contnet">
-						 <h4>
-						  Praesent suscipit
-						<small><i class="fa fa-clock-o"></i> Yesterday</small>
-						 </h4>
-						 <span>Curabitur quis risus aliquet, luctus arcu nec, venenatis neque.</span>
-					  </div>
-					</a>
-				  </li>
-				  <li>
-					<a href="#">
-					  <div class="pull-left">
-						<img src="<%=path%>/images/user4-128x128.jpg" class="rounded-circle" alt="User Image">
-					  </div>
-					  <div class="mail-contnet">
-						 <h4>
-						  Donec tempor
-						  <small><i class="fa fa-clock-o"></i> 2 days</small>
-						 </h4>
-						 <span>Praesent vitae tellus eget nibh lacinia pretium.</span>
-					  </div>
-
-					</a>
-				  </li>
 				</ul>
 			  </li>
 			  <li class="footer">				  
-				  <a href="#" class="bg-light">See all e-Mails</a>
+				  <a href="#" class="bg-light">查看所有的信息</a>
 			  </li>
 			</ul>
 		  </li>
@@ -241,15 +198,15 @@
               </li>
               <!-- Menu Body -->
               <li class="user-body">
-				    <a class="dropdown-item" href="javascript:void(0)"><i class="ion ion-person"></i> My Profile</a>
-					<a class="dropdown-item" href="javascript:void(0)"><i class="ion ion-bag"></i> My Balance</a>
-					<a class="dropdown-item" href="javascript:void(0)"><i class="ion ion-email-unread"></i> Inbox</a>
+				    <a class="dropdown-item" href="javascript:void(0)"><i class="ion ion-person"></i> 修改个人信息</a>
+					<a class="dropdown-item" href="javascript:void(0)"><i class="ion ion-bag"></i> 购买&出售信息</a>
+					<a class="dropdown-item" href="javascript:void(0)"><i class="ion ion-email-unread"></i> 信息</a>
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="javascript:void(0)" data-toggle="control-sidebar"><i class="ion ion-settings"></i> Account Setting</a>
+					<a class="dropdown-item" href="javascript:void(0)" data-toggle="control-sidebar"><i class="ion ion-settings"></i> 基础界面设置</a>
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="<%=path%>/toLoginPage.action"><i class="ion-log-out"></i> Logout</a>
+					<a class="dropdown-item" href="<%=path%>/toLoginPage.action"><i class="ion-log-out"></i> 重新登录</a>
 					<div class="dropdown-divider"></div>
-					<div class="p-10"><a href="javascript:void(0)" class="btn btn-sm btn-rounded btn-success">View Profile</a></div>
+					<div class="p-10"><a href="javascript:void(0)" class="btn btn-sm btn-rounded btn-success">返回</a></div>
               </li>
             </ul>
           </li>	
