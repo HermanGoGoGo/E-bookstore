@@ -9,9 +9,18 @@
 		<result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
 		<result column="UPDATETIME" property="updatetime" jdbcType="TIMESTAMP" />
 		<result column="ROLECODE" property="rolecode" jdbcType="VARCHAR" />
+		<result column="UNIVERSITY" property="university" jdbcType="VARCHAR" />
+		<result column="CAMPUS" property="campus" jdbcType="VARCHAR" />
+		<result column="DEGREE" property="degree" jdbcType="VARCHAR" />
+		<result column="SECONDDEGREE" property="secondDegree" jdbcType="VARCHAR" />
+		<result column="YEARSTARTED" property="yearStarted" jdbcType="VARCHAR" />
+		<result column="YEAREND" property="yearEnd" jdbcType="VARCHAR" />
+		<result column="CITY" property="city" jdbcType="VARCHAR" />
+		<result column="PROVINCE" property="province" jdbcType="VARCHAR" />
+		<result column="EMAIL" property="email" jdbcType="VARCHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		username,usercode,password,phonenumber,createtime,updatetime,rolecode
+		username,usercode,password,phonenumber,createtime,updatetime,rolecode,university,campus,degree,secondDegree,yearStarted,yearEnd,city,province,email
 	</sql>
 	<select id="getUserList" resultMap="BaseResultMap">
 		select
@@ -36,8 +45,8 @@
 
 	<insert id="insertNewUser" parameterType="com.herman.ebookstore.pojo.User">
 		insert into MSTB_USER
-		(username,usercode,password,phonenumber,createtime,updatetime,rolecode)
-		values(#{username},#{usercode},#{password},#{phonenumber},sysdate(),null,#{rolecode})
+		(username,usercode,password,phonenumber,createtime,updatetime,rolecode,university,campus,degree,secondDegree,yearStarted,yearEnd,city,province,email)
+		values(#{username},#{usercode},#{password},#{phonenumber},sysdate(),null,#{rolecode},#{university},#{campus},#{degree},#{secondDegree},#{yearStarted},#{yearEnd},#{city},#{province},#{email})
 	</insert>
 	
 	<update id="updatePassword" parameterType="com.herman.ebookstore.pojo.User">

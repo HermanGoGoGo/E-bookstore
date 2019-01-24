@@ -21,6 +21,24 @@ public class User {
 	private Date updatetime;
 	@Field
 	private String rolecode;
+	@Field
+	private String university;
+	@Field
+	private String campus;
+	@Field
+	private String degree;
+	@Field
+	private String secondDegree;
+	@Field
+	private String yearStarted;
+	@Field
+	private String yearEnd;
+	@Field
+	private String city;
+	@Field
+	private String province;
+	@Field
+	private String email;
 
 
 	public String getUsername() {
@@ -77,6 +95,78 @@ public class User {
 
 	public void setUsercode(String usercode) {
 		this.usercode = usercode;
+	}
+
+	public String getUniversity() {
+		return university;
+	}
+
+	public void setUniversity(String university) {
+		this.university = university;
+	}
+
+	public String getCampus() {
+		return campus;
+	}
+
+	public void setCampus(String campus) {
+		this.campus = campus;
+	}
+
+	public String getDegree() {
+		return degree;
+	}
+
+	public void setDegree(String degree) {
+		this.degree = degree;
+	}
+
+	public String getSecondDegree() {
+		return secondDegree;
+	}
+
+	public void setSecondDegree(String secondDegree) {
+		this.secondDegree = secondDegree;
+	}
+
+	public String getYearStarted() {
+		return yearStarted;
+	}
+
+	public void setYearStarted(String yearStarted) {
+		this.yearStarted = yearStarted;
+	}
+
+	public String getYearEnd() {
+		return yearEnd;
+	}
+
+	public void setYearEnd(String yearEnd) {
+		this.yearEnd = yearEnd;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getProvince() {
+		return province;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	@Override
