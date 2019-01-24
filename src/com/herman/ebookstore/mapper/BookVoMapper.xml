@@ -39,5 +39,6 @@
 				and bookname = #{bookname}
 			</if>
 		</where>
+		order by  CREATEDTIME desc,BOOKID desc
 	</select>
 </mapper>

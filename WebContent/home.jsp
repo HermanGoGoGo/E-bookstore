@@ -3,12 +3,15 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
+<%@ page import="com.herman.ebookstore.util.RelativeDateFormat"%> 
 <%
 	String path = request.getContextPath();
 
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 	
-%>
+	
+	RelativeDateFormat  format = new RelativeDateFormat();
+%> 
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -342,18 +345,21 @@
 						  <table id="example5" class="table table-bordered table-striped">
 							<thead>
 								<tr>
-									<th>编号</th>
+									<th>序号</th>
 									<th>名称</th>
 									<th>作者</th>
 									<th>描述</th>
 									<th>出售人</th>
 									<th>价钱</th>
+									<th>时间</th>
 								</tr>
 							</thead>
 							<tbody>
+							<% int i = 0; %>
 								<c:forEach items="${bookVoList }" var="book" varStatus="status">
 									  <tr>
-										<td>${book.bookId}</td>
+									    <% i++; %>
+										<td> <%=i %></td>
 										<td><a href="<%=path%>/home/toHomePage.action?id=${book.bookId}">${book.bookname}</a></td>
 										<td>${book.bookAuthor}</td>
 										<td>
@@ -361,17 +367,20 @@
 										</td>
 										<td>${book.user.username}</td>
 										<td>$ ${book.bookPrice}</td>
+										<td>${book.createdtime}</td>
 									  </tr>
 								</c:forEach>
+								
 							</tbody>
 							<tfoot>
 								<tr>
-									<th>编号</th>
+									<th>序号</th>
 									<th>名称</th>
 									<th>作者</th>
 									<th>描述</th>
 									<th>出售人</th>
 									<th>价钱</th>
+									<th>时间</th>
 								</tr>
 							</tfoot>
 						  </table>

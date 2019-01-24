@@ -7,8 +7,8 @@
 		<result column="PARAM" property="param" jdbcType="VARCHAR" />
 		<result column="COUNT" property="count" jdbcType="VARCHAR" />
 		<result column="CREATEDATE" property="createdate" jdbcType="TIMESTAMP" />
-		<result column="MOBILE" property="mobile" jdbcType="TIMESTAMP" />
-		<result column="MSG" property="msg" jdbcType="TIMESTAMP" />
+		<result column="MOBILE" property="mobile" jdbcType="VARCHAR" />
+		<result column="MSG" property="msg" jdbcType="VARCHAR" />
 		<result column="SMSID" property="smsid" jdbcType="VARCHAR" />
 		<result column="UID" property="uid" jdbcType="VARCHAR" />
 	</resultMap>
