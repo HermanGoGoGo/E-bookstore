@@ -25,9 +25,10 @@ public class UserLoginInterceptor implements HandlerInterceptor{
 		Object object = request.getSession().getAttribute("usercode");
 		if(object == null){
 			response.sendRedirect(request.getContextPath() + "/toLoginPage.action");
+			return false;
+		}else {
+			return true;
 		}
-		//true放行,false拦截
-		return true;
     }
     // 在业务处理器处理请求完成之后，生成视图之前执行
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception{
