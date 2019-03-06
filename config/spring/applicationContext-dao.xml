@@ -32,10 +32,14 @@
 		<!-- 别名包扫描 -->
 		<property name="typeAliasesPackage" value="com.herman.ebookstore.pojo" />
 	</bean>
-	
     <!-- 动态代理，第二种方式：包扫描（推荐）： -->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
     	<!-- basePackage多个包用","分隔 -->
     	<property name="basePackage" value="com.herman.ebookstore.mapper" />
+    	<property name="properties">
+       			 <value>
+           				 mappers=tk.mybatis.mapper.common.Mapper
+        		</value>
+    	</property>
     </bean>
 </beans>
