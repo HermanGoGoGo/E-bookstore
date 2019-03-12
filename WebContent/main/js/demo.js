@@ -203,13 +203,13 @@ $(function () {
   // Layout options
   $demoSettings.append(
     '<h4 class="control-sidebar-heading">'
-    + 'Dark or Light Sidebar'
+    + '深色或浅色导航栏'
     + '</h4>'
 	  
     // Left Sidebar Skin Toggle	  
 	+ '<div class="flexbox mb-10 pb-10 bb-1">'
 	+ '<label for="toggle_left_sidebar_skin" class="control-sidebar-subheading">'
-    + 'Sidebar Color'
+    + '导航栏颜色'
     + '</label>'
 	+ '<label class="switch switch-border switch-danger">'
 	+ '<input type="checkbox" data-mainsidebarskin="toggle" id="toggle_left_sidebar_skin">'
@@ -224,13 +224,13 @@ $(function () {
   // Layout options
   $demoSettings.append(
     '<h4 class="control-sidebar-heading">'
-    + 'RTL or LTR'
+    + '左或右导航栏'
     + '</h4>'
 	  
     // rtl layout
 	+ '<div class="flexbox mb-10 pb-10 bb-1">'
 	+ '<label for="rtl" class="control-sidebar-subheading">'
-    + 'RTL'
+    + '右'
     + '</label>'
 	+ '<label class="switch switch-border switch-danger">'
 	+ '<input type="checkbox" data-layout="rtl" id="rtl">'
@@ -243,13 +243,13 @@ $(function () {
   // Layout options
   $demoSettings.append(
     '<h4 class="control-sidebar-heading">'
-    + 'Dark or Light Layout'
+    + '深色或浅色主题'
     + '</h4>'
 	  
     // dark layout
 	+ '<div class="flexbox mb-10 pb-10 bb-1">'
 	+ '<label for="dark" class="control-sidebar-subheading">'
-    + 'Layout Color'
+    + '主题颜色'
     + '</label>'
 	+ '<label class="switch switch-border switch-danger">'
 	+ '<input type="checkbox" data-layout="dark" id="dark">'
@@ -262,14 +262,14 @@ $(function () {
   // Layout options
   $demoSettings.append(
     '<h4 class="control-sidebar-heading">'
-    + 'Layout Options'
+    + '布局选项'
     + '</h4>'
 	  
 	  
     // Fixed layout
 	+ '<div class="flexbox mb-10">'
 	+ '<label for="layout_fixed" class="control-sidebar-subheading">'
-    + 'Fixed layout'
+    + '默认布局'
     + '</label>'
 	+ '<label class="switch switch-border switch-danger">'
 	+ '<input type="checkbox" data-layout="fixed" id="layout_fixed">'
@@ -281,7 +281,7 @@ $(function () {
     // Boxed layout
 	+ '<div class="flexbox mb-10">'
 	+ '<label for="layout_boxed" class="control-sidebar-subheading">'
-    + 'Boxed Layout'
+    + '固定布局'
     + '</label>'
 	+ '<label class="switch switch-border switch-danger">'
 	+ '<input type="checkbox" data-layout="layout-boxed" id="layout_boxed">'
@@ -293,7 +293,7 @@ $(function () {
     // Sidebar Toggle
 	+ '<div class="flexbox mb-10">'
 	+ '<label for="toggle_sidebar" class="control-sidebar-subheading">'
-    + 'Toggle Sidebar'
+    + '隐藏导航栏'
     + '</label>'
 	+ '<label class="switch switch-border switch-danger">'
 	+ '<input type="checkbox" data-layout="sidebar-collapse" id="toggle_sidebar">'
@@ -305,7 +305,7 @@ $(function () {
     // Control Sidebar Toggle
 	+ '<div class="flexbox mb-10">'
 	+ '<label for="toggle_right_sidebar" class="control-sidebar-subheading">'
-    + 'Toggle Right Sidebar Slide'
+    + '取消悬浮侧边栏'
     + '</label>'
 	+ '<label class="switch switch-border switch-danger">'
 	+ '<input type="checkbox" data-controlsidebar="control-sidebar-open" id="toggle_right_sidebar">'
@@ -317,7 +317,7 @@ $(function () {
     // Control Sidebar Skin Toggle
 	+ '<div class="flexbox mb-10 pb-10 bb-1">'
 	+ '<label for="toggle_right_sidebar_skin" class="control-sidebar-subheading">'
-    + 'Toggle Right Sidebar Skin'
+    + '深色或浅色侧边栏'
     + '</label>'
 	+ '<label class="switch switch-border switch-danger">'
 	+ '<input type="checkbox" data-sidebarskin="toggle" id="toggle_right_sidebar_skin">'
@@ -334,48 +334,48 @@ $(function () {
         $('<li />', { style: 'padding: 5px;line-height: 25px;' })
           .append('<a href="javascript:void(0)" data-skin="skin-info" style="display: inline-block;box-shadow: 0 0 3px rgba(0,0,0,0.4);border-radius: 100px;height: 20px;width: 20px;vertical-align: middle;" class="clearfix full-opacity-hover bg-info">'
             + '</a>'
-			+ '<span class="text-center no-margin pl-20">Skin Info</span>')
+			+ '<span class="text-center no-margin pl-20">蓝色</span>')
   $skinsList.append($skinInfo)
   var $skinSuccess =
         $('<li />', { style: 'padding: 5px;line-height: 25px;' })
           .append('<a href="javascript:void(0)" data-skin="skin-success" style="display: inline-block;box-shadow: 0 0 3px rgba(0,0,0,0.4);border-radius: 100px;height: 20px;width: 20px;vertical-align: middle;" class="clearfix full-opacity-hover bg-success">'
             + '</a>'
-			+ '<span class="text-center no-margin pl-20">Skin Success</span>')
+			+ '<span class="text-center no-margin pl-20">浅绿色</span>')
   $skinsList.append($skinSuccess)
   var $skinDanger =
         $('<li />', { style: 'padding: 5px;line-height: 25px;' })
           .append('<a href="javascript:void(0)" data-skin="skin-danger" style="display: inline-block;box-shadow: 0 0 3px rgba(0,0,0,0.4);border-radius: 100px;height: 20px;width: 20px;vertical-align: middle;" class="clearfix full-opacity-hover bg-danger">'
             + '</a>'
-			+ '<span class="text-center no-margin pl-20">Skin Danger</span>')
+			+ '<span class="text-center no-margin pl-20">红色</span>')
   $skinsList.append($skinDanger)
   var $skinPrimary =
         $('<li />', { style: 'padding: 5px;line-height: 25px;' })
           .append('<a href="javascript:void(0)" data-skin="skin-primary" style="display: inline-block;box-shadow: 0 0 3px rgba(0,0,0,0.4);border-radius: 100px;height: 20px;width: 20px;vertical-align: middle;" class="clearfix full-opacity-hover bg-primary">'
             + '</a>'
-			+ '<span class="text-center no-margin pl-20">Skin Primary</span>')
+			+ '<span class="text-center no-margin pl-20">浅蓝色</span>')
   $skinsList.append($skinPrimary)
   var $skinWarning =
         $('<li />', { style: 'padding: 5px;line-height: 25px;' })
           .append('<a href="javascript:void(0)" data-skin="skin-warning" style="display: inline-block;box-shadow: 0 0 3px rgba(0,0,0,0.4);border-radius: 100px;height: 20px;width: 20px;vertical-align: middle;" class="clearfix full-opacity-hover bg-warning">'
             + '</a>'
-			+ '<span class="text-center no-margin pl-20">Skin Warning</span>')
+			+ '<span class="text-center no-margin pl-20">黄色</span>')
   $skinsList.append($skinWarning)
   var $skinLight =
         $('<li />', { style: 'padding: 5px;line-height: 25px;' })
           .append('<a href="javascript:void(0)" data-skin="skin-light" style="display: inline-block;box-shadow: 0 0 3px rgba(0,0,0,0.4);border-radius: 100px;height: 20px;width: 20px;vertical-align: middle;" class="clearfix full-opacity-hover bg-light">'
             + '</a>'
-			+ '<span class="text-center no-margin pl-20">Skin Light</span>')
+			+ '<span class="text-center no-margin pl-20">亮白色</span>')
   $skinsList.append($skinLight)
   var $skinDark =
         $('<li />', { style: 'padding: 5px;line-height: 25px;' })
           .append('<a href="javascript:void(0)" data-skin="skin-dark" style="display: inline-block;box-shadow: 0 0 3px rgba(0,0,0,0.4);border-radius: 100px;height: 20px;width: 20px;vertical-align: middle;" class="clearfix full-opacity-hover bg-dark">'
             + '</a>'
-			+ '<span class="text-center no-margin pl-20">Skin Dark</span>')
+			+ '<span class="text-center no-margin pl-20">黑色</span>')
   $skinsList.append($skinDark)
 
   
 
-  $demoSettings.append('<h4 class="control-sidebar-heading">Header Colors</h4>')
+  $demoSettings.append('<h4 class="control-sidebar-heading">头部主题颜色</h4>')
   $demoSettings.append($skinsList)
 
   $tabPane.append($demoSettings)
