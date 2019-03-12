@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.herman.ebookstore.mapper.UniversityMapper">
+  <resultMap id="UniversityMapper" type="com.herman.ebookstore.pojo.University">
+    <result property="id" column="id"/>
+    <result property="createTime" column="create_time"/>
+    <result property="updateTime" column="update_time"/>
+    <result property="universityId" column="university_id"/>
+    <result property="university" column="university"/>
+    <result property="campus" column="campus"/>
+    <result property="city" column="city"/>
+    <result property="province" column="province"/>
+    <result property="address" column="address"/>
+    <result property="deleteFlag" column="delete_flag"/>
+  </resultMap>
+</mapper>

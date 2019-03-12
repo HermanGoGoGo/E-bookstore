@@ -1,4 +1,4 @@
-package com.herman.ebookstore.base;
+package com.herman.ebookstore.common.model;
 
 /**
  * @ClassName: BaseForSDK
