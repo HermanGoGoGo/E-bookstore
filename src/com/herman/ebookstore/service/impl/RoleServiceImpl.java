@@ -33,4 +33,10 @@ public class RoleServiceImpl extends AbstractService<Role> implements RoleServic
 		return roleMapper.selectAll();
 	}
 
+	@Override
+	public List<Role> getRoleByRoleID(String roleId) {
+		// TODO Auto-generated method stub
+		return roleMapper.getRoleByRoleID(roleId);
+	}
+
 }

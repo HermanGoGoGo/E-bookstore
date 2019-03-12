@@ -13,5 +13,7 @@ import com.herman.ebookstore.pojo.Role;
  * @date 2019-03-05 11:24:15
  */
 public interface RoleService extends Service<Role> {
-	List<Role> selectAll();
+	public List<Role> selectAll();
+
+	public List<Role> getRoleByRoleID(String roleId);
 }
