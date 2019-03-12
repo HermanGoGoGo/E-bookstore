@@ -37,10 +37,10 @@ public class CustomerExceptionResolver implements HandlerExceptionResolver {
 			Exception ex) {
 		
 		String result = "系统发生异常了，请联系管理员！";
-		System.out.println(request.getRequestURI());
-		System.out.println(request.getSession().getAttribute("usercode"));
-		System.out.println(ex.getClass());
-		System.out.println(ex.getMessage());
+		LOGGER.error(request.getRequestURI());
+		LOGGER.error(request.getSession().getAttribute("usercode"));
+		LOGGER.error(ex.getMessage());
+		LOGGER.error(ex.getClass());
 		
 		Date date = new Date();
 		Calendar cal = Calendar.getInstance();
