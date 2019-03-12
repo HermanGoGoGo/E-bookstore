@@ -189,7 +189,7 @@ $(function () {
   // Create the tab button
   var $tabButton = $('<li />', { 'class': 'nav-item' })
     .html('<a href=\'#control-sidebar-theme-demo-options-tab\' class=\'active\' data-toggle=\'tab\'>'
-      + 'Settings'
+      + '设置'
       + '</a>')
 
   // Add the tab button to the right sidebar tabs
