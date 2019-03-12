@@ -10,20 +10,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.herman.ebookstore.common.model.ResultCode;
 import com.herman.ebookstore.exception.MyException;
+import com.herman.ebookstore.mapper.RoleMapper;
 import com.herman.ebookstore.pojo.Role;
 import com.herman.ebookstore.pojo.User;
 import com.herman.ebookstore.service.RoleService;
 import com.herman.ebookstore.util.IlismJSONEncoder;
 import com.herman.ebookstore.util.ReturnJson;
 
-
-@ResponseBody
 @Controller
+@RequestMapping("test")
 public class TestController {
 	
 	@Autowired
@@ -53,6 +56,32 @@ public class TestController {
 			result.setStatus(ResultCode.NETWORK_ERROR.getCode());
 			result.setMessage(ResultCode.NETWORK_ERROR.getMessage());
 			new ResponseEntity<ReturnJson>(result, HttpStatus.INTERNAL_SERVER_ERROR);	
+		}
+	}
+	@RequestMapping(method = RequestMethod.GET,value="/test2")
+	public String test1(Model model,String id ) {
+		List<Role> role = roleService.getRoleByRoleID(id);
+		ReturnJson result = new ReturnJson(true);
+		try {
+			
+			int i= 1/0;
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+		}
+		if(role.size()==0) {
+			result.setStatus(ResultCode.NOT_FOUND.getCode());
+			result.setMessage(ResultCode.NOT_FOUND.getMessage());
+			model.addAttribute("role", IlismJSONEncoder.encode(result));
+			return  null;
+		}else {
+			
+			result.setStatus(ResultCode.SUCCESS.getCode());
+			result.setMessage(ResultCode.SUCCESS.getMessage());
+			System.out.println(role);
+			result.setObj(role);
+			model.addAttribute("role", IlismJSONEncoder.encode(result));
+			return  "index1";
 		}
 	}
 }

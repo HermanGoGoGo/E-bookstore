@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.herman.ebookstore.base.BaseForSDK;
+import com.herman.ebookstore.common.model.BaseForSDK;
 import com.herman.ebookstore.pojo.User;
 import com.herman.ebookstore.repository.UserRepository;
 import com.herman.ebookstore.sdk.impl.JsonReqClient;

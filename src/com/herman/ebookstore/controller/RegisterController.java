@@ -13,7 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.alibaba.fastjson.JSON;
-import com.herman.ebookstore.base.BaseForSDK;
+import com.herman.ebookstore.common.model.BaseForSDK;
 import com.herman.ebookstore.pojo.SDKInfo;
 import com.herman.ebookstore.pojo.User;
 import com.herman.ebookstore.repository.UserRepository;
