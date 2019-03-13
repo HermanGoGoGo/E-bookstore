@@ -8,5 +8,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	</properties>
 	<settings>
 		<setting name="logImpl" value="LOG4J" />
+		<!-- 是否开启自动驼峰命名规则（camel case）映射 -->
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
 	</settings>
 </configuration>

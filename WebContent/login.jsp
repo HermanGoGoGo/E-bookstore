@@ -157,6 +157,8 @@
 					return false;
 				} else { //登录
 					//调用后台登录验证的方法
+					$("#login-btn").attr("disabled",true);
+					$("#login-btn").val("正在登录");
 					$.ajax({
 						type: "post",
 						url: "<%=path%>/verificationLogin.action",
@@ -188,6 +190,8 @@
 									}
 								});
 							} else if(data.value == "3") {
+								$("#login-btn").attr("disabled",false);
+								$("#login-btn").val("登录");
 								$.pt({
 									target: $("#login-password"),
 									position: 'r',
@@ -199,6 +203,8 @@
 								goto_login();
 								return false;
 							} else if(data.value == "2") {
+								$("#login-btn").attr("disabled",false);
+								$("#login-btn").val("登录");
 								$.pt({
 									target: $("#login-username"),
 									position: 'r',
@@ -210,6 +216,8 @@
 								goto_login();
 								return false;
 							} else{
+								$("#login-btn").attr("disabled",false);
+								$("#login-btn").val("登录");
 								$.pt({
 									target: $("#login-username"),
 									position: 'r',
@@ -679,14 +687,14 @@
 						<div class="pad input-container">
 							<section class="content">
 								<span class="input input--hideo"> 
-									<input class="input__field input__field--hideo" type="text" id="login-username" autocomplete="off" placeholder="请输入用户名" tabindex="1" maxlength="15" value="2201504200"/> 
+									<input class="input__field input__field--hideo" type="text" id="login-username" autocomplete="off" placeholder="请输入一卡通账号" tabindex="1" maxlength="10"/> 
 									<label class="input__label input__label--hideo" for="login-username">
 										<i class="fa fa-fw fa-user icon icon--hideo"></i> 
 										<span class="input__label-content input__label-content--hideo"></span>
 								</label>
 								</span>
 								<span class="input input--hideo"> 
-									<input class="input__field input__field--hideo" type="password" id="login-password" placeholder="请输入密码" tabindex="2" maxlength="15" /> 
+									<input class="input__field input__field--hideo" type="password" id="login-password" placeholder="请输入密码" tabindex="2" maxlength="32" /> 
 									<label class="input__label input__label--hideo" for="login-password">
 										<i class="fa fa-fw fa-lock icon icon--hideo"></i> 
 										<span class="input__label-content input__label-content--hideo"></span>
@@ -697,7 +705,7 @@
 						<div class="form-actions">
 							<a tabindex="4" class="btn pull-left btn-link text-muted" onClick="goto_forget()">忘记密码?</a>
 							<a tabindex="5" class="btn btn-link text-muted" onClick="goto_register()">注册</a>
-							<input class="btn btn-primary" type="button" tabindex="3" onClick="login()" value="登录" style="color: white;" />
+							<input class="btn btn-primary" id="login-btn" type="button" tabindex="3" onClick="login()" value="登录" style="color: white;" />
 						</div>
 					</form>
 				</div>

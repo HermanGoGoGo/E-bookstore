@@ -419,7 +419,7 @@
 	<div class="rpanel-title"><span class="btn pull-right"><i class="ion ion-close" data-toggle="control-sidebar"></i></span> </div>  
     <!-- Create the tabs -->
     <ul class="nav nav-tabs control-sidebar-tabs">
-      <li class="nav-item"><a >Setting</a></li>
+      <li class="nav-item"><a >设置</a></li>
     </ul>
     <!-- Tab panes -->
     <div class="tab-content">
