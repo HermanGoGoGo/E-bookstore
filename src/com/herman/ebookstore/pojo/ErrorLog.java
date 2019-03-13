@@ -1,85 +1,105 @@
 package com.herman.ebookstore.pojo;
 
+import javax.persistence.*;
+
+import com.herman.ebookstore.common.model.BaseEntity;
+
 import java.util.Date;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
-@Document
-public class ErrorLog {
-	@Id
-	private String errorLogId;
-	@Field
-	private Date createdTime;
-	@Field
-	private String createdUserId;
-	@Field
-	private String eventAction;
-	@Field
-	private String eventType;
-	@Field
-	private String errorLogContent;
-	@Field
-	private String errorLogTime;
-	@Field
-	private String errorLogTimeMonth;
-	@Field
-	private String remark;
+/**
+ * 错误信息表
+ * 
+ * @author herman
+ * @email 1146465559@qq.com
+ * @date 2019-03-13 16:21:37
+ */
+@Table(name = "MSTB_ERROR_LOG_INFO")
+public class ErrorLog extends BaseEntity<ErrorLog> {
+
+	private static final long serialVersionUID = 1L;
 	
-	
-	public String getErrorLogId() {
-		return errorLogId;
-	}
-	public void setErrorLogId(String errorLogId) {
-		this.errorLogId = errorLogId;
-	}
-	public Date getCreatedTime() {
-		return createdTime;
-	}
-	public void setCreatedTime(Date createdTime) {
-		this.createdTime = createdTime;
-	}
-	public String getCreatedUserId() {
-		return createdUserId;
-	}
+    //创建用户
+    @Column(name = "created_user_id")
+    private String createdUserId;
+    
+    //发生的请求
+    @Column(name = "action")
+    private String action;
+    
+    //错误类型
+    @Column(name = "type")
+    private String type;
+    
+    //错误代码
+    @Column(name = "status")
+    private Integer status;
+    
+    //错误信息
+    @Column(name = "content")
+    private String content;
+    
+    //错误月份
+    @Column(name = "create_month")
+    private String createMonth;
+    
+    //备注
+    @Column(name = "remark")
+    private String remark;
+    
 	public void setCreatedUserId(String createdUserId) {
 		this.createdUserId = createdUserId;
 	}
-	public String getEventAction() {
-		return eventAction;
+
+	public String getCreatedUserId() {
+		return createdUserId;
 	}
-	public void setEventAction(String eventAction) {
-		this.eventAction = eventAction;
+	
+	public void setAction(String action) {
+		this.action = action;
 	}
-	public String getEventType() {
-		return eventType;
+
+	public String getAction() {
+		return action;
 	}
-	public void setEventType(String eventType) {
-		this.eventType = eventType;
+	
+	public void setType(String type) {
+		this.type = type;
 	}
-	public String getErrorLogContent() {
-		return errorLogContent;
+
+	public String getType() {
+		return type;
 	}
-	public void setErrorLogContent(String errorLogContent) {
-		this.errorLogContent = errorLogContent;
+	
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
-	public String getErrorLogTime() {
-		return errorLogTime;
+
+	public Integer getStatus() {
+		return status;
 	}
-	public void setErrorLogTime(String errorLogTime) {
-		this.errorLogTime = errorLogTime;
+	
+	public void setContent(String content) {
+		this.content = content;
 	}
-	public String getErrorLogTimeMonth() {
-		return errorLogTimeMonth;
+
+	public String getContent() {
+		return content;
 	}
-	public void setErrorLogTimeMonth(String errorLogTimeMonth) {
-		this.errorLogTimeMonth = errorLogTimeMonth;
+	
+	public void setCreateMonth(String createMonth) {
+		this.createMonth = createMonth;
 	}
-	public String getRemark() {
-		return remark;
+
+	public String getCreateMonth() {
+		return createMonth;
 	}
+	
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public String getRemark() {
+		return remark;
 	}
 	
 }

@@ -35,32 +35,30 @@ public class CustomerExceptionResolver implements HandlerExceptionResolver {
 	@Override
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object hanlder,
 			Exception ex) {
-		
-		String result = "系统发生异常了，请联系管理员！";
 		LOGGER.error(request.getRequestURI());
 		LOGGER.error(request.getSession().getAttribute("usercode"));
 		LOGGER.error(ex.getMessage());
 		LOGGER.error(ex.getClass());
-		
+		LOGGER.error(response.getStatus());
 		Date date = new Date();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 		int month = cal.get(Calendar.MONTH) + 1;
 		ErrorLog errorLog = new ErrorLog();
 		errorLog.setCreatedUserId(String.valueOf(request.getSession().getAttribute("usercode")));
-		errorLog.setEventAction(request.getRequestURI());
-		errorLog.setEventType(String.valueOf(ex.getClass()));
-		errorLog.setErrorLogContent(ex.getMessage());
-		errorLog.setErrorLogTime(date.toString());
-		errorLog.setErrorLogTimeMonth(Integer.toString(month));
+		errorLog.setStatus(response.getStatus());
+		errorLog.setAction(request.getRequestURI());
+		errorLog.setType(String.valueOf(ex.getClass()));
+		errorLog.setContent(ex.getMessage());
+		errorLog.setCreateMonth(Integer.toString(month));
 		//errorLog.setRemark(remark);
-		this.errorLogService.insertNewErrorLog(errorLog);
+		this.errorLogService.save(errorLog);
 		//自定义异常处理
-		if(ex instanceof MyException){
-			result = ((MyException)ex).getMsg();
-		}
+//		if(ex instanceof MyException){
+//			result = ((MyException)ex).getMsg();
+//		}
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("msg", result);
+//		mav.addObject("msg", result);
 		mav.setViewName("pages/error_maintenance");
 		return mav;
 	}
