@@ -1,72 +1,69 @@
 package com.herman.ebookstore.pojo;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
+import javax.persistence.*;
 
-@Document
-public class Message {
-	@Id
-	private String messId;
-	@Field
-	private String messInfo;
-	@Field
-	private String receiveCode;
-	@Field
-	private String sendCode;
-	@Field
-	private String state;
-	@Field
-	private String createtime;
-	@Field
-	private String updatetime;
-	public String getMessId() {
-		return messId;
-	}
-	public void setMessId(String messId) {
-		this.messId = messId;
-	}
-	public String getMessInfo() {
-		return messInfo;
-	}
+import com.herman.ebookstore.common.model.BaseEntity;
+
+import java.util.Date;
+
+/**
+ * 交互信息表
+ * 
+ * @author herman
+ * @email 1146465559@qq.com
+ * @date 2019-03-13 16:43:30
+ */
+@Table(name = "HSTB_MESSAGE")
+public class Message extends BaseEntity<Message> {
+
+	private static final long serialVersionUID = 1L;
+	
+    //信息内容
+    @Column(name = "mess_info")
+    private String messInfo;
+    
+    //接收用户id
+    @Column(name = "receive_user_id")
+    private String receiveUserId;
+    
+    //发送用户id
+    @Column(name = "send_user_id")
+    private String sendUserId;
+    
+    //状态，是否已读 1：已读；0：未读
+    @Column(name = "status")
+    private String status;
+    
 	public void setMessInfo(String messInfo) {
 		this.messInfo = messInfo;
 	}
-	public String getReceiveCode() {
-		return receiveCode;
-	}
-	public void setReceiveCode(String receiveCode) {
-		this.receiveCode = receiveCode;
-	}
-	public String getSendCode() {
-		return sendCode;
-	}
-	public void setSendCode(String sendCode) {
-		this.sendCode = sendCode;
-	}
-	public String getState() {
-		return state;
-	}
-	public void setState(String state) {
-		this.state = state;
-	}
-	public String getCreatetime() {
-		return createtime;
-	}
-	public void setCreatetime(String createtime) {
-		this.createtime = createtime;
-	}
-	public String getUpdatetime() {
-		return updatetime;
-	}
-	public void setUpdatetime(String updatetime) {
-		this.updatetime = updatetime;
-	}
-	@Override
-	public String toString() {
-		return "Message [messId=" + messId + ", messInfo=" + messInfo + ", receiveCode=" + receiveCode + ", sendCode="
-				+ sendCode + ", state=" + state + ", createtime=" + createtime + ", updatetime=" + updatetime + "]";
+
+	public String getMessInfo() {
+		return messInfo;
 	}
 	
+	public void setReceiveUserId(String receiveUserId) {
+		this.receiveUserId = receiveUserId;
+	}
+
+	public String getReceiveUserId() {
+		return receiveUserId;
+	}
+	
+	public void setSendUserId(String sendUserId) {
+		this.sendUserId = sendUserId;
+	}
+
+	public String getSendUserId() {
+		return sendUserId;
+	}
+	
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getStatus() {
+		return status;
+	}
 	
 }

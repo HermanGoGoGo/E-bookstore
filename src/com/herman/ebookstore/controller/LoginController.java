@@ -53,14 +53,8 @@ public class LoginController extends BaseForSDK {
 		for (User user : userList) {
 			if (user.getUsercode().equals(username)) {
 				if (user.getPassword().equals(MD5Util.MD5Encode(password,"utf8"))) {
-					this.userRepository.save(user);
-					User user2 = this.userRepository.findByUsercode(user.getUsercode());
-					Long list= this.userRepository.count();
-					System.out.println(user2);
-					System.out.println(list);
 					session.setAttribute("usercode", username);
 					json.setValue("1");
-					//json.setObj(user);
 					break;
 				} else {
 					json.setValue("3");
@@ -82,5 +76,6 @@ public class LoginController extends BaseForSDK {
 				writer.close();
 		}
 	}
+	
 
 }

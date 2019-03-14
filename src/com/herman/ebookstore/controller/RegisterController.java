@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.alibaba.fastjson.JSON;
 import com.herman.ebookstore.common.model.BaseForSDK;
-import com.herman.ebookstore.pojo.SDKInfo;
+import com.herman.ebookstore.pojo.Sdk;
 import com.herman.ebookstore.pojo.User;
 import com.herman.ebookstore.repository.UserRepository;
 import com.herman.ebookstore.sdk.impl.JsonReqClient;
-import com.herman.ebookstore.service.SDKInfoService;
+import com.herman.ebookstore.service.SdkService;
 import com.herman.ebookstore.service.UserService;
 import com.herman.ebookstore.util.IlismJSONEncoder;
 import com.herman.ebookstore.util.MD5Util;
@@ -42,16 +42,16 @@ public class RegisterController extends BaseForSDK {
 	@Autowired
 	private UserService userService;
 	@Autowired
-	private SDKInfoService sdkInfoService;
+	private SdkService sdkService;
 
 	@RequestMapping("getVerificationCode")
 	public String getVerificationCode(String phonenumber,String usercode, HttpServletResponse response) {
 		String getPatam = String.valueOf(new Random().nextInt(899999) + 100000);
 		String result = this.jsonReqClient.sendSms(ACCOUNT_SID, AUTH_TOKEN, APPID, TEMPLATEID, getPatam , phonenumber, usercode);
-		SDKInfo pushMsgContent =  JSON.parseObject(result,SDKInfo.class);
+		Sdk pushMsgContent =  JSON.parseObject(result,Sdk.class);
 		if(!"".equals(pushMsgContent.getUid()) && pushMsgContent.getUid() != null){
 			pushMsgContent.setParam(getPatam);
-			this.sdkInfoService.insertNewSDKInfo(pushMsgContent);
+			this.sdkService.save(pushMsgContent);
 		}
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter writer = null;
@@ -72,18 +72,18 @@ public class RegisterController extends BaseForSDK {
 	@RequestMapping("register")
 	public String register(String username, String password, String usercode, String phonenumber, String code,HttpServletResponse response) {	
 		User user =new User();
-		SDKInfo sdkInfo = new SDKInfo();
+		Sdk sdk = new Sdk();
 		int index = -1;
 		response.setContentType("text/html;charset=utf-8");
 		ReturnJson json = new ReturnJson(true);
 		json.setValue(StringUtils.EMPTY);
 		PrintWriter writer = null;
 		if(usercode !=null && !"".equals(usercode)){
-			sdkInfo.setUid(usercode);
-			sdkInfo.setMobile(phonenumber);
-			sdkInfo=this.sdkInfoService.selectOneSDKInfo(sdkInfo);
+			sdk.setUid(usercode);
+			sdk.setMobile(phonenumber);
+			sdk=this.sdkService.selectOneSDKInfo(sdk);
 			try {
-				if("000000".equals(sdkInfo.getCode()) && code.equals(sdkInfo.getParam())) {
+				if("000000".equals(sdk.getCode()) && code.equals(sdk.getParam())) {
 					user.setUsercode(usercode);
 					index = this.userService.getUserListWhere(user);
 					if(index == 0){

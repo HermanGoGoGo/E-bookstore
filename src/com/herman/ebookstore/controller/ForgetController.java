@@ -13,14 +13,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.alibaba.fastjson.JSON;
 import com.herman.ebookstore.common.model.BaseForSDK;
-import com.herman.ebookstore.pojo.SDKInfo;
+import com.herman.ebookstore.pojo.Sdk;
 import com.herman.ebookstore.pojo.User;
 import com.herman.ebookstore.sdk.impl.JsonReqClient;
-import com.herman.ebookstore.service.SDKInfoService;
+import com.herman.ebookstore.service.SdkService;
 import com.herman.ebookstore.service.UserService;
 import com.herman.ebookstore.util.IlismJSONEncoder;
 import com.herman.ebookstore.util.MD5Util;
 import com.herman.ebookstore.util.ReturnJson;
+
+import tk.mybatis.mapper.entity.Condition;
 
 
 /**
@@ -41,7 +43,7 @@ public class ForgetController extends BaseForSDK{
 	@Autowired
 	private UserService userService;
 	@Autowired
-	private SDKInfoService sdkInfoService;
+	private SdkService sdkService;
 	
 	/**
 	* @Title: getVerificationCode
@@ -66,10 +68,10 @@ public class ForgetController extends BaseForSDK{
 		if(index == 1) {
 			String getPatam = String.valueOf(new Random().nextInt(899999) + 100000);
 			String result = this.jsonReqClient.sendSms(ACCOUNT_SID, AUTH_TOKEN, APPID, TEMPLATEID, getPatam , phonenumber, usercode);
-			SDKInfo pushMsgContent =  JSON.parseObject(result,SDKInfo.class);
+			Sdk pushMsgContent =  JSON.parseObject(result,Sdk.class);
 			if(!"".equals(pushMsgContent.getUid()) && pushMsgContent.getUid() != null){
 				pushMsgContent.setParam(getPatam);
-				this.sdkInfoService.insertNewSDKInfo(pushMsgContent);
+				this.sdkService.save(pushMsgContent);
 			}
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter writer = null;
@@ -106,7 +108,7 @@ public class ForgetController extends BaseForSDK{
 	@RequestMapping("forget")
 	public String forget(String usercode, String phonenumber, String code, String password, HttpServletResponse response) {
 		User user =new User();
-		SDKInfo sdkInfo = new SDKInfo();
+		Sdk sdkInfo = new Sdk();
 		int index = -1;
 		response.setContentType("text/html;charset=utf-8");
 		ReturnJson json = new ReturnJson(true);
@@ -115,7 +117,7 @@ public class ForgetController extends BaseForSDK{
 		if(usercode !=null && !"".equals(usercode)) {
 			sdkInfo.setUid(usercode);
 			sdkInfo.setMobile(phonenumber);
-			sdkInfo=this.sdkInfoService.selectOneSDKInfo(sdkInfo);
+			sdkInfo=this.sdkService.selectOneSDKInfo(sdkInfo);
 			try {
 				if(/*!"".equals(sdkInfo.getSmsid()) && "000000".equals(sdkInfo.getCode()) && */code.equals(sdkInfo.getParam())) {
 					user.setUsercode(usercode);

@@ -19,7 +19,7 @@
 		HSTB_MESSAGE(messInfo,receiveCode,sendCode,createtime,state)
 		values(#{messInfo},#{receiveCode},#{sendCode},sysdate(),'0')
 	</insert>
-	<select id="selectMessageByUsercode" parameterType="com.herman.ebookstore.pojo.SDKInfo" resultMap="BaseResultMap">
+	<select id="selectMessageByUsercode" parameterType="com.herman.ebookstore.pojo.Message" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List"></include>
 		from HSTB_MESSAGE

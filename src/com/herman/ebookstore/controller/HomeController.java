@@ -31,8 +31,6 @@ public class HomeController {
 	private UserService userService;
 	@Autowired
 	private BookVoService bookVoService;
-	@Autowired
-	private BookVoRepository bookVoRepository;
 	
 	@RequestMapping("toHomePage")
 	public String toHomepage(String searchByBookName,HttpServletRequest request,Model model) {
@@ -43,8 +41,7 @@ public class HomeController {
 		User currentUser =new User();
 		if(usercode != null && !"".equals(usercode)) {
 			currentUser.setUsercode(usercode.toString());
-			currentUser =this.userService.getOneUser(currentUser);
-			
+			currentUser =this.userService.getOneUser(currentUser);			
 			model.addAttribute("currentUser", currentUser);
 		}else {
 			currentUser.setUsername("请登录后获取");
