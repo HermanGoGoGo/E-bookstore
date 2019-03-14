@@ -9,25 +9,7 @@ public enum ResultCode {
     UNAUTHORIZED(401,"未认证"),//未认证（签名错误）
     INTERNAL_SERVER_ERROR(500,"服务器异常"),
     PARAMS_NOT_NULL(7001,"参数不能为空"),
-
-	/**
-	 * 修改套餐状态
-	 */
-	SUCCESS_TRUE(2008,"该编码已经在同一网店创建过有效套餐。"),
-
-	/**
-	 * 新增时套餐编码重复
-	 */
-	SUCCESS_ADD(2007,"同一网店套餐编码重复，请修改套餐编码。"),
-
-	/**
-	 * 修改套餐状态
-	 */
-	SUCCESS_FALSE(2004,"同一网店有效套餐编码不重复"),
-
-	/**
-	 * 查询无此记录
-	 */
+    
 	NOT_FOUND(404,"查询无此记录"),
 
 	PASSWORD_ERROR(445,"原密码错误"),
@@ -44,12 +26,7 @@ public enum ResultCode {
 	/**
 	 * 服务器繁忙
 	 */
-	NETWORK_ERROR(9999,"服务器繁忙"),
-
-	/**
-	 * 数量必须为正整数
-	 */
-	QUANTITY_ERROR(2002,"数量必须为正整数");
+	NETWORK_ERROR(9999,"服务器繁忙");
 	private final int code;
 
     private final String message;

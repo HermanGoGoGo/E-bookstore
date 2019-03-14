@@ -1,5 +1,7 @@
 package com.herman.ebookstore.util;
 
+import com.herman.ebookstore.common.model.ResultCode;
+
 /**
  * @ClassName: ReturnJson
  * @Description: TODO(json类封装)
@@ -16,11 +18,11 @@ public class ReturnJson {
 	
 	public ReturnJson(boolean judge){
 		if(judge){
-			this.status = 200;
-			this.message = "执行成功";
+			this.status = ResultCode.SUCCESS.getCode();
+			this.message = ResultCode.SUCCESS.getMessage();
 		}else{
-			this.status = 300;
-			this.message = "执行失败";
+			this.status = ResultCode.FAIL.getCode();
+			this.message = ResultCode.FAIL.getMessage();
 		}
 	}
 	
