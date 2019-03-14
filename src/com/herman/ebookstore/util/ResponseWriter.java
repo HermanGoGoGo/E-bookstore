@@ -112,4 +112,55 @@ public class ResponseWriter {
 		}
 	}
 	
+	/** 
+	 * @Method_Name: writerResponse 
+	 * @Description: TODO(返回默认参数)
+	 * @Description: * @param judge
+	 * @Description: * @param response void
+	 * @date 2019年3月14日
+	 * @author 黄金宝 
+	 */
+	public void writerResponse(boolean judge,HttpServletResponse response) {
+		response.setContentType("text/html;charset=utf-8");
+		ReturnJson json = new ReturnJson(judge);
+		PrintWriter writer = null;
+		try {
+			writer = response.getWriter();
+			writer.write(IlismJSONEncoder.encode(json));
+			writer.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (writer != null)
+				writer.close();
+		}
+	}
+	
+	/** 
+	 * @Method_Name: writerResponse 
+	 * @Description: TODO(返回自定义参数)
+	 * @Description: * @param status
+	 * @Description: * @param message
+	 * @Description: * @param response void
+	 * @date 2019年3月14日
+	 * @author 黄金宝 
+	 */
+	public void writerResponse(int status,String message,HttpServletResponse response) {
+		response.setContentType("text/html;charset=utf-8");
+		ReturnJson json = new ReturnJson(status,message);
+		PrintWriter writer = null;
+		try {
+			writer = response.getWriter();
+			writer.write(IlismJSONEncoder.encode(json));
+			writer.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (writer != null)
+				writer.close();
+		}
+	}
+	
 }

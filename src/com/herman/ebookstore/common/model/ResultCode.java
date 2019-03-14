@@ -12,7 +12,7 @@ public enum ResultCode {
     
 	NOT_FOUND(404,"查询无此记录"),
 
-	PASSWORD_ERROR(445,"原密码错误"),
+	PASSWORD_ERROR(445,"密码错误"),
 
 	SAME_PASSWORD(446,"新密码不能与原密码一样！"),
 
@@ -22,6 +22,7 @@ public enum ResultCode {
 	 * 参数错误
 	 */
 	PARAMETER_ERROR(9998,"参数错误"),
+	SDK_ERROR(10001,"验证码获取错误"),
 
 	/**
 	 * 服务器繁忙

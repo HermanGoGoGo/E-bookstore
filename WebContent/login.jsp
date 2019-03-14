@@ -168,7 +168,7 @@
 						},
 						dataType: 'json',
 						success: function(data) {
-							if(data.value == "1") {
+							if(data.status == "200") {
 								spop({
 									template: '<h4 class="spop-title">登录成功</h4>即将3秒后前往首页',
 									position: 'top-center',
@@ -189,7 +189,7 @@
 										return false;
 									}
 								});
-							} else if(data.value == "3") {
+							} else if(data.status == "445") {
 								$("#login-btn").attr("disabled",false);
 								$("#login-btn").val("登录");
 								$.pt({
@@ -202,7 +202,7 @@
 								});
 								goto_login();
 								return false;
-							} else if(data.value == "2") {
+							} else if(data.status == "400") {
 								$("#login-btn").attr("disabled",false);
 								$("#login-btn").val("登录");
 								$.pt({
