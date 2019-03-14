@@ -60,9 +60,6 @@ public class ForgetController extends BaseForSDK {
 		if (StringUtils.isNotEmpty(usercode)) {
 			user.setUsercode(usercode);
 		}
-		if (StringUtils.isNotEmpty(phonenumber)) {
-			user.setPhonenumber(phonenumber);
-		}
 		int index = -1;
 		index = this.userService.selectCountByCondition(user);
 		if (index == 1) {
@@ -93,8 +90,7 @@ public class ForgetController extends BaseForSDK {
 	 * @author Franklin
 	 */
 	@RequestMapping("forget")
-	public void forget(String usercode, String phonenumber, String code, String password,
-			HttpServletResponse response) {
+	public void forget(String usercode, String phonenumber, String code, String password, HttpServletResponse response) {
 		MstbUser user = new MstbUser();
 		Sdk sdkInfo = new Sdk();
 		int index = -1;

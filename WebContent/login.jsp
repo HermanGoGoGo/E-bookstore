@@ -368,8 +368,8 @@
 						},
 						dataType: 'json',
 						success: function(data) {
-							console.log(data.value);
-							if(data.value == "1") {
+							console.log(data);
+							if(data.status == "200") {
 								spop({
 									template: '<h4 class="spop-title">注册成功</h4>即将3秒后前往登录界面',
 									position: 'top-center',
@@ -390,7 +390,7 @@
 										return false;
 									}
 								});
-							} else if(data.value == "2") {
+							} else if(data.status == "10003") {
 								$.pt({
 									target: $("#register-usercode"),
 									position: 'r',
@@ -401,18 +401,7 @@
 								});
 								//goto_register();
 								return false;
-							} else if(data.value == "3") {
-								$.pt({
-									target: $("#register-code"),
-									position: 'r',
-									align: 't',
-									width: 'auto',
-									height: 'auto',
-									content: "请点击获取验证码"
-								});
-								goto_register();
-								return false;
-							}else if(data.value == "4") {
+							} else if(data.status == "400") {
 								$.pt({
 									target: $("#register-code"),
 									position: 'r',
@@ -423,8 +412,18 @@
 								});
 								//goto_register();
 								return false;
+							}else{
+								$.pt({
+									target: $("#register-code"),
+									position: 'r',
+									align: 't',
+									width: 'auto',
+									height: 'auto',
+									content: "验证码获取错误"
+								});
+								//goto_register();
+								return false;
 							}
-
 						},
 						error: function() {
 							$.pt({
@@ -1215,7 +1214,7 @@
 													dataType: 'json',
 													success: function(data) {
 														//console.log(data);
-														if(data.code == "000000") {
+														if(data.status == "200") {
 															$.pt({
 																target: $("#register-code"),
 																position: 'r',
@@ -1224,20 +1223,38 @@
 																height: 'auto',
 																content: "验证码发送成功"
 															});
-														} else {
+														} else if(data.status == "10002"){
 															$.pt({
 																target: $("#register-code"),
 																position: 'r',
 																align: 't',
 																width: 'auto',
 																height: 'auto',
-																content: "验证码发送失败，请重新尝试"
+																content: "验证发送失败，该账号已存在"
 															});
-														}
+														}else if(data.status == "10004"){
+															$.pt({
+																target: $("#register-code"),
+																position: 'r',
+																align: 't',
+																width: 'auto',
+																height: 'auto',
+																content: "验证获取异常，请稍后重试"		
+															});
+														}else{
+															$.pt({
+																target: $("#register-code"),
+																position: 'r',
+																align: 't',
+																width: 'auto',
+																height: 'auto',
+																content: "验证发送失败"
+															});
+														}											
 	
 													},
 													error: function() {
-														alert('登录失败');
+														alert('验证码发送失败');
 														return false;
 													}
 												});

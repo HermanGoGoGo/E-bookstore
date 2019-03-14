@@ -13,12 +13,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.herman.ebookstore.common.model.BaseForSDK;
+import com.herman.ebookstore.common.model.ResultCode;
+import com.herman.ebookstore.pojo.MstbUser;
 import com.herman.ebookstore.pojo.User;
 import com.herman.ebookstore.repository.UserRepository;
 import com.herman.ebookstore.sdk.impl.JsonReqClient;
+import com.herman.ebookstore.service.MstbUserService;
 import com.herman.ebookstore.service.UserService;
 import com.herman.ebookstore.util.IlismJSONEncoder;
 import com.herman.ebookstore.util.MD5Util;
+import com.herman.ebookstore.util.ResponseWriter;
 import com.herman.ebookstore.util.ReturnJson;
 
 /**
@@ -31,49 +35,30 @@ import com.herman.ebookstore.util.ReturnJson;
 @Controller
 public class LoginController extends BaseForSDK {
 	@Autowired
-	private UserService userService;
-
-	@Autowired
-	private UserRepository userRepository;
-
-	JsonReqClient jsonReqClient = new JsonReqClient();
+	private MstbUserService userService;
 
 	@RequestMapping("toLoginPage")
 	public String toLoginPage() {
 		return "login";
 	}
-
+	
 	@RequestMapping("verificationLogin")
 	public void verificationLogin(String username, String password, HttpServletResponse response ,HttpSession session) {
-		List<User> userList = this.userService.getUserList();
-		response.setContentType("text/html;charset=utf-8");
-		ReturnJson json = new ReturnJson(true);
-		json.setValue(StringUtils.EMPTY);
-		PrintWriter writer = null;
-		for (User user : userList) {
+		
+		List<MstbUser> userList = this.userService.findAll();
+		for (MstbUser user : userList) {
 			if (user.getUsercode().equals(username)) {
 				if (user.getPassword().equals(MD5Util.MD5Encode(password,"utf8"))) {
 					session.setAttribute("usercode", username);
-					json.setValue("1");
+					new ResponseWriter().writerResponse(true,response);
 					break;
 				} else {
-					json.setValue("3");
+					new ResponseWriter().writerResponse(ResultCode.PASSWORD_ERROR.getCode(),ResultCode.PASSWORD_ERROR.getMessage(), response);
 					break;
 				}
 			} else {
-				json.setValue("2");
+				new ResponseWriter().writerResponse(false,response);
 			}
-		}
-		try {
-			writer = response.getWriter();
-			writer.write(IlismJSONEncoder.encode(json));
-			writer.flush();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if (writer != null)
-				writer.close();
 		}
 	}
 	
