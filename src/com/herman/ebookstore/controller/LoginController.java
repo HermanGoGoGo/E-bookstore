@@ -14,11 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.herman.ebookstore.common.model.BaseForSDK;
 import com.herman.ebookstore.common.model.ResultCode;
-import com.herman.ebookstore.pojo.MstbUser;
 import com.herman.ebookstore.pojo.User;
-import com.herman.ebookstore.repository.UserRepository;
+
 import com.herman.ebookstore.sdk.impl.JsonReqClient;
-import com.herman.ebookstore.service.MstbUserService;
 import com.herman.ebookstore.service.UserService;
 import com.herman.ebookstore.util.IlismJSONEncoder;
 import com.herman.ebookstore.util.MD5Util;
@@ -35,7 +33,7 @@ import com.herman.ebookstore.util.ReturnJson;
 @Controller
 public class LoginController extends BaseForSDK {
 	@Autowired
-	private MstbUserService userService;
+	private UserService userService;
 
 	@RequestMapping("toLoginPage")
 	public String toLoginPage() {
@@ -43,23 +41,23 @@ public class LoginController extends BaseForSDK {
 	}
 	
 	@RequestMapping("verificationLogin")
-	public void verificationLogin(String username, String password, HttpServletResponse response ,HttpSession session) {
+	public String verificationLogin(String username, String password, HttpServletResponse response ,HttpSession session) {
 		
-		List<MstbUser> userList = this.userService.findAll();
-		for (MstbUser user : userList) {
+		List<User> userList = this.userService.findAll();
+		for (User user : userList) {
 			if (user.getUsercode().equals(username)) {
 				if (user.getPassword().equals(MD5Util.MD5Encode(password,"utf8"))) {
 					session.setAttribute("usercode", username);
 					new ResponseWriter().writerResponse(true,response);
-					break;
+					return null;
 				} else {
 					new ResponseWriter().writerResponse(ResultCode.PASSWORD_ERROR.getCode(),ResultCode.PASSWORD_ERROR.getMessage(), response);
-					break;
+					return null;
 				}
-			} else {
-				new ResponseWriter().writerResponse(false,response);
-			}
+			} 
 		}
+		new ResponseWriter().writerResponse(false,response);
+		return null;
 	}
 	
 

@@ -13,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.herman.ebookstore.pojo.ErrorLog;
 import com.herman.ebookstore.service.ErrorLogService;
-import com.herman.ebookstore.service.UserService;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

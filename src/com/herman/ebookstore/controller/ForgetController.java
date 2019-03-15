@@ -14,13 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.alibaba.fastjson.JSON;
 import com.herman.ebookstore.common.model.BaseForSDK;
 import com.herman.ebookstore.common.model.ResultCode;
-import com.herman.ebookstore.pojo.MstbUser;
-import com.herman.ebookstore.pojo.Sdk;
 import com.herman.ebookstore.pojo.User;
+import com.herman.ebookstore.pojo.Sdk;
 import com.herman.ebookstore.sdk.impl.JsonReqClient;
-import com.herman.ebookstore.service.MstbUserService;
-import com.herman.ebookstore.service.SdkService;
 import com.herman.ebookstore.service.UserService;
+import com.herman.ebookstore.service.SdkService;
 import com.herman.ebookstore.util.IlismJSONEncoder;
 import com.herman.ebookstore.util.MD5Util;
 import com.herman.ebookstore.util.ResponseWriter;
@@ -44,7 +42,7 @@ public class ForgetController extends BaseForSDK {
 	private String param;
 
 	@Autowired
-	private MstbUserService userService;
+	private UserService userService;
 	@Autowired
 	private SdkService sdkService;
 
@@ -56,7 +54,7 @@ public class ForgetController extends BaseForSDK {
 
 	@RequestMapping("getVerificationCode")
 	public void getVerificationCode(String phonenumber, String usercode, HttpServletResponse response) {
-		MstbUser user = new MstbUser();
+		User user = new User();
 		if (StringUtils.isNotEmpty(usercode)) {
 			user.setUsercode(usercode);
 		}
@@ -67,7 +65,6 @@ public class ForgetController extends BaseForSDK {
 			String result = this.jsonReqClient.sendSms(ACCOUNT_SID, AUTH_TOKEN, APPID, TEMPLATEID, getPatam, phonenumber, usercode);
 			Sdk pushMsgContent = JSON.parseObject(result, Sdk.class);
 			if (!"".equals(pushMsgContent.getUid()) && pushMsgContent.getUid() != null) {
-				pushMsgContent.setParam(getPatam);
 				this.sdkService.save(pushMsgContent);
 			}
 			new ResponseWriter().writerResponseObject(true, result, response);
@@ -91,7 +88,7 @@ public class ForgetController extends BaseForSDK {
 	 */
 	@RequestMapping("forget")
 	public void forget(String usercode, String phonenumber, String code, String password, HttpServletResponse response) {
-		MstbUser user = new MstbUser();
+		User user = new User();
 		Sdk sdkInfo = new Sdk();
 		int index = -1;
 		if (usercode != null && !"".equals(usercode)) {

@@ -360,14 +360,14 @@
 									  <tr>
 									    <% i++; %>
 										<td> <%=i %></td>
-										<td><a href="<%=path%>/home/toHomePage.action?id=${book.bookId}">${book.bookname}</a></td>
-										<td>${book.bookAuthor}</td>
+										<td><a href="<%=path%>/home/toHomePage.action?id=${book.id}">${book.name}</a></td>
+										<td>${book.author}</td>
 										<td>
-										  <span class="badge badge-success">${book.bookDescription}</span>
+										  <span class="badge badge-success">${book.description}</span>
 										</td>
-										<td>${book.user.username}</td>
-										<td>$ ${book.bookPrice}</td>
-										<td>${book.createdtime}</td>
+										<td>${book.username}</td>
+										<td>$ ${book.price}</td>
+										<td>${book.createTimeCompare}</td>
 									  </tr>
 								</c:forEach>
 								

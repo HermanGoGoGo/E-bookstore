@@ -15,14 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.alibaba.fastjson.JSON;
 import com.herman.ebookstore.common.model.BaseForSDK;
 import com.herman.ebookstore.common.model.ResultCode;
-import com.herman.ebookstore.pojo.MstbUser;
-import com.herman.ebookstore.pojo.Sdk;
 import com.herman.ebookstore.pojo.User;
-import com.herman.ebookstore.repository.UserRepository;
+import com.herman.ebookstore.pojo.Sdk;
+
 import com.herman.ebookstore.sdk.impl.JsonReqClient;
-import com.herman.ebookstore.service.MstbUserService;
-import com.herman.ebookstore.service.SdkService;
 import com.herman.ebookstore.service.UserService;
+import com.herman.ebookstore.service.SdkService;
 import com.herman.ebookstore.util.IlismJSONEncoder;
 import com.herman.ebookstore.util.MD5Util;
 import com.herman.ebookstore.util.ResponseWriter;
@@ -44,13 +42,13 @@ public class RegisterController extends BaseForSDK {
 	private String param;
 
 	@Autowired
-	private MstbUserService userService;
+	private UserService userService;
 	@Autowired
 	private SdkService sdkService;
 
 	@RequestMapping("getVerificationCode")
 	public void getVerificationCode(String phonenumber, String usercode, HttpServletResponse response) {
-		MstbUser user = new MstbUser();
+		User user = new User();
 		if (StringUtils.isNotEmpty(usercode)) {
 			user.setUsercode(usercode);
 		}
@@ -76,7 +74,7 @@ public class RegisterController extends BaseForSDK {
 
 	@RequestMapping("register")
 	public void register(String username, String password, String usercode, String phonenumber, String code,HttpServletResponse response) {
-		MstbUser user = new MstbUser();
+		User user = new User();
 		Sdk sdk = new Sdk();
 		int index = -1;
 		if (StringUtils.isNotEmpty(usercode)) {

@@ -2,71 +2,57 @@ package com.herman.ebookstore.service;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 
+import com.herman.ebookstore.common.core.Service;
 import com.herman.ebookstore.pojo.User;
 
-/**
- * @ClassName: UserService
- * @Description: TODO()
- * @author 黄金宝
- * @date 2018年11月19日
- *
- */
-public interface UserService {
-	/** 
-	 * @Method_Name: getUserList 
-	 * @Description: * @return List<User>
-	 * @date 2018年11月19日
-	 * @author 黄金宝 
-	 */
-	List<User> getUserList();
-	
-	/** 
-	 * @Method_Name: getUserListWhere 
-	 * @Description: * @param user
-	 * @Description: * @return Integer
-	 * @date 2018年12月20日
-	 * @author 黄金宝 
-	 */
-	Integer getUserListWhere(User user);
-	
-	/** 
-	 * @Method_Name: insertNewUser 
-	 * @Description: * @param user
-	 * @Description: * @return Integer
-	 * @date 2018年12月20日
-	 * @author 黄金宝 
-	 */
-	Integer insertNewUser(User user);
-	
-	/** 
-	 * @Method_Name: updatePassword 
-	 * @Description: * @param user
-	 * @Description: * @return Integer
-	 * @date 2018年12月26日
-	 * @author 黄金宝 
-	 */
-	Integer updatePassword(User user);
+import tk.mybatis.mapper.entity.Condition;
 
+/**
+ * 用户表
+ *
+ * @author herman
+ * @email 1146465559@qq.com
+ * @date 2019-03-14 14:40:46
+ */
+public interface UserService extends Service<User> {
+	
 	/** 
-	 * @Method_Name: getUsercodeMobileWhere 
+	 * @Method_Name: selectByCondition 
+	 * @Description: TODO(条件查询返回实体)
 	 * @Description: * @param user
-	 * @Description: * @return Integer
-	 * @date 2018年12月26日
+	 * @Description: * @return List<User>
+	 * @date 2019年3月14日
 	 * @author 黄金宝 
 	 */
-	Integer getUsercodeMobileWhere(User user);
-	
-	
+	public List<User> selectByCondition(User user);
 	/** 
-	 * @Method_Name: getOneUser 
-	 * @Description: TODO(获取单个user实体)
+	 * @Method_Name: selectCountByCondition 
+	 * @Description: TODO(条件查询返回条数)
+	 * @Description: * @param user
+	 * @Description: * @return Integer
+	 * @date 2019年3月14日
+	 * @author 黄金宝 
+	 */
+	public Integer selectCountByCondition(User user);
+	/** 
+	 * @Method_Name: selectOne 
+	 * @Description: TODO(条件查询单个实体)
 	 * @Description: * @param user
 	 * @Description: * @return User
-	 * @date 2019年1月9日
+	 * @date 2019年3月14日
 	 * @author 黄金宝 
 	 */
-	User getOneUser(User user);
+	public User selectOne(User user);
 	
-	
+	/** 
+	 * @Method_Name: selectAll 
+	 * @Description: TODO(查找全部)
+	 * @Description: * @return List<User>
+	 * @date 2019年3月14日
+	 * @author 黄金宝 
+	 */
+	public List<User> selectAll();
+
 }

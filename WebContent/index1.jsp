@@ -15,13 +15,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+${role}
 </body>
 <script type="text/javascript">
 $(function() {
 $.ajax({
 	type: "get",
-	url: "<%=path%>/test.action",
+	url: "<%=path%>/test/test5.action",
 	dataType: 'json',
 	success: function(data) {
 		console.log(data);

@@ -1,180 +1,153 @@
 package com.herman.ebookstore.pojo;
 
+import javax.persistence.*;
+
+import com.herman.ebookstore.common.model.BaseEntity;
+
 import java.util.Date;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
-@Document
-public class User {
-	@Field
-	private String username;
-	@Id
-	private String usercode;
-	@Field
-	private String password;
-	@Field
-	private String phonenumber;
-	@Field
-	private Date createtime;
-	@Field
-	private Date updatetime;
-	@Field
-	private String rolecode;
-	@Field
-	private String university;
-	@Field
-	private String campus;
-	@Field
-	private String degree;
-	@Field
-	private String secondDegree;
-	@Field
-	private String yearStarted;
-	@Field
-	private String yearEnd;
-	@Field
-	private String city;
-	@Field
-	private String province;
-	@Field
-	private String email;
+/**
+ * 用户表
+ * 
+ * @author herman
+ * @email 1146465559@qq.com
+ * @date 2019-03-14 14:40:46
+ */
+@Table(name = "MSTB_USER")
+public class User extends BaseEntity<User> {
 
-
-	public String getUsername() {
-		return username;
-	}
-
+	private static final long serialVersionUID = 1L;
+	
+    //用户名
+    @Column(name = "username")
+    private String username;
+    
+    //登录账号（10位一卡通账号）
+    @Column(name = "usercode")
+    private String usercode;
+    
+    //密码
+    @Column(name = "password")
+    private String password;
+    
+    //电话号码
+    @Column(name = "phonenumber")
+    private String phonenumber;
+    
+    //所属角色
+    @Column(name = "role_id")
+    private String roleId;
+    
+    //所属学校
+    @Column(name = "university_id")
+    private String universityId;
+    
+    //第一专业
+    @Column(name = "degree")
+    private String degree;
+    
+    //第二专业
+    @Column(name = "second_degree")
+    private String secondDegree;
+    
+    //开始学年
+    @Column(name = "year_started")
+    private String yearStarted;
+    
+    //结束学年
+    @Column(name = "year_end")
+    private String yearEnd;
+    
+    //是否删除，0：未删除；1：已删除
+    @Column(name = "delete_flag")
+    private String deleteFlag;
+    
 	public void setUsername(String username) {
 		this.username = username;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
+	public String getUsername() {
+		return username;
 	}
 	
-	public String getPhonenumber() {
-		return phonenumber;
-	}
-
-	public void setPhonenumber(String phonenumber) {
-		this.phonenumber = phonenumber;
-	}
-
-	public Date getCreatetime() {
-		return createtime;
-	}
-
-	public void setCreatetime(Date createtime) {
-		this.createtime = createtime;
-	}
-
-	public Date getUpdatetime() {
-		return updatetime;
-	}
-
-	public void setUpdatetime(Date updatetime) {
-		this.updatetime = updatetime;
-	}
-
-	public String getRolecode() {
-		return rolecode;
-	}
-
-	public void setRolecode(String rolecode) {
-		this.rolecode = rolecode;
+	public void setUsercode(String usercode) {
+		this.usercode = usercode;
 	}
 
 	public String getUsercode() {
 		return usercode;
 	}
-
-	public void setUsercode(String usercode) {
-		this.usercode = usercode;
+	
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public String getUniversity() {
-		return university;
+	public String getPassword() {
+		return password;
+	}
+	
+	public void setPhonenumber(String phonenumber) {
+		this.phonenumber = phonenumber;
 	}
 
-	public void setUniversity(String university) {
-		this.university = university;
+	public String getPhonenumber() {
+		return phonenumber;
+	}
+	
+	public void setRoleId(String roleId) {
+		this.roleId = roleId;
 	}
 
-	public String getCampus() {
-		return campus;
+	public String getRoleId() {
+		return roleId;
+	}
+	
+	public void setUniversityId(String universityId) {
+		this.universityId = universityId;
 	}
 
-	public void setCampus(String campus) {
-		this.campus = campus;
-	}
-
-	public String getDegree() {
-		return degree;
+	public String getUniversityId() {
+		return universityId;
 	}
 
 	public void setDegree(String degree) {
 		this.degree = degree;
 	}
 
+	public String getDegree() {
+		return degree;
+	}
+	
+	public void setSecondDegree(String secondDegree) {
+		this.secondDegree = secondDegree;
+	}
+
 	public String getSecondDegree() {
 		return secondDegree;
 	}
-
-	public void setSecondDegree(String secondDegree) {
-		this.secondDegree = secondDegree;
+	
+	public void setYearStarted(String yearStarted) {
+		this.yearStarted = yearStarted;
 	}
 
 	public String getYearStarted() {
 		return yearStarted;
 	}
-
-	public void setYearStarted(String yearStarted) {
-		this.yearStarted = yearStarted;
+	
+	public void setYearEnd(String yearEnd) {
+		this.yearEnd = yearEnd;
 	}
 
 	public String getYearEnd() {
 		return yearEnd;
 	}
-
-	public void setYearEnd(String yearEnd) {
-		this.yearEnd = yearEnd;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getProvince() {
-		return province;
-	}
-
-	public void setProvince(String province) {
-		this.province = province;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	@Override
-	public String toString() {
-		return "User [username=" + username + ", usercode=" + usercode + ", password=" + password + ", createtime="
-				+ createtime + ", updatetime=" + updatetime + ", rolecode=" + rolecode + "]";
-	}
-
 	
+	public void setDeleteFlag(String deleteFlag) {
+		this.deleteFlag = deleteFlag;
+	}
 
+	public String getDeleteFlag() {
+		return deleteFlag;
+	}
+	
 }
