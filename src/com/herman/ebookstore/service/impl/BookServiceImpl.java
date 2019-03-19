@@ -12,7 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.herman.ebookstore.common.core.AbstractService;
 import com.herman.ebookstore.mapper.BookMapper;
 import com.herman.ebookstore.model.BookDto;
+import com.herman.ebookstore.model.HomeReq;
 import com.herman.ebookstore.model.SeachDto;
+import com.herman.ebookstore.model.UserDto;
 import com.herman.ebookstore.pojo.Book;
 import com.herman.ebookstore.service.BookService;
 import com.herman.ebookstore.util.RelativeDateFormat;
@@ -65,6 +67,12 @@ public class BookServiceImpl extends AbstractService<Book> implements BookServic
 			bookList.add(book);
 		}
 		return bookList;
+	}
+
+	@Override
+	public HomeReq selectBookSum(UserDto currentUser) {
+		// TODO Auto-generated method stub
+		return this.bookMapper.selectBookSum(currentUser);
 	}
 
 }

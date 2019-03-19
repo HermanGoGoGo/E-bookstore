@@ -136,19 +136,19 @@ public class TestController {
 	public void test6(HttpServletResponse response) {
 		Book book = new Book();
 		book.setUserId("2201504239");
-		book.setName("高数一");
-		book.setAuthor("老可");
-		book.setOriginalPrice(45);
-		book.setPrice(20);
-		book.setDescription("全新高数一必修");
+		book.setName("影视鉴赏");
+		book.setAuthor("老王");
+		book.setOriginalPrice(42);
+		book.setPrice(17);
+		book.setDescription("大学选修");
 		book.setEdition("第四版");
-		book.setSemester("2015年第一学期");
-		book.setCourse("大学高数");
+		book.setSemester("2017年第一学期");
+		book.setCourse("影视鉴赏");
 		
 		Book book1 = new Book();
-		book1.setUserId("2201504002");
+		book1.setUserId("2201504239");
 		book1.setName("创造学");
-		book1.setAuthor("老望");
+		book1.setAuthor("老三");
 		book1.setOriginalPrice(67);
 		book1.setPrice(31);
 		book1.setDescription("全新创造学必修");

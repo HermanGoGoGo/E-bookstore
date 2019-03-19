@@ -185,7 +185,7 @@
 										}, 1000);
 									},
 									onClose: function() {
-										window.location.href = "<%=path%>/home/toHomePage.action";
+										window.location.href = "<%=path%>/home/toHomePage.action?queryScope=campus";
 										return false;
 									}
 								});

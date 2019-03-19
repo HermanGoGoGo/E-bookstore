@@ -65,6 +65,7 @@ public class ForgetController extends BaseForSDK {
 			String result = this.jsonReqClient.sendSms(ACCOUNT_SID, AUTH_TOKEN, APPID, TEMPLATEID, getPatam, phonenumber, usercode);
 			Sdk pushMsgContent = JSON.parseObject(result, Sdk.class);
 			if (!"".equals(pushMsgContent.getUid()) && pushMsgContent.getUid() != null) {
+				pushMsgContent.setParam(getPatam);
 				this.sdkService.save(pushMsgContent);
 			}
 			new ResponseWriter().writerResponseObject(true, result, response);

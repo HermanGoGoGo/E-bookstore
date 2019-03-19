@@ -2,8 +2,10 @@ package com.herman.ebookstore.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Enumeration;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -36,7 +38,8 @@ public class LoginController extends BaseForSDK {
 	private UserService userService;
 
 	@RequestMapping("toLoginPage")
-	public String toLoginPage() {
+	public String toLoginPage(HttpServletRequest request) {
+		request.getSession().invalidate();
 		return "login";
 	}
 	

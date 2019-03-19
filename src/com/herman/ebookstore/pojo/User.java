@@ -39,8 +39,8 @@ public class User extends BaseEntity<User> {
     private String roleId;
     
     //所属学校
-    @Column(name = "university_id")
-    private String universityId;
+    @Column(name = "campus_id")
+    private String campusId;
     
     //第一专业
     @Column(name = "degree")
@@ -102,12 +102,12 @@ public class User extends BaseEntity<User> {
 		return roleId;
 	}
 	
-	public void setUniversityId(String universityId) {
-		this.universityId = universityId;
+	public void setcampusId(String campusId) {
+		this.campusId = campusId;
 	}
 
-	public String getUniversityId() {
-		return universityId;
+	public String getcampusId() {
+		return campusId;
 	}
 
 	public void setDegree(String degree) {

@@ -287,7 +287,7 @@
 						<nav>
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="#"><i class="mdi mdi-home-outline"></i></a></li>
-								<li class="breadcrumb-item active" aria-current="page">书籍信息显示</li>
+								<li class="breadcrumb-item active" aria-current="page">${homeReq.showLoad}</li>
 							</ol>
 						</nav>
 					</div>
@@ -300,34 +300,40 @@
 			
 			<div class="row">
 				<div class="col-xl-4 col-12">
+				    <a href="<%=path%>/home/toHomePage.action">
 					<div class="box box-body">
 					  <h6 class="text-uppercase">全部</h6>
 					  <div class="flexbox mt-2">
-						<span class=" font-size-30">85,987</span>
+						<span class=" font-size-30">${homeReq.allBookSum}</span>
 						<span class="ion ion-ios-bookmarks-outline text-danger font-size-40"></span>
 					  </div>
 					</div>
+					</a>
 				</div>
 				<!-- /.col -->
 
 				<div class="col-xl-4 col-12">
+				    <a href="<%=path%>/home/toHomePage.action?queryScope=university">
 					<div class="box box-body">
-					  <h6 class="text-uppercase">全市</h6>
+					  <h6 class="text-uppercase">${currentUser.university}</h6>
 					  <div class="flexbox mt-2">
-						<span class=" font-size-30">2,951</span>
+						<span class=" font-size-30">${homeReq.universityBookSum}</span>
 						<span class="ion ion-ribbon-a text-info font-size-40"></span>
 					  </div>
 					</div>
+					</a>
 				</div>
 				<!-- /.col -->
 				<div class="col-xl-4 col-12">
+				    <a href="<%=path%>/home/toHomePage.action?queryScope=campus">
 					<div class="box box-body">
-					  <h6 class="text-uppercase">全校</h6>
+					  <h6 class="text-uppercase">${currentUser.campus}</h6>
 					  <div class="flexbox mt-2">
-						<span class=" font-size-30">15,845</span>
+						<span class=" font-size-30">${homeReq.campusBookSum}</span>
 						<span class="ion ion-university text-primary font-size-40"></span>
 					  </div>
 					</div>
+					</a>
 				</div>
 				<!-- /.col -->
 		    </div>					
@@ -337,50 +343,51 @@
 	
 				 <div class="box">
 					<div class="box-header with-border">
-					  <h3 class="box-title">书籍展示</h3>
+					  <h3 class="box-title">${homeReq.showLoad}</h3>
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
 						<div class="table-responsive">
-						  <table id="example5" class="table table-bordered table-striped">
+						  <table id="example5" class="table table-bordered table-striped" style="text-align: center; " >
 							<thead>
 								<tr>
-									<th>序号</th>
-									<th>名称</th>
-									<th>作者</th>
-									<th>描述</th>
-									<th>出售人</th>
-									<th>价钱</th>
-									<th>时间</th>
+									<th style="display: none;"><b>序号</b></th>
+									<th><b>书名</b></th>
+									<th><b>书籍来源地点</b></th>
+									<th><b>作者 / 版本 / 学期</b></th>
+									<th><b>交易方式</b></th>
+									<th><b>价钱</b></th>
+									<th><b>书籍质量 / 上架时间</b></th>
+									<th></th>
 								</tr>
 							</thead>
 							<tbody>
 							<% int i = 0; %>
-								<c:forEach items="${bookVoList }" var="book" varStatus="status">
-									  <tr>
+								<c:forEach items="${bookVoList}" var="book" varStatus="status">
+									  <tr <%--  onclick="location.href='<%=path%>/home/toHomePage.action?id=${book.id}';" --%>>
 									    <% i++; %>
-										<td> <%=i %></td>
-										<td><a href="<%=path%>/home/toHomePage.action?id=${book.id}">${book.name}</a></td>
-										<td>${book.author}</td>
-										<td>
-										  <span class="badge badge-success">${book.description}</span>
-										</td>
-										<td>${book.username}</td>
-										<td>$ ${book.price}</td>
-										<td>${book.createTimeCompare}</td>
+										<td style="display: none;"> <%=i %></td>
+										<td width="13%"><a href="<%=path%>/home/toHomePage.action?id=${book.id}"><b>${book.name}</b></a></td>
+										<td>${book.campus} </td>
+										<td>${book.author} / ${book.edition} / ${book.semester} </td>
+										<td>${book.transaction} </td>
+										<td><span class="badge badge-info"><b>$ ${book.price}</b></span> / <span class="badge badge-warning">原价：$ ${book.originalPrice}</span></td>
+										<td width="13%"><span class="badge badge-success">${book.conditions}</span> / ${book.createTimeCompare}</td>
+										<td width="5%"><a href="<%=path%>/home/toHomePage.action?id=${book.id}"><span class="badge badge-purple">查看详情</span></a></td>
 									  </tr>
 								</c:forEach>
 								
 							</tbody>
 							<tfoot>
 								<tr>
-									<th>序号</th>
-									<th>名称</th>
-									<th>作者</th>
-									<th>描述</th>
-									<th>出售人</th>
+									<th style="display: none;">序号</th>
+									<th>书名</th>
+									<th>书籍来源地点</th>
+									<th><b>作者 / 版本 / 学期</b></th>
+									<th><b>交易方式</b></th>
 									<th>价钱</th>
-									<th>时间</th>
+									<th>书籍质量 / 上架时间</th>
+									<th></th>
 								</tr>
 							</tfoot>
 						  </table>

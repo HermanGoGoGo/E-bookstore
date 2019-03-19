@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 
 import com.herman.ebookstore.common.core.Service;
+import com.herman.ebookstore.model.UserDto;
 import com.herman.ebookstore.pojo.User;
 
 import tk.mybatis.mapper.entity.Condition;
@@ -54,5 +55,15 @@ public interface UserService extends Service<User> {
 	 * @author 黄金宝 
 	 */
 	public List<User> selectAll();
+	
+	/** 
+	 * @Method_Name: selectMinuteOne 
+	 * @Description: TODO(详细查询个人资料)
+	 * @Description: * @param userDto
+	 * @Description: * @return UserDto
+	 * @date 2019年3月19日
+	 * @author 黄金宝 
+	 */
+	public UserDto selectMinuteOne(UserDto userDto);
 
 }

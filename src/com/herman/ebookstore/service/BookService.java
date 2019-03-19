@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.herman.ebookstore.common.core.Service;
 import com.herman.ebookstore.mapper.BookMapper;
 import com.herman.ebookstore.model.BookDto;
+import com.herman.ebookstore.model.HomeReq;
 import com.herman.ebookstore.model.SeachDto;
+import com.herman.ebookstore.model.UserDto;
 
 /**
  * 售书表
@@ -25,4 +27,6 @@ public interface BookService extends Service<Book> {
 	public List<BookDto> findAllBookList();
 	
 	public List<BookDto> selectByBookName(SeachDto seachDto);
+	
+	public HomeReq selectBookSum(UserDto currentUser);
 }

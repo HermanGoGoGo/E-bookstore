@@ -14,6 +14,7 @@ import tk.mybatis.mapper.entity.Condition;
 
 import com.herman.ebookstore.common.core.AbstractService;
 import com.herman.ebookstore.mapper.UserMapper;
+import com.herman.ebookstore.model.UserDto;
 
 /**
  * 用户表
@@ -67,6 +68,11 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
 	@Override
 	public List<User> selectAll() {
 		return this.UserMapper.findAll();
+	}
+	@Override
+	public UserDto selectMinuteOne(UserDto userDto) {
+		// TODO Auto-generated method stub
+		return this.UserMapper.selectMinuteOne(userDto);
 	}
 	
 	

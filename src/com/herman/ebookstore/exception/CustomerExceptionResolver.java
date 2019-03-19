@@ -48,7 +48,7 @@ public class CustomerExceptionResolver implements HandlerExceptionResolver {
 		errorLog.setStatus(response.getStatus());
 		errorLog.setAction(request.getRequestURI());
 		errorLog.setType(String.valueOf(ex.getClass()));
-		errorLog.setContent(ex.getMessage());
+		errorLog.setContent(ex.getMessage().substring(0, 100));
 		errorLog.setCreateMonth(Integer.toString(month));
 		//errorLog.setRemark(remark);
 		this.errorLogService.save(errorLog);

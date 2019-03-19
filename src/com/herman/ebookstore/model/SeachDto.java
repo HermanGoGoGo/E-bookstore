@@ -13,7 +13,7 @@ import javax.validation.constraints.*;
  * SeachDto
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-03-15T08:41:33.997Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-03-18T06:37:17.877Z")
 
 public class SeachDto   {
   @JsonProperty("bookName")
@@ -21,6 +21,9 @@ public class SeachDto   {
 
   @JsonProperty("universityId")
   private String universityId = null;
+
+  @JsonProperty("campusId")
+  private String campusId = null;
 
   public SeachDto bookName(String bookName) {
     this.bookName = bookName;
@@ -48,10 +51,10 @@ public class SeachDto   {
   }
 
   /**
-   * 校区名字
+   * 学校名字
    * @return universityId
   **/
-  @ApiModelProperty(value = "校区名字")
+  @ApiModelProperty(value = "学校名字")
 
 
   public String getUniversityId() {
@@ -60,6 +63,26 @@ public class SeachDto   {
 
   public void setUniversityId(String universityId) {
     this.universityId = universityId;
+  }
+
+  public SeachDto campusId(String campusId) {
+    this.campusId = campusId;
+    return this;
+  }
+
+  /**
+   * 学校校区id
+   * @return campusId
+  **/
+  @ApiModelProperty(value = "学校校区id")
+
+
+  public String getCampusId() {
+    return campusId;
+  }
+
+  public void setCampusId(String campusId) {
+    this.campusId = campusId;
   }
 
 
@@ -73,12 +96,13 @@ public class SeachDto   {
     }
     SeachDto seachDto = (SeachDto) o;
     return Objects.equals(this.bookName, seachDto.bookName) &&
-        Objects.equals(this.universityId, seachDto.universityId);
+        Objects.equals(this.universityId, seachDto.universityId) &&
+        Objects.equals(this.campusId, seachDto.campusId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(bookName, universityId);
+    return Objects.hash(bookName, universityId, campusId);
   }
 
   @Override
@@ -88,6 +112,7 @@ public class SeachDto   {
     
     sb.append("    bookName: ").append(toIndentedString(bookName)).append("\n");
     sb.append("    universityId: ").append(toIndentedString(universityId)).append("\n");
+    sb.append("    campusId: ").append(toIndentedString(campusId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -13,7 +13,9 @@ import org.apache.ibatis.jdbc.SQL;
 
 import com.herman.ebookstore.common.core.Mapper;
 import com.herman.ebookstore.model.BookDto;
+import com.herman.ebookstore.model.HomeReq;
 import com.herman.ebookstore.model.SeachDto;
+import com.herman.ebookstore.model.UserDto;
 
 /**
  * 售书表
@@ -31,30 +33,70 @@ public interface BookMapper extends Mapper<Book> {
 	@Select("SELECT b.*, " + "u.username, " + "s.id, " + "s.campus, " + "s.city " 
 	        + "FROM MSTB_SELL_BOOK b "
 			+ "LEFT JOIN MSTB_USER u ON u.usercode=b.user_id "
-			+ "LEFT JOIN MSTB_UNIVERSITY s ON s.id = u.university_id " + "WHERE b.`status` ='0' "
+			+ "LEFT JOIN MSTB_UNIVERSITY s ON s.id = u.campus_id " + "WHERE b.`status` ='0' "
 			+ "order by b.create_time desc,b.id desc")
 	public List<BookDto> findAllBookList();
 	
 
 	@SelectProvider(type = BookSqlBuilder.class, method = "selectByBookName")
 	public List<BookDto> selectByBookName(SeachDto seachDto);
+	
+	@SelectProvider(type = BookSqlBuilder.class, method = "selectBookSum")
+	public HomeReq selectBookSum(UserDto currentUser);
 
 	class BookSqlBuilder {
 		public String selectByBookName(SeachDto seachDto) {
 			return new SQL() {
 				{
-					SELECT("b.*, u.username, s.id, s.campus, s.city");
+					SELECT("b.id,b.create_time,b.name,b.author,b.original_price,b.price,b.edition,b.semester,"
+							+ "CASE " + 
+							"         WHEN b.conditions = '0' THEN '全新' " + 
+							"         WHEN b.conditions = '1' THEN '9.9成新' " + 
+							"         WHEN b.conditions = '2' THEN '6成新' " + 
+							"         ELSE '出错了' "
+							+ " END AS conditions, "
+							+ "CASE " + 
+							"         WHEN b.transaction = '0' THEN '校区当面交易' " + 
+							"         WHEN b.transaction = '1' THEN '邮寄' " + 
+							"         WHEN b.transaction = '2' THEN '校区当面交易或者邮寄' " + 
+							"         ELSE '出错了' " + 
+							"  END AS transaction, "
+							+ "u.username, s.id, s.campus, s.city");
 					FROM("MSTB_SELL_BOOK b");
 					LEFT_OUTER_JOIN("MSTB_USER u ON u.usercode=b.user_id");
-					LEFT_OUTER_JOIN("MSTB_UNIVERSITY s ON s.id = u.university_id");
+					LEFT_OUTER_JOIN("MSTB_UNIVERSITY s ON s.id = u.campus_id");
 					if (null != seachDto.getBookName()) {
 						WHERE("b.name LIKE CONCAT('%',#{bookName},'%')");
 					}
 					if (null != seachDto.getUniversityId()) {
-						WHERE("s.id = #{universityId}");
+						WHERE("s.university_id = #{universityId}");
+					}
+					if (null != seachDto.getCampusId()) {
+						WHERE("s.id = #{campusId}");
 					}
 					WHERE("b.`status` ='0' ");
 					ORDER_BY("b.create_time desc,b.id desc");
+				}
+			}.toString();
+		}
+		
+		public String selectBookSum(UserDto currentUser) {
+			return new SQL() {
+				{
+					StringBuilder select =new StringBuilder();
+					select.append("COUNT(1) AS allBookSum,");
+					if (null != currentUser.getCampusId()) {
+						select.append("COUNT(CASE WHEN s.id = #{campusId} THEN 1 END) AS campusBookSum,");
+					}
+					if (null != currentUser.getUniversityId()) {
+						select.append("COUNT(CASE WHEN s.university_id = #{universityId} THEN 1 END) AS universityBookSum,");
+					}
+					select.append("u.username,u.usercode,s.university,s.campus ");
+					SELECT(select.toString());
+					FROM("MSTB_SELL_BOOK b");
+					LEFT_OUTER_JOIN("MSTB_USER u ON u.usercode=b.user_id");
+					LEFT_OUTER_JOIN("MSTB_UNIVERSITY s ON s.id = u.campus_id");
+					WHERE("b.`status` ='0' ");
 				}
 			}.toString();
 		}

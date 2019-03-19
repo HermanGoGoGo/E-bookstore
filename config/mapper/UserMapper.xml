@@ -10,7 +10,7 @@
     <result property="password" column="password"/>
     <result property="phonenumber" column="phonenumber"/>
     <result property="roleId" column="role_id"/>
-    <result property="universityId" column="university_id"/>
+    <result property="campusId" column="campus_id"/>
     <result property="degree" column="degree"/>
     <result property="secondDegree" column="second_degree"/>
     <result property="yearStarted" column="year_started"/>

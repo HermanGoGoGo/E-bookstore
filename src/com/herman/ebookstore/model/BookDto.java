@@ -70,6 +70,9 @@ public class BookDto   {
 
   @JsonProperty("universityId")
   private String universityId = null;
+  
+  @JsonProperty("campusId")
+  private String campusId = null;
 
   @JsonProperty("campus")
   private String campus = null;
