@@ -26,6 +26,7 @@ public enum ResultCode {
 	SDK_USERCODE_EXIT(10002,"验证发送失败，该账号已存在"),
 	SDK_SERVER_ERROR(10004,"验证码获取异常"),
 	USERCODE_EXIT(10003,"该一卡通账号已被注册，请重新输入或者直接登录"),
+	USERCODE_NOTEXIT(10005,"该一卡通账号在教务系统中不存在"),
 
 	/**
 	 * 服务器繁忙

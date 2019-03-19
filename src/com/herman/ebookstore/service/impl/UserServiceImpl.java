@@ -33,6 +33,7 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
 	public List<User> selectByCondition(User user){
 		Condition condition = new Condition(User.class);
 		condition.and().andEqualTo("deleteFlag", "0");
+		condition.and().andEqualTo("status", "1");
 		if(StringUtils.isNotEmpty(user.getUsercode())) {
 			condition.and().andEqualTo("usercode", user.getUsercode());
 		}
@@ -48,6 +49,7 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
 	public Integer selectCountByCondition(User user){
 		Condition condition = new Condition(User.class);
 		condition.and().andEqualTo("deleteFlag", "0");
+		condition.and().andEqualTo("status", "1");
 		if(StringUtils.isNotEmpty(user.getUsercode())) {
 			condition.and().andEqualTo("usercode", user.getUsercode());
 		}
@@ -62,6 +64,7 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
 	@Override
 	public User selectOne(User user){
 		user.setDeleteFlag("0");
+		user.setStatus("1");
 		return this.UserMapper.selectOne(user);
 	}
 
@@ -69,6 +72,7 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
 	public List<User> selectAll() {
 		return this.UserMapper.findAll();
 	}
+	
 	@Override
 	public UserDto selectMinuteOne(UserDto userDto) {
 		// TODO Auto-generated method stub

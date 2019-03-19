@@ -111,6 +111,16 @@
 				$("#forget-code").val("");
 				$("#tab-3").prop("checked", true);
 			}
+			
+			function show_user(obj) {
+				$("#register-campus").val(obj.campus);
+				$("#register-degree").val(obj.degree+obj.yearStarted+"级");
+				$(".showUser").show();
+			}
+			
+			function hide_user(obj) {
+				$(".showUser").hide();
+			}
 
 			function login() { //登录
 				var username = $("#login-username").val(),
@@ -185,7 +195,7 @@
 										}, 1000);
 									},
 									onClose: function() {
-										window.location.href = "<%=path%>/home/toHomePage.action?queryScope=campus";
+										window.location.href = "<%=path%>/home/toHomePage.action";
 										return false;
 									}
 								});
@@ -941,30 +951,7 @@
 						</div>
 						<div class="pad input-container">
 							<section class="content">
-								<span class="input input--hideo"> 
-									<input class="input__field input__field--hideo" type="text" id="register-username" autocomplete="off" placeholder="请输入用户名" maxlength="15" onkeyup="show_yhm(this.value)" value="测试用户名" /> 
-									<script type="text/javascript">
-										function show_yhm(str){
-											//var reg = /^[0-9]{10}$/;
-											if(str ==""){
-												$.pt({
-													target: $("#register-username"),
-													position: 'r',
-													align: 't',
-													width: 'auto',
-													height: 'auto',
-													content: "用户名不能为空" 
-												});
-												return;
-											}									
-										}
-									</script> 
-									<label class="input__label input__label--hideo" for="register-username"> 
-										<i class="fa fa-fw fa-user icon icon--hideo"></i> 
-										<span class="input__label-content input__label-content--hideo"></span>
-								 	</label>
-								</span> 
-								<span class="input input--hideo"> 
+							    <span class="input input--hideo"> 
 									<input class="input__field input__field--hideo" type="text" id="register-usercode" autocomplete="off" placeholder="请输入一卡通账号" maxlength="10" onkeyup="show_ykt(this.value)" value="2201504242" /> 
 									<script type="text/javascript">
 										function show_ykt(str){
@@ -989,6 +976,76 @@
 													content: "请输入正确的10位一卡通账号" 
 												});
 												return;
+											}else{
+												var usercode = $("#register-usercode").val()
+												$.ajax({
+													type: "post",
+													url: "<%=path%>/register/getUser.action",
+													data: {
+														"usercode": usercode,
+													},
+													dataType: 'json',
+													success: function(data) {
+														console.log(data);
+														if(data.status == "200") {
+															$.pt({
+																target: $("#register-usercode"),
+																position: 'r',
+																align: 't',
+																width: 'auto',
+																height: 'auto',
+																content: data.message
+															});
+															show_user(data.obj);
+															return false;
+														} else if(data.status == "10003"){
+															$.pt({
+																target: $("#register-usercode"),
+																position: 'r',
+																align: 't',
+																width: 'auto',
+																height: 'auto',
+																content: data.message
+															});
+															hide_user();
+															return false;
+														}else if(data.status == "10005"){
+															$.pt({
+																target: $("#register-usercode"),
+																position: 'r',
+																align: 't',
+																width: 'auto',
+																height: 'auto',
+																content: data.message
+															});
+															hide_user();
+															return false;
+														}else {
+																$.pt({
+																	target: $("#register-usercode"),
+																	position: 'r',
+																	align: 't',
+																	width: 'auto',
+																	height: 'auto',
+																	content: data.message
+																});
+																hide_user();
+																return false;
+															}
+													},
+													error: function() {
+														$.pt({
+															target: $("#register-usercode"),
+															position: 'r',
+															align: 't',
+															width: 'auto',
+															height: 'auto',
+															content: "查询失败"
+														});
+														hide_user();
+														return false;
+													}
+												});
 											}									
 										}
 									</script> 
@@ -996,47 +1053,74 @@
 										<i class="fa fa-fw fa-user icon icon--hideo"></i> 
 										<span class="input__label-content input__label-content--hideo"></span>
 									</label>
+								</span>
+								<span class="showUser input input--hideo" style="display: none;" > 
+									<input class="input__field input__field--hideo" type="text" id="register-campus" disabled="disabled"/> 
+									<label class="input__label input__label--hideo" for="register-campus"> 
+										<i class="fa fa-fw fa-user icon icon--hideo"></i> 
+										<span class="input__label-content input__label-content--hideo"></span>
+								 	</label>
+								</span> 
+								<span class="showUser input input--hideo" style="display: none;"> 
+									<input class="input__field input__field--hideo" type="text" id="register-degree" disabled="disabled"/> 
+									<label class="input__label input__label--hideo" for="register-degree"> 
+										<i class="fa fa-fw fa-user icon icon--hideo"></i> 
+										<span class="input__label-content input__label-content--hideo"></span>
+								 	</label>
 								</span> 
 								<span class="input input--hideo"> 
-									<input class="input__field input__field--hideo" type="password" id="register-password" placeholder="请输入密码" maxlength="16" onkeyup="show_mm(this.value)" value="123456"/> 
+									<input class="input__field input__field--hideo" type="text" id="register-username" autocomplete="off" placeholder="请输入用户名" maxlength="15" onkeyup="show_yhm(this.value)" value="测试用户名" /> 
 									<script type="text/javascript">
-										function show_mm(str){
-											var reg = new RegExp("^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$");
-											if(str == ""){
+										function show_yhm(str){
+											//var reg = /^[0-9]{10}$/;
+											if(str ==""){
 												$.pt({
-													target: $("#register-password"),
+													target: $("#register-username"),
 													position: 'r',
 													align: 't',
 													width: 'auto',
 													height: 'auto',
-													content: "密码不能为空" 
-												});
-												return;
-											}else if(!reg.test(str)){
-												$.pt({
-													target: $("#register-password"),
-													position: 'r',
-													align: 't',
-													width: 'auto',
-													height: 'auto',
-													content: "请输入6-16位由数字及字母组成的密码" 
+													content: "用户名不能为空" 
 												});
 												return;
 											}									
 										}
 									</script> 
-									<label class="input__label input__label--hideo" for="register-password">
-										<i class="fa fa-fw fa-lock icon icon--hideo"></i> 
+									<label class="input__label input__label--hideo" for="register-username"> 
+										<i class="fa fa-fw fa-user icon icon--hideo"></i> 
 										<span class="input__label-content input__label-content--hideo"></span>
-									</label>
-								</span> 
-								<span class="input input--hideo"> 
+								 	</label>
+								</span>
+							    	<!-- <span class="input input--hideo "> 
+									<select class="input__label input__field--hideo input" style="border: 0; background: transparent;">
+											<option value="" selected>Basic select</option>
+													<optgroup label="Alaskan/Hawaiian Time Zone">
+															<option value="AK">Alaska</option>
+															<option value="HI">Hawaii</option>
+													</optgroup>
+													<optgroup label="Pacific Time Zone">
+															<option value="CA">California</option>
+															<option value="NV">Nevada</option>
+															<option value="WA">Washington</option>
+													</optgroup>
+													<optgroup label="Mountain Time Zone">
+															<option value="AZ">Arizona</option>
+															<option value="CO">Colorado</option>
+															<option value="WY">Wyoming</option>
+													</optgroup>
+									</select>
+									<label class="input__label input__label--hideo" for="register-username"> 
+										<i class="fa fa-fw fa-user icon icon--hideo"></i> 
+										<span class="input__label-content input__label-content--hideo"></span>
+								 	</label>
+								</span>   -->
+<!-- 								<span class="input input--hideo"> 
 									<input class="input__field input__field--hideo" type="password" id="register-repassword" placeholder="请确认密码" maxlength="16" value="123456"/>
 									<label class="input__label input__label--hideo" for="register-repassword"> 
 										<i class="fa fa-fw fa-lock icon icon--hideo"></i> 
 										<span class="input__label-content input__label-content--hideo"></span>
 									</label>
-								</span> 
+								</span>  -->
 								<span class="input input--hideo"> 
 									<input class="input__field input__field--hideo" type="text" id="register-phone" autocomplete="off" placeholder="请输入手机号" maxlength="15" onkeyup="show_sjh(this.value)" value="13507064221"/> 
 									<script type="text/javascript">
@@ -1099,7 +1183,7 @@
 											var username = $("#register-username").val(),
 												usercode = $("#register-usercode").val(),
 												password = $("#register-password").val(),
-												repassword = $("#register-repassword").val(),
+												//repassword = $("#register-repassword").val(),
 												phonenumber = $("#register-phone").val(),
 												code = $("#register-code").val(),
 												flag = false,
@@ -1159,7 +1243,7 @@
 													content: "请输入6-15位账户密码"
 													});
 												flag = true;
-											} else if(password != repassword) {
+											} /* else if(password != repassword) {
 												$.pt({
 													target: $("#register-repassword"),
 													position: 'r',
@@ -1169,7 +1253,7 @@
 													content: "两次输入的密码不一致"
 												});
 												flag = true;
-											} else if(password == "") {
+											} */ else if(password == "") {
 												$.pt({
 													target: $("#register-password"),
 													position: 'r',
@@ -1262,6 +1346,39 @@
 										})
 									</script>
 								</span>
+								<span class="input input--hideo"> 
+									<input class="input__field input__field--hideo" type="password" id="register-password" placeholder="请输入密码" maxlength="16" onkeyup="show_mm(this.value)" value="123456"/> 
+									<script type="text/javascript">
+										function show_mm(str){
+											var reg = new RegExp("^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$");
+											if(str == ""){
+												$.pt({
+													target: $("#register-password"),
+													position: 'r',
+													align: 't',
+													width: 'auto',
+													height: 'auto',
+													content: "密码不能为空" 
+												});
+												return;
+											}else if(!reg.test(str)){
+												$.pt({
+													target: $("#register-password"),
+													position: 'r',
+													align: 't',
+													width: 'auto',
+													height: 'auto',
+													content: "请输入6-16位由数字及字母组成的密码" 
+												});
+												return;
+											}									
+										}
+									</script> 
+									<label class="input__label input__label--hideo" for="register-password">
+										<i class="fa fa-fw fa-lock icon icon--hideo"></i> 
+										<span class="input__label-content input__label-content--hideo"></span>
+									</label>
+								</span> 
 							</section>
 						</div>
 						<div class="form-actions">

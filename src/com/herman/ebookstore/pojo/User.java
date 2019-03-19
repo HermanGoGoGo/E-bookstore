@@ -62,6 +62,10 @@ public class User extends BaseEntity<User> {
     @Column(name = "delete_flag")
     private String deleteFlag;
     
+  //是否激活，0：未激活；1：已激活
+    @Column(name = "status")
+    private String status;
+    
 	public void setUsername(String username) {
 		this.username = username;
 	}
@@ -148,6 +152,14 @@ public class User extends BaseEntity<User> {
 
 	public String getDeleteFlag() {
 		return deleteFlag;
+	}
+	
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getStatus() {
+		return status;
 	}
 	
 }

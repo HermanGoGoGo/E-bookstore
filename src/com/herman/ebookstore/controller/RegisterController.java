@@ -10,11 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.alibaba.fastjson.JSON;
 import com.herman.ebookstore.common.model.BaseForSDK;
 import com.herman.ebookstore.common.model.ResultCode;
+import com.herman.ebookstore.model.UserDto;
 import com.herman.ebookstore.pojo.User;
 import com.herman.ebookstore.pojo.Sdk;
 
@@ -99,6 +101,30 @@ public class RegisterController extends BaseForSDK {
 				new ResponseWriter().writerResponse(false, response);
 			}
 		}
+	}
+	
+	@RequestMapping("getUser")
+	public void getUser(String usercode, HttpServletResponse response,Model model) {
+		UserDto userDto =new UserDto();
+		if(StringUtils.isNotEmpty(usercode)) {
+			userDto.setUsercode(usercode);
+		}
+		userDto = this.userService.selectMinuteOne(userDto);
+		try {
+			if(userDto != null){
+				if("0".equals(userDto.getStatus())) {
+					new ResponseWriter().writerResponseObject(true, userDto, response);
+				}else if("1".equals(userDto.getStatus())){
+					new ResponseWriter().writerResponse(ResultCode.USERCODE_EXIT.getCode(),ResultCode.USERCODE_EXIT.getMessage(), response);
+				}
+			}else {
+				new ResponseWriter().writerResponse(ResultCode.USERCODE_NOTEXIT.getCode(),ResultCode.USERCODE_NOTEXIT.getMessage(), response);
+			}
+		} catch (Exception e) {
+			new ResponseWriter().writerResponse(false, response);
+			// TODO: handle exception
+		}
+		model.addAttribute("campus",userDto.getCampus());
 	}
 
 }

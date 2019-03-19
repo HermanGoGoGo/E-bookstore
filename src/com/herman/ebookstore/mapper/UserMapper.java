@@ -16,7 +16,7 @@ import com.herman.ebookstore.pojo.User;
  * @date 2019-03-14 14:40:46
  */
 public interface UserMapper extends Mapper<User> {
-	@Select("SELECT t.* from MSTB_USER t WHERE delete_flag='0'")
+	@Select("SELECT t.* from MSTB_USER t WHERE delete_flag='0' AND status='1'")
 	public List<User> findAll();
 	
 	@Select("SELECT u.*,s.university_id,s.university,s.campus,s.city,s.province,s.address,r.role "

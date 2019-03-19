@@ -16,7 +16,7 @@ import javax.validation.constraints.*;
  */
 @ApiModel(description = "详细用户")
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-03-19T06:43:50.203Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-03-19T09:58:41.995Z")
 
 public class UserDto   {
   @JsonProperty("id")
@@ -80,6 +80,9 @@ public class UserDto   {
 
   @JsonProperty("address")
   private String address = null;
+
+  @JsonProperty("status")
+  private String status = null;
 
   public UserDto id(String id) {
     this.id = id;
@@ -483,6 +486,26 @@ public class UserDto   {
     this.address = address;
   }
 
+  public UserDto status(String status) {
+    this.status = status;
+    return this;
+  }
+
+  /**
+   * 是否激活，0：未激活；1：已激活
+   * @return status
+  **/
+  @ApiModelProperty(value = "是否激活，0：未激活；1：已激活")
+
+
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -512,12 +535,13 @@ public class UserDto   {
         Objects.equals(this.university, userDto.university) &&
         Objects.equals(this.city, userDto.city) &&
         Objects.equals(this.province, userDto.province) &&
-        Objects.equals(this.address, userDto.address);
+        Objects.equals(this.address, userDto.address) &&
+        Objects.equals(this.status, userDto.status);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, createTime, updateTime, username, usercode, password, phonenumber, roleId, role, campusId, campus, degree, secondDegree, yearStarted, yearEnd, universityId, university, city, province, address);
+    return Objects.hash(id, createTime, updateTime, username, usercode, password, phonenumber, roleId, role, campusId, campus, degree, secondDegree, yearStarted, yearEnd, universityId, university, city, province, address, status);
   }
 
   @Override
@@ -545,6 +569,7 @@ public class UserDto   {
     sb.append("    city: ").append(toIndentedString(city)).append("\n");
     sb.append("    province: ").append(toIndentedString(province)).append("\n");
     sb.append("    address: ").append(toIndentedString(address)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("}");
     return sb.toString();
   }
