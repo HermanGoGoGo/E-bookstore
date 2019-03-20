@@ -84,22 +84,30 @@ public class RegisterController extends BaseForSDK {
 			sdk.setMobile(phonenumber);
 			sdk = this.sdkService.selectOneSDKInfo(sdk);
 			if ("000000".equals(sdk.getCode()) && code.equals(sdk.getParam())) {
-				user.setUsercode(usercode);
-				index = this.userService.selectCountByCondition(user);
-				if (index == 0) {
-					user.setUsername(username);
-					user.setUsercode(usercode);
-					user.setPassword(MD5Util.MD5Encode(password, "utf8"));
-					user.setPhonenumber(phonenumber);
-					user.setRoleId("1");
-					this.userService.save(user);
-					new ResponseWriter().writerResponse(true, response);
+				//user.setUsercode(usercode);
+				user = this.userService.findBy("usercode", usercode);
+				//index = this.userService.selectCountByCondition(user);
+				if (user == null) {
+					new ResponseWriter().writerResponse(ResultCode.USERCODE_NOTEXIT.getCode(),ResultCode.USERCODE_NOTEXIT.getMessage(), response);
 				} else {
-					new ResponseWriter().writerResponse(ResultCode.USERCODE_EXIT.getCode(),ResultCode.USERCODE_EXIT.getMessage(), response);
+					if("0".equals(user.getStatus())) {
+						user.setUsername(username);
+						user.setPassword(MD5Util.MD5Encode(password, "utf8"));
+						user.setPhonenumber(phonenumber);
+						user.setRoleId("2");
+						user.setStatus("1");
+						user.setDeleteFlag("0");
+						this.userService.update(user);
+						new ResponseWriter().writerResponse(true, response);
+					}else {					
+						new ResponseWriter().writerResponse(ResultCode.USERCODE_EXIT.getCode(),ResultCode.USERCODE_EXIT.getMessage(), response);
+					}
 				}
 			} else {
 				new ResponseWriter().writerResponse(false, response);
 			}
+		}else {
+			new ResponseWriter().writerResponse(ResultCode.SDK_ERROR.getCode(),ResultCode.SDK_ERROR.getMessage(), response);
 		}
 	}
 	

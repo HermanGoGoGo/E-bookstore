@@ -64,7 +64,7 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
 	@Override
 	public User selectOne(User user){
 		user.setDeleteFlag("0");
-		user.setStatus("1");
+		//user.setStatus("1");
 		return this.UserMapper.selectOne(user);
 	}
 

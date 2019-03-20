@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.herman.ebookstore.common.model.ResultCode;
 import com.herman.ebookstore.pojo.ErrorLog;
 import com.herman.ebookstore.service.ErrorLogService;
+import com.herman.ebookstore.util.ResponseWriter;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -48,7 +50,11 @@ public class CustomerExceptionResolver implements HandlerExceptionResolver {
 		errorLog.setStatus(response.getStatus());
 		errorLog.setAction(request.getRequestURI());
 		errorLog.setType(String.valueOf(ex.getClass()));
-		errorLog.setContent(ex.getMessage().substring(0, 100));
+		if(ex.getMessage() !=null) {			
+			errorLog.setContent(ex.getMessage().substring(0, 100));
+		}else {
+			errorLog.setContent(ex.getMessage());
+		}
 		errorLog.setCreateMonth(Integer.toString(month));
 		//errorLog.setRemark(remark);
 		this.errorLogService.save(errorLog);
@@ -59,6 +65,7 @@ public class CustomerExceptionResolver implements HandlerExceptionResolver {
 		ModelAndView mav = new ModelAndView();
 //		mav.addObject("msg", result);
 		mav.setViewName("pages/error_maintenance");
+		new ResponseWriter().writerResponse(ResultCode.INTERNAL_SERVER_ERROR.getCode(),ResultCode.INTERNAL_SERVER_ERROR.getMessage(), response);
 		return mav;
 	}
 

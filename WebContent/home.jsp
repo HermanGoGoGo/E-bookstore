@@ -370,9 +370,9 @@
 										<td width="13%"><a href="<%=path%>/home/toHomePage.action?id=${book.id}"><b>${book.name}</b></a></td>
 										<td>${book.campus} </td>
 										<td>${book.author} / ${book.edition} / ${book.semester} </td>
-										<td>${book.transaction} </td>
+										<td width="15%">${book.transaction} </td>
 										<td><span class="badge badge-info"><b>$ ${book.price}</b></span> / <span class="badge badge-warning">原价：$ ${book.originalPrice}</span></td>
-										<td width="13%"><span class="badge badge-success">${book.conditions}</span> / ${book.createTimeCompare}</td>
+										<td width="15%"><span class="badge badge-success">${book.conditions}</span> / ${book.createTimeCompare}</td>
 										<td width="5%"><a href="<%=path%>/home/toHomePage.action?id=${book.id}"><span class="badge badge-purple">查看详情</span></a></td>
 									  </tr>
 								</c:forEach>

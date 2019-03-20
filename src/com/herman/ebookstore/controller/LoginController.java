@@ -55,9 +55,9 @@ public class LoginController extends BaseForSDK {
 	@RequestMapping("verificationLogin")
 	public String verificationLogin(String username, String password, HttpServletResponse response ,HttpSession session) {
 		
-		List<User> userList = this.userService.findAll();
+		List<User> userList = this.userService.selectAll();
 		for (User user : userList) {
-			if (user.getUsercode().equals(username)) {
+			if (user.getUsercode().equals(username) ) {
 				if (user.getPassword().equals(MD5Util.MD5Encode(password,"utf8"))) {
 					session.setAttribute("usercode", username);
 					new ResponseWriter().writerResponse(true,response);
