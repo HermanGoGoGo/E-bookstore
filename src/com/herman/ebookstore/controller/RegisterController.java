@@ -58,24 +58,28 @@ public class RegisterController extends BaseForSDK {
 		index = this.userService.selectCountByCondition(user);
 		if (index == 0) {
 			String getPatam = String.valueOf(new Random().nextInt(899999) + 100000);
-			String result = this.jsonReqClient.sendSms(ACCOUNT_SID, AUTH_TOKEN, APPID, TEMPLATEID, getPatam,phonenumber, usercode);
+			String result = this.jsonReqClient.sendSms(ACCOUNT_SID, AUTH_TOKEN, APPID, TEMPLATEID, getPatam,
+					phonenumber, usercode);
 			Sdk pushMsgContent = JSON.parseObject(result, Sdk.class);
 			pushMsgContent.setParam(getPatam);
 			this.sdkService.save(pushMsgContent);
-			if(pushMsgContent.getCode()=="000000") {
+			if (pushMsgContent.getCode() == "000000") {
 				new ResponseWriter().writerResponse(true, response);
-			}else {
-				new ResponseWriter().writerResponse(ResultCode.SDK_SERVER_ERROR.getCode(),ResultCode.SDK_SERVER_ERROR.getMessage(), response);
+			} else {
+				new ResponseWriter().writerResponse(ResultCode.SDK_SERVER_ERROR.getCode(),
+						ResultCode.SDK_SERVER_ERROR.getMessage(), response);
 			}
 		} else if (index == 1) {
-			new ResponseWriter().writerResponse(ResultCode.SDK_USERCODE_EXIT.getCode(),ResultCode.SDK_USERCODE_EXIT.getMessage(), response);
+			new ResponseWriter().writerResponse(ResultCode.SDK_USERCODE_EXIT.getCode(),
+					ResultCode.SDK_USERCODE_EXIT.getMessage(), response);
 		} else {
 			new ResponseWriter().writerResponse(false, response);
 		}
 	}
 
 	@RequestMapping("register")
-	public void register(String username, String password, String usercode, String phonenumber, String code,HttpServletResponse response) {
+	public void register(String username, String password, String usercode, String phonenumber, String code,
+			HttpServletResponse response) {
 		User user = new User();
 		Sdk sdk = new Sdk();
 		int index = -1;
@@ -83,14 +87,17 @@ public class RegisterController extends BaseForSDK {
 			sdk.setUid(usercode);
 			sdk.setMobile(phonenumber);
 			sdk = this.sdkService.selectOneSDKInfo(sdk);
-			if ("000000".equals(sdk.getCode()) && code.equals(sdk.getParam())) {
-				//user.setUsercode(usercode);
+		}
+		if ("000000".equals(sdk.getCode())) {
+			if (code.equals(sdk.getParam())) {
+				// user.setUsercode(usercode);
 				user = this.userService.findBy("usercode", usercode);
-				//index = this.userService.selectCountByCondition(user);
+				// index = this.userService.selectCountByCondition(user);
 				if (user == null) {
-					new ResponseWriter().writerResponse(ResultCode.USERCODE_NOTEXIT.getCode(),ResultCode.USERCODE_NOTEXIT.getMessage(), response);
+					new ResponseWriter().writerResponse(ResultCode.USERCODE_NOTEXIT.getCode(),
+							ResultCode.USERCODE_NOTEXIT.getMessage(), response);
 				} else {
-					if("0".equals(user.getStatus())) {
+					if ("0".equals(user.getStatus())) {
 						user.setUsername(username);
 						user.setPassword(MD5Util.MD5Encode(password, "utf8"));
 						user.setPhonenumber(phonenumber);
@@ -99,40 +106,43 @@ public class RegisterController extends BaseForSDK {
 						user.setDeleteFlag("0");
 						this.userService.update(user);
 						new ResponseWriter().writerResponse(true, response);
-					}else {					
-						new ResponseWriter().writerResponse(ResultCode.USERCODE_EXIT.getCode(),ResultCode.USERCODE_EXIT.getMessage(), response);
+					} else {
+						new ResponseWriter().writerResponse(ResultCode.USERCODE_EXIT.getCode(),
+								ResultCode.USERCODE_EXIT.getMessage(), response);
 					}
 				}
 			} else {
 				new ResponseWriter().writerResponse(false, response);
 			}
+		} else if("400".equals(sdk.getCode())){
+			new ResponseWriter().writerResponse(ResultCode.SDK_FAIL.getCode(), ResultCode.SDK_FAIL.getMessage(),
+					response);
 		}else {
-			new ResponseWriter().writerResponse(ResultCode.SDK_ERROR.getCode(),ResultCode.SDK_ERROR.getMessage(), response);
+			new ResponseWriter().writerResponse(ResultCode.SDK_ERROR.getCode(), ResultCode.SDK_ERROR.getMessage(),
+					response);
 		}
 	}
-	
+
 	@RequestMapping("getUser")
-	public void getUser(String usercode, HttpServletResponse response,Model model) {
-		UserDto userDto =new UserDto();
-		if(StringUtils.isNotEmpty(usercode)) {
+	public void getUser(String usercode, HttpServletResponse response) {
+		UserDto userDto = new UserDto();
+		if (StringUtils.isNotEmpty(usercode)) {
 			userDto.setUsercode(usercode);
-		}
-		userDto = this.userService.selectMinuteOne(userDto);
-		try {
-			if(userDto != null){
-				if("0".equals(userDto.getStatus())) {
+			userDto = this.userService.selectMinuteOne(userDto);
+			if (userDto != null) {
+				if ("0".equals(userDto.getStatus())) {
 					new ResponseWriter().writerResponseObject(true, userDto, response);
-				}else if("1".equals(userDto.getStatus())){
-					new ResponseWriter().writerResponse(ResultCode.USERCODE_EXIT.getCode(),ResultCode.USERCODE_EXIT.getMessage(), response);
+				} else if ("1".equals(userDto.getStatus())) {
+					new ResponseWriter().writerResponse(ResultCode.USERCODE_EXIT.getCode(),
+							ResultCode.USERCODE_EXIT.getMessage(), response);
 				}
-			}else {
-				new ResponseWriter().writerResponse(ResultCode.USERCODE_NOTEXIT.getCode(),ResultCode.USERCODE_NOTEXIT.getMessage(), response);
+			} else {
+				new ResponseWriter().writerResponse(ResultCode.USERCODE_NOTEXIT.getCode(),
+						ResultCode.USERCODE_NOTEXIT.getMessage(), response);
 			}
-		} catch (Exception e) {
-			new ResponseWriter().writerResponse(false, response);
-			// TODO: handle exception
+		} else {
+			new ResponseWriter().writerResponseObject(false, userDto, response);
 		}
-		model.addAttribute("campus",userDto.getCampus());
 	}
 
 }

@@ -107,7 +107,7 @@
 			}
 
 			function goto_forget() {
-				$("#forget-username").val("");
+				//$("#forget-username").val("");
 				$("#forget-password").val("");
 				$("#forget-repassword").val("");
 				$("#forget-phone").val("");
@@ -149,6 +149,7 @@
 					$.pt({
 						target: $("#login-usercode"),
 						position: 'r',
+						autoClose: false,
 						align: 't',
 						width: 'auto',
 						height: 'auto',
@@ -160,6 +161,7 @@
 					$.pt({
 						target: $("#login-password"),
 						position: 'r',
+						autoClose: false,
 						align: 't',
 						width: 'auto',
 						height: 'auto',
@@ -173,6 +175,7 @@
 					$.pt({
 						target: $("#login-usercode"),
 						position: 'r',
+						autoClose: false,
 						align: 't',
 						width: 'auto',
 						height: 'auto',
@@ -235,6 +238,7 @@
 								$.pt({
 									target: $("#login-usercode"),
 									position: 'r',
+									autoClose: false,
 									align: 't',
 									width: 'auto',
 									height: 'auto',
@@ -249,6 +253,7 @@
 									target: $("#login-usercode"),
 									position: 'r',
 									align: 't',
+									autoClose: false,
 									width: 'auto',
 									height: 'auto',
 									content: data.message
@@ -264,6 +269,7 @@
 								position: 'r',
 								align: 't',
 								width: 'auto',
+								autoClose: false,
 								height: 'auto',
 								content: "一卡通账号和密码不符请从新输入"
 							});
@@ -286,42 +292,80 @@
 					validatecode = null;
 				var regUsercode = new RegExp("^[0-9_]{10,10}$");
 				var regPassword = new RegExp("^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$");
+				var regPhone = new RegExp("^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199|(147))\\d{8}$");
 				//判断用户名密码是否为空
 	
 				if(usercode == "") {
 					$.pt({
 						target: $("#register-usercode"),
 						position: 'r',
+						autoClose: false,
 						align: 't',
 						width: 'auto',
 						height: 'auto',
 						content: "一卡通账号不能为空"
 					});
 					flag = true;
-				} else if(username == "") {
-					$.pt({
-						target: $("#register-username"),
-						position: 'r',
-						align: 't',
-						width: 'auto',
-						height: 'auto',
-						content: "用户名不能为空"
-					});
-					flag = true;
-				} else if(!regUsercode.test(usercode)) {
+				}else if(!regUsercode.test(usercode)) {
 					$.pt({
 						target: $("#register-usercode"),
 						position: 'r',
+						autoClose: false,
 						align: 't',
 						width: 'auto',
 						height: 'auto',
 						content: "请输入正确的10位一卡通账号"
 					});
 					flag = true;
-				} else if(password == "") {
+				}  else if(username == "") {
+					$.pt({
+						target: $("#register-username"),
+						position: 'r',
+						autoClose: false,
+						align: 't',
+						width: 'auto',
+						height: 'auto',
+						content: "用户名不能为空"
+					});
+					flag = true;
+				}  else if(phonenumber == "") {
+					$.pt({
+						target: $("#register-phone"),
+						position: 'r',
+						autoClose: false,
+						align: 't',
+						width: 'auto',
+						height: 'auto',
+						content: "手机号码不能为空"
+					});
+					flag = true;
+				}else if(!regPhone.test(phonenumber)) {
+					$.pt({
+						target: $("#register-phone"),
+						position: 'r',
+						autoClose: false,
+						align: 't',
+						width: 'auto',
+						height: 'auto',
+						content: "请输入正确的手机号码"
+					});
+					flag = true;
+				} else if(code == "") {
+					$.pt({
+						target: $("#register-code"),
+						position: 'r',
+						autoClose: false,
+						align: 't',
+						width: 'auto',
+						height: 'auto',
+						content: "验证码不能为空"
+					});
+					flag = true;
+				}else if(password == "") {
 					$.pt({
 						target: $("#register-password"),
 						position: 'r',
+						autoClose: false,
 						align: 't',
 						width: 'auto',
 						height: 'auto',
@@ -332,40 +376,11 @@
 					$.pt({
 						target: $("#register-password"),
 						position: 'r',
+						autoClose: false,
 						align: 't',
 						width: 'auto',
 						height: 'auto',
 						content: "请输入6-16位由数字及字母组成的密码"
-					});
-					flag = true;
-				}  else if(password == "") {
-					$.pt({
-						target: $("#register-password"),
-						position: 'r',
-						align: 't',
-						width: 'auto',
-						height: 'auto',
-						content: "密码不能为空"
-					});
-					flag = true;
-				} else if(phonenumber == "") {
-					$.pt({
-						target: $("#register-phone"),
-						position: 'r',
-						align: 't',
-						width: 'auto',
-						height: 'auto',
-						content: "电话号码不能为空"
-					});
-					flag = true;
-				} else if(code == "") {
-					$.pt({
-						target: $("#register-code"),
-						position: 'r',
-						align: 't',
-						width: 'auto',
-						height: 'auto',
-						content: "验证码不能为空"
 					});
 					flag = true;
 				}
@@ -410,6 +425,7 @@
 								$.pt({
 									target: $("#register-usercode"),
 									position: 'r',
+									autoClose: false,
 									align: 't',
 									width: 'auto',
 									height: 'auto',
@@ -422,16 +438,30 @@
 									target: $("#register-code"),
 									position: 'r',
 									align: 't',
+									autoClose: false,
 									width: 'auto',
 									height: 'auto',
-									content: "验证码获取错误，请重新点击获取验证码"
+									content: "验证码输入错误请重新输入"
 								});
-								goto_register();
+								$("#register-code").val("");
+								return false;
+							}else if(data.status == "10008") {
+								$.pt({
+									target: $("#register-code"),
+									position: 'r',
+									align: 't',
+									autoClose: false,
+									width: 'auto',
+									height: 'auto',
+									content: "验证码已失效请重新获取"
+								});
+								$("#register-code").val("");
 								return false;
 							}else{
 								$.pt({
 									target: $("#register-code"),
 									position: 'r',
+									autoClose: false,
 									align: 't',
 									width: 'auto',
 									height: 'auto',
@@ -446,6 +476,7 @@
 								target: $("#register-usercode"),
 								position: 'r',
 								align: 't',
+								autoClose: false,
 								width: 'auto',
 								height: 'auto',
 								content: "注册失败"
@@ -476,6 +507,7 @@
 					$.pt({
 						target: $("#forget-usercode"),
 						position: 'r',
+						autoClose: false,
 						align: 't',
 						width: 'auto',
 						height: 'auto',
@@ -487,6 +519,7 @@
 						target: $("#forget-usercode"),
 						position: 'r',
 						align: 't',
+						autoClose: false,
 						width: 'auto',
 						height: 'auto',
 						content: "请输入正确的10位一卡通账号"
@@ -496,16 +529,18 @@
 					$.pt({
 						target: $("#forget-phone"),
 						position: 'r',
+						autoClose: false,
 						align: 't',
 						width: 'auto',
 						height: 'auto',
-						content: "手机号不能为空"
+						content: "手机号码不能为空"
 					});
 					flag = true;
 				}else if(phonenumber != phonenumberG) {
 					$.pt({
 						target: $("#forget-phone"),
 						position: 'r',
+						autoClose: false,
 						align: 't',
 						width: 'auto',
 						height: 'auto',
@@ -517,6 +552,7 @@
 						target: $("#forget-code"),
 						position: 'r',
 						align: 't',
+						autoClose: false,
 						width: 'auto',
 						height: 'auto',
 						content: "验证码不能为空"
@@ -526,6 +562,7 @@
 					$.pt({
 						target: $("#forget-password"),
 						position: 'r',
+						autoClose: false,
 						align: 't',
 						width: 'auto',
 						height: 'auto',
@@ -536,6 +573,7 @@
 					$.pt({
 						target: $("#forget-password"),
 						position: 'r',
+						autoClose: false,
 						align: 't',
 						width: 'auto',
 						height: 'auto',
@@ -546,6 +584,7 @@
 					$.pt({
 						target: $("#forget-repassword"),
 						position: 'r',
+						autoClose: false,
 						align: 't',
 						width: 'auto',
 						height: 'auto',
@@ -606,10 +645,35 @@
 									}
 								});
 								return false;
+							}else if(data.status == "400") {
+								$.pt({
+									target: $("#forget-code"),
+									position: 'r',
+									align: 't',
+									autoClose: false,
+									width: 'auto',
+									height: 'auto',
+									content: "验证码输入错误请重新输入"
+								});
+								$("#forget-code").val("");
+								return false;
+							}else if(data.status == "10008") {
+								$.pt({
+									target: $("#forget-code"),
+									position: 'r',
+									align: 't',
+									autoClose: false,
+									width: 'auto',
+									height: 'auto',
+									content: "验证码已失效请重新获取"
+								});
+								$("#forget-code").val("");
+								return false;
 							} else {
 								$.pt({
 									target: $("#forget-usercode"),
 									position: 'r',
+									autoClose: false,
 									align: 't',
 									width: 'auto',
 									height: 'auto',
@@ -624,6 +688,7 @@
 							$.pt({
 								target: $("#forget-usercode"),
 								position: 'r',
+								autoClose: false,
 								align: 't',
 								width: 'auto',
 								height: 'auto',
@@ -699,6 +764,7 @@
 												$.pt({
 													target: $("#login-usercode"),
 													position: 'r',
+													autoClose: false,
 													align: 't',
 													width: 'auto',
 													height: 'auto',
@@ -709,6 +775,7 @@
 												$.pt({
 													target: $("#login-usercode"),
 													position: 'r',
+													autoClose: false,
 													align: 't',
 													width: 'auto',
 													height: 'auto',
@@ -741,6 +808,7 @@
 																target: $("#login-usercode"),
 																position: 'r',
 																align: 't',
+																autoClose: false,
 																width: 'auto',
 																height: 'auto',
 																content: data.message
@@ -752,6 +820,7 @@
 																position: 'r',
 																align: 't',
 																width: 'auto',
+																autoClose: false,
 																height: 'auto',
 																content: data.message
 															});
@@ -762,6 +831,7 @@
 																	position: 'r',
 																	align: 't',
 																	width: 'auto',
+																	autoClose: false,
 																	height: 'auto',
 																	content: data.message
 																});
@@ -774,6 +844,7 @@
 															position: 'r',
 															align: 't',
 															width: 'auto',
+															autoClose: false,
 															height: 'auto',
 															content: "查询失败"
 														});
@@ -831,6 +902,7 @@
 													target: $("#forget-usercode"),
 													position: 'r',
 													align: 't',
+													autoClose: false,
 													width: 'auto',
 													height: 'auto',
 													content: "一卡通账号不能为空" 
@@ -841,6 +913,7 @@
 													target: $("#forget-usercode"),
 													position: 'r',
 													align: 't',
+													autoClose: false,
 													width: 'auto',
 													height: 'auto',
 													content: "请输入正确的10位一卡通账号" 
@@ -858,6 +931,7 @@
 													success: function(data) {
 														console.log(data);
 														if(data.status == "200") {
+															show_forget(data.obj);
 															$.pt({
 																target: $("#forget-usercode"),
 																position: 'r',
@@ -866,53 +940,57 @@
 																height: 'auto',
 																content: '获取数据成功，可以修改密码'
 															});
-															show_forget(data.obj);
 															return false;
 														} else if(data.status == "10007"){
+															hide_forget();
 															$.pt({
 																target: $("#register-usercode"),
 																position: 'r',
+																autoClose: false,
 																align: 't',
 																width: 'auto',
 																height: 'auto',
 																content: data.message
 															});
-															hide_forget();
 															return false;
 														}else if(data.status == "10005"){
+															hide_forget();
 															$.pt({
 																target: $("#register-usercode"),
 																position: 'r',
+																autoClose: false,
 																align: 't',
 																width: 'auto',
 																height: 'auto',
 																content: data.message
 															});
-															hide_forget();
+								
 															return false;
 														}else {
+															hide_forget();
 																$.pt({
 																	target: $("#register-usercode"),
 																	position: 'r',
+																	autoClose: false,
 																	align: 't',
 																	width: 'auto',
 																	height: 'auto',
 																	content: data.message
 																});
-																hide_forget();
 																return false;
 															}
 													},
-													error: function() {
+													error: function() {														
+														hide_Forget();
 														$.pt({
 															target: $("#register-usercode"),
 															position: 'r',
 															align: 't',
+															autoClose: false,
 															width: 'auto',
 															height: 'auto',
 															content: "查询失败"
 														});
-														hide_Forget();
 														return false;
 													}
 												});
@@ -950,7 +1028,7 @@
 													align: 't',
 													width: 'auto',
 													height: 'auto',
-													content: "手机号不能为空" 
+													content: "手机号码不能为空" 
 												});
 												return;
 											}else if(!reg.test(str)){
@@ -960,7 +1038,7 @@
 													align: 't',
 													width: 'auto',
 													height: 'auto',
-													content: "请输入正确的手机号" 
+													content: "请输入正确的手机号码" 
 												});
 												return;
 											}									
@@ -973,7 +1051,33 @@
 									
 								</span>
 								<span class="input input--hideo"> 
-									<input class="input__field input__field--hideo" type="text" id="forget-code" autocomplete="off" placeholder="请输入验证码" maxlength="6" value="443322"/> 
+									<input class="input__field input__field--hideo" type="text" id="forget-code" autocomplete="off" placeholder="请输入验证码" maxlength="6" onkeyup="show_yzm4(this.value)"/> 
+									<script type="text/javascript">
+										function show_yzm4(str){
+											var reg = new RegExp("^[0-9_]{6}$");
+											if(str == ""){
+												$.pt({
+													target: $("#forget-code"),
+													position: 'r',
+													align: 't',
+													width: 'auto',
+													height: 'auto',
+													content: "验证码不能为空" 
+												});
+												return;
+											}else if(!reg.test(str)){
+												$.pt({
+													target: $("#forget-code"),
+													position: 'r',
+													align: 't',
+													width: 'auto',
+													height: 'auto',
+													content: "请输入6位验证码" 
+												});
+												return;
+											}									
+										}
+									</script> 
 									<label class="input__label input__label--hideo" for="forget-code">
 										<i class="fa fa-fw fa-send-o icon icon--hideo"></i> 
 										<span class="input__label-content input__label-content--hideo"></span>
@@ -1012,6 +1116,7 @@
 												$.pt({
 													target: $("#forget-usercode"),
 													position: 'r',
+													autoClose: false,
 													align: 't',
 													width: 'auto',
 													height: 'auto',
@@ -1022,6 +1127,7 @@
 												$.pt({
 													target: $("#forget-usercode"),
 													position: 'r',
+													autoClose: false,
 													align: 't',
 													width: 'auto',
 													height: 'auto',
@@ -1032,6 +1138,7 @@
 												$.pt({
 													target: $("#forget-phone"),
 													position: 'r',
+													autoClose: false,
 													align: 't',
 													width: 'auto',
 													height: 'auto',
@@ -1042,6 +1149,7 @@
 												$.pt({
 													target: $("#forget-phone"),
 													position: 'r',
+													autoClose: false,
 													align: 't',
 													width: 'auto',
 													height: 'auto',
@@ -1076,6 +1184,7 @@
 															$.pt({
 																target: $("#forget-code"),
 																position: 'r',
+																autoClose: false,
 																align: 't',
 																width: 'auto',
 																height: 'auto',
@@ -1085,6 +1194,7 @@
 															$.pt({
 																target: $("#forget-code"),
 																position: 'r',
+																autoClose: false,
 																align: 't',
 																width: 'auto',
 																height: 'auto',
@@ -1097,6 +1207,7 @@
 														$.pt({
 															target: $("#forget-code"),
 															position: 'r',
+															autoClose: false,
 															align: 't',
 															width: 'auto',
 															height: 'auto',
@@ -1157,6 +1268,7 @@
 												$.pt({
 													target: $("#register-usercode"),
 													position: 'r',
+													autoClose: false,
 													align: 't',
 													width: 'auto',
 													height: 'auto',
@@ -1167,6 +1279,7 @@
 												$.pt({
 													target: $("#register-usercode"),
 													position: 'r',
+													autoClose: false,
 													align: 't',
 													width: 'auto',
 													height: 'auto',
@@ -1185,6 +1298,7 @@
 													success: function(data) {
 														console.log(data);
 														if(data.status == "200") {
+															show_user(data.obj);
 															$.pt({
 																target: $("#register-usercode"),
 																position: 'r',
@@ -1193,53 +1307,56 @@
 																height: 'auto',
 																content: '获取数据成功，可以注册'
 															});
-															show_user(data.obj);
 															return false;
 														} else if(data.status == "10003"){
+															hide_user();
 															$.pt({
 																target: $("#register-usercode"),
 																position: 'r',
+																autoClose: false,
 																align: 't',
 																width: 'auto',
 																height: 'auto',
 																content: data.message
 															});
-															hide_user();
 															return false;
 														}else if(data.status == "10005"){
+															hide_user();
 															$.pt({
 																target: $("#register-usercode"),
 																position: 'r',
+																autoClose: false,
 																align: 't',
 																width: 'auto',
 																height: 'auto',
 																content: data.message
 															});
-															hide_user();
 															return false;
 														}else {
+															hide_user();
 																$.pt({
 																	target: $("#register-usercode"),
 																	position: 'r',
+																	autoClose: false,
 																	align: 't',
 																	width: 'auto',
 																	height: 'auto',
 																	content: data.message
 																});
-																hide_user();
 																return false;
 															}
 													},
 													error: function() {
+														hide_user();
 														$.pt({
 															target: $("#register-usercode"),
 															position: 'r',
+															autoClose: false,
 															align: 't',
 															width: 'auto',
 															height: 'auto',
 															content: "查询失败"
 														});
-														hide_user();
 														return false;
 													}
 												});
@@ -1330,7 +1447,7 @@
 													align: 't',
 													width: 'auto',
 													height: 'auto',
-													content: "手机号不能为空" 
+													content: "手机号码不能为空" 
 												});
 												return;
 											}else if(!reg.test(str)){
@@ -1340,7 +1457,7 @@
 													align: 't',
 													width: 'auto',
 													height: 'auto',
-													content: "请输入正确的手机号" 
+													content: "请输入正确的手机号码" 
 												});
 												return;
 											}									
@@ -1352,7 +1469,33 @@
 									</label>
 								</span> 
 								<span class="input input--hideo"> 
-									<input class="input__field input__field--hideo" type="text" id="register-code" autocomplete="off" placeholder="请输入验证码" maxlength="6" /> 
+									<input class="input__field input__field--hideo" type="text" id="register-code" autocomplete="off" placeholder="请输入验证码" maxlength="6" onkeyup="show_yzm3(this.value)"/> 
+									<script type="text/javascript">
+										function show_yzm3(str){
+											var reg = new RegExp("^[0-9_]{6}$");
+											if(str == ""){
+												$.pt({
+													target: $("#register-code"),
+													position: 'r',
+													align: 't',
+													width: 'auto',
+													height: 'auto',
+													content: "验证码不能为空" 
+												});
+												return;
+											}else if(!reg.test(str)){
+												$.pt({
+													target: $("#register-code"),
+													position: 'r',
+													align: 't',
+													width: 'auto',
+													height: 'auto',
+													content: "请输入6位验证码" 
+												});
+												return;
+											}							
+										}
+									</script> 
 									<label class="input__label input__label--hideo" for="register-code">
 										<i class="fa fa-fw fa-send-o icon icon--hideo"></i> 
 										<span class="input__label-content input__label-content--hideo"></span>
@@ -1394,6 +1537,7 @@
 												$.pt({
 													target: $("#register-usercode"),
 													position: 'r',
+													autoClose: false,
 													align: 't',
 													width: 'auto',
 													height: 'auto',
@@ -1405,6 +1549,7 @@
 													target: $("#register-username"),
 													position: 'r',
 													align: 't',
+													autoClose: false,
 													width: 'auto',
 													height: 'auto',
 													content: "用户名不能为空"
@@ -1415,6 +1560,7 @@
 													target: $("#register-usercode"),
 													position: 'r',
 													align: 't',
+													autoClose: false,
 													width: 'auto',
 													height: 'auto',
 													content: "请输入正确的10位一卡通账号"
@@ -1454,6 +1600,7 @@
 												$.pt({
 													target: $("#register-phone"),
 													position: 'r',
+													autoClose: false,
 													align: 't',
 													width: 'auto',
 													height: 'auto',
@@ -1464,6 +1611,7 @@
 												$.pt({
 													target: $("#register-phone"),
 													position: 'r',
+													autoClose: false,
 													align: 't',
 													width: 'auto',
 													height: 'auto',
@@ -1508,6 +1656,7 @@
 																target: $("#register-code"),
 																position: 'r',
 																align: 't',
+																autoClose: false,
 																width: 'auto',
 																height: 'auto',
 																content: data.message
@@ -1519,6 +1668,7 @@
 														$.pt({
 															target: $("#register-code"),
 															position: 'r',
+															autoClose: false,
 															align: 't',
 															width: 'auto',
 															height: 'auto',

@@ -1,5 +1,7 @@
 package com.herman.ebookstore.service.impl;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +30,13 @@ public class SdkServiceImpl extends AbstractService<Sdk> implements SdkService {
 	@Override
 	public Sdk selectOneSDKInfo(Sdk sdk) {
 		// TODO Auto-generated method stub
-		return this.sdkMapper.selectOneSDKInfo(sdk);
+		sdk = this.sdkMapper.selectOneSDKInfo(sdk);
+		long delta = new Date().getTime() - sdk.getCreateTime().getTime();
+		if(delta > 900000L) {
+			System.out.println(delta);
+			sdk.setCode("400");
+		}
+		return sdk;
 	}
 
 }

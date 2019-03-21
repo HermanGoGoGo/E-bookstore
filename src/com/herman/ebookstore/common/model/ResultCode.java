@@ -23,6 +23,7 @@ public enum ResultCode {
 	 */
 	PARAMETER_ERROR(9998,"参数错误"),
 	SDK_ERROR(10001,"验证码获取错误"),
+	SDK_FAIL(10008,"验证码已失效"),
 	SDK_USERCODE_EXIT(10002,"验证发送失败，该账号已存在"),
 	SDK_SERVER_ERROR(10004,"验证码获取异常"),
 	SDK_SUCCESS(10006,"验证码发送成功"),

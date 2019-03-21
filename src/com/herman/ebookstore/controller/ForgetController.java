@@ -50,8 +50,8 @@ public class ForgetController extends BaseForSDK {
 
 	/**
 	 * @Title: getVerificationCode @Description: TODO(获取验证码) @param @param
-	 * phonenumber @param @param usercode @param @param
-	 * response @param @return @return String @throws
+	 *         phonenumber @param @param usercode @param @param
+	 *         response @param @return @return String @throws
 	 */
 
 	@RequestMapping("getVerificationCode")
@@ -64,7 +64,8 @@ public class ForgetController extends BaseForSDK {
 		index = this.userService.selectCountByCondition(user);
 		if (index == 1) {
 			String getPatam = String.valueOf(new Random().nextInt(899999) + 100000);
-			String result = this.jsonReqClient.sendSms(ACCOUNT_SID, AUTH_TOKEN, APPID, TEMPLATEID, getPatam, phonenumber, usercode);
+			String result = this.jsonReqClient.sendSms(ACCOUNT_SID, AUTH_TOKEN, APPID, TEMPLATEID, getPatam,
+					phonenumber, usercode);
 			Sdk pushMsgContent = JSON.parseObject(result, Sdk.class);
 			if (!"".equals(pushMsgContent.getUid()) && pushMsgContent.getUid() != null) {
 				pushMsgContent.setParam(getPatam);
@@ -90,56 +91,65 @@ public class ForgetController extends BaseForSDK {
 	 * @author Franklin
 	 */
 	@RequestMapping("forget")
-	public void forget(String usercode, String phonenumber, String code, String password, HttpServletResponse response) {
+	public void forget(String usercode, String phonenumber, String code, String password,
+			HttpServletResponse response) {
 		User user = new User();
 		Sdk sdkInfo = new Sdk();
 		int index = -1;
-		if (usercode != null && !"".equals(usercode)) {
+		if (StringUtils.isNotEmpty(usercode)) {
 			sdkInfo.setUid(usercode);
 			sdkInfo.setMobile(phonenumber);
 			sdkInfo = this.sdkService.selectOneSDKInfo(sdkInfo);
+		}
+		if ("000000".equals(sdkInfo.getCode())) {
 			if (code.equals(sdkInfo.getParam())) {
 				user.setUsercode(usercode);
 				user.setPhonenumber(phonenumber);
 				user = this.userService.selectOne(user);
 				if (user == null) {
-					new ResponseWriter().writerResponse(ResultCode.USERCODE_NOTEXIT.getCode(),ResultCode.USERCODE_NOTEXIT.getMessage(), response);
+					new ResponseWriter().writerResponse(ResultCode.USERCODE_NOTEXIT.getCode(),
+							ResultCode.USERCODE_NOTEXIT.getMessage(), response);
 				} else {
-					if("1".equals(user.getStatus())) {
+					if ("1".equals(user.getStatus())) {
 						user.setPassword(MD5Util.MD5Encode(password, "utf8"));
 						this.userService.update(user);
 						new ResponseWriter().writerResponse(true, response);
-					}else {					
-						new ResponseWriter().writerResponse(ResultCode.USERCODE_ACTIVATION.getCode(),ResultCode.USERCODE_ACTIVATION.getMessage(), response);
+					} else {
+						new ResponseWriter().writerResponse(ResultCode.USERCODE_ACTIVATION.getCode(),
+								ResultCode.USERCODE_ACTIVATION.getMessage(), response);
 					}
 				}
 			} else {
-				new ResponseWriter().writerResponse(false,response);
+				new ResponseWriter().writerResponse(false, response);
 			}
+		}else if("400".equals(sdkInfo.getCode())){
+			new ResponseWriter().writerResponse(ResultCode.SDK_FAIL.getCode(), ResultCode.SDK_FAIL.getMessage(),
+					response);
+		}else {
+			new ResponseWriter().writerResponse(ResultCode.SDK_ERROR.getCode(), ResultCode.SDK_ERROR.getMessage(),
+					response);
 		}
 	}
-	
+
 	@RequestMapping("getUser")
-	public void getUser(String usercode, HttpServletResponse response,Model model) {
-		UserDto userDto =new UserDto();
-		if(StringUtils.isNotEmpty(usercode)) {
+	public void getUser(String usercode, HttpServletResponse response, Model model) {
+		UserDto userDto = new UserDto();
+		if (StringUtils.isNotEmpty(usercode)) {
 			userDto.setUsercode(usercode);
-		}
-		userDto = this.userService.selectMinuteOne(userDto);
-		try {
-			if(userDto != null){
-				if("0".equals(userDto.getStatus())) {
-					new ResponseWriter().writerResponse(ResultCode.USERCODE_ACTIVATION.getCode(),ResultCode.USERCODE_ACTIVATION.getMessage(), response);
-				}else if("1".equals(userDto.getStatus())){
+			userDto = this.userService.selectMinuteOne(userDto);
+			if (userDto != null) {
+				if ("0".equals(userDto.getStatus())) {
+					new ResponseWriter().writerResponse(ResultCode.USERCODE_ACTIVATION.getCode(),
+							ResultCode.USERCODE_ACTIVATION.getMessage(), response);
+				} else if ("1".equals(userDto.getStatus())) {
 					new ResponseWriter().writerResponseObject(true, userDto, response);
 				}
-			}else {
-				new ResponseWriter().writerResponse(ResultCode.USERCODE_NOTEXIT.getCode(),ResultCode.USERCODE_NOTEXIT.getMessage(), response);
+			} else {
+				new ResponseWriter().writerResponse(ResultCode.USERCODE_NOTEXIT.getCode(),
+						ResultCode.USERCODE_NOTEXIT.getMessage(), response);
 			}
-		} catch (Exception e) {
+		} else {
 			new ResponseWriter().writerResponse(false, response);
-			// TODO: handle exception
 		}
-		model.addAttribute("campus",userDto.getCampus());
 	}
 }
