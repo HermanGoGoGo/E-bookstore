@@ -24,7 +24,7 @@ public class UserLoginInterceptor implements HandlerInterceptor{
         // equalsIgnoreCase 与 equals的区别？
 		Object object = request.getSession().getAttribute("usercode");
 		if(object == null){
-			response.sendRedirect(request.getContextPath() + "/toLoginPage.action");
+			response.sendRedirect(request.getContextPath() + "/page.action?type=login");
 			return false;
 		}else {
 			return true;

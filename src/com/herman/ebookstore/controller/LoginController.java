@@ -44,11 +44,12 @@ public class LoginController extends BaseForSDK {
 	@Autowired
 	private UniversityService universityService;
 
-	@RequestMapping("toLoginPage")
-	public String toLoginPage(HttpServletRequest request,Model model) {
+	@RequestMapping("page")
+	public String toLoginPage(HttpServletRequest request,Model model,String type) {
 		request.getSession().invalidate();
 		List<University> universityList = this.universityService.selectAll();
 		model.addAttribute("universityList",universityList);
+		model.addAttribute("type",type);
 		return "login";
 	}
 	

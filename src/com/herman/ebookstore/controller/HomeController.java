@@ -49,6 +49,7 @@ public class HomeController {
 	public String toHomepage(String searchByBookName,String queryScope,HttpServletRequest request,Model model) {
 		Object usercode = request.getSession().getAttribute("usercode");
 		SeachDto seachDto =new SeachDto();
+		seachDto.setBookName(searchByBookName);
 		List<BookDto> bookList =new ArrayList<BookDto>();
 		UserDto currentUser = new UserDto();
 		HomeReq homeReq =new HomeReq();
@@ -65,7 +66,7 @@ public class HomeController {
 			}
 		}else {
 			if(StringUtils.isNotEmpty(queryScope)) {
-				return "redirect:/toLoginPage.action";
+				return "redirect:/page.action?type=login";
 			}
 			String msg= "请登录后查看";
 			currentUser.setUsercode("管理员邮箱：1146465559@qq.com");

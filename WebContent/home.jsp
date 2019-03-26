@@ -207,7 +207,7 @@
 					<div class="dropdown-divider"></div>
 					<a class="dropdown-item" href="javascript:void(0)" data-toggle="control-sidebar"><i class="ion ion-settings"></i> 基础界面设置</a>
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="<%=path%>/toLoginPage.action"><i class="ion-log-out"></i> 重新登录</a>
+					<a class="dropdown-item" href="<%=path%>/page.action?type=login"><i class="ion-log-out"></i> 重新登录</a>
 					<div class="dropdown-divider"></div>
 					<div class="p-10"><a href="javascript:void(0)" class="btn btn-sm btn-rounded btn-success">返回</a></div>
               </li>
@@ -239,7 +239,7 @@
        	    <a class="dropdown-item" ><i>${currentUser.username}</i></a>
 			<a href="" class="link" data-toggle="tooltip" title="" data-original-title="Settings"><i class="ion ion-gear-b"></i></a>
             <a href="" class="link" data-toggle="tooltip" title="" data-original-title="Email"><i class="ion ion-android-mail"></i></a>
-            <a href="<%=path%>/toLoginPage.action" class="link" data-toggle="tooltip" title="" data-original-title="Logout"><i class="ion ion-power"></i></a>
+            <a href="<%=path%>/page.action?type=login" class="link" data-toggle="tooltip" title="" data-original-title="Logout"><i class="ion ion-power"></i></a>
         </div>
       </div>
       
@@ -271,7 +271,7 @@
 		<!-- item-->
 		<a href="pages/mailbox_inbox.html" class="link" data-toggle="tooltip" title="" data-original-title="Email"><i class="fa fa-envelope"></i></a>
 		<!-- item-->
-		<a href="<%=path%>/toLoginPage.action" class="link" data-toggle="tooltip" title="" data-original-title="Logout"><i class="fa fa-power-off"></i></a>
+		<a href="<%=path%>/page.action?type=login" class="link" data-toggle="tooltip" title="" data-original-title="Logout"><i class="fa fa-power-off"></i></a>
 	</div>
   </aside>
 
@@ -361,9 +361,9 @@
 									<th></th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody >
 							<% int i = 0; %>
-								<c:forEach items="${bookVoList}" var="book" varStatus="status">
+								<c:forEach items="${bookVoList}" var="book" varStatus="status" >
 									  <tr <%--  onclick="location.href='<%=path%>/home/toHomePage.action?id=${book.id}';" --%>>
 									    <% i++; %>
 										<td style="display: none;"> <%=i %></td>
@@ -509,8 +509,9 @@
     
     <script type="text/javascript">
 			$.hulla = new hullabaloo();
+			var usercode = '${currentUser.usercode}';
 			setTimeout(function() {
-				$.hulla.send("Hi！这里是jQuery之家！", "success");
+				$.hulla.send(usercode+"Hi！这里是jQuery之家！", "success");
 			}, 1000);
 			function checkTime(){			
 		        var nowtime=Date.parse(new Date());

@@ -12,7 +12,7 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
-			<mvc:exclude-mapping path="/toLoginPage.action" />
+			<mvc:exclude-mapping path="/page.action*" />
 			<mvc:exclude-mapping path="/verificationLogin.action" />
 			<mvc:exclude-mapping path="/home/*" />
 			<mvc:exclude-mapping path="/register/*" />

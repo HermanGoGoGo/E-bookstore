@@ -62,7 +62,15 @@
 			})();
 
 			$(function() {
-				
+				var type='${type}';
+				console.log(type);
+				if(type=="register"){
+					goto_register()
+				}else if(type=="forget"){
+					goto_forget();
+				}else{
+					goto_login();
+				}			
 				$('#login #login-password').focus(function() {
 					$('.login-owl').addClass('password');
 				}).blur(function() {
