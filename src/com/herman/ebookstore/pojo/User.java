@@ -1,17 +1,15 @@
 package com.herman.ebookstore.pojo;
 
 import javax.persistence.*;
-
-import com.herman.ebookstore.common.model.BaseEntity;
-
 import java.util.Date;
+import com.herman.ebookstore.common.model.BaseEntity;
 
 /**
  * 用户表
  * 
  * @author herman
  * @email 1146465559@qq.com
- * @date 2019-03-14 14:40:46
+ * @date 2019-04-02 17:50:39
  */
 @Table(name = "MSTB_USER")
 public class User extends BaseEntity<User> {
@@ -33,6 +31,10 @@ public class User extends BaseEntity<User> {
     //电话号码
     @Column(name = "phonenumber")
     private String phonenumber;
+    
+    //头像地址
+    @Column(name = "image")
+    private String image;
     
     //所属角色
     @Column(name = "role_id")
@@ -62,7 +64,7 @@ public class User extends BaseEntity<User> {
     @Column(name = "delete_flag")
     private String deleteFlag;
     
-  //是否激活，0：未激活；1：已激活
+    //是否激活，0：未激活；1：已激活
     @Column(name = "status")
     private String status;
     
@@ -98,6 +100,14 @@ public class User extends BaseEntity<User> {
 		return phonenumber;
 	}
 	
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public String getImage() {
+		return image;
+	}
+	
 	public void setRoleId(String roleId) {
 		this.roleId = roleId;
 	}
@@ -106,14 +116,14 @@ public class User extends BaseEntity<User> {
 		return roleId;
 	}
 	
-	public void setcampusId(String campusId) {
+	public void setCampusId(String campusId) {
 		this.campusId = campusId;
 	}
 
-	public String getcampusId() {
+	public String getCampusId() {
 		return campusId;
 	}
-
+	
 	public void setDegree(String degree) {
 		this.degree = degree;
 	}

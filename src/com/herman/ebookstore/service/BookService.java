@@ -22,6 +22,13 @@ import com.herman.ebookstore.model.UserDto;
  */
 public interface BookService extends Service<Book> {
 
+	/** 
+	 * @Method_Name: findAllBooks 
+	 * @Description: TODO()
+	 * @Description: * @return List<Book>
+	 * @date 2019年4月1日
+	 * @author 黄金宝 
+	 */
 	public List<Book> findAllBooks();
 	
 	public List<BookDto> findAllBookList();

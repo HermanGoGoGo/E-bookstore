@@ -7,12 +7,12 @@ import java.util.Date;
 import com.herman.ebookstore.common.model.BaseEntity;
 
 /**
- * 售书表
- * 
- * @author herman
- * @email 1146465559@qq.com
- * @date 2019-03-15 10:23:30
- */
+* @ClassName: Book
+* @Description: TODO(售书表)
+* @author 黄金宝
+* @date 2019年3月15日
+*
+*/
 @Table(name = "MSTB_SELL_BOOK")
 public class Book extends BaseEntity<Book> {
 

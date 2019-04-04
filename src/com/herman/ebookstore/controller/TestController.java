@@ -2,6 +2,7 @@ package com.herman.ebookstore.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.herman.ebookstore.common.model.ResultCode;
 import com.herman.ebookstore.exception.MyException;
 import com.herman.ebookstore.mapper.RoleMapper;
+import com.herman.ebookstore.model.MessageDto;
 import com.herman.ebookstore.model.RoleDto;
 import com.herman.ebookstore.pojo.Book;
 import com.herman.ebookstore.pojo.Message;
@@ -111,9 +113,9 @@ public class TestController {
 	@RequestMapping(method = RequestMethod.GET, value = "/test4")
 	public void test4() {
 		Message me = new Message();
-		me.setMessInfo("nihao");
+		me.setMessInfo("在吗，你那本书还可以卖嘛？");
 		me.setReceiveUserId("2201504242");
-		me.setSendUserId("2201504240");
+		me.setSendUserId("2201504239");
 
 		this.messageService.save(me);
 
@@ -134,6 +136,7 @@ public class TestController {
 	private BookService bookService;
 	@RequestMapping(method = RequestMethod.GET, value = "/test6")
 	public void test6(HttpServletResponse response) {
+		
 		Book book = new Book();
 		book.setUserId("2201504239");
 		book.setName("影视鉴赏");
@@ -180,6 +183,7 @@ public class TestController {
 		List<Book> bookList = new ArrayList<Book>();
 		for(int i= 0 ;i<20;i++) {
 			try {
+				
 				Thread.sleep(500);
 				this.bookService.save(book1);
 				this.bookService.save(book2);
@@ -191,5 +195,20 @@ public class TestController {
 				e.printStackTrace();
 			}
 		}
+	}
+	@RequestMapping(method = RequestMethod.GET, value = "/test7")
+	public void test7(HttpServletResponse response) {
+		MessageDto messageDto =new MessageDto();
+		messageDto.setReceiveUserId("2201504242");
+		List<MessageDto> messages = this.messageService.findAllMessageByDto(messageDto);
+		
+	}
+	
+	@RequestMapping("/test8")
+	public void test8(String message,HttpServletResponse response) {
+		new ResponseWriter().writerResponse(true,response);
+		System.out.println(message);
+		
+		
 	}
 }

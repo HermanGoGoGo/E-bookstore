@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.alibaba.fastjson.JSON;
 import com.herman.ebookstore.common.model.BaseForSDK;
 import com.herman.ebookstore.common.model.ResultCode;
+import com.herman.ebookstore.model.MessageDto;
 import com.herman.ebookstore.pojo.Sdk;
 import com.herman.ebookstore.pojo.User;
 import com.herman.ebookstore.sdk.impl.JsonReqClient;
@@ -71,5 +72,9 @@ public class BaseController extends BaseForSDK {
 		}else {
 			new ResponseWriter().writerResponse(ResultCode.USERCODE_NOTEXIT.getCode(), ResultCode.USERCODE_NOTEXIT.getMessage(), response);
 		}
+	}
+	
+	public void getUserMessage(MessageDto messageDto ,HttpServletResponse response) {
+		
 	}
 }

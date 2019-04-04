@@ -1,11 +1,21 @@
 package com.herman.ebookstore.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.herman.ebookstore.common.core.AbstractService;
+import com.herman.ebookstore.mapper.MessageMapper;
+import com.herman.ebookstore.model.MessageDto;
 import com.herman.ebookstore.pojo.Message;
 import com.herman.ebookstore.service.MessageService;
+import com.herman.ebookstore.util.RelativeDateFormat;
+
+import tk.mybatis.mapper.entity.Condition;
 
 
 
@@ -19,5 +29,47 @@ import com.herman.ebookstore.service.MessageService;
 @Service
 @Transactional
 public class MessageServiceImpl extends AbstractService<Message> implements MessageService {
+
+	@Autowired
+	private MessageMapper messageMapper;
+	
+	@Override
+	public List<Message> findAllMessages(Message message) {
+		Condition condition =new Condition(Message.class);
+		condition.and().andEqualTo("status", 0);
+		if(StringUtils.isNotEmpty(message.getReceiveUserId())) {
+			condition.and().andEqualTo("receiveUserId", message.getReceiveUserId());
+		}
+		if(StringUtils.isNotEmpty(message.getSendUserId())) {
+			condition.and().andEqualTo("sendUserId", message.getSendUserId());
+		}
+		condition.setOrderByClause("create_time desc , id desc");
+		return this.messageMapper.selectByCondition(condition);
+	}
+
+	@Override
+	public List<MessageDto> findAllMessageByDto(MessageDto messageDto) {
+		List<MessageDto> messageDtos =this.messageMapper.findAllMessageByDto(messageDto);
+		List<MessageDto> messageDtos1 = new ArrayList<MessageDto>();
+		for (MessageDto messageDto2 : messageDtos) {
+			messageDto2.setShowTime(RelativeDateFormat.format(messageDto2.getCreateTime()));
+			messageDtos1.add(messageDto2);
+		}
+		return messageDtos1;
+	}
+
+	@Override
+	public List<MessageDto> findAllMessageByReAndSe(MessageDto messageDto) {
+		// TODO Auto-generated method stub
+		List<MessageDto> messageDtos =this.messageMapper.findAllMessageByReAndSe(messageDto);
+		List<MessageDto> messageDtos1 = new ArrayList<MessageDto>();
+		for (MessageDto messageDto2 : messageDtos) {
+			messageDto2.setShowTime(RelativeDateFormat.format(messageDto2.getCreateTime()));
+			messageDtos1.add(messageDto2);
+		}
+		return messageDtos1;
+	}
+	
+	
 
 }

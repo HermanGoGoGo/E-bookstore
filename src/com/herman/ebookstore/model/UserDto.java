@@ -16,7 +16,7 @@ import javax.validation.constraints.*;
  */
 @ApiModel(description = "详细用户")
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-03-19T09:58:41.995Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-04-02T09:53:51.203Z")
 
 public class UserDto   {
   @JsonProperty("id")
@@ -41,6 +41,9 @@ public class UserDto   {
 
   @JsonProperty("phonenumber")
   private String phonenumber = null;
+
+  @JsonProperty("image")
+  private String image = null;
 
   @JsonProperty("roleId")
   private String roleId = null;
@@ -224,6 +227,26 @@ public class UserDto   {
 
   public void setPhonenumber(String phonenumber) {
     this.phonenumber = phonenumber;
+  }
+
+  public UserDto image(String image) {
+    this.image = image;
+    return this;
+  }
+
+  /**
+   * 头像地址
+   * @return image
+  **/
+  @ApiModelProperty(value = "头像地址")
+
+
+  public String getImage() {
+    return image;
+  }
+
+  public void setImage(String image) {
+    this.image = image;
   }
 
   public UserDto roleId(String roleId) {
@@ -523,6 +546,7 @@ public class UserDto   {
         Objects.equals(this.usercode, userDto.usercode) &&
         Objects.equals(this.password, userDto.password) &&
         Objects.equals(this.phonenumber, userDto.phonenumber) &&
+        Objects.equals(this.image, userDto.image) &&
         Objects.equals(this.roleId, userDto.roleId) &&
         Objects.equals(this.role, userDto.role) &&
         Objects.equals(this.campusId, userDto.campusId) &&
@@ -541,7 +565,7 @@ public class UserDto   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, createTime, updateTime, username, usercode, password, phonenumber, roleId, role, campusId, campus, degree, secondDegree, yearStarted, yearEnd, universityId, university, city, province, address, status);
+    return Objects.hash(id, createTime, updateTime, username, usercode, password, phonenumber, image, roleId, role, campusId, campus, degree, secondDegree, yearStarted, yearEnd, universityId, university, city, province, address, status);
   }
 
   @Override
@@ -556,6 +580,7 @@ public class UserDto   {
     sb.append("    usercode: ").append(toIndentedString(usercode)).append("\n");
     sb.append("    password: ").append(toIndentedString(password)).append("\n");
     sb.append("    phonenumber: ").append(toIndentedString(phonenumber)).append("\n");
+    sb.append("    image: ").append(toIndentedString(image)).append("\n");
     sb.append("    roleId: ").append(toIndentedString(roleId)).append("\n");
     sb.append("    role: ").append(toIndentedString(role)).append("\n");
     sb.append("    campusId: ").append(toIndentedString(campusId)).append("\n");

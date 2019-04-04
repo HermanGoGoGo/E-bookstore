@@ -1,4 +1,4 @@
-﻿﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -56,42 +56,6 @@
   </head>
 
 <body class="hold-transition skin-info dark-sidebar light sidebar-mini">
-<!-- loading -->
-		<div class="loader">
-			<div class="text">Loading...</div>
-			<div class="horizontal">
-				<div class="circlesup">
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-				</div>
-				<div class="circlesdwn">
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-				</div>
-			</div>
-			<div class="vertical">
-				<div class="circlesup">
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-				</div>
-				<div class="circlesdwn">
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-				</div>
-			</div>
-		</div>
 <div class="wrapper" >
   <header class="main-header">
     <!-- Logo -->
@@ -115,7 +79,7 @@
 			<i class="ti-align-left"></i>
 		  </a>
 		  <a id="toggle_res_search" data-toggle="collapse" data-target="#search_form" class="res-only-view" href="javascript:void(0);"><i class="mdi mdi-magnify"></i></a>
-		  <form id="search_form" role="search" class="top-nav-search pull-left collapse ml-20">
+		  <form action="<%=path %>/home/toHomePage.action" id="search_form" role="search" class="top-nav-search pull-left collapse ml-20">
 				<div class="input-group">
 					<input type="text" name="searchByBookName" class="form-control" placeholder="Search">
 						<span class="input-group-btn">
@@ -152,7 +116,7 @@
 				<ul class="menu sm-scrol">
 			      <c:forEach items="${messageDtos}" var="message" varStatus="status" >
 			      <li>
-					<a href="<%=path%>/message/showOneMessage.action?sendUserId=${message.sendUserId}">
+					<a href="<%=path%>/">
 					  <div class="pull-left">
 						<img src="<%=path%>${message.sendUserImage}" class="rounded-circle" alt="User Image">
 					  </div>
@@ -287,106 +251,6 @@
 
 		<!-- Main content -->
 		<section class="content">
-			<div class="row">
-				<div class="col-xl-4 col-12">
-				    <a href="<%=path%>/home/toHomePage.action">
-					<div class="box box-body">
-					  <h6 class="text-uppercase">全部</h6>
-					  <div class="flexbox mt-2">
-						<span class=" font-size-30">${homeReq.allBookSum}</span>
-						<span class="ion ion-ios-bookmarks-outline text-danger font-size-40"></span>
-					  </div>
-					</div>
-					</a>
-				</div>
-				<!-- /.col -->
-
-				<div class="col-xl-4 col-12">
-				    <a href="<%=path%>/home/toHomePage.action?queryScope=university">
-					<div class="box box-body">
-					  <h6 class="text-uppercase">${currentUser.university}</h6>
-					  <div class="flexbox mt-2">
-						<span class=" font-size-30">${homeReq.universityBookSum}</span>
-						<span class="ion ion-ribbon-a text-info font-size-40"></span>
-					  </div>
-					</div>
-					</a>
-				</div>
-				<!-- /.col -->
-				<div class="col-xl-4 col-12">
-				    <a href="<%=path%>/home/toHomePage.action?queryScope=campus">
-					<div class="box box-body">
-					  <h6 class="text-uppercase">${currentUser.campus}</h6>
-					  <div class="flexbox mt-2">
-						<span class=" font-size-30">${homeReq.campusBookSum}</span>
-						<span class="ion ion-university text-primary font-size-40"></span>
-					  </div>
-					</div>
-					</a>
-				</div>
-				<!-- /.col -->
-		    </div>					
-			<div class="row">
-				<div class="col-12">
-	
-				 <div class="box">
-					<div class="box-header with-border">
-					  <h3 class="box-title">${homeReq.showLoad}</h3>
-					</div>
-					<!-- /.box-header -->
-					<div class="box-body">
-						<div class="table-responsive">
-						  <table id="example5" class="table table-bordered table-striped" style="text-align: center; " >
-							<thead>
-								<tr>
-									<th style="display: none;"><b>序号</b></th>
-									<th><b>书名</b></th>
-									<th><b>书籍来源地点</b></th>
-									<th><b>作者 / 版本 / 学期</b></th>
-									<th><b>交易方式</b></th>
-									<th><b>价钱</b></th>
-									<th><b>书籍质量 / 上架时间</b></th>
-									<th></th>
-								</tr>
-							</thead>
-							<tbody >
-							<% int i = 0; %>
-								<c:forEach items="${bookVoList}" var="book" varStatus="status" >
-									  <tr <%--  onclick="location.href='<%=path%>/home/toHomePage.action?id=${book.id}';" --%>>
-									    <% i++; %>
-										<td style="display: none;"> <%=i %></td>
-										<td width="13%"><a href="<%=path%>/home/toHomePage.action?id=${book.id}"><b>${book.name}</b></a></td>
-										<td>${book.campus} </td>
-										<td>${book.author} / ${book.edition} / ${book.semester} </td>
-										<td width="15%">${book.transaction} </td>
-										<td><span class="badge badge-info"><b>$ ${book.price}</b></span> / <span class="badge badge-warning">原价：$ ${book.originalPrice}</span></td>
-										<td width="15%"><span class="badge badge-success">${book.conditions}</span> / ${book.createTimeCompare}</td>
-										<td width="5%"><a href="<%=path%>/home/toHomePage.action?id=${book.id}"><span class="badge badge-purple">查看详情</span></a></td>
-									  </tr>
-								</c:forEach>
-								
-							</tbody>
-							<tfoot>
-								<tr>
-									<th style="display: none;">序号</th>
-									<th>书名</th>
-									<th>书籍来源地点</th>
-									<th><b>作者 / 版本 / 学期</b></th>
-									<th><b>交易方式</b></th>
-									<th>价钱</th>
-									<th>书籍质量 / 上架时间</th>
-									<th></th>
-								</tr>
-							</tfoot>
-						  </table>
-						</div>
-					</div>
-					<!-- /.box-body -->
-				  </div>
-				  <!-- /.box -->
-					<!-- /.box-body -->
-				  </div>
-			</div>
 			
 		</section>
 		<!-- /.content -->

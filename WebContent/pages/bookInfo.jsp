@@ -1,4 +1,4 @@
-﻿﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -42,56 +42,11 @@
 	<link rel="stylesheet" href="<%=path%>/main/css/skins/_all-skins.css">
 	
 
-    <!-- Data Table-->
-	<link rel="stylesheet" type="text/css" href="<%=path%>/assets/vendor_components/datatable/datatables.min.css"/>
-	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 9]>
-	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
-
 
      
   </head>
 
 <body class="hold-transition skin-info dark-sidebar light sidebar-mini">
-<!-- loading -->
-		<div class="loader">
-			<div class="text">Loading...</div>
-			<div class="horizontal">
-				<div class="circlesup">
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-				</div>
-				<div class="circlesdwn">
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-				</div>
-			</div>
-			<div class="vertical">
-				<div class="circlesup">
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-				</div>
-				<div class="circlesdwn">
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-				</div>
-			</div>
-		</div>
 <div class="wrapper" >
   <header class="main-header">
     <!-- Logo -->
@@ -150,22 +105,33 @@
 			  <li>
 				<!-- inner menu: contains the actual data -->
 				<ul class="menu sm-scrol">
-			      <c:forEach items="${messageDtos}" var="message" varStatus="status" >
-			      <li>
-					<a href="<%=path%>/message/showOneMessage.action?sendUserId=${message.sendUserId}">
-					  <div class="pull-left">
-						<img src="<%=path%>${message.sendUserImage}" class="rounded-circle" alt="User Image">
-					  </div>
+				  <li><!-- start message -->
+					<a href="#">
+
 					  <div class="mail-contnet">
 						 <h4>
-						  ${message.sendUserName}
-						  <small><i class="fa fa-clock-o"></i> ${message.showTime}</small>
+						  Lorem Ipsum
+						  <small><i class="fa fa-clock-o"></i> 15 mins</small>
 						 </h4>
-						 <span>${message.messInfo}</span>
+						 <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
 					  </div>
 					</a>
 				  </li>
-			      </c:forEach>
+				  <!-- end message -->
+				  <li>
+					<a href="#">
+					  <div class="pull-left">
+						<img src="<%=path%>/images/user3-128x128.jpg" class="rounded-circle" alt="User Image">
+					  </div>
+					  <div class="mail-contnet">
+						 <h4>
+						  Nullam tempor
+						  <small><i class="fa fa-clock-o"></i> 4 hours</small>
+						 </h4>
+						 <span>Curabitur facilisis erat quis metus congue viverra.</span>
+					  </div>
+					</a>
+				  </li>
 				</ul>
 			  </li>
 			  <li class="footer">				  
@@ -176,13 +142,13 @@
 		  <!-- User Account-->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<%=path%>${currentUser.image}" class="user-image rounded-circle" alt="User Image">
+              <img src="<%=path%>/images/avatar/7.jpg" class="user-image rounded-circle" alt="User Image">
             </a>
             <ul class="dropdown-menu animated flipInX">
               <!-- User image -->
-              <li class="user-header bg-img" style="background-image: url(<%=path%>${currentUser.image})" data-overlay="3">
+              <li class="user-header bg-img" style="background-image: url(<%=path%>/images/logo-big.png)" data-overlay="3">
 				  <div class="flexbox align-self-center">					  
-				  	<img src="<%=path%>${currentUser.image}" class="float-left rounded-circle" alt="User Image">					  
+				  	<img src="<%=path%>/images/avatar/7.jpg" class="float-left rounded-circle" alt="User Image">					  
 					<h5 class="user-name align-self-center ">
 					  <span>${currentUser.username} </span> <br />
 					  <small>${currentUser.usercode}</small>
@@ -223,7 +189,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="image">
-          <img src="<%=path%>${currentUser.image}" class="rounded-circle" alt="User Image">
+          <img src="<%=path%>/images/logo-big.png" class="rounded-circle" alt="User Image">
         </div>
         <div class="info">
        	    <a class="dropdown-item" ><i>${currentUser.username}</i></a>
@@ -287,6 +253,7 @@
 
 		<!-- Main content -->
 		<section class="content">
+			
 			<div class="row">
 				<div class="col-xl-4 col-12">
 				    <a href="<%=path%>/home/toHomePage.action">
@@ -326,6 +293,7 @@
 				</div>
 				<!-- /.col -->
 		    </div>					
+			
 			<div class="row">
 				<div class="col-12">
 	

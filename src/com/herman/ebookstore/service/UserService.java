@@ -11,12 +11,12 @@ import com.herman.ebookstore.pojo.User;
 import tk.mybatis.mapper.entity.Condition;
 
 /**
- * 用户表
- *
- * @author herman
- * @email 1146465559@qq.com
- * @date 2019-03-14 14:40:46
- */
+* @ClassName: UserService
+* @Description: TODO()
+* @author 黄金宝
+* @date 2019年3月14日
+*
+*/
 public interface UserService extends Service<User> {
 	
 	/** 

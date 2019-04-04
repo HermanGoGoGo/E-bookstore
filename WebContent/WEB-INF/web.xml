@@ -6,7 +6,9 @@
 	<display-name>E-bookstore</display-name>
 	<!-- springmvc配置 -->
 	<context-param>
+		<!-- 识别contextConfigLocation -->
 		<param-name>contextConfigLocation</param-name>
+		<!-- 加载springmvc配置文件 -->
 		<param-value>classpath:spring/applicationContext*.xml,classpath:spring/mongoDB.xml</param-value>
 	</context-param>
 
@@ -17,18 +19,24 @@
 
 	<!-- 配置前端控制器 -->
 	<servlet>
+	    <!-- 识别springmvc -->
 		<servlet-name>springmvc</servlet-name>
+		<!-- 加载前端控制器DispatcherServlet -->
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<!-- 加载springmvc核心配置文件 -->
 		<init-param>
+		    <!-- 返回参数名称contextConfigLocation -->
 			<param-name>contextConfigLocation</param-name>
+			<!-- 加载springmvc配置文件 -->
 			<param-value>classpath:spring/springmvc.xml</param-value>
 		</init-param>
 	</servlet>
 
 	<!-- 配置前端拦截路径 -->
 	<servlet-mapping>
+	    <!-- 返回服务名称springmvc -->
 		<servlet-name>springmvc</servlet-name>
+		<!-- 拦截请求内容 -->
 		<url-pattern>*.action</url-pattern>
 	</servlet-mapping>
 

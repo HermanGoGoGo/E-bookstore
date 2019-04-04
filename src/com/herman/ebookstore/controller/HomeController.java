@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.herman.ebookstore.model.BookDto;
 import com.herman.ebookstore.model.HomeReq;
+import com.herman.ebookstore.model.MessageDto;
 import com.herman.ebookstore.model.SeachDto;
 import com.herman.ebookstore.model.UserDto;
 import com.herman.ebookstore.pojo.Book;
 import com.herman.ebookstore.pojo.University;
 import com.herman.ebookstore.pojo.User;
 import com.herman.ebookstore.service.BookService;
+import com.herman.ebookstore.service.MessageService;
 import com.herman.ebookstore.service.UniversityService;
 import com.herman.ebookstore.service.UserService;
 
@@ -45,6 +47,9 @@ public class HomeController {
 	@Autowired
 	private UniversityService universityService;
 	
+	@Autowired
+	private MessageService messageService;
+	
 	@RequestMapping("toHomePage")
 	public String toHomepage(String searchByBookName,String queryScope,HttpServletRequest request,Model model) {
 		Object usercode = request.getSession().getAttribute("usercode");
@@ -53,10 +58,15 @@ public class HomeController {
 		List<BookDto> bookList =new ArrayList<BookDto>();
 		UserDto currentUser = new UserDto();
 		HomeReq homeReq =new HomeReq();
+		MessageDto messageDto = new MessageDto();
 		String showLoad = "全部书籍";
 		if(usercode != null && !"".equals(usercode)) {
+			messageDto.setReceiveUserId(usercode.toString());
+			messageDto.setStatus("0");
 			currentUser.setUsercode(usercode.toString());
 			currentUser =this.userService.selectMinuteOne(currentUser);
+			List<MessageDto> messageDtos = this.messageService.findAllMessageByDto(messageDto);
+			model.addAttribute("messageDtos", messageDtos);
 			if("campus".equals(queryScope)) {		
 				showLoad=currentUser.getCampus();
 				seachDto.setCampusId(currentUser.getCampusId());
@@ -73,6 +83,7 @@ public class HomeController {
 			currentUser.setUsername(msg);
 			currentUser.setCampus(msg);
 			currentUser.setUniversity(msg);
+			currentUser.setImage("/images/gallery/thumb/1.jpg");
 		}
 		homeReq = this.bookService.selectBookSum(currentUser);
 		homeReq.setShowLoad(showLoad);

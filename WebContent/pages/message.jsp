@@ -1,4 +1,4 @@
-﻿﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -41,6 +41,8 @@
 	<!-- Ekan Admin skins -->
 	<link rel="stylesheet" href="<%=path%>/main/css/skins/_all-skins.css">
 	
+<%-- 	<link rel="stylesheet" href="<%=path%>/css/spop.min.css" /> --%>
+	
 
     <!-- Data Table-->
 	<link rel="stylesheet" type="text/css" href="<%=path%>/assets/vendor_components/datatable/datatables.min.css"/>
@@ -56,42 +58,6 @@
   </head>
 
 <body class="hold-transition skin-info dark-sidebar light sidebar-mini">
-<!-- loading -->
-		<div class="loader">
-			<div class="text">Loading...</div>
-			<div class="horizontal">
-				<div class="circlesup">
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-				</div>
-				<div class="circlesdwn">
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-				</div>
-			</div>
-			<div class="vertical">
-				<div class="circlesup">
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-				</div>
-				<div class="circlesdwn">
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-				</div>
-			</div>
-		</div>
 <div class="wrapper" >
   <header class="main-header">
     <!-- Logo -->
@@ -266,18 +232,18 @@
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper"  style="display: none;">
+  <div class="content-wrapper" >
 	  <div class="container-full">
 		<!-- Content Header (Page header) -->	  
 		<div class="content-header">
 			<div class="d-flex align-items-center">
 				<div class="mr-auto">
-					<h3 class="page-title">购买书</h3>
+					<h3 class="page-title">信息中心</h3>
 					<div class="d-inline-block align-items-center">
 						<nav>
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="#"><i class="mdi mdi-home-outline"></i></a></li>
-								<li class="breadcrumb-item active" aria-current="page">${homeReq.showLoad}</li>
+								<li class="breadcrumb-item active" aria-current="page">${messageReq.messInfo}</li>
 							</ol>
 						</nav>
 					</div>
@@ -288,106 +254,90 @@
 		<!-- Main content -->
 		<section class="content">
 			<div class="row">
-				<div class="col-xl-4 col-12">
-				    <a href="<%=path%>/home/toHomePage.action">
-					<div class="box box-body">
-					  <h6 class="text-uppercase">全部</h6>
-					  <div class="flexbox mt-2">
-						<span class=" font-size-30">${homeReq.allBookSum}</span>
-						<span class="ion ion-ios-bookmarks-outline text-danger font-size-40"></span>
-					  </div>
-					</div>
-					</a>
+			  <div class="col-xl-9 col-12 m-auto">
+			  <!-- DIRECT CHAT PRIMARY -->
+			  <div class="box direct-chat direct-chat-info">
+				<div class="box-header with-border">
+				  <h4 class="box-title">${messageReq.sendUserName}</h4>
+					<ul class="box-controls pull-right ">
+					  <li><a class="box-btn-close" href="#"></a></li>
+					  <!--<li><a class="box-btn-slide" href="#"></a></li>-->
+					  <!--<li><a class="box-btn-fullscreen" href="#"></a></li>-->
+            <!--<li><a class="" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle"><i class="fa fa-comments"></i></a></li>-->
+					  <!--<li><span data-toggle="tooltip" title="1 New Messages" class="badge badge-pill badge-info">5</span></li>-->
+					</ul>
 				</div>
-				<!-- /.col -->
+				<!-- /.box-header -->
+				<div class="box-body " >
+				  <!-- Conversations are loaded here -->
+				  <div class="direct-chat-messages" >
+					<!-- Message. Default to the left -->
+				    <c:forEach items="${listMessages}" var="messages" varStatus="status" >
+				    <c:if test="${messages.sendUserId != currentUser.usercode}">
+				    <div class="direct-chat-msg mb-30">
+					  <div class="clearfix mb-15">
+					  <span class="direct-chat-name">${messages.sendUserName}</span>	
+					  </div>
+					  <!-- /.direct-chat-info -->
+					  <img class="direct-chat-img avatar" src="<%=path%>${messages.sendUserImage}" alt="message user image">
+					  <!-- /.direct-chat-img -->
+					  <div class="direct-chat-text">
+						<p>${messages.messInfo}</p>
+						<p class="direct-chat-timestamp"><time datetime="2019">${messages.showTime}</time></p>
+					  </div>
 
-				<div class="col-xl-4 col-12">
-				    <a href="<%=path%>/home/toHomePage.action?queryScope=university">
-					<div class="box box-body">
-					  <h6 class="text-uppercase">${currentUser.university}</h6>
-					  <div class="flexbox mt-2">
-						<span class=" font-size-30">${homeReq.universityBookSum}</span>
-						<span class="ion ion-ribbon-a text-info font-size-40"></span>
+					  <!-- /.direct-chat-text -->
+					</div>
+					<!-- /.direct-chat-msg -->
+				    </c:if>
+				    <c:if test="${messages.sendUserId == currentUser.usercode}">
+				    <!-- Message to the right -->
+					<div class="direct-chat-msg right mb-30">
+					  <div class="clearfix mb-15">
+					  <span class="direct-chat-name pull-right">${messages.sendUserName}</span>	
 					  </div>
-					</div>
-					</a>
-				</div>
-				<!-- /.col -->
-				<div class="col-xl-4 col-12">
-				    <a href="<%=path%>/home/toHomePage.action?queryScope=campus">
-					<div class="box box-body">
-					  <h6 class="text-uppercase">${currentUser.campus}</h6>
-					  <div class="flexbox mt-2">
-						<span class=" font-size-30">${homeReq.campusBookSum}</span>
-						<span class="ion ion-university text-primary font-size-40"></span>
+					   <img class="direct-chat-img avatar "  src="<%=path%>${messages.sendUserImage}" alt="message user image">
+					  <div class="direct-chat-text">
+						<p>${messages.messInfo}</p>
+						<p class="direct-chat-timestamp"><time datetime="2018">${messages.showTime}</time></p>
 					  </div>
+					  <!-- /.direct-chat-text -->
 					</div>
-					</a>
+					
+					<!-- /.direct-chat-msg -->
+				    </c:if>
+				    </c:forEach>
+				  </div>
+				  <!--/.direct-chat-messages-->
 				</div>
-				<!-- /.col -->
-		    </div>					
-			<div class="row">
-				<div class="col-12">
-	
-				 <div class="box">
-					<div class="box-header with-border">
-					  <h3 class="box-title">${homeReq.showLoad}</h3>
+				<!-- /.box-body -->
+				<div class="box-footer">
+				  <form action="<%=path%>/message/showOneMessage.action?sendUserId=2201504242" method="get">
+					<div class="input-group">
+	    			<!--   <input type="text" name="receiveUserId" id="receiveUserId"  value="2201504242" class="form-control" style="display: none;">-->
+					  <input type="text" name="sendUserId" id="sendUserId" value="${messageReq.sendUserId}" class="form-control" style="display: none;">
+					  <input type="text" name="message" id="message" placeholder="Type Message ..." class="form-control">
+						  <div class="input-group-addon">
+							<div class="align-self-end gap-items">
+							  <a class="publisher-btn" onclick="sendMessage()"><i class="fa fa-paper-plane"></i></a>
+							  <script type="text/javascript"> 
+							          function sendMessage() {
+										
+							          var sendUserId = $("#sendUserId").val(),
+							          message = $("#message").val();
+							          window.location.href="<%=path%>/message/showOneMessage.action?sendUserId="+sendUserId+"&message=" + message;
+									}
+                              </script> 
+							</div>
+						  </div>
 					</div>
-					<!-- /.box-header -->
-					<div class="box-body">
-						<div class="table-responsive">
-						  <table id="example5" class="table table-bordered table-striped" style="text-align: center; " >
-							<thead>
-								<tr>
-									<th style="display: none;"><b>序号</b></th>
-									<th><b>书名</b></th>
-									<th><b>书籍来源地点</b></th>
-									<th><b>作者 / 版本 / 学期</b></th>
-									<th><b>交易方式</b></th>
-									<th><b>价钱</b></th>
-									<th><b>书籍质量 / 上架时间</b></th>
-									<th></th>
-								</tr>
-							</thead>
-							<tbody >
-							<% int i = 0; %>
-								<c:forEach items="${bookVoList}" var="book" varStatus="status" >
-									  <tr <%--  onclick="location.href='<%=path%>/home/toHomePage.action?id=${book.id}';" --%>>
-									    <% i++; %>
-										<td style="display: none;"> <%=i %></td>
-										<td width="13%"><a href="<%=path%>/home/toHomePage.action?id=${book.id}"><b>${book.name}</b></a></td>
-										<td>${book.campus} </td>
-										<td>${book.author} / ${book.edition} / ${book.semester} </td>
-										<td width="15%">${book.transaction} </td>
-										<td><span class="badge badge-info"><b>$ ${book.price}</b></span> / <span class="badge badge-warning">原价：$ ${book.originalPrice}</span></td>
-										<td width="15%"><span class="badge badge-success">${book.conditions}</span> / ${book.createTimeCompare}</td>
-										<td width="5%"><a href="<%=path%>/home/toHomePage.action?id=${book.id}"><span class="badge badge-purple">查看详情</span></a></td>
-									  </tr>
-								</c:forEach>
-								
-							</tbody>
-							<tfoot>
-								<tr>
-									<th style="display: none;">序号</th>
-									<th>书名</th>
-									<th>书籍来源地点</th>
-									<th><b>作者 / 版本 / 学期</b></th>
-									<th><b>交易方式</b></th>
-									<th>价钱</th>
-									<th>书籍质量 / 上架时间</th>
-									<th></th>
-								</tr>
-							</tfoot>
-						  </table>
-						</div>
-					</div>
-					<!-- /.box-body -->
-				  </div>
-				  <!-- /.box -->
-					<!-- /.box-body -->
-				  </div>
+				  </form>
+				</div>
+				<!-- /.box-footer-->
+			  </div>
+			  <!--/.direct-chat -->
 			</div>
-			
+		    </div>							
 		</section>
 		<!-- /.content -->
 	  </div>
@@ -447,12 +397,6 @@
   	
 	<!-- jQuery 3 -->
 	<script src="<%=path%>/assets/vendor_components/jquery-3.3.1/jquery-3.3.1.js"></script>
-		<script type="text/javascript">
-		window.onload=function(){
-		    $(".loader").fadeOut();
-		    $(".content-wrapper").show();
-		}
-	</script>
 	  
 	
 	<!-- jQuery UI 1.11.4 -->
@@ -494,6 +438,8 @@
 	
 	<!-- Prompting -->
     <script src="<%=path%>/assets/vendor_components/hullabaloo/hullabaloo.js"></script>
+    
+    <%-- <script src="<%=path%>/js/spop.min.js"></script> --%>
     
     <script type="text/javascript">
 			$.hulla = new hullabaloo();

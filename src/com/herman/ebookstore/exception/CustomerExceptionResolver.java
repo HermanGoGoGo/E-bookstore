@@ -65,7 +65,7 @@ public class CustomerExceptionResolver implements HandlerExceptionResolver {
 		ModelAndView mav = new ModelAndView();
 //		mav.addObject("msg", result);
 		mav.setViewName("pages/error_maintenance");
-		new ResponseWriter().writerResponse(ResultCode.INTERNAL_SERVER_ERROR.getCode(),ResultCode.INTERNAL_SERVER_ERROR.getMessage(), response);
+		//new ResponseWriter().writerResponse(ResultCode.INTERNAL_SERVER_ERROR.getCode(),ResultCode.INTERNAL_SERVER_ERROR.getMessage(), response);
 		return mav;
 	}
 
