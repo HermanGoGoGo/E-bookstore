@@ -43,4 +43,43 @@ public interface MessageService extends Service<Message> {
 	 * @author 黄金宝 
 	 */
 	public List<MessageDto> findAllMessageByReAndSe(MessageDto messageDto);
+	
+	/** 
+	 * @Method_Name: findOneMessage 
+	 * @Description: TODO(查询接收人最新信息（三秒内  )
+	 * @Description: * @param message
+	 * @Description: * @return Message
+	 * @date 2019年4月8日
+	 * @author 黄金宝 
+	 */
+	public Integer findOneMessage(Message message);
+	
+	/** 
+	 * @Method_Name: clearStatus 
+	 * @Description: TODO(清理消息)
+	 * @Description: * @param messageDto void
+	 * @date 2019年4月8日
+	 * @author 黄金宝 
+	 */
+	public void clearStatus(MessageDto messageDto);
+	
+	/** 
+	 * @Method_Name: findAllUserInfo 
+	 * @Description: TODO(查询所有用户信息)
+	 * @Description: * @param messageDto
+	 * @Description: * @return List<MessageDto>
+	 * @date 2019年4月8日
+	 * @author 黄金宝 
+	 */
+	public List<MessageDto> findAllUserInfo(MessageDto messageDto);
+	
+	/** 
+	 * @Method_Name: findAllMessageReceiveUserId 
+	 * @Description: TODO(查询所有的信息)
+	 * @Description: * @param messageDto
+	 * @Description: * @return List<MessageDto>
+	 * @date 2019年4月8日
+	 * @author 黄金宝 
+	 */
+	public List<MessageDto> findAllMessageReceiveUserId(MessageDto messageDto);
 }

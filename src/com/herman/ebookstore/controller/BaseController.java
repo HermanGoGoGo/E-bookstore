@@ -1,7 +1,9 @@
 package com.herman.ebookstore.controller;
 
+import java.util.List;
 import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
@@ -12,10 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.alibaba.fastjson.JSON;
 import com.herman.ebookstore.common.model.BaseForSDK;
 import com.herman.ebookstore.common.model.ResultCode;
+import com.herman.ebookstore.mapper.MessageMapper;
 import com.herman.ebookstore.model.MessageDto;
+import com.herman.ebookstore.pojo.Message;
 import com.herman.ebookstore.pojo.Sdk;
 import com.herman.ebookstore.pojo.User;
 import com.herman.ebookstore.sdk.impl.JsonReqClient;
+import com.herman.ebookstore.service.MessageService;
 import com.herman.ebookstore.service.SdkService;
 import com.herman.ebookstore.service.UserService;
 import com.herman.ebookstore.util.ResponseWriter;
@@ -47,6 +52,8 @@ public class BaseController extends BaseForSDK {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private MessageService messageService;
 	@RequestMapping("getVerificationCode")
 	public void getVerificationCode(String phonenumber, String usercode, HttpServletResponse response) {
 		User user =new User();
@@ -74,7 +81,25 @@ public class BaseController extends BaseForSDK {
 		}
 	}
 	
-	public void getUserMessage(MessageDto messageDto ,HttpServletResponse response) {
-		
+	@RequestMapping("getUserMessage")
+	public void getUserMessage(HttpServletResponse response,HttpServletRequest request) {
+		Object usercode = request.getSession().getAttribute("usercode");
+		Message message = new Message();
+		MessageDto messageDto =new MessageDto();
+		int index =-1;
+		if(usercode != null && !"".equals(usercode)) {
+			message.setReceiveUserId(usercode.toString());
+			index = this.messageService.findOneMessage(message);
+			if(index == 1) {
+				messageDto.setReceiveUserId(usercode.toString());
+				messageDto.setStatus("0");
+				List<MessageDto> messageDtos = this.messageService.findAllMessageByDto(messageDto);
+				new ResponseWriter().writerResponseObject(true, messageDtos, response);
+			}else {
+				new ResponseWriter().writerResponse(false, response);
+			}
+		}else {
+			new ResponseWriter().writerResponse(false, response);
+		}
 	}
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.jdbc.SQL;
 
 import com.herman.ebookstore.common.core.Mapper;
@@ -41,6 +42,47 @@ public interface MessageMapper extends Mapper<Message> {
 	 */
 	@SelectProvider(type = messageSqlBuilder.class, method = "findAllMessageByReAndSe")	
 	public List<MessageDto> findAllMessageByReAndSe(MessageDto messageDto);
+	
+	/** 
+	 * @Method_Name: findOneMessage 
+	 * @Description: TODO(查询接收人最新信息)
+	 * @Description: * @param message
+	 * @Description: * @return Message
+	 * @date 2019年4月8日
+	 * @author 黄金宝 
+	 */
+	@Select("select * from HSTB_MESSAGE where id=(select MAX(id) from HSTB_MESSAGE where receive_user_id=#{receiveUserId} and status='0')")
+	public Message findOneMessage(Message message);
+		
+	/** 
+	 * @Method_Name: clearStatus 
+	 * @Description: TODO(清理消息)
+	 * @Description: * @param messageDto void
+	 * @date 2019年4月8日
+	 * @author 黄金宝 
+	 */
+	@SelectProvider(type = messageSqlBuilder.class, method = "clearStatus")	
+	public void clearStatus(MessageDto messageDto);
+	
+	/** 
+	 * @Method_Name: findAllUserInfo 
+	 * @Description: TODO(查询所有用户信息)
+	 * @Description: * @param messageDto
+	 * @Description: * @return List<MessageDto>
+	 * @date 2019年4月8日
+	 * @author 黄金宝 
+	 */
+	@SelectProvider(type = messageSqlBuilder.class, method = "findAllUserInfo")	
+	public List<MessageDto> findAllUserInfo(MessageDto messageDto);
+	
+	@Select("SELECT m.*," + 
+			"       u.username AS sendUserName," + 
+			"       u.image AS sendUserImage" + 
+			" FROM HSTB_MESSAGE m  LEFT JOIN MSTB_USER u ON u.usercode = m.send_user_id " + 
+			" WHERE receive_user_id = #{receiveUserId} "+ 
+			" ORDER BY m.create_time  desc, m.id desc ")
+	public List<MessageDto> findAllMessageReceiveUserId(MessageDto messageDto);
+	
 	class messageSqlBuilder {
 		public String findAllMessageByDto(MessageDto messageDto) {
 			return new SQL() {
@@ -75,9 +117,41 @@ public interface MessageMapper extends Mapper<Message> {
 					if(null != messageDto.getStatus()) {
 						WHERE("m.status= #{status}");
 					}
-					ORDER_BY("m.create_time , m.id ");
+					ORDER_BY("m.create_time desc, m.id desc");
 				}			
 				
+			}.toString();
+		}
+		
+		public String clearStatus(MessageDto messageDto) {
+			return new SQL() {
+				{
+					UPDATE("HSTB_MESSAGE ");
+					SET("`status` = '1'");
+					if(null != messageDto.getReceiveUserId()) {
+					    WHERE("receive_user_id =#{receiveUserId}");
+					}
+					if(null != messageDto.getSendUserId()) {
+						WHERE("send_user_id = #{sendUserId}");
+					}
+				}
+			}.toString();
+		}
+		
+		public String findAllUserInfo(MessageDto messageDto) {
+			return new SQL() {
+				{
+					SELECT("m.*,u.username as sendUserName,u.image as sendUserImage");
+					FROM("HSTB_MESSAGE m");
+					LEFT_OUTER_JOIN("MSTB_USER u ON u.usercode=m.send_user_id");
+					if(null != messageDto.getReceiveUserId()) {
+					    WHERE("m.id IN (SELECT MAX(id) " + 
+					    		"             FROM HSTB_MESSAGE " + 
+					    		"             WHERE receive_user_id = #{receiveUserId} " + 
+					    		"             GROUP BY send_user_id) ");
+					}
+					GROUP_BY(" m.id DESC ");
+				}
 			}.toString();
 		}
 	}

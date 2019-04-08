@@ -117,7 +117,7 @@
 		  <a id="toggle_res_search" data-toggle="collapse" data-target="#search_form" class="res-only-view" href="javascript:void(0);"><i class="mdi mdi-magnify"></i></a>
 		  <form id="search_form" role="search" class="top-nav-search pull-left collapse ml-20">
 				<div class="input-group">
-					<input type="text" name="searchByBookName" class="form-control" placeholder="Search">
+					<input type="text" name="searchByBookName" class="form-control" placeholder="请输入书名">
 						<span class="input-group-btn">
 							<button type="button" class="btn  btn-default" data-target="#search_form" data-toggle="collapse" aria-label="Close" aria-expanded="true" ><i class="mdi mdi-magnify"></i></button>
 						</span>
@@ -149,7 +149,7 @@
 			  </li>
 			  <li>
 				<!-- inner menu: contains the actual data -->
-				<ul class="menu sm-scrol">
+				<ul class="menu sm-scrol" id="menuForAllMessages">
 			      <c:forEach items="${messageDtos}" var="message" varStatus="status" >
 			      <li>
 					<a href="<%=path%>/message/showOneMessage.action?sendUserId=${message.sendUserId}">
@@ -169,7 +169,46 @@
 				</ul>
 			  </li>
 			  <li class="footer">				  
-				  <a href="#" class="bg-light">查看所有的信息</a>
+				  <a class="bg-light" href="<%=path%>/message/showOneMessage.action">查看所有的信息</a>
+				  <script type="text/javascript">
+				  function findAllUserMessage(){
+				        $.ajax({
+							type: "post",
+							url: "<%=path%>/message/findAllUserMessage.action",
+							data: {
+							},
+							dataType: 'json',
+							success: function(data) {
+								console.log(data);
+				            	if(data.status == '200'){
+				            		$("#menuForAllMessages li").remove();
+				            		//$.hulla.send("您有最新消息请查看收件箱", "success");
+				            		var str = "";
+				                    for(var i=0;i<data.obj.length;i++){
+				                        str += "<li>" +
+				                                "<a href='<%=path%>/message/showOneMessage.action?sendUserId=" + data.obj[i].sendUserId + " '>" +
+				                                "<div class=\"pull-left\">" +
+				                                "<img src=\"<%=path%>"+data.obj[i].sendUserImage +"\" class=\"rounded-circle\" alt=\"User Image\">" +
+				                                "</div>" +
+				                                "<div class=\"mail-contnet\">" +
+				                                "<h4> " +data.obj[i].sendUserName +
+				                                "<small><i class=\"fa fa-clock-o\"></i> "+data.obj[i].showTime +"</small>"+
+				                                "</h4>" +
+				                                " <span>"+data.obj[i].messInfo+"</span> " +
+				                                "</div>" +
+				                                "</a>" +
+				                                "</li>";
+				            	}
+				                $("#menuForAllMessages").append(str);
+				                console.log(str);
+				            	}
+							},
+							error: function() {
+								console.log("error");
+							}
+						}); 
+				    }
+				  </script>
 			  </li>
 			</ul>
 		  </li>
@@ -497,34 +536,47 @@
     
     <script type="text/javascript">
 			$.hulla = new hullabaloo();
-			var usercode = '${currentUser.usercode}';
-			setTimeout(function() {
-				$.hulla.send(usercode+"Hi！这里是jQuery之家！", "success");
-			}, 1000);
-			function checkTime(){			
-		        var nowtime=Date.parse(new Date());
-		        $(".username").html("详细地址不能为空");
-		        console.log(nowtime);	
-		        <%-- $.ajax( {
+			//var usercode = '${currentUser.usercode}';
 
-		           // "dataType" : 'json',
-
-		            "type" : "POST",
-
-		            "url" : "<%=path%>/toHomepage.action",
-
-		            "data" : { "searchByBookName" : "123" },
-
-		            "success" : function(  ) {           
-
-		            	$("#username").value== "详细地址不能为空";
-		            	console.log("new");
-		            }
-
-		         } ); --%>
+			function checkTime(){
+		        $.ajax({
+					type: "post",
+					url: "<%=path%>/base/getUserMessage.action",
+					data: {
+					},
+					dataType: 'json',
+					success: function(data) {
+						console.log(data);
+		            	if(data.status == '200'){
+		            		$("#menuForAllMessages li").remove();
+		            		$.hulla.send("您有最新消息请查看收件箱", "success");
+		            		var str = "";
+		                    for(var i=0;i<data.obj.length;i++){
+		                        str += "<li>" +
+		                                "<a href='<%=path%>/message/showOneMessage.action?sendUserId=" + data.obj[i].sendUserId + " '>" +
+		                                "<div class=\"pull-left\">" +
+		                                "<img src=\"<%=path%>"+data.obj[i].sendUserImage +"\" class=\"rounded-circle\" alt=\"User Image\">" +
+		                                "</div>" +
+		                                "<div class=\"mail-contnet\">" +
+		                                "<h4> " +data.obj[i].sendUserName +
+		                                "<small><i class=\"fa fa-clock-o\"></i> "+data.obj[i].showTime +"</small>"+
+		                                "</h4>" +
+		                                " <span>"+data.obj[i].messInfo+"</span> " +
+		                                "</div>" +
+		                                "</a>" +
+		                                "</li>";
+		            	}
+		                $("#menuForAllMessages").append(str);
+		                console.log(str);
+		            	}
+					},
+					error: function() {
+						console.log("error");
+					}
+				}); 
 		    }
 		
-		    //setInterval("checkTime()","5000");
+		    setInterval("checkTime()","3000"); 
 
 	</script>
 </body>

@@ -1,6 +1,7 @@
 package com.herman.ebookstore.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -68,6 +69,52 @@ public class MessageServiceImpl extends AbstractService<Message> implements Mess
 			messageDtos1.add(messageDto2);
 		}
 		return messageDtos1;
+	}
+
+	@Override
+	public Integer findOneMessage(Message message) {
+		try {
+		    message = this.messageMapper.findOneMessage(message);
+		    if(message !=null) {	    	
+		    	long delta = new Date().getTime() - message.getCreateTime().getTime();
+		    	if(delta < 4000L) {
+		    		return 1;
+		    	}
+		    }
+		} catch (Exception e) {
+			// TODO: handle exception
+			return 0;
+		}
+		return 0;
+	}
+
+	@Override
+	public void clearStatus(MessageDto messageDto) {
+		// TODO Auto-generated method stub
+		this.messageMapper.clearStatus( messageDto);
+	}
+
+	@Override
+	public List<MessageDto> findAllUserInfo(MessageDto messageDto) {
+		List<MessageDto> messageDtos =this.messageMapper.findAllUserInfo(messageDto);
+		List<MessageDto> messageDtos1 = new ArrayList<MessageDto>();
+		for (MessageDto messageDto2 : messageDtos) {
+			messageDto2.setShowTime(RelativeDateFormat.format(messageDto2.getCreateTime()));
+			if(messageDto2.getStatus().equals("0")) {
+				messageDto2.setStatus("未读");
+			}else {
+				messageDto2.setStatus("已读");
+			}
+			messageDtos1.add(messageDto2);
+		}
+		return messageDtos1;
+		
+	}
+
+	@Override
+	public List<MessageDto> findAllMessageReceiveUserId(MessageDto messageDto) {
+		// TODO Auto-generated method stub
+		return this.messageMapper.findAllMessageReceiveUserId(messageDto);
 	}
 	
 	

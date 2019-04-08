@@ -77,13 +77,13 @@
     <nav class="navbar navbar-static-top">
       <!-- Sidebar toggle button-->
 	  <div>
-		  <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+		  <a href="<%=path%>/message/showOneMessage.action" class="sidebar-toggle" data-toggle="push-menu" role="button">
 			<i class="ti-align-left"></i>
 		  </a>
 		  <a id="toggle_res_search" data-toggle="collapse" data-target="#search_form" class="res-only-view" href="javascript:void(0);"><i class="mdi mdi-magnify"></i></a>
 		  <form id="search_form" role="search" class="top-nav-search pull-left collapse ml-20">
 				<div class="input-group">
-					<input type="text" name="searchByBookName" class="form-control" placeholder="Search">
+					<input type="text" name="sendUserId" class="form-control" placeholder="输入一卡通号">
 						<span class="input-group-btn">
 							<button type="button" class="btn  btn-default" data-target="#search_form" data-toggle="collapse" aria-label="Close" aria-expanded="true" ><i class="mdi mdi-magnify"></i></button>
 						</span>
@@ -115,7 +115,7 @@
 			  </li>
 			  <li>
 				<!-- inner menu: contains the actual data -->
-				<ul class="menu sm-scrol">
+				<ul class="menu sm-scrol" id="menuForAllMessages">
 			      <c:forEach items="${messageDtos}" var="message" varStatus="status" >
 			      <li>
 					<a href="<%=path%>/message/showOneMessage.action?sendUserId=${message.sendUserId}">
@@ -254,13 +254,40 @@
 		<!-- Main content -->
 		<section class="content">
 			<div class="row">
-			  <div class="col-xl-9 col-12 m-auto">
+			  <div class="col-lg-4 col-md-8">
+					<div class="box">
+					  <div class="media-list media-list-divided media-list-hover">
+					  <c:forEach items="${listOfAllUser}" var="userMessage" varStatus="status" >
+					  	<div class="media align-items-center">
+						  <a class="avatar avatar-lg status-success" href="<%=path%>/message/showOneMessage.action?sendUserId=${userMessage.sendUserId}">
+							<img src="<%=path%>${userMessage.sendUserImage}" >
+						  </a>
+
+						  <div class="media-body">
+							<p>
+							  <a href="<%=path%>/message/showOneMessage.action?sendUserId=${userMessage.sendUserId}"><strong>${userMessage.sendUserName}</strong></a>
+							  <small class="sidetitle">${userMessage.showTime}</small>
+							</p>
+							<p style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">${userMessage.messInfo}</p>
+							<small class="badge badge-success">最新消息${userMessage.status}</small>
+						  </div>
+
+						  <div class="media-right gap-items">
+							<a class="media-action lead" href="#" data-toggle="tooltip" title=""><i class="ti-shopping-cart"></i></a>
+							<a class="media-action lead" href="#" data-toggle="tooltip" title="Receipts"><i class="ti-receipt"></i></a>
+						  </div>
+						</div>
+					  </c:forEach>
+					  </div>
+					</div>
+			  </div>
+			  <div class="col-xl-8 col-12">
 			  <!-- DIRECT CHAT PRIMARY -->
 			  <div class="box direct-chat direct-chat-info">
 				<div class="box-header with-border">
 				  <h4 class="box-title">${messageReq.sendUserName}</h4>
 					<ul class="box-controls pull-right ">
-					  <li><a class="box-btn-close" href="#"></a></li>
+					  <li><a class="box-btn-close" href="<%=path%>/home/toHomePage.action"></a></li>
 					  <!--<li><a class="box-btn-slide" href="#"></a></li>-->
 					  <!--<li><a class="box-btn-fullscreen" href="#"></a></li>-->
             <!--<li><a class="" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle"><i class="fa fa-comments"></i></a></li>-->
@@ -282,8 +309,8 @@
 					  <img class="direct-chat-img avatar" src="<%=path%>${messages.sendUserImage}" alt="message user image">
 					  <!-- /.direct-chat-img -->
 					  <div class="direct-chat-text">
-						<p>${messages.messInfo}</p>
-						<p class="direct-chat-timestamp"><time datetime="2019">${messages.showTime}</time></p>
+						<p>${messages.messInfo} </p>
+						<p class="direct-chat-timestamp"><time datetime="2019">${messages.showTime} / ${messages.createTime}</time></p>
 					  </div>
 
 					  <!-- /.direct-chat-text -->
@@ -299,7 +326,7 @@
 					   <img class="direct-chat-img avatar "  src="<%=path%>${messages.sendUserImage}" alt="message user image">
 					  <div class="direct-chat-text">
 						<p>${messages.messInfo}</p>
-						<p class="direct-chat-timestamp"><time datetime="2018">${messages.showTime}</time></p>
+						<p class="direct-chat-timestamp"><time datetime="2019">${messages.showTime} / ${messages.createTime}</time></p>
 					  </div>
 					  <!-- /.direct-chat-text -->
 					</div>
@@ -312,7 +339,7 @@
 				</div>
 				<!-- /.box-body -->
 				<div class="box-footer">
-				  <form action="<%=path%>/message/showOneMessage.action?sendUserId=2201504242" method="get">
+				  <form action="<%=path%>/message/showOneMessage.action" method="get">
 					<div class="input-group">
 	    			<!--   <input type="text" name="receiveUserId" id="receiveUserId"  value="2201504242" class="form-control" style="display: none;">-->
 					  <input type="text" name="sendUserId" id="sendUserId" value="${messageReq.sendUserId}" class="form-control" style="display: none;">
@@ -324,9 +351,9 @@
 							          function sendMessage() {
 										
 							          var sendUserId = $("#sendUserId").val(),
-							          message = $("#message").val();
+							          message = $("#message").val();							          
 							          window.location.href="<%=path%>/message/showOneMessage.action?sendUserId="+sendUserId+"&message=" + message;
-									}
+							          }
                               </script> 
 							</div>
 						  </div>
@@ -442,35 +469,50 @@
     <%-- <script src="<%=path%>/js/spop.min.js"></script> --%>
     
     <script type="text/javascript">
-			$.hulla = new hullabaloo();
-			var usercode = '${currentUser.usercode}';
-			setTimeout(function() {
-				$.hulla.send(usercode+"Hi！这里是jQuery之家！", "success");
-			}, 1000);
-			function checkTime(){			
-		        var nowtime=Date.parse(new Date());
-		        $(".username").html("详细地址不能为空");
-		        console.log(nowtime);	
-		        <%-- $.ajax( {
+    $.hulla = new hullabaloo();
+	//var usercode = '${currentUser.usercode}';
 
-		           // "dataType" : 'json',
+	function checkTime(){
+        $.ajax({
+			type: "post",
+			url: "<%=path%>/base/getUserMessage.action",
+			data: {
+			},
+			dataType: 'json',
+			success: function(data) {
+				console.log(data);
+          	    if(data.status == '200'){
+                <%--  $("#menuForAllMessages li").remove();
+            		$.hulla.send("您有最新消息请查看", "success");
+            		var str = "";
+                    for(var i=0;i<data.obj.length;i++){
+                        str += "<li>" +
+                                "<a href='<%=path%>/message/showOneMessage.action?sendUserId=" + data.obj[i].sendUserId + " '>" +
+                                "<div class=\"pull-left\">" +
+                                "<img src=\"<%=path%>"+data.obj[i].sendUserImage +"\" class=\"rounded-circle\" alt=\"User Image\">" +
+                                "</div>" +
+                                "<div class=\"mail-contnet\">" +
+                                "<h4> " +data.obj[i].sendUserName +
+                                "<small><i class=\"fa fa-clock-o\"></i> "+data.obj[i].showTime +"</small>"+
+                                "</h4>" +
+                                " <span>"+data.obj[i].messInfo+"</span> " +
+                                "</div>" +
+                                "</a>" +
+                                "</li>";
+                                } 
+                console.log(str); --%>
+                var sendUserId = $("#sendUserId").val();
+                window.location.href = "<%=path%>/message/showOneMessage.action?sendUserId=" + sendUserId;
+                $.hulla.send("您有最新消息请查看收件箱", "success");
+            	}
+			},
+			error: function() {
+				console.log("error");
+			}
+		}); 
+    }
 
-		            "type" : "POST",
-
-		            "url" : "<%=path%>/toHomepage.action",
-
-		            "data" : { "searchByBookName" : "123" },
-
-		            "success" : function(  ) {           
-
-		            	$("#username").value== "详细地址不能为空";
-		            	console.log("new");
-		            }
-
-		         } ); --%>
-		    }
-		
-		    //setInterval("checkTime()","5000");
+    setInterval("checkTime()","3000"); 
 
 	</script>
 </body>

@@ -33,7 +33,7 @@ public class SdkServiceImpl extends AbstractService<Sdk> implements SdkService {
 		sdk = this.sdkMapper.selectOneSDKInfo(sdk);
 		long delta = new Date().getTime() - sdk.getCreateTime().getTime();
 		if(delta > 900000L) {
-			System.out.println(delta);
+			//System.out.println(delta);
 			sdk.setCode("400");
 		}
 		return sdk;

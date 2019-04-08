@@ -204,11 +204,4 @@ public class TestController {
 		
 	}
 	
-	@RequestMapping("/test8")
-	public void test8(String message,HttpServletResponse response) {
-		new ResponseWriter().writerResponse(true,response);
-		System.out.println(message);
-		
-		
-	}
 }

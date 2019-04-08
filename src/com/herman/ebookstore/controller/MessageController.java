@@ -46,9 +46,13 @@ public class MessageController {
 		MessageDto messageDto = new MessageDto();
 		List<MessageDto> listMessages = new ArrayList<MessageDto>();
 		if(usercode != null && !"".equals(usercode)) {
+			messageDto.setReceiveUserId(usercode.toString());
+			List<MessageDto> listOfAllUser=this.messageService.findAllUserInfo(messageDto);
+			model.addAttribute("listOfAllUser", listOfAllUser);
 			if(StringUtils.isEmpty(sendUserId)) {
-				return "redirect:/home/toHomePage.action";
-			}else {
+				//return "redirect:/home/toHomePage.action";
+				listMessages = this.messageService.findAllMessageReceiveUserId(messageDto);
+			}else {			
 				sendUser.setUsercode(sendUserId);
 				sendUser = this.userService.selectOne(sendUser);
 				if(StringUtils.isNotEmpty(message)) {
@@ -58,10 +62,11 @@ public class MessageController {
 					messageDto1.setMessInfo(message);
 					this.messageService.save(messageDto1);
 					//new ResponseWriter().writerResponse(true, response);
+					return "redirect:/message/showOneMessage.action?sendUserId="+ sendUserId;
 				}
-				messageDto.setReceiveUserId(usercode.toString());
 				messageDto.setSendUserId(sendUserId);
 				listMessages= this.messageService.findAllMessageByReAndSe(messageDto);
+				this.messageService.clearStatus(messageDto);			
 			}
 			messageDto=new MessageDto();
 			messageDto.setReceiveUserId(usercode.toString());
@@ -70,14 +75,35 @@ public class MessageController {
 			currentUser =this.userService.selectMinuteOne(currentUser);
 			List<MessageDto> messageDtos = this.messageService.findAllMessageByDto(messageDto);
 			model.addAttribute("messageDtos", messageDtos);
+		}else {
+			return "redirect:/home/toHomePage.action";
 		}
-		messageDto.setSendUserId(sendUserId);
-		messageDto.setMessInfo("个人信息");
-		messageDto.setReceiveUserId(usercode.toString());
-		messageDto.setSendUserName(sendUser.getUsername());
+
+		if(StringUtils.isEmpty(sendUser.getId())) {
+			messageDto.setMessInfo("个人信息");
+			messageDto.setSendUserName("全部信息");
+		}else {
+			messageDto.setSendUserId(sendUserId);
+			messageDto.setMessInfo("个人信息");
+			messageDto.setReceiveUserId(usercode.toString());
+			messageDto.setSendUserName(sendUser.getUsername());
+		}
 		model.addAttribute("messageReq", messageDto);
 		model.addAttribute("currentUser", currentUser);
 		model.addAttribute("listMessages", listMessages);
 		return "pages/message";
+	}
+	
+	@RequestMapping("findAllUserMessage")
+	public void findAllUserMessage(HttpServletRequest request,HttpServletResponse response) {
+		Object usercode = request.getSession().getAttribute("usercode");
+		MessageDto messageDto = new MessageDto();
+		if(usercode != null && !"".equals(usercode)) {
+			messageDto.setReceiveUserId(usercode.toString());
+			List<MessageDto> listMessages = this.messageService.findAllUserInfo(messageDto);
+			new ResponseWriter().writerResponseObject(true, listMessages, response);
+		}else {
+			new ResponseWriter().writerResponse(false,response);
+		}
 	}
 }
