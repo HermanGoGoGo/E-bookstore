@@ -101,10 +101,10 @@ public class MessageServiceImpl extends AbstractService<Message> implements Mess
 		List<MessageDto> messageDtos1 = new ArrayList<MessageDto>();
 		for (MessageDto messageDto2 : messageDtos) {
 			messageDto2.setShowTime(RelativeDateFormat.format(messageDto2.getCreateTime()));
-			if(messageDto2.getStatus().equals("0")) {
-				messageDto2.setStatus("未读");
+			if(messageDto2.getStatus().equals("0") && !messageDto2.getSendUserId().equals(messageDto.getReceiveUserId())) {
+				messageDto2.setStatus("有最新消息未读");
 			}else {
-				messageDto2.setStatus("已读");
+				messageDto2.setStatus("");
 			}
 			messageDtos1.add(messageDto2);
 		}

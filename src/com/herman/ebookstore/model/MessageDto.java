@@ -33,6 +33,9 @@ public class MessageDto   {
 
   @JsonProperty("sendUserImage")
   private String sendUserImage = null;
+  
+  @JsonProperty("chatUser")
+  private String chatUser = null;
 
   @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
   @JsonProperty("createTime")
@@ -124,25 +127,45 @@ public class MessageDto   {
     this.sendUserName = sendUserName;
   }
 
-  public MessageDto sendUserImage(String sendUserImage) {
-    this.sendUserImage = sendUserImage;
+  public MessageDto chatUser(String chatUser) {
+    this.chatUser = chatUser;
     return this;
   }
 
   /**
-   * 发送人照片
-   * @return sendUserImage
+   * 聊天用户
+   * @return chatUser
   **/
-  @ApiModelProperty(value = "发送人照片")
+  @ApiModelProperty(value = "聊天用户")
 
 
-  public String getSendUserImage() {
-    return sendUserImage;
+  public String getChatUser() {
+    return chatUser;
   }
 
-  public void setSendUserImage(String sendUserImage) {
-    this.sendUserImage = sendUserImage;
+  public void setChatUser(String chatUser) {
+    this.chatUser = chatUser;
   }
+  
+  public MessageDto sendUserImage(String sendUserImage) {
+	    this.sendUserImage = sendUserImage;
+	    return this;
+	  }
+
+	  /**
+	   * 发送人照片
+	   * @return sendUserImage
+	  **/
+	  @ApiModelProperty(value = "发送人照片")
+
+
+	  public String getSendUserImage() {
+	    return sendUserImage;
+	  }
+
+	  public void setSendUserImage(String sendUserImage) {
+	    this.sendUserImage = sendUserImage;
+	  }
 
   public MessageDto createTime(Date createTime) {
     this.createTime = createTime;
@@ -220,6 +243,7 @@ public class MessageDto   {
         Objects.equals(this.sendUserId, messageDto.sendUserId) &&
         Objects.equals(this.sendUserName, messageDto.sendUserName) &&
         Objects.equals(this.sendUserImage, messageDto.sendUserImage) &&
+        Objects.equals(this.chatUser, messageDto.chatUser) &&
         Objects.equals(this.createTime, messageDto.createTime) &&
         Objects.equals(this.showTime, messageDto.showTime) &&
         Objects.equals(this.status, messageDto.status);
@@ -227,7 +251,7 @@ public class MessageDto   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(messInfo, receiveUserId, sendUserId, sendUserName, sendUserImage, createTime, showTime, status);
+    return Objects.hash(messInfo, receiveUserId, sendUserId, sendUserName, sendUserImage, chatUser, createTime, showTime, status);
   }
 
   @Override
@@ -240,6 +264,7 @@ public class MessageDto   {
     sb.append("    sendUserId: ").append(toIndentedString(sendUserId)).append("\n");
     sb.append("    sendUserName: ").append(toIndentedString(sendUserName)).append("\n");
     sb.append("    sendUserImage: ").append(toIndentedString(sendUserImage)).append("\n");
+    sb.append("    chatUser: ").append(toIndentedString(chatUser)).append("\n");
     sb.append("    createTime: ").append(toIndentedString(createTime)).append("\n");
     sb.append("    showTime: ").append(toIndentedString(showTime)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");

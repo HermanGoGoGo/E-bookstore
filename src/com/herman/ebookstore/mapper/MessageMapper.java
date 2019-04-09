@@ -72,7 +72,32 @@ public interface MessageMapper extends Mapper<Message> {
 	 * @date 2019年4月8日
 	 * @author 黄金宝 
 	 */
-	@SelectProvider(type = messageSqlBuilder.class, method = "findAllUserInfo")	
+	@Select("SELECT t.*, " + 
+			"       u.username AS sendUserName, " + 
+			"       u.image AS sendUserImage " + 
+			"FROM (SELECT t.*, " + 
+			"             CASE " + 
+			"               WHEN t.send_user_id = #{receiveUserId} THEN t.receive_user_id " + 
+			"               WHEN t.receive_user_id = #{receiveUserId} THEN t.send_user_id " + 
+			"             END AS chatUser " + 
+			"      FROM (SELECT m.* " + 
+			"            FROM HSTB_MESSAGE m " + 
+			"            WHERE (m.id IN (SELECT MAX(id) " + 
+			"                            FROM HSTB_MESSAGE " + 
+			"                            WHERE (receive_user_id = #{receiveUserId} OR send_user_id = #{receiveUserId}) " + 
+			"                            GROUP BY receive_user_id, " + 
+			"                                     send_user_id))) t " + 
+			"      WHERE t.receive_user_id NOT IN ((SELECT t.* " + 
+			"                                       FROM (SELECT MAX(receive_user_id) AS receive_user_id " + 
+			"                                             FROM HSTB_MESSAGE " + 
+			"                                             WHERE (send_user_id = #{receiveUserId}) " + 
+			"                                             GROUP BY receive_user_id) t " + 
+			"                                       WHERE t.receive_user_id IN (SELECT MAX(send_user_id) AS send_user_id " + 
+			"                                                                   FROM HSTB_MESSAGE " + 
+			"                                                                   WHERE (receive_user_id = #{receiveUserId}) " + 
+			"                                                                   GROUP BY send_user_id)))) t " + 
+			"  LEFT OUTER JOIN MSTB_USER u ON u.usercode = t.chatUser " + 
+			"  GROUP BY t.id DESC")
 	public List<MessageDto> findAllUserInfo(MessageDto messageDto);
 	
 	@Select("SELECT m.*," + 

@@ -22,7 +22,7 @@
     <meta name="author" content="">
     <link rel="icon" href="<%=path%>/images/favicon.ico">
 
-    <title>e书网 - 首页</title>
+    <title>e书网 - 消息中心</title>
     
 	<!-- Bootstrap 4.0-->
 	<link rel="stylesheet" href="<%=path%>/assets/vendor_components/bootstrap/dist/css/bootstrap.css">
@@ -248,7 +248,7 @@
 		<div class="content-header">
 			<div class="d-flex align-items-center">
 				<div class="mr-auto">
-					<h3 class="page-title">信息中心</h3>
+					<h3 class="page-title">消息中心</h3>
 					<div class="d-inline-block align-items-center">
 						<nav>
 							<ol class="breadcrumb">
@@ -267,25 +267,28 @@
 			  	<div class="col-md-4 col-12">
 				<div class="box">
 				  <div class="box-header with-border">
-					<h4 class="box-title">Scrollable</h4>
+					<h4 class="box-title">通讯录</h4>
 				  </div>
 
 				  <div class="box-body">
-					<div class="inner-content-div">
+					<div class="inner-content-div" id="inner-content-div">
 					  <div class="media-list media-list-divided media-list-hover">
 					  <c:forEach items="${listOfAllUser}" var="userMessage" varStatus="status" >
 					  	<div class="media align-items-center">
-						  <a class="avatar avatar-lg status-success" href="<%=path%>/message/showOneMessage.action?sendUserId=${userMessage.sendUserId}">
+						  <a class="avatar avatar-lg status-success" href="<%=path%>/message/showOneMessage.action?sendUserId=${userMessage.chatUser}">
 							<img src="<%=path%>${userMessage.sendUserImage}" >
 						  </a>
 
 						  <div class="media-body">
 							<p>
 							  <a href="<%=path%>/message/showOneMessage.action?sendUserId=${userMessage.sendUserId}"><strong>${userMessage.sendUserName}</strong></a>
-							  <small class="sidetitle">${userMessage.showTime}</small>
+							  <small class="sidetitle">${userMessage.chatUser}</small>
+							  
 							</p>
-							<p style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">${userMessage.messInfo}</p>
-							<small class="badge badge-success">最新消息${userMessage.status}</small>
+							<p style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">${userMessage.messInfo}
+							<small class="sidetitle">${userMessage.showTime}</small>
+							</p>
+							<small class="badge badge-success">${userMessage.status}</small>
 						  </div>
 
 						  <div class="media-right gap-items">
@@ -515,6 +518,14 @@
     <%-- <script src="<%=path%>/js/spop.min.js"></script> --%>
     
     <script type="text/javascript">
+/*     window.onload=function(){
+    	//div.scrollTop = div.scrollHeight;
+    	$('.slimScrollBar').css("top","100%");
+    	$('#inner-content-div').scrollTop( $('#inner-content-div')[0].scrollHeight );
+    	//console.log(scrollTop1);
+    	//$('.slimScrollBar').Top(100 );
+    	//$('.box-body').scrollTop='100px';
+	} */
     $.hulla = new hullabaloo();
 	//var usercode = '${currentUser.usercode}';
 

@@ -66,9 +66,9 @@ public class MessageController {
 			if(StringUtils.isEmpty(sendUserId)) {
 				//return "redirect:/home/toHomePage.action";
 				//设置标题
-				messageDto.setMessInfo("个人信息");
+				messageDto.setMessInfo("个人消息");
 				//设置内容
-				messageDto.setSendUserName("全部信息");
+				messageDto.setSendUserName("全部消息");
 				listMessages = this.messageService.findAllMessageReceiveUserId(messageDto);
 			}else {
 				//查询发送用户是否存在
@@ -99,7 +99,7 @@ public class MessageController {
 						sendUser.setUsercode(sendUserId);
 						sendUser = this.userService.selectOne(sendUser);
 						messageDto.setSendUserId(sendUserId);
-						messageDto.setMessInfo("个人信息");
+						messageDto.setMessInfo("个人消息");
 						messageDto.setReceiveUserId(usercode.toString());
 						messageDto.setSendUserName(sendUser.getUsername());
 					}

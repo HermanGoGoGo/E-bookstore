@@ -911,7 +911,7 @@ throw new Error('template requires jQuery')
   // Slim scrolling
   
   $('.inner-content-div').slimScroll({
-    height: '400'
+    height: '416.56'
   });
   $('.sm-scrol').slimScroll({
     height: '250'
