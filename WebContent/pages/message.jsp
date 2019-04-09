@@ -207,7 +207,7 @@
 		<li class="treeview active">
           <a href="#">
             <i class="ti-dashboard"></i>
-            <span></span>
+            <span>交易中心</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>
@@ -219,7 +219,7 @@
           </ul>
           <a href="#">
             <i class="ti-pencil-alt"></i>
-            <span>信息中心</span>
+            <span>消息中心</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>
