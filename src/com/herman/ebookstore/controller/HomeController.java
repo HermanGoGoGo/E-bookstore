@@ -83,7 +83,7 @@ public class HomeController {
 			currentUser.setUsername(msg);
 			currentUser.setCampus(msg);
 			currentUser.setUniversity(msg);
-			currentUser.setImage("/images/gallery/thumb/1.jpg");
+			currentUser.setImage("/images/user2-128x128.jpg");
 		}
 		homeReq = this.bookService.selectBookSum(currentUser);
 		homeReq.setShowLoad(showLoad);

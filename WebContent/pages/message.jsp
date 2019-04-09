@@ -213,9 +213,19 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="<%=path%>/home/toHomePage.action"><i class="ti-more"></i>购买书</a></li>
+            <li><a href="<%=path%>/home/toHomePage.action"><i class="ti-more"></i>购买书</a></li>
             <li><a href="#"><i class="ti-more"></i>出售书</a></li>
             <li><a href="#"><i class="ti-more"></i>出售书</a></li>
+          </ul>
+          <a href="#">
+            <i class="ti-pencil-alt"></i>
+            <span>信息中心</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="active"><a href="<%=path%>/message/showOneMessage.action"><i class="ti-more"></i>个人信息</a></li>
           </ul>
         </li>  
         
