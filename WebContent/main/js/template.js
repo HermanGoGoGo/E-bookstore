@@ -911,13 +911,13 @@ throw new Error('template requires jQuery')
   // Slim scrolling
   
   $('.inner-content-div').slimScroll({
-    height: '200'
+    height: '400'
   });
   $('.sm-scrol').slimScroll({
     height: '250'
   });	
   $('.direct-chat-messages').slimScroll({
-    height: '310'
+    height: '380'
   });
   
   $(".search-box a, .search-box .app-search .srh-btn").on('click', function() {

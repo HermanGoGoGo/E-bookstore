@@ -264,7 +264,43 @@
 		<!-- Main content -->
 		<section class="content">
 			<div class="row">
-			  <div class="col-lg-4 col-md-8">
+			  	<div class="col-md-4 col-12">
+				<div class="box">
+				  <div class="box-header with-border">
+					<h4 class="box-title">Scrollable</h4>
+				  </div>
+
+				  <div class="box-body">
+					<div class="inner-content-div">
+					  <div class="media-list media-list-divided media-list-hover">
+					  <c:forEach items="${listOfAllUser}" var="userMessage" varStatus="status" >
+					  	<div class="media align-items-center">
+						  <a class="avatar avatar-lg status-success" href="<%=path%>/message/showOneMessage.action?sendUserId=${userMessage.sendUserId}">
+							<img src="<%=path%>${userMessage.sendUserImage}" >
+						  </a>
+
+						  <div class="media-body">
+							<p>
+							  <a href="<%=path%>/message/showOneMessage.action?sendUserId=${userMessage.sendUserId}"><strong>${userMessage.sendUserName}</strong></a>
+							  <small class="sidetitle">${userMessage.showTime}</small>
+							</p>
+							<p style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">${userMessage.messInfo}</p>
+							<small class="badge badge-success">最新消息${userMessage.status}</small>
+						  </div>
+
+						  <div class="media-right gap-items">
+							<a class="media-action lead" href="#" data-toggle="tooltip" title=""><i class="ti-shopping-cart"></i></a>
+							<a class="media-action lead" href="#" data-toggle="tooltip" title="Receipts"><i class="ti-receipt"></i></a>
+						  </div>
+						</div>
+					  </c:forEach>
+					  </div>
+					</div>
+				  </div>
+				</div>
+			  </div>
+			  
+<%-- 			  <div class="col-lg-4 col-md-8">
 					<div class="box">
 					  <div class="media-list media-list-divided media-list-hover">
 					  <c:forEach items="${listOfAllUser}" var="userMessage" varStatus="status" >
@@ -290,7 +326,7 @@
 					  </c:forEach>
 					  </div>
 					</div>
-			  </div>
+			  </div> --%>
 			  <div class="col-xl-8 col-12">
 			  <!-- DIRECT CHAT PRIMARY -->
 			  <div class="box direct-chat direct-chat-info">
