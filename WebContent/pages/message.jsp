@@ -135,7 +135,7 @@
 				</ul>
 			  </li>
 			  <li class="footer">				  
-				  <a href="#" class="bg-light">查看所有的信息</a>
+				  <a href="<%=path%>/message/showOneMessage.action" class="bg-light">查看所有的信息</a>
 			  </li>
 			</ul>
 		  </li>

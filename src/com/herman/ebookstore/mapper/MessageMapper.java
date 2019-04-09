@@ -96,9 +96,7 @@ public interface MessageMapper extends Mapper<Message> {
 					if(null != messageDto.getSendUserId()) {
 						WHERE("m.send_user_id = #{sendUserId}");
 					}
-					if(null != messageDto.getStatus()) {
-						WHERE("m.status= #{status}");
-					}
+					WHERE("m.status= '0'");
 					ORDER_BY("m.create_time  desc, m.id desc");
 				}			
 				

@@ -50,6 +50,7 @@ public class MessageServiceImpl extends AbstractService<Message> implements Mess
 
 	@Override
 	public List<MessageDto> findAllMessageByDto(MessageDto messageDto) {
+		//messageDto.setStatus("0");
 		List<MessageDto> messageDtos =this.messageMapper.findAllMessageByDto(messageDto);
 		List<MessageDto> messageDtos1 = new ArrayList<MessageDto>();
 		for (MessageDto messageDto2 : messageDtos) {
