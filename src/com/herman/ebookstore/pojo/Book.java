@@ -1,18 +1,16 @@
 package com.herman.ebookstore.pojo;
 
 import javax.persistence.*;
-
-import java.math.BigDecimal;
 import java.util.Date;
 import com.herman.ebookstore.common.model.BaseEntity;
 
 /**
-* @ClassName: Book
-* @Description: TODO(售书表)
-* @author 黄金宝
-* @date 2019年3月15日
-*
-*/
+ * 售书表
+ * 
+ * @author herman
+ * @email 1146465559@qq.com
+ * @date 2019-04-10 15:23:08
+ */
 @Table(name = "MSTB_SELL_BOOK")
 public class Book extends BaseEntity<Book> {
 
@@ -70,6 +68,10 @@ public class Book extends BaseEntity<Book> {
     @Column(name = "purchaser_id")
     private String purchaserId;
     
+    //书籍浏览次数
+    @Column(name = "browse_times")
+    private Integer browseTimes;
+    
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
@@ -126,7 +128,7 @@ public class Book extends BaseEntity<Book> {
 		return description;
 	}
 	
-	public void setCondition(String conditions) {
+	public void setConditions(String conditions) {
 		this.conditions = conditions;
 	}
 
@@ -172,6 +174,14 @@ public class Book extends BaseEntity<Book> {
 
 	public String getPurchaserId() {
 		return purchaserId;
+	}
+	
+	public void setBrowseTimes(Integer browseTimes) {
+		this.browseTimes = browseTimes;
+	}
+
+	public Integer getBrowseTimes() {
+		return browseTimes;
 	}
 	
 }

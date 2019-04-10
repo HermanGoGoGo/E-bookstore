@@ -101,7 +101,7 @@ public interface MessageMapper extends Mapper<Message> {
 			"  GROUP BY t.id DESC")
 	public List<MessageDto> findAllUserInfo(MessageDto messageDto);
 	
-	@Select("SELECT m.*," + 
+	@Select("SELECT m.*,m.create_time as createTimeShow," + 
 			"       u.username AS sendUserName," + 
 			"       u.image AS sendUserImage" + 
 			" FROM HSTB_MESSAGE m  LEFT JOIN MSTB_USER u ON u.usercode = m.send_user_id " + 
@@ -113,7 +113,7 @@ public interface MessageMapper extends Mapper<Message> {
 		public String findAllMessageByDto(MessageDto messageDto) {
 			return new SQL() {
 				{
-					SELECT("m.*,u.username as sendUserName,u.image as sendUserImage");
+					SELECT("m.*,m.create_time as createTimeShow,u.username as sendUserName,u.image as sendUserImage");
 					FROM("HSTB_MESSAGE m");
 					LEFT_OUTER_JOIN("MSTB_USER u ON u.usercode=m.send_user_id");
 					if(null != messageDto.getReceiveUserId()) {
@@ -132,7 +132,7 @@ public interface MessageMapper extends Mapper<Message> {
 		public String findAllMessageByReAndSe(MessageDto messageDto) {
 			return new SQL() {
 				{
-					SELECT("m.*,u.username as sendUserName,u.image as sendUserImage");
+					SELECT("m.*,m.create_time as createTimeShow,u.username as sendUserName,u.image as sendUserImage");
 					FROM("HSTB_MESSAGE m");
 					LEFT_OUTER_JOIN("MSTB_USER u ON u.usercode=m.send_user_id");
 					if(null != messageDto.getReceiveUserId() &&  null != messageDto.getSendUserId()) {

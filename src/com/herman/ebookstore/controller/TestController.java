@@ -198,10 +198,9 @@ public class TestController {
 	}
 	@RequestMapping(method = RequestMethod.GET, value = "/test7")
 	public void test7(HttpServletResponse response) {
-		MessageDto messageDto =new MessageDto();
-		messageDto.setReceiveUserId("2201504242");
-		List<MessageDto> messages = this.messageService.findAllMessageByDto(messageDto);
 		
+		List<RoleDto> books = this.roleService.selectAll();
+		System.out.println(books);
 	}
 	
 }

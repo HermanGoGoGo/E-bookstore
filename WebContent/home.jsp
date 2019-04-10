@@ -35,6 +35,10 @@
 	<!-- Bootstrap extend-->
 	<link rel="stylesheet" href="<%=path%>/main/css/bootstrap-extend.css">
 	
+		<!-- owlcarousel-->
+	<link rel="stylesheet" href="<%=path%>/assets/vendor_components/OwlCarousel2/dist/assets/owl.carousel.css">
+	<link rel="stylesheet" href="<%=path%>/assets/vendor_components/OwlCarousel2/dist/assets/owl.theme.default.css">
+	
 	<!-- theme style -->
 	<link rel="stylesheet" href="<%=path%>/main/css/master_style.css">
 	
@@ -161,7 +165,7 @@
 						  ${message.sendUserName}
 						  <small><i class="fa fa-clock-o"></i> ${message.showTime}</small>
 						 </h4>
-						 <span>${message.messInfo}</span>
+						 <span style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">${message.messInfo}</span>
 					  </div>
 					</a>
 				  </li>
@@ -374,10 +378,44 @@
 					</a>
 				</div>
 				<!-- /.col -->
-		    </div>					
+		    </div>
+		    <h3 class="page-header">最热书榜</h3>
+		    <div class="news-slider owl-carousel">
+		       <% int j = 0; String style="";%>
+		       <c:forEach items="${hotBookList}" var="hotBook" varStatus="status" >
+			   <div class="box ">
+			        <%  j++;
+			        if(j%2==0) {
+			        	style ="bg-pale-primary";
+			        }else{
+			        	style ="";
+			        }
+			        %>
+					<div class="box-body <%=style%>"> 
+						<div class="text-left ">
+							<h4 class="box-title ">${hotBook.name}</h4>
+							<p class="my-10">
+							  <small>
+								  <i class="fa fa-user"></i> by <a href="#">${hotBook.username}</a> 
+								  <span class="px-10">| </span><i class="fa fa-calendar"></i> ${hotBook.createTimeCompare}
+							  </small>
+							</p>
+							<p class="box-text" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">${hotBook.description}</p>
+							<div class="flexbox align-items-center mt-3">
+							<a href="<%=path%>/home/toHomePage.action?id=${hotBook.id}" class="btn btn-flat btn-primary btn-sm">查看详情</a>
+							<a>
+							<i class="ion-heart text-danger font-size-11"></i>
+							<span class="font-size-11 text-fade ml-1">${hotBook.browseTimes}</span>
+							</a>
+							</div>
+						</div>
+					</div>
+					<!-- /.box-body -->
+				</div>
+				</c:forEach>
+			</div>					
 			<div class="row">
-				<div class="col-12 m-auto">
-	
+				<div class="col-12 m-auto">	
 				 <div class="box">
 					<div class="box-header with-border">
 					  <h3 class="box-title">${homeReq.showLoad}</h3>
@@ -523,6 +561,9 @@
 	<!-- FastClick -->
 	<script src="<%=path%>/assets/vendor_components/fastclick/lib/fastclick.js"></script>
 	
+	<!-- Carousel -->
+	<script src="<%=path%>/assets/vendor_components/OwlCarousel2/dist/owl.carousel.js"></script>
+	
     <!-- C3 Plugins -->
     <script src="<%=path%>/assets/vendor_components/c3/d3.min.js"></script>
     <script src="<%=path%>/assets/vendor_components/c3/c3.min.js"></script>
@@ -543,6 +584,8 @@
 	
 	<!-- Prompting -->
     <script src="<%=path%>/assets/vendor_components/hullabaloo/hullabaloo.js"></script>
+    
+    <script src="<%=path%>/main/js/pages/widget-blog.js"></script>
     
     <script type="text/javascript">
 			$.hulla = new hullabaloo();
@@ -571,7 +614,7 @@
 		                                "<h4> " +data.obj[i].sendUserName +
 		                                "<small><i class=\"fa fa-clock-o\"></i> "+data.obj[i].showTime +"</small>"+
 		                                "</h4>" +
-		                                " <span>"+data.obj[i].messInfo+"</span> " +
+		                                " <span style=\"overflow: hidden;text-overflow: ellipsis;white-space: nowrap;\">"+data.obj[i].messInfo+"</span> " +
 		                                "</div>" +
 		                                "</a>" +
 		                                "</li>";

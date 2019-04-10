@@ -75,4 +75,10 @@ public class BookServiceImpl extends AbstractService<Book> implements BookServic
 		return this.bookMapper.selectBookSum(currentUser);
 	}
 
+	@Override
+	public List<BookDto> findHotBookList() {
+		// TODO Auto-generated method stub
+		return this.bookMapper.findHotBookList();
+	}
+
 }

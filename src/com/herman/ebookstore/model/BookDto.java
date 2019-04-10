@@ -25,6 +25,7 @@ public class BookDto   {
   @JsonProperty("createTime")
   private Date  createTime = null;
 
+  @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
   @JsonProperty("createTimeCompare")
   private String  createTimeCompare = null;
 
@@ -79,6 +80,9 @@ public class BookDto   {
 
   @JsonProperty("city")
   private String city = null;
+  
+  @JsonProperty("browseTimes")
+  private String browseTimes = null;
 
   public BookDto id(String id) {
     this.id = id;
@@ -443,25 +447,45 @@ public class BookDto   {
     this.campus = campus;
   }
 
-  public BookDto city(String city) {
-    this.city = city;
+  public BookDto browseTimes(String browseTimes) {
+    this.browseTimes = browseTimes;
     return this;
   }
 
   /**
-   * 所在城市
-   * @return city
+      * 浏览次数 
+   * @return browseTimes
   **/
-  @ApiModelProperty(value = "所在城市")
+  @ApiModelProperty(value = "浏览次数")
 
 
-  public String getCity() {
-    return city;
+  public String getBrowseTimes() {
+    return browseTimes;
   }
 
-  public void setCity(String city) {
-    this.city = city;
+  public void setBrowseTimes(String browseTimes) {
+    this.browseTimes = browseTimes;
   }
+  
+  public BookDto city(String city) {
+	    this.city = city;
+	    return this;
+	  }
+
+	  /**
+	      * 所在城市
+	   * @return city
+	  **/
+	  @ApiModelProperty(value = "所在城市")
+
+
+	  public String getCity() {
+	    return city;
+	  }
+
+	  public void setCity(String city) {
+	    this.city = city;
+	  }
 
 
   @Override
@@ -491,12 +515,13 @@ public class BookDto   {
         Objects.equals(this.username, bookDto.username) &&
         Objects.equals(this.universityId, bookDto.universityId) &&
         Objects.equals(this.campus, bookDto.campus) &&
-        Objects.equals(this.city, bookDto.city);
+        Objects.equals(this.city, bookDto.city) &&
+        Objects.equals(this.browseTimes, bookDto.browseTimes);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, createTime, createTimeCompare, name, author, originalPrice, price, description, conditions, edition, semester, course, transaction, purchaserId, userId, username, universityId, campus, city);
+    return Objects.hash(id, createTime, createTimeCompare, name, author, originalPrice, price, description, conditions, edition, semester, course, transaction, purchaserId, userId, username, universityId, campus, city , browseTimes);
   }
 
   @Override
@@ -523,6 +548,7 @@ public class BookDto   {
     sb.append("    universityId: ").append(toIndentedString(universityId)).append("\n");
     sb.append("    campus: ").append(toIndentedString(campus)).append("\n");
     sb.append("    city: ").append(toIndentedString(city)).append("\n");
+    sb.append("    browseTimes: ").append(toIndentedString(browseTimes)).append("\n");
     sb.append("}");
     return sb.toString();
   }

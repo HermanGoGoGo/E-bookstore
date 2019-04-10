@@ -127,7 +127,7 @@
 						  ${message.sendUserName}
 						  <small><i class="fa fa-clock-o"></i> ${message.showTime}</small>
 						 </h4>
-						 <span>${message.messInfo}</span>
+						 <span style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">${message.messInfo}</span>
 					  </div>
 					</a>
 				  </li>
@@ -374,8 +374,8 @@
 					  </a>
 					  <!-- /.direct-chat-img -->
 					  <div class="direct-chat-text">
-						<p>${messages.messInfo} </p>
-						<p class="direct-chat-timestamp"><time datetime="2019">${messages.showTime} / ${messages.createTime}</time></p>
+						<p >${messages.messInfo} </p>
+						<p class="direct-chat-timestamp"><time datetime="2019">${messages.showTime} / ${messages.createTimeShow}</time></p>
 					  </div>
 
 					  <!-- /.direct-chat-text -->
@@ -390,8 +390,8 @@
 					  </div>
 					   <img class="direct-chat-img avatar "  src="<%=path%>${messages.sendUserImage}" alt="message user image">
 					  <div class="direct-chat-text">
-						<p>${messages.messInfo}</p>
-						<p class="direct-chat-timestamp"><time datetime="2019">${messages.showTime} / ${messages.createTime}</time></p>
+						<p >${messages.messInfo}</p>
+						<p class="direct-chat-timestamp"><time datetime="2019">${messages.showTime} / ${messages.createTimeShow}</time></p>
 					  </div>
 					  <!-- /.direct-chat-text -->
 					</div>					

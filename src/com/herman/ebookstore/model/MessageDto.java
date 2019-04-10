@@ -40,6 +40,10 @@ public class MessageDto   {
   @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
   @JsonProperty("createTime")
   private Date  createTime = null;
+  
+  @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+  @JsonProperty("createTimeShow")
+  private String  createTimeShow = null;
 
   @JsonProperty("showTime")
   private String showTime = null;
@@ -227,6 +231,26 @@ public class MessageDto   {
   public void setStatus(String status) {
     this.status = status;
   }
+  
+  public MessageDto createTimeShow(String createTimeShow) {
+	    this.createTimeShow = createTimeShow;
+	    return this;
+	  }
+
+	  /**
+	   * 显示时间
+	   * @return createTimeShow
+	  **/
+	  @ApiModelProperty(value = "显示时间")
+
+
+	  public String getCreateTimeShow() {
+	    return createTimeShow;
+	  }
+
+	  public void setCreateTimeShow(String createTimeShow) {
+	    this.createTimeShow = createTimeShow;
+	  }
 
 
   @Override
@@ -246,12 +270,13 @@ public class MessageDto   {
         Objects.equals(this.chatUser, messageDto.chatUser) &&
         Objects.equals(this.createTime, messageDto.createTime) &&
         Objects.equals(this.showTime, messageDto.showTime) &&
+        Objects.equals(this.createTimeShow, messageDto.createTimeShow) &&
         Objects.equals(this.status, messageDto.status);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(messInfo, receiveUserId, sendUserId, sendUserName, sendUserImage, chatUser, createTime, showTime, status);
+    return Objects.hash(messInfo, receiveUserId, sendUserId, sendUserName, sendUserImage, chatUser, createTime, showTime, status ,createTimeShow);
   }
 
   @Override
@@ -268,6 +293,7 @@ public class MessageDto   {
     sb.append("    createTime: ").append(toIndentedString(createTime)).append("\n");
     sb.append("    showTime: ").append(toIndentedString(showTime)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
+    sb.append("    createTimeShow: ").append(toIndentedString(createTimeShow)).append("\n");
     sb.append("}");
     return sb.toString();
   }

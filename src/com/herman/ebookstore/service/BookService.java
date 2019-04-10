@@ -33,6 +33,15 @@ public interface BookService extends Service<Book> {
 	
 	public List<BookDto> findAllBookList();
 	
+	/** 
+	 * @Method_Name: findHotBookList 
+	 * @Description: TODO(找到浏览次数最多的10本书)
+	 * @Description: * @return List<BookDto>
+	 * @date 2019年4月10日
+	 * @author 黄金宝 
+	 */
+	public List<BookDto> findHotBookList();
+	
 	public List<BookDto> selectByBookName(SeachDto seachDto);
 	
 	public HomeReq selectBookSum(UserDto currentUser);

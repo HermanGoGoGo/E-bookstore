@@ -88,9 +88,11 @@ public class HomeController {
 		homeReq = this.bookService.selectBookSum(currentUser);
 		homeReq.setShowLoad(showLoad);
 		bookList = this.bookService.selectByBookName(seachDto);
+		List<BookDto> hotBookList = this.bookService.findHotBookList();
 		model.addAttribute("bookVoList", bookList);
 		model.addAttribute("homeReq", homeReq);
 		model.addAttribute("currentUser", currentUser);
+		model.addAttribute("hotBookList", hotBookList);
 		return "home";
 	}
 }

@@ -37,6 +37,13 @@ public interface BookMapper extends Mapper<Book> {
 			+ "order by b.create_time desc,b.id desc")
 	public List<BookDto> findAllBookList();
 	
+	@Select("SELECT b.*, b.create_time as createTimeCompare," + "u.username, " + "s.id, " + "s.campus, " + "s.city " 
+	        + "FROM MSTB_SELL_BOOK b "
+			+ "LEFT JOIN MSTB_USER u ON u.usercode=b.user_id "
+			+ "LEFT JOIN MSTB_UNIVERSITY s ON s.id = u.campus_id " + "WHERE b.`status` ='0' "
+			+ "order by b.browse_times desc,b.id limit 10")
+	public List<BookDto> findHotBookList();
+	
 
 	@SelectProvider(type = BookSqlBuilder.class, method = "selectByBookName")
 	public List<BookDto> selectByBookName(SeachDto seachDto);

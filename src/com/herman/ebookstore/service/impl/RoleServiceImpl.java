@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.herman.ebookstore.common.core.AbstractService;
 import com.herman.ebookstore.mapper.RoleMapper;
+import com.herman.ebookstore.model.RoleDto;
 import com.herman.ebookstore.pojo.Role;
 import com.herman.ebookstore.service.RoleService;
 
@@ -27,10 +28,10 @@ public class RoleServiceImpl extends AbstractService<Role> implements RoleServic
 	private RoleMapper roleMapper;
 
 	@Override
-	public List<Role> selectAll() {
+	public List<RoleDto> selectAll() {
 		// TODO Auto-generated method stub
 		
-		return roleMapper.selectAll();
+		return roleMapper.selectAll1();
 	}
 
 	@Override

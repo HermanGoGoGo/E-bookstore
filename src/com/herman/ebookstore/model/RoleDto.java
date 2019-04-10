@@ -23,7 +23,7 @@ public class RoleDto   {
 
   @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
   @JsonProperty("createTime")
-  private Date  createTime = null;
+  private String  createTime = null;
 
   @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
   @JsonProperty("updateTime")
@@ -64,7 +64,7 @@ public class RoleDto   {
     this.id = id;
   }
 
-  public RoleDto createTime(Date createTime) {
+  public RoleDto createTime(String createTime) {
     this.createTime = createTime;
     return this;
   }
@@ -77,11 +77,11 @@ public class RoleDto   {
 
   @Valid
 
-  public Date getCreateTime() {
+  public String getCreateTime() {
     return createTime;
   }
 
-  public void setCreateTime(Date createTime) {
+  public void setCreateTime(String createTime) {
     this.createTime = createTime;
   }
 
