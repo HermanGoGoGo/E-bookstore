@@ -72,9 +72,10 @@ public interface MessageMapper extends Mapper<Message> {
 	 * @date 2019年4月8日
 	 * @author 黄金宝 
 	 */
-	@Select("SELECT t.*, " + 
+	@Select("SELECT t.receive_user_id,t.send_user_id,t.mess_info,t.status,t.chatUser, " + 
 			"       u.username AS sendUserName, " + 
-			"       u.image AS sendUserImage " + 
+			"       u.image AS sendUserImage, " + 
+			"       u.update_time AS createTime " + 
 			"FROM (SELECT t.*, " + 
 			"             CASE " + 
 			"               WHEN t.send_user_id = #{receiveUserId} THEN t.receive_user_id " + 

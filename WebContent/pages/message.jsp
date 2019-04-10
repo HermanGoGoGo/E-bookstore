@@ -275,20 +275,34 @@
 					  <div class="media-list media-list-divided media-list-hover">
 					  <c:forEach items="${listOfAllUser}" var="userMessage" varStatus="status" >
 					  	<div class="media align-items-center">
-						  <a class="avatar avatar-lg status-success" href="<%=path%>/message/showOneMessage.action?sendUserId=${userMessage.chatUser}">
-							<img src="<%=path%>${userMessage.sendUserImage}" >
-						  </a>
-
+					  	      <c:if test="${userMessage.showTime=='1'}">
+							  	 <a class="avatar avatar-lg status-success" href="<%=path%>/message/showOneMessage.action?sendUserId=${userMessage.chatUser}">
+							     <img src="<%=path%>${userMessage.sendUserImage}" >
+						         </a>
+							  </c:if>
+							  <c:if test="${userMessage.showTime!='1'}">
+							  	<a class="avatar avatar-lg status-warning" href="<%=path%>/message/showOneMessage.action?sendUserId=${userMessage.chatUser}">
+							     <img src="<%=path%>${userMessage.sendUserImage}" >
+						         </a>
+							  </c:if>
 						  <div class="media-body">
 							<p>
 							  <a href="<%=path%>/message/showOneMessage.action?sendUserId=${userMessage.sendUserId}"><strong>${userMessage.sendUserName}</strong></a>
-							  <small class="sidetitle">${userMessage.chatUser}</small>
-							  
+							  <c:if test="${userMessage.showTime=='1'}">
+							  	<small class="badge badge-success">在线</small>
+							  </c:if>
+							  <c:if test="${userMessage.showTime!='1'}">
+							  	<small class="badge badge-warning">${userMessage.showTime}</small>
+							  </c:if>
+							<%--   <small class="sidetitle">${userMessage.chatUser}</small>	 --%>						  
 							</p>
-							<p style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">${userMessage.messInfo}
-							<small class="sidetitle">${userMessage.showTime}</small>
+							<p >---</p>
+							<p style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+							<small class="">${userMessage.messInfo}</small>
+							<c:if test="${userMessage.status =='0' && userMessage.chatUser !=userMessage.receiveUserId}">
+							  	<small class="sidetitle badge badge-success">最新消息</small>
+							</c:if>
 							</p>
-							<small class="badge badge-success">${userMessage.status}</small>
 						  </div>
 
 						  <div class="media-right gap-items">
@@ -355,7 +369,9 @@
 					  <span class="direct-chat-name">${messages.sendUserName}</span>	
 					  </div>
 					  <!-- /.direct-chat-info -->
+					  <a  href="<%=path%>/message/showOneMessage.action?sendUserId=${messages.sendUserId}">
 					  <img class="direct-chat-img avatar" src="<%=path%>${messages.sendUserImage}" alt="message user image">
+					  </a>
 					  <!-- /.direct-chat-img -->
 					  <div class="direct-chat-text">
 						<p>${messages.messInfo} </p>
@@ -368,7 +384,7 @@
 				    </c:if>
 				    <c:if test="${messages.sendUserId == currentUser.usercode}">
 				    <!-- Message to the right -->
-					<div class="direct-chat-msg right mb-30">
+					<div class="direct-chat-msg right mb-30" >
 					  <div class="clearfix mb-15">
 					  <span class="direct-chat-name pull-right">${messages.sendUserName}</span>	
 					  </div>
@@ -378,8 +394,7 @@
 						<p class="direct-chat-timestamp"><time datetime="2019">${messages.showTime} / ${messages.createTime}</time></p>
 					  </div>
 					  <!-- /.direct-chat-text -->
-					</div>
-					
+					</div>					
 					<!-- /.direct-chat-msg -->
 				    </c:if>
 				    </c:forEach>
@@ -393,12 +408,12 @@
 	    			<!--   <input type="text" name="receiveUserId" id="receiveUserId"  value="2201504242" class="form-control" style="display: none;">-->
 					  <input type="text" name="sendUserId" id="sendUserId" value="${messageReq.sendUserId}" class="form-control" style="display: none;">
 					  <input type="text" name="message" id="message" placeholder="Type Message ..." class="form-control">
+						  <c:if test="${messageReq.sendUserName !='全部消息'}">
 						  <div class="input-group-addon">
 							<div class="align-self-end gap-items">
 							  <a class="publisher-btn" onclick="sendMessage()"><i class="fa fa-paper-plane"></i></a>
 							  <script type="text/javascript"> 
-							          function sendMessage() {
-										
+							          function sendMessage() {										
 							          var sendUserId = $("#sendUserId").val(),
 							          message = $("#message").val();							          
 							          window.location.href="<%=path%>/message/showOneMessage.action?sendUserId="+sendUserId+"&message=" + message;
@@ -406,6 +421,7 @@
                               </script> 
 							</div>
 						  </div>
+						  </c:if>
 					</div>
 				  </form>
 				</div>

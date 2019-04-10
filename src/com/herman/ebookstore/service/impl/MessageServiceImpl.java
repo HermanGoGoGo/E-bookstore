@@ -100,12 +100,18 @@ public class MessageServiceImpl extends AbstractService<Message> implements Mess
 		List<MessageDto> messageDtos =this.messageMapper.findAllUserInfo(messageDto);
 		List<MessageDto> messageDtos1 = new ArrayList<MessageDto>();
 		for (MessageDto messageDto2 : messageDtos) {
-			messageDto2.setShowTime(RelativeDateFormat.format(messageDto2.getCreateTime()));
-			if(messageDto2.getStatus().equals("0") && !messageDto2.getSendUserId().equals(messageDto.getReceiveUserId())) {
-				messageDto2.setStatus("有最新消息未读");
+			long delta = new Date().getTime() - messageDto2.getCreateTime().getTime();
+			if(delta < 4200L) {
+				messageDto2.setShowTime("1");
 			}else {
-				messageDto2.setStatus("");
+				messageDto2.setShowTime(RelativeDateFormat.format(messageDto2.getCreateTime()));
 			}
+			//messageDto2.setShowTime(RelativeDateFormat.format(messageDto2.getCreateTime()));
+			/*
+			 * if(messageDto2.getStatus().equals("0") &&
+			 * !messageDto2.getSendUserId().equals(messageDto.getReceiveUserId())) {
+			 * messageDto2.setStatus("有最新消息未读"); }else { messageDto2.setStatus(""); }
+			 */
 			messageDtos1.add(messageDto2);
 		}
 		return messageDtos1;
@@ -115,7 +121,13 @@ public class MessageServiceImpl extends AbstractService<Message> implements Mess
 	@Override
 	public List<MessageDto> findAllMessageReceiveUserId(MessageDto messageDto) {
 		// TODO Auto-generated method stub
-		return this.messageMapper.findAllMessageReceiveUserId(messageDto);
+		List<MessageDto> messageDtos = this.messageMapper.findAllMessageReceiveUserId(messageDto);
+		List<MessageDto> messageDtos1 = new ArrayList<MessageDto>();
+		for (MessageDto messageDto2 : messageDtos) {
+			messageDto2.setShowTime(RelativeDateFormat.format(messageDto2.getCreateTime()));
+			messageDtos1.add(messageDto2);
+		}
+		return messageDtos1;
 	}
 	
 	

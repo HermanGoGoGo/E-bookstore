@@ -84,11 +84,15 @@ public class BaseController extends BaseForSDK {
 	@RequestMapping("getUserMessage")
 	public void getUserMessage(HttpServletResponse response,HttpServletRequest request) {
 		Object usercode = request.getSession().getAttribute("usercode");
+		User user =new User();
 		Message message = new Message();
 		MessageDto messageDto =new MessageDto();
 		int index =-1;
 		if(usercode != null && !"".equals(usercode)) {
 			message.setReceiveUserId(usercode.toString());
+			user.setUsercode(usercode.toString());
+			user = this.userService.selectOne(user);
+			this.userService.update(user);
 			index = this.messageService.findOneMessage(message);
 			if(index == 1) {
 				messageDto.setReceiveUserId(usercode.toString());

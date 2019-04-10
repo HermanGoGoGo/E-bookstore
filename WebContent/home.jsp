@@ -376,7 +376,7 @@
 				<!-- /.col -->
 		    </div>					
 			<div class="row">
-				<div class="col-12">
+				<div class="col-12 m-auto">
 	
 				 <div class="box">
 					<div class="box-header with-border">
@@ -385,7 +385,7 @@
 					<!-- /.box-header -->
 					<div class="box-body">
 						<div class="table-responsive">
-						  <table id="example5" class="table table-bordered table-striped" style="text-align: center; " >
+						  <table id="example5" class="table table-bordered table-striped text-center"  >
 							<thead>
 								<tr>
 									<th style="display: none;"><b>序号</b></th>
