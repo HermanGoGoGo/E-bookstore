@@ -71,6 +71,10 @@ public class MessageController {
 				messageDto.setSendUserName("全部消息");
 				listMessages = this.messageService.findAllMessageReceiveUserId(messageDto);
 			}else {
+				//如果发送人id等于接收人id则返回
+				if(sendUserId.equals(usercode)) {
+					return "redirect:/message/showOneMessage.action";
+				}
 				//查询发送用户是否存在
 				sendUser.setUsercode(sendUserId);
 				index = this.userService.selectCountByCondition(sendUser);

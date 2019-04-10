@@ -340,6 +340,7 @@
 
 		<!-- Main content -->
 		<section class="content">
+		    <h3 class="page-header">书籍统计</h3>
 			<div class="row">
 				<div class="col-xl-4 col-12">
 				    <a href="<%=path%>/home/toHomePage.action">
