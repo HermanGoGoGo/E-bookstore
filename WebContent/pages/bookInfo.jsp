@@ -334,26 +334,16 @@
 							   <script type="text/javascript">
 							   function validate() {
 
-								      var a=document.getElementById("file");
+								   var a=document.getElementById("file");
 									  var form=document.getElementById("upload");
 									  if(a.value==""){		   
 										   alert("请先选择图片");
 								           return false;
 										  }
 									  else{
-										  $.ajax({
-								                cache: true,
-								                type: "POST",
-								                url: "<%=path%>/book/saveBook.action",
-								                data:new FormData($("#upload")[0]),// 你的formid
-								                async: false,
-								                error: function(request) {
-								                    alert("Connection error");
-								                },
-								                success: function(data) {
-								                    $("#upload").parent().html(data);
-								                }
-								            });
+										  form.submit();
+										  console.log("成功");
+										  return false;
 									  }
 							     }
 						            	
