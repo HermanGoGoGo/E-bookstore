@@ -105,7 +105,7 @@ public interface MessageMapper extends Mapper<Message> {
 			"       u.username AS sendUserName," + 
 			"       u.image AS sendUserImage" + 
 			" FROM HSTB_MESSAGE m  LEFT JOIN MSTB_USER u ON u.usercode = m.send_user_id " + 
-			" WHERE receive_user_id = #{receiveUserId} "+ 
+			" WHERE m.receive_user_id = #{receiveUserId} "+ 
 			" ORDER BY m.create_time  desc, m.id desc ")
 	public List<MessageDto> findAllMessageReceiveUserId(MessageDto messageDto);
 	

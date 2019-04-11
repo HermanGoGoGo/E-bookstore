@@ -38,6 +38,7 @@ public class MessageController {
 	private UserService userService;
 	@Autowired
 	private MessageService messageService;
+	
 	@RequestMapping("showOneMessage")
 	public String showOneMessage(String message,String sendUserId,HttpServletRequest request,Model model,HttpServletResponse response) {
 		Object usercode = request.getSession().getAttribute("usercode");

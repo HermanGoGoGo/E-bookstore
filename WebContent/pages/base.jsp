@@ -1,4 +1,4 @@
-﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+﻿﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -34,6 +34,10 @@
 	
 	<!-- Bootstrap extend-->
 	<link rel="stylesheet" href="<%=path%>/main/css/bootstrap-extend.css">
+	
+		<!-- owlcarousel-->
+	<link rel="stylesheet" href="<%=path%>/assets/vendor_components/OwlCarousel2/dist/assets/owl.carousel.css">
+	<link rel="stylesheet" href="<%=path%>/assets/vendor_components/OwlCarousel2/dist/assets/owl.theme.default.css">
 	
 	<!-- theme style -->
 	<link rel="stylesheet" href="<%=path%>/main/css/master_style.css">
@@ -79,9 +83,9 @@
 			<i class="ti-align-left"></i>
 		  </a>
 		  <a id="toggle_res_search" data-toggle="collapse" data-target="#search_form" class="res-only-view" href="javascript:void(0);"><i class="mdi mdi-magnify"></i></a>
-		  <form action="<%=path %>/home/toHomePage.action" id="search_form" role="search" class="top-nav-search pull-left collapse ml-20">
+		  <form id="search_form" role="search" class="top-nav-search pull-left collapse ml-20">
 				<div class="input-group">
-					<input type="text" name="searchByBookName" class="form-control" placeholder="Search">
+					<input type="text" name="searchByBookName" class="form-control" placeholder="请输入书名">
 						<span class="input-group-btn">
 							<button type="button" class="btn  btn-default" data-target="#search_form" data-toggle="collapse" aria-label="Close" aria-expanded="true" ><i class="mdi mdi-magnify"></i></button>
 						</span>
@@ -113,10 +117,10 @@
 			  </li>
 			  <li>
 				<!-- inner menu: contains the actual data -->
-				<ul class="menu sm-scrol">
+				<ul class="menu sm-scrol" id="menuForAllMessages">
 			      <c:forEach items="${messageDtos}" var="message" varStatus="status" >
 			      <li>
-					<a href="<%=path%>/">
+					<a href="<%=path%>/message/showOneMessage.action?sendUserId=${message.sendUserId}">
 					  <div class="pull-left">
 						<img src="<%=path%>${message.sendUserImage}" class="rounded-circle" alt="User Image">
 					  </div>
@@ -125,7 +129,7 @@
 						  ${message.sendUserName}
 						  <small><i class="fa fa-clock-o"></i> ${message.showTime}</small>
 						 </h4>
-						 <span>${message.messInfo}</span>
+						 <span style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">${message.messInfo}</span>
 					  </div>
 					</a>
 				  </li>
@@ -133,7 +137,7 @@
 				</ul>
 			  </li>
 			  <li class="footer">				  
-				  <a href="#" class="bg-light">查看所有的信息</a>
+				  <a class="bg-light" href="<%=path%>/message/showOneMessage.action">查看所有的信息</a>
 			  </li>
 			</ul>
 		  </li>
@@ -205,7 +209,7 @@
 		<li class="treeview active">
           <a href="#">
             <i class="ti-dashboard"></i>
-            <span></span>
+            <span>交易中心</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>
@@ -214,6 +218,16 @@
             <li class="active"><a href="<%=path%>/home/toHomePage.action"><i class="ti-more"></i>购买书</a></li>
             <li><a href="#"><i class="ti-more"></i>出售书</a></li>
             <li><a href="#"><i class="ti-more"></i>出售书</a></li>
+          </ul>
+          <a href="#">
+            <i class="ti-pencil-alt"></i>
+            <span>个人中心</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<%=path%>/message/showOneMessage.action"><i class="ti-more"></i>消息中心</a></li>
           </ul>
         </li>  
         
@@ -230,18 +244,18 @@
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper"  style="display: none;">
+  <div class="content-wrapper" >
 	  <div class="container-full">
 		<!-- Content Header (Page header) -->	  
 		<div class="content-header">
 			<div class="d-flex align-items-center">
 				<div class="mr-auto">
-					<h3 class="page-title">购买书</h3>
+					<h3 class="page-title">page-title</h3>
 					<div class="d-inline-block align-items-center">
 						<nav>
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="#"><i class="mdi mdi-home-outline"></i></a></li>
-								<li class="breadcrumb-item active" aria-current="page">${homeReq.showLoad}</li>
+								<li class="breadcrumb-item active" aria-current="page">page</li>
 							</ol>
 						</nav>
 					</div>
@@ -251,6 +265,7 @@
 
 		<!-- Main content -->
 		<section class="content">
+		   
 			
 		</section>
 		<!-- /.content -->
@@ -311,14 +326,7 @@
   	
 	<!-- jQuery 3 -->
 	<script src="<%=path%>/assets/vendor_components/jquery-3.3.1/jquery-3.3.1.js"></script>
-		<script type="text/javascript">
-		window.onload=function(){
-		    $(".loader").fadeOut();
-		    $(".content-wrapper").show();
-		}
-	</script>
-	  
-	
+	  	
 	<!-- jQuery UI 1.11.4 -->
 	<script src="<%=path%>/assets/vendor_components/jquery-ui/jquery-ui.js"></script>
 	
@@ -337,6 +345,9 @@
 	
 	<!-- FastClick -->
 	<script src="<%=path%>/assets/vendor_components/fastclick/lib/fastclick.js"></script>
+	
+	<!-- Carousel -->
+	<script src="<%=path%>/assets/vendor_components/OwlCarousel2/dist/owl.carousel.js"></script>
 	
     <!-- C3 Plugins -->
     <script src="<%=path%>/assets/vendor_components/c3/d3.min.js"></script>
@@ -359,36 +370,51 @@
 	<!-- Prompting -->
     <script src="<%=path%>/assets/vendor_components/hullabaloo/hullabaloo.js"></script>
     
+    <script src="<%=path%>/main/js/pages/widget-blog.js"></script>
+    
     <script type="text/javascript">
 			$.hulla = new hullabaloo();
-			var usercode = '${currentUser.usercode}';
-			setTimeout(function() {
-				$.hulla.send(usercode+"Hi！这里是jQuery之家！", "success");
-			}, 1000);
-			function checkTime(){			
-		        var nowtime=Date.parse(new Date());
-		        $(".username").html("详细地址不能为空");
-		        console.log(nowtime);	
-		        <%-- $.ajax( {
+			//var usercode = '${currentUser.usercode}';
 
-		           // "dataType" : 'json',
-
-		            "type" : "POST",
-
-		            "url" : "<%=path%>/toHomepage.action",
-
-		            "data" : { "searchByBookName" : "123" },
-
-		            "success" : function(  ) {           
-
-		            	$("#username").value== "详细地址不能为空";
-		            	console.log("new");
-		            }
-
-		         } ); --%>
+			function checkTime(){
+		        $.ajax({
+					type: "post",
+					url: "<%=path%>/base/getUserMessage.action",
+					data: {
+					},
+					dataType: 'json',
+					success: function(data) {
+						console.log(data);
+		            	if(data.status == '200'){
+		            		$("#menuForAllMessages li").remove();
+		            		$.hulla.send("您有最新消息请查看收件箱", "success");
+		            		var str = "";
+		                    for(var i=0;i<data.obj.length;i++){
+		                        str += "<li>" +
+		                                "<a href='<%=path%>/message/showOneMessage.action?sendUserId=" + data.obj[i].sendUserId + " '>" +
+		                                "<div class=\"pull-left\">" +
+		                                "<img src=\"<%=path%>"+data.obj[i].sendUserImage +"\" class=\"rounded-circle\" alt=\"User Image\">" +
+		                                "</div>" +
+		                                "<div class=\"mail-contnet\">" +
+		                                "<h4> " +data.obj[i].sendUserName +
+		                                "<small><i class=\"fa fa-clock-o\"></i> "+data.obj[i].showTime +"</small>"+
+		                                "</h4>" +
+		                                " <span style=\"overflow: hidden;text-overflow: ellipsis;white-space: nowrap;\">"+data.obj[i].messInfo+"</span> " +
+		                                "</div>" +
+		                                "</a>" +
+		                                "</li>";
+		            	}
+		                $("#menuForAllMessages").append(str);
+		                console.log(str);
+		            	}
+					},
+					error: function() {
+						console.log("error");
+					}
+				}); 
 		    }
 		
-		    //setInterval("checkTime()","5000");
+		    setInterval("checkTime()","3000"); 
 
 	</script>
 </body>

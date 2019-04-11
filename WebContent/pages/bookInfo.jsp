@@ -1,4 +1,4 @@
-﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+﻿﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -22,7 +22,7 @@
     <meta name="author" content="">
     <link rel="icon" href="<%=path%>/images/favicon.ico">
 
-    <title>e书网 - 首页</title>
+    <title>e书网 - </title>
     
 	<!-- Bootstrap 4.0-->
 	<link rel="stylesheet" href="<%=path%>/assets/vendor_components/bootstrap/dist/css/bootstrap.css">
@@ -35,12 +35,25 @@
 	<!-- Bootstrap extend-->
 	<link rel="stylesheet" href="<%=path%>/main/css/bootstrap-extend.css">
 	
+		<!-- owlcarousel-->
+	<link rel="stylesheet" href="<%=path%>/assets/vendor_components/OwlCarousel2/dist/assets/owl.carousel.css">
+	<link rel="stylesheet" href="<%=path%>/assets/vendor_components/OwlCarousel2/dist/assets/owl.theme.default.css">
+	
 	<!-- theme style -->
 	<link rel="stylesheet" href="<%=path%>/main/css/master_style.css">
 	
 	<!-- Ekan Admin skins -->
 	<link rel="stylesheet" href="<%=path%>/main/css/skins/_all-skins.css">
 	
+
+    <!-- Data Table-->
+	<link rel="stylesheet" type="text/css" href="<%=path%>/assets/vendor_components/datatable/datatables.min.css"/>
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
 
 
      
@@ -69,15 +82,15 @@
 		  <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
 			<i class="ti-align-left"></i>
 		  </a>
-		  <a id="toggle_res_search" data-toggle="collapse" data-target="#search_form" class="res-only-view" href="javascript:void(0);"><i class="mdi mdi-magnify"></i></a>
+<!-- 		  <a id="toggle_res_search" data-toggle="collapse" data-target="#search_form" class="res-only-view" href="javascript:void(0);"><i class="mdi mdi-magnify"></i></a>
 		  <form id="search_form" role="search" class="top-nav-search pull-left collapse ml-20">
 				<div class="input-group">
-					<input type="text" name="searchByBookName" class="form-control" placeholder="Search">
+					<input type="text" name="searchByBookName" class="form-control" placeholder="请输入书名">
 						<span class="input-group-btn">
 							<button type="button" class="btn  btn-default" data-target="#search_form" data-toggle="collapse" aria-label="Close" aria-expanded="true" ><i class="mdi mdi-magnify"></i></button>
 						</span>
 				</div>
-		  </form> 
+		  </form>  -->
 		
 	  </div>
 		
@@ -104,51 +117,40 @@
 			  </li>
 			  <li>
 				<!-- inner menu: contains the actual data -->
-				<ul class="menu sm-scrol">
-				  <li><!-- start message -->
-					<a href="#">
-
-					  <div class="mail-contnet">
-						 <h4>
-						  Lorem Ipsum
-						  <small><i class="fa fa-clock-o"></i> 15 mins</small>
-						 </h4>
-						 <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
-					  </div>
-					</a>
-				  </li>
-				  <!-- end message -->
-				  <li>
-					<a href="#">
+				<ul class="menu sm-scrol" id="menuForAllMessages">
+			      <c:forEach items="${messageDtos}" var="message" varStatus="status" >
+			      <li>
+					<a href="<%=path%>/message/showOneMessage.action?sendUserId=${message.sendUserId}">
 					  <div class="pull-left">
-						<img src="<%=path%>/images/user3-128x128.jpg" class="rounded-circle" alt="User Image">
+						<img src="<%=path%>${message.sendUserImage}" class="rounded-circle" alt="User Image">
 					  </div>
 					  <div class="mail-contnet">
 						 <h4>
-						  Nullam tempor
-						  <small><i class="fa fa-clock-o"></i> 4 hours</small>
+						  ${message.sendUserName}
+						  <small><i class="fa fa-clock-o"></i> ${message.showTime}</small>
 						 </h4>
-						 <span>Curabitur facilisis erat quis metus congue viverra.</span>
+						 <span style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">${message.messInfo}</span>
 					  </div>
 					</a>
 				  </li>
+			      </c:forEach>
 				</ul>
 			  </li>
 			  <li class="footer">				  
-				  <a href="#" class="bg-light">查看所有的信息</a>
+				  <a class="bg-light" href="<%=path%>/message/showOneMessage.action">查看所有的信息</a>
 			  </li>
 			</ul>
 		  </li>
 		  <!-- User Account-->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<%=path%>/images/avatar/7.jpg" class="user-image rounded-circle" alt="User Image">
+              <img src="<%=path%>${currentUser.image}" class="user-image rounded-circle" alt="User Image">
             </a>
             <ul class="dropdown-menu animated flipInX">
               <!-- User image -->
-              <li class="user-header bg-img" style="background-image: url(<%=path%>/images/logo-big.png)" data-overlay="3">
+              <li class="user-header bg-img" style="background-image: url(<%=path%>${currentUser.image})" data-overlay="3">
 				  <div class="flexbox align-self-center">					  
-				  	<img src="<%=path%>/images/avatar/7.jpg" class="float-left rounded-circle" alt="User Image">					  
+				  	<img src="<%=path%>${currentUser.image}" class="float-left rounded-circle" alt="User Image">					  
 					<h5 class="user-name align-self-center ">
 					  <span>${currentUser.username} </span> <br />
 					  <small>${currentUser.usercode}</small>
@@ -189,7 +191,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="image">
-          <img src="<%=path%>/images/logo-big.png" class="rounded-circle" alt="User Image">
+          <img src="<%=path%>${currentUser.image}" class="rounded-circle" alt="User Image">
         </div>
         <div class="info">
        	    <a class="dropdown-item" ><i>${currentUser.username}</i></a>
@@ -207,7 +209,7 @@
 		<li class="treeview active">
           <a href="#">
             <i class="ti-dashboard"></i>
-            <span></span>
+            <span>交易中心</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>
@@ -216,6 +218,16 @@
             <li class="active"><a href="<%=path%>/home/toHomePage.action"><i class="ti-more"></i>购买书</a></li>
             <li><a href="#"><i class="ti-more"></i>出售书</a></li>
             <li><a href="#"><i class="ti-more"></i>出售书</a></li>
+          </ul>
+          <a href="#">
+            <i class="ti-pencil-alt"></i>
+            <span>个人中心</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<%=path%>/message/showOneMessage.action"><i class="ti-more"></i>消息中心</a></li>
           </ul>
         </li>  
         
@@ -232,7 +244,7 @@
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper"  style="display: none;">
+  <div class="content-wrapper" >
 	  <div class="container-full">
 		<!-- Content Header (Page header) -->	  
 		<div class="content-header">
@@ -243,7 +255,7 @@
 						<nav>
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="#"><i class="mdi mdi-home-outline"></i></a></li>
-								<li class="breadcrumb-item active" aria-current="page">${homeReq.showLoad}</li>
+								<li class="breadcrumb-item active" aria-current="page">书籍详情</li>
 							</ol>
 						</nav>
 					</div>
@@ -253,108 +265,106 @@
 
 		<!-- Main content -->
 		<section class="content">
-			
-			<div class="row">
-				<div class="col-xl-4 col-12">
-				    <a href="<%=path%>/home/toHomePage.action">
-					<div class="box box-body">
-					  <h6 class="text-uppercase">全部</h6>
-					  <div class="flexbox mt-2">
-						<span class=" font-size-30">${homeReq.allBookSum}</span>
-						<span class="ion ion-ios-bookmarks-outline text-danger font-size-40"></span>
-					  </div>
+		   		<div class="col-12 col-xl-8 m-auto">
+				<div class="box">		
+					<div class="box-header bg-warning">
+						<h4 class="box-title">Packages</h4>
+						<ul class="box-controls pull-right">
+						  <li class="dropdown">
+							<a data-toggle="dropdown" href="#" class="btn btn-rounded btn-outline btn-white px-10">Stats</a>
+							<div class="dropdown-menu dropdown-menu-right">
+							  <a class="dropdown-item" href="#"><i class="ti-import"></i> Import</a>
+							  <a class="dropdown-item" href="#"><i class="ti-export"></i> Export</a>
+							  <a class="dropdown-item" href="#"><i class="ti-printer"></i> Print</a>
+							  <div class="dropdown-divider"></div>
+							  <a class="dropdown-item" href="#"><i class="ti-settings"></i> Settings</a>
+							</div>
+						  </li>
+						</ul>
 					</div>
-					</a>
-				</div>
-				<!-- /.col -->
+					<div class="box-body bg-warning">										
+						<div class="px-10 py-30 bg-white text-dark">
+							<h5 class="px-10 mb-15 font-weight-700">Partners Sale</h5>
+						     <ul class="flexbox flex-justified">
+							 <li class="px-30">
+							    <p> 
+							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-user"></i> 书名：							   
+							      <small>
+								  	合演
+							      </small>
+							      </h6> 
+							    </p>
+							    <p> 
+							     <h6 class="mb-0 text-bold">书名：							   
+							      <small>
+								  	合演
+							      </small>
+							      </h6> 
+							    </p>
+							    <p> 
+							     <h6 class="mb-0 text-bold">书名：							   
+							      <small>
+								  	合演
+							      </small>
+							      </h6> 
+							    </p>
+							    <p> 
+							     <h6 class="mb-0 text-bold">书名：							   
+							      <small>
+								  	合演
+							      </small>
+							      </h6> 
+							    </p>
+							   <p class="my-10">
+							     <small>
+								  <i class="fa fa-user"></i> by <a href="#">dashu</a> 
+							     </small>
+							   </p>
+							   <p class="box-text" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">nihao</p>
+							   <div class="flexbox align-items-center mt-3">
+							   <input type="file" class="form-control">
+							      <a href="<%=path%>/home/toHomePage.action?id=${hotBook.id}" class="btn btn-flat btn-primary btn-sm">查看详情</a>
+							   </div>
+							 </li>
+							 <li class="px-10">
+							   <form enctype="multipart/form-data" method="post" id="upload" action="<%=path%>/book/saveBook.action">
+									  <input id="file" type="file" name="image" id="image" > 
+									  <input type="button" value="上传" onclick="validate()"  />
+							   </form>
+							   <script type="text/javascript">
+							   function validate() {
 
-				<div class="col-xl-4 col-12">
-				    <a href="<%=path%>/home/toHomePage.action?queryScope=university">
-					<div class="box box-body">
-					  <h6 class="text-uppercase">${currentUser.university}</h6>
-					  <div class="flexbox mt-2">
-						<span class=" font-size-30">${homeReq.universityBookSum}</span>
-						<span class="ion ion-ribbon-a text-info font-size-40"></span>
-					  </div>
-					</div>
-					</a>
-				</div>
-				<!-- /.col -->
-				<div class="col-xl-4 col-12">
-				    <a href="<%=path%>/home/toHomePage.action?queryScope=campus">
-					<div class="box box-body">
-					  <h6 class="text-uppercase">${currentUser.campus}</h6>
-					  <div class="flexbox mt-2">
-						<span class=" font-size-30">${homeReq.campusBookSum}</span>
-						<span class="ion ion-university text-primary font-size-40"></span>
-					  </div>
-					</div>
-					</a>
-				</div>
-				<!-- /.col -->
-		    </div>					
-			
-			<div class="row">
-				<div class="col-12">
-	
-				 <div class="box">
-					<div class="box-header with-border">
-					  <h3 class="box-title">${homeReq.showLoad}</h3>
-					</div>
-					<!-- /.box-header -->
-					<div class="box-body">
-						<div class="table-responsive">
-						  <table id="example5" class="table table-bordered table-striped" style="text-align: center; " >
-							<thead>
-								<tr>
-									<th style="display: none;"><b>序号</b></th>
-									<th><b>书名</b></th>
-									<th><b>书籍来源地点</b></th>
-									<th><b>作者 / 版本 / 学期</b></th>
-									<th><b>交易方式</b></th>
-									<th><b>价钱</b></th>
-									<th><b>书籍质量 / 上架时间</b></th>
-									<th></th>
-								</tr>
-							</thead>
-							<tbody >
-							<% int i = 0; %>
-								<c:forEach items="${bookVoList}" var="book" varStatus="status" >
-									  <tr <%--  onclick="location.href='<%=path%>/home/toHomePage.action?id=${book.id}';" --%>>
-									    <% i++; %>
-										<td style="display: none;"> <%=i %></td>
-										<td width="13%"><a href="<%=path%>/home/toHomePage.action?id=${book.id}"><b>${book.name}</b></a></td>
-										<td>${book.campus} </td>
-										<td>${book.author} / ${book.edition} / ${book.semester} </td>
-										<td width="15%">${book.transaction} </td>
-										<td><span class="badge badge-info"><b>$ ${book.price}</b></span> / <span class="badge badge-warning">原价：$ ${book.originalPrice}</span></td>
-										<td width="15%"><span class="badge badge-success">${book.conditions}</span> / ${book.createTimeCompare}</td>
-										<td width="5%"><a href="<%=path%>/home/toHomePage.action?id=${book.id}"><span class="badge badge-purple">查看详情</span></a></td>
-									  </tr>
-								</c:forEach>
-								
-							</tbody>
-							<tfoot>
-								<tr>
-									<th style="display: none;">序号</th>
-									<th>书名</th>
-									<th>书籍来源地点</th>
-									<th><b>作者 / 版本 / 学期</b></th>
-									<th><b>交易方式</b></th>
-									<th>价钱</th>
-									<th>书籍质量 / 上架时间</th>
-									<th></th>
-								</tr>
-							</tfoot>
-						  </table>
+								      var a=document.getElementById("file");
+									  var form=document.getElementById("upload");
+									  if(a.value==""){		   
+										   alert("请先选择图片");
+								           return false;
+										  }
+									  else{
+										  $.ajax({
+								                cache: true,
+								                type: "POST",
+								                url: "<%=path%>/book/saveBook.action",
+								                data:new FormData($("#upload")[0]),// 你的formid
+								                async: false,
+								                error: function(request) {
+								                    alert("Connection error");
+								                },
+								                success: function(data) {
+								                    $("#upload").parent().html(data);
+								                }
+								            });
+									  }
+							     }
+						            	
+							   </script>
+							 </li>
+						   </ul>						
 						</div>
 					</div>
-					<!-- /.box-body -->
-				  </div>
-				  <!-- /.box -->
-					<!-- /.box-body -->
-				  </div>
-			</div>
+					
+				</div>
+			</div>  
 			
 		</section>
 		<!-- /.content -->
@@ -415,14 +425,7 @@
   	
 	<!-- jQuery 3 -->
 	<script src="<%=path%>/assets/vendor_components/jquery-3.3.1/jquery-3.3.1.js"></script>
-		<script type="text/javascript">
-		window.onload=function(){
-		    $(".loader").fadeOut();
-		    $(".content-wrapper").show();
-		}
-	</script>
-	  
-	
+	  	
 	<!-- jQuery UI 1.11.4 -->
 	<script src="<%=path%>/assets/vendor_components/jquery-ui/jquery-ui.js"></script>
 	
@@ -441,6 +444,9 @@
 	
 	<!-- FastClick -->
 	<script src="<%=path%>/assets/vendor_components/fastclick/lib/fastclick.js"></script>
+	
+	<!-- Carousel -->
+	<script src="<%=path%>/assets/vendor_components/OwlCarousel2/dist/owl.carousel.js"></script>
 	
     <!-- C3 Plugins -->
     <script src="<%=path%>/assets/vendor_components/c3/d3.min.js"></script>
@@ -463,36 +469,51 @@
 	<!-- Prompting -->
     <script src="<%=path%>/assets/vendor_components/hullabaloo/hullabaloo.js"></script>
     
+    <script src="<%=path%>/main/js/pages/widget-blog.js"></script>
+    
     <script type="text/javascript">
 			$.hulla = new hullabaloo();
-			var usercode = '${currentUser.usercode}';
-			setTimeout(function() {
-				$.hulla.send(usercode+"Hi！这里是jQuery之家！", "success");
-			}, 1000);
-			function checkTime(){			
-		        var nowtime=Date.parse(new Date());
-		        $(".username").html("详细地址不能为空");
-		        console.log(nowtime);	
-		        <%-- $.ajax( {
+			//var usercode = '${currentUser.usercode}';
 
-		           // "dataType" : 'json',
-
-		            "type" : "POST",
-
-		            "url" : "<%=path%>/toHomepage.action",
-
-		            "data" : { "searchByBookName" : "123" },
-
-		            "success" : function(  ) {           
-
-		            	$("#username").value== "详细地址不能为空";
-		            	console.log("new");
-		            }
-
-		         } ); --%>
+			function checkTime(){
+		        $.ajax({
+					type: "post",
+					url: "<%=path%>/base/getUserMessage.action",
+					data: {
+					},
+					dataType: 'json',
+					success: function(data) {
+						console.log(data);
+		            	if(data.status == '200'){
+		            		$("#menuForAllMessages li").remove();
+		            		$.hulla.send("您有最新消息请查看收件箱", "success");
+		            		var str = "";
+		                    for(var i=0;i<data.obj.length;i++){
+		                        str += "<li>" +
+		                                "<a href='<%=path%>/message/showOneMessage.action?sendUserId=" + data.obj[i].sendUserId + " '>" +
+		                                "<div class=\"pull-left\">" +
+		                                "<img src=\"<%=path%>"+data.obj[i].sendUserImage +"\" class=\"rounded-circle\" alt=\"User Image\">" +
+		                                "</div>" +
+		                                "<div class=\"mail-contnet\">" +
+		                                "<h4> " +data.obj[i].sendUserName +
+		                                "<small><i class=\"fa fa-clock-o\"></i> "+data.obj[i].showTime +"</small>"+
+		                                "</h4>" +
+		                                " <span style=\"overflow: hidden;text-overflow: ellipsis;white-space: nowrap;\">"+data.obj[i].messInfo+"</span> " +
+		                                "</div>" +
+		                                "</a>" +
+		                                "</li>";
+		            	}
+		                $("#menuForAllMessages").append(str);
+		                console.log(str);
+		            	}
+					},
+					error: function() {
+						console.log("error");
+					}
+				}); 
 		    }
 		
-		    //setInterval("checkTime()","5000");
+		    setInterval("checkTime()","3000"); 
 
 	</script>
 </body>

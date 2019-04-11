@@ -33,4 +33,11 @@
 	</bean>
 	<!-- 配置全局异常处理器 -->
 	<bean class="com.herman.ebookstore.exception.CustomerExceptionResolver"></bean>
+	<!-- 对文件上传的处理，这里声明的id必须为multipartResolver-->
+	 <bean id="multipartResolver"  class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >  
+           <!--  最大为100M，单位为字节   -->
+	     <property name="maxUploadSize" value="1048576"></property>      
+	     <property name="defaultEncoding" value="utf-8"></property>     
+	     <property name="maxInMemorySize" value="40960"></property>
+	 </bean>
 </beans>

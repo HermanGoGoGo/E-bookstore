@@ -296,13 +296,13 @@
           </ul>
           <a href="#">
             <i class="ti-pencil-alt"></i>
-            <span>消息中心</span>
+            <span>个人中心</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<%=path%>/message/showOneMessage.action"><i class="ti-more"></i>个人信息</a></li>
+            <li><a href="<%=path%>/message/showOneMessage.action"><i class="ti-more"></i>消息中心</a></li>
           </ul>
         </li>  
         
@@ -443,7 +443,7 @@
 									  <tr <%--  onclick="location.href='<%=path%>/home/toHomePage.action?id=${book.id}';" --%>>
 									    <% i++; %>
 										<td style="display: none;"> <%=i %></td>
-										<td width="13%"><a href="<%=path%>/home/toHomePage.action?id=${book.id}"><b>${book.name}</b></a></td>
+										<td width="13%"><a href="<%=path%>/book/bookDetails.action?id=${book.id}"><b>${book.name}</b></a></td>
 										<td>${book.campus} </td>
 										<td>${book.author} / ${book.edition} / ${book.semester} </td>
 										<td width="15%">${book.transaction} </td>

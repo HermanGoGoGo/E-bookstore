@@ -219,13 +219,13 @@
           </ul>
           <a href="#">
             <i class="ti-pencil-alt"></i>
-            <span>消息中心</span>
+            <span>个人中心</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="<%=path%>/message/showOneMessage.action"><i class="ti-more"></i>个人信息</a></li>
+            <li class="active"><a href="<%=path%>/message/showOneMessage.action"><i class="ti-more"></i>信息中心</a></li>
           </ul>
         </li>  
         
@@ -264,10 +264,14 @@
 		<!-- Main content -->
 		<section class="content">
 			<div class="row">
-			  	<div class="col-md-4 col-12">
+			  	<div class="col-xl-4 col-12">
 				<div class="box">
 				  <div class="box-header with-border">
 					<h4 class="box-title">通讯录</h4>
+					<ul class="box-controls pull-right">
+					 <!--  <li><a class="box-btn-slide" href="#"></a></li> -->
+					  <li><a class="box-btn-fullscreen" href="#"></a></li>
+					</ul>
 				  </div>
 
 				  <div class="box-body">

@@ -1,5 +1,6 @@
 package com.herman.ebookstore.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.alibaba.fastjson.JSON;
@@ -16,6 +18,7 @@ import com.herman.ebookstore.common.model.BaseForSDK;
 import com.herman.ebookstore.common.model.ResultCode;
 import com.herman.ebookstore.mapper.MessageMapper;
 import com.herman.ebookstore.model.MessageDto;
+import com.herman.ebookstore.model.UserDto;
 import com.herman.ebookstore.pojo.Message;
 import com.herman.ebookstore.pojo.Sdk;
 import com.herman.ebookstore.pojo.User;
@@ -54,6 +57,7 @@ public class BaseController extends BaseForSDK {
 
 	@Autowired
 	private MessageService messageService;
+	
 	@RequestMapping("getVerificationCode")
 	public void getVerificationCode(String phonenumber, String usercode, HttpServletResponse response) {
 		User user =new User();
@@ -105,5 +109,30 @@ public class BaseController extends BaseForSDK {
 		}else {
 			new ResponseWriter().writerResponse(false, response);
 		}
+	}
+	
+	@RequestMapping("base")
+	public String base(HttpServletRequest request,Model model) {
+		Object usercode = request.getSession().getAttribute("usercode");
+		UserDto currentUser = new UserDto();
+		MessageDto messageDto = new MessageDto();
+		List<MessageDto> messageDtos = new ArrayList<MessageDto>();
+		if(usercode != null && !"".equals(usercode)) {
+			messageDto.setReceiveUserId(usercode.toString());
+			messageDto.setStatus("0");
+			currentUser.setUsercode(usercode.toString());
+			currentUser =this.userService.selectMinuteOne(currentUser);
+			messageDtos = this.messageService.findAllMessageByDto(messageDto);
+		}else {
+			String msg= "请登录后查看";
+			currentUser.setUsercode("管理员邮箱：1146465559@qq.com");
+			currentUser.setUsername(msg);
+			currentUser.setCampus(msg);
+			currentUser.setUniversity(msg);
+			currentUser.setImage("/images/user2-128x128.jpg");
+		}
+		model.addAttribute("messageDtos", messageDtos);
+		model.addAttribute("currentUser", currentUser);
+		return "pages/base";
 	}
 }
