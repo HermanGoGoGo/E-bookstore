@@ -11,6 +11,7 @@ import com.herman.ebookstore.common.model.BaseEntity;
  * @email 1146465559@qq.com
  * @date 2019-04-10 15:23:08
  */
+@Entity
 @Table(name = "MSTB_SELL_BOOK")
 public class Book extends BaseEntity<Book> {
 
@@ -71,6 +72,10 @@ public class Book extends BaseEntity<Book> {
     //书籍浏览次数
     @Column(name = "browse_times")
     private Integer browseTimes;
+    
+    //照片url
+    @Column(name = "image")
+    private String image;
     
 	public void setUserId(String userId) {
 		this.userId = userId;
@@ -183,5 +188,15 @@ public class Book extends BaseEntity<Book> {
 	public Integer getBrowseTimes() {
 		return browseTimes;
 	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+	
+	
 	
 }

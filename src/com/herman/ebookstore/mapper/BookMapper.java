@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.jdbc.SQL;
 
 import com.herman.ebookstore.common.core.Mapper;
@@ -50,6 +51,9 @@ public interface BookMapper extends Mapper<Book> {
 	
 	@SelectProvider(type = BookSqlBuilder.class, method = "selectBookSum")
 	public HomeReq selectBookSum(UserDto currentUser);
+	
+	@Update("UPDATE MSTB_SELL_BOOK SET browse_times = browse_times+1 WHERE id= #{id}")
+	public Integer addHotBrowseTimes(Book book);
 
 	class BookSqlBuilder {
 		public String selectByBookName(SeachDto seachDto) {

@@ -45,4 +45,14 @@ public interface BookService extends Service<Book> {
 	public List<BookDto> selectByBookName(SeachDto seachDto);
 	
 	public HomeReq selectBookSum(UserDto currentUser);
+	
+	/** 
+	 * @Method_Name: addHotBrowseTimes 
+	 * @Description: TODO(增加书籍热度BrowseTimes )
+	 * @Description: * @param book
+	 * @Description: * @return Integer
+	 * @date 2019年4月12日
+	 * @author 黄金宝 
+	 */
+	public Integer addHotBrowseTimes(Book book);
 }

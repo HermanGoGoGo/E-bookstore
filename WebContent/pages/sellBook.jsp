@@ -22,32 +22,21 @@
     <meta name="author" content="">
     <link rel="icon" href="<%=path%>/images/favicon.ico">
 
-    <title>e书网 - 首页</title>
-    
+    <title>e书网 - 出售书</title>
+	
 	<!-- Bootstrap 4.0-->
-	<link rel="stylesheet" href="<%=path%>/assets/vendor_components/bootstrap/dist/css/bootstrap.css">
-	
-	<link rel="stylesheet"  type="text/css" href="<%=path%>/main/css/style-1.css">	
-	
-    <!-- c3 CSS -->
-    <link rel="stylesheet" type="text/css" href="<%=path%>/assets/vendor_components/c3/c3.min.css">
+	<link rel="stylesheet" href="<%=path%>/assets/vendor_components/bootstrap/dist/css/bootstrap.min.css">
 	
 	<!-- Bootstrap extend-->
 	<link rel="stylesheet" href="<%=path%>/main/css/bootstrap-extend.css">
-	
-		<!-- owlcarousel-->
-	<link rel="stylesheet" href="<%=path%>/assets/vendor_components/OwlCarousel2/dist/assets/owl.carousel.css">
-	<link rel="stylesheet" href="<%=path%>/assets/vendor_components/OwlCarousel2/dist/assets/owl.theme.default.css">
-	
-	<!-- theme style -->
+
+	<!-- Theme style -->
 	<link rel="stylesheet" href="<%=path%>/main/css/master_style.css">
 	
+	<link rel="stylesheet"  type="text/css" href="<%=path%>/main/css/style-1.css">	
+
 	<!-- Ekan Admin skins -->
 	<link rel="stylesheet" href="<%=path%>/main/css/skins/_all-skins.css">
-	
-
-    <!-- Data Table-->
-	<link rel="stylesheet" type="text/css" href="<%=path%>/assets/vendor_components/datatable/datatables.min.css"/>
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -60,42 +49,6 @@
   </head>
 
 <body class="hold-transition skin-info dark-sidebar light sidebar-mini">
-<!-- loading -->
-		<div class="loader">
-			<div class="text">Loading...</div>
-			<div class="horizontal">
-				<div class="circlesup">
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-				</div>
-				<div class="circlesdwn">
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-				</div>
-			</div>
-			<div class="vertical">
-				<div class="circlesup">
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-				</div>
-				<div class="circlesdwn">
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-				</div>
-			</div>
-		</div>
 <div class="wrapper" >
   <header class="main-header">
     <!-- Logo -->
@@ -118,15 +71,6 @@
 		  <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
 			<i class="ti-align-left"></i>
 		  </a>
-		  <a id="toggle_res_search" data-toggle="collapse" data-target="#search_form" class="res-only-view" href="javascript:void(0);"><i class="mdi mdi-magnify"></i></a>
-		  <form id="search_form" role="search" class="top-nav-search pull-left collapse ml-20">
-				<div class="input-group">
-					<input type="text" name="searchByBookName" class="form-control" placeholder="请输入书名">
-						<span class="input-group-btn">
-							<button type="button" class="btn  btn-default" data-target="#search_form" data-toggle="collapse" aria-label="Close" aria-expanded="true" ><i class="mdi mdi-magnify"></i></button>
-						</span>
-				</div>
-		  </form> 
 		
 	  </div>
 		
@@ -174,45 +118,6 @@
 			  </li>
 			  <li class="footer">				  
 				  <a class="bg-light" href="<%=path%>/message/showOneMessage.action">查看所有的信息</a>
-				  <script type="text/javascript">
-				  function findAllUserMessage(){
-				        $.ajax({
-							type: "post",
-							url: "<%=path%>/message/findAllUserMessage.action",
-							data: {
-							},
-							dataType: 'json',
-							success: function(data) {
-								console.log(data);
-				            	if(data.status == '200'){
-				            		$("#menuForAllMessages li").remove();
-				            		//$.hulla.send("您有最新消息请查看收件箱", "success");
-				            		var str = "";
-				                    for(var i=0;i<data.obj.length;i++){
-				                        str += "<li>" +
-				                                "<a href='<%=path%>/message/showOneMessage.action?sendUserId=" + data.obj[i].sendUserId + " '>" +
-				                                "<div class=\"pull-left\">" +
-				                                "<img src=\"<%=path%>"+data.obj[i].sendUserImage +"\" class=\"rounded-circle\" alt=\"User Image\">" +
-				                                "</div>" +
-				                                "<div class=\"mail-contnet\">" +
-				                                "<h4> " +data.obj[i].sendUserName +
-				                                "<small><i class=\"fa fa-clock-o\"></i> "+data.obj[i].showTime +"</small>"+
-				                                "</h4>" +
-				                                " <span>"+data.obj[i].messInfo+"</span> " +
-				                                "</div>" +
-				                                "</a>" +
-				                                "</li>";
-				            	}
-				                $("#menuForAllMessages").append(str);
-				                console.log(str);
-				            	}
-							},
-							error: function() {
-								console.log("error");
-							}
-						}); 
-				    }
-				  </script>
 			  </li>
 			</ul>
 		  </li>
@@ -290,8 +195,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="<%=path%>/home/toHomePage.action"><i class="ti-more"></i>购买书</a></li>
-            <li><a href="<%=path%>/book/sellBook.action"><i class="ti-more"></i>出售书</a></li>
+            <li><a href="<%=path%>/home/toHomePage.action"><i class="ti-more"></i>购买书</a></li>
+            <li class="active"><a href="<%=path%>/book/sellBook.action"><i class="ti-more"></i>出售书</a></li>
             <li><a href="#"><i class="ti-more"></i>出售书</a></li>
           </ul>
           <a href="#">
@@ -319,18 +224,18 @@
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper"  style="display: none;">
+  <div class="content-wrapper" >
 	  <div class="container-full">
 		<!-- Content Header (Page header) -->	  
 		<div class="content-header">
 			<div class="d-flex align-items-center">
 				<div class="mr-auto">
-					<h3 class="page-title">购买书</h3>
+					<h3 class="page-title">交易中心</h3>
 					<div class="d-inline-block align-items-center">
 						<nav>
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="#"><i class="mdi mdi-home-outline"></i></a></li>
-								<li class="breadcrumb-item active" aria-current="page">${homeReq.showLoad}</li>
+								<li class="breadcrumb-item active" aria-current="page">出售书</li>
 							</ol>
 						</nav>
 					</div>
@@ -340,142 +245,159 @@
 
 		<!-- Main content -->
 		<section class="content">
-		    <h3 class="page-header">书籍统计</h3>
-			<div class="row">
-				<div class="col-xl-4 col-12">
-				    <a href="<%=path%>/home/toHomePage.action">
-					<div class="box box-body">
-					  <h6 class="text-uppercase">全部</h6>
-					  <div class="flexbox mt-2">
-						<span class=" font-size-30">${homeReq.allBookSum}</span>
-						<span class="ion ion-ios-bookmarks-outline text-danger font-size-40"></span>
-					  </div>
-					</div>
-					</a>
-				</div>
-				<!-- /.col -->
-
-				<div class="col-xl-4 col-12">
-				    <a href="<%=path%>/home/toHomePage.action?queryScope=university">
-					<div class="box box-body">
-					  <h6 class="text-uppercase">${currentUser.university}</h6>
-					  <div class="flexbox mt-2">
-						<span class=" font-size-30">${homeReq.universityBookSum}</span>
-						<span class="ion ion-ribbon-a text-info font-size-40"></span>
-					  </div>
-					</div>
-					</a>
-				</div>
-				<!-- /.col -->
-				<div class="col-xl-4 col-12">
-				    <a href="<%=path%>/home/toHomePage.action?queryScope=campus">
-					<div class="box box-body">
-					  <h6 class="text-uppercase">${currentUser.campus}</h6>
-					  <div class="flexbox mt-2">
-						<span class=" font-size-30">${homeReq.campusBookSum}</span>
-						<span class="ion ion-university text-primary font-size-40"></span>
-					  </div>
-					</div>
-					</a>
-				</div>
-				<!-- /.col -->
-		    </div>
-		    <h3 class="page-header">最热书榜</h3>
-		    <div class="news-slider owl-carousel">
-		       <% int j = 0; String style="";%>
-		       <c:forEach items="${hotBookList}" var="hotBook" varStatus="status" >
-			   <div class="box ">
-			        <%  j++;
-			        if(j%2==0) {
-			        	style ="bg-pale-primary";
-			        }else{
-			        	style ="";
-			        }
-			        %>
-					<div class="box-body <%=style%>"> 
-						<div class="text-left ">
-							<h4 class="box-title ">${hotBook.name}</h4>
-							<p class="my-10">
-							  <small>
-								  <i class="fa fa-user"></i> by <a href="#">${hotBook.username}</a> 
-								  <span class="px-10">| </span><i class="fa fa-calendar"></i> ${hotBook.createTimeCompare}
-							  </small>
-							</p>
-							<p class="box-text" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">${hotBook.description}</p>
-							<div class="flexbox align-items-center mt-3">
-							<a href="<%=path%>/home/toHomePage.action?id=${hotBook.id}" class="btn btn-flat btn-primary btn-sm">查看详情</a>
-							<a>
-							<i class="ion-heart text-danger font-size-11"></i>
-							<span class="font-size-11 text-fade ml-1">${hotBook.browseTimes}</span>
-							</a>
+		   <div class="row">
+		   	<div class="col-lg-8 col-12 m-auto">
+				  <div class="box">
+					<!-- /.box-header -->
+					<form id="bookInfo" class="form" novalidate action="<%=path%>/book/saveBook.action" method="post" enctype="multipart/form-data">
+						<div class="box-body">
+							<h4 class="box-title text-info" ><i class="ti-book mr-15"></i> 填写售书信息</h4>
+							<h6><small><span class="text-danger px-10">* 为必填项</span></small></h6>
+							<hr class="my-15">
+							<div class="row">
+							  <div class="col-md-6">
+								<div class="form-group">
+								  <label for="name">书名<span class="text-danger">*</span></label>
+								  <input type="text" id="name" name ="name" class="form-control"required data-validation-required-message="This field is required" placeholder="请填写书名">
+								</div>
+							  </div>
+							  <div class="col-md-6">
+								<div class="form-group">
+								  <label for="author">作者<span class="text-danger">*</span></label>
+								  <input type="text" id="author" name ="author"  class="form-control" required data-validation-required-message="This field is required" placeholder="请填写作者">
+								</div>
+							  </div>
+							</div>
+							<div class="row">
+							  <div class="col-md-6">
+								<div class="form-group">
+								     <label for="originalPrice">原价<span class="text-danger">*</span></label>
+								    <div class="input-group"> 
+								        <span class="input-group-addon">￥</span>
+									    <input type="number" id="originalPrice" name="originalPrice" class="form-control" required data-validation-required-message="This field is required"> <span class="input-group-addon">.00</span> 
+									</div>
+								</div>
+							  </div>
+							  <div class="col-md-6">
+								<div class="form-group">
+								     <label for="price">售价<span class="text-danger">*</span></label>
+								    <div class="input-group"> 
+								        <span class="input-group-addon">￥</span>
+									    <input type="number" id="price" name="price" class="form-control" required data-validation-required-message="This field is required"> <span class="input-group-addon">.00</span> 
+									</div>
+								</div>
+							  </div>
+							</div>
+							<div class="row">
+							  <div class="col-md-6">
+								<div class="form-group">
+								  <label for="edition">版本</label>
+								  <input type="text" id="edition" name="edition" class="form-control" placeholder="请填写版本">
+								</div>
+							  </div>
+							  <div class="col-md-6">
+								<div class="form-group">
+								  <label for="semester">学期</label>
+								 <select id="semester" name="semester" class="form-control">
+									<option>无</option>
+									<option>2014年第一学期</option>
+									<option>2014年第二学期</option>
+									<option>2014年第三学期</option>
+									<option>2015年第一学期</option>
+									<option>2015年第二学期</option>
+									<option>2015年第三学期</option>
+									<option>2016年第一学期</option>
+									<option>2016年第二学期</option>
+									<option>2016年第三学期</option>
+									<option>2017年第一学期</option>
+									<option>2017年第二学期</option>
+									<option>2017年第三学期</option>
+									<option>2018年第一学期</option>
+									<option>2018年第二学期</option>
+									<option>2018年第三学期</option>
+									<option>2019年第一学期</option>
+									<option>2019年第二学期</option>
+									<option>2019年第三学期</option>
+								  </select>
+								</div>
+							  </div>
+							</div>
+							<div class="row">
+							  <div class="col-md-6">
+								<div class="form-group">
+								  <label for="course">课程</label>
+								  <input type="text" id="course" name ="course"  class="form-control" placeholder="请填写课程">
+								</div>
+							  </div>
+							  <div class="col-md-6">
+								<div class="form-group">
+								  <label for="transaction">交易方式<small class="text-danger sidetitle">默认校区当面交易</small></label>
+								  <select id="transaction" name ="transaction" class="form-control">
+									<option value="0">校区当面交易</option>
+									<option value="1">邮寄</option>
+									<option value="2">校区当面交易或者邮寄</option>
+								  </select>
+								</div>
+							  </div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+								  <div class="form-group">
+								   <label for="conditions">状态<small class="text-danger sidetitle">默认9成新</small></label>
+								   <select id="conditions" name ="conditions" class="form-control">
+									 <option value="1">9成新</option>
+									 <option value="0">全新</option>
+									 <option value="2">6成新</option>
+								   </select>
+								  </div>
+							    </div>
+							</div>
+							<div class="form-group">
+							        <label for="image">上传书籍照片<span class="text-danger">*</span></label>
+								      <input type="file" id="image" name ="image" required data-validation-required-message="This field is required">
+								      <label class="file">
+							        </label>
+							</div>
+							<div class="form-group">
+							  <label for="description">书本描述<span class="text-danger">*</span></label>
+							  <textarea id="description" name ="description" rows="5" class="form-control" required data-validation-required-message="This field is required" placeholder="书籍描述"></textarea>
 							</div>
 						</div>
-					</div>
-					<!-- /.box-body -->
-				</div>
-				</c:forEach>
-			</div>					
-			<div class="row">
-				<div class="col-12 m-auto">	
-				 <div class="box">
-					<div class="box-header with-border">
-					  <h3 class="box-title">${homeReq.showLoad}</h3>
-					</div>
-					<!-- /.box-header -->
-					<div class="box-body">
-						<div class="table-responsive">
-						  <table id="example5" class="table table-bordered table-striped text-center"  >
-							<thead>
-								<tr>
-									<th style="display: none;"><b>序号</b></th>
-									<th><b>书名</b></th>
-									<th><b>书籍来源地点</b></th>
-									<th><b>作者 / 版本 / 学期</b></th>
-									<th><b>交易方式</b></th>
-									<th><b>价钱</b></th>
-									<th><b>书籍质量 / 上架时间</b></th>
-									<th></th>
-								</tr>
-							</thead>
-							<tbody >
-							<% int i = 0; %>
-								<c:forEach items="${bookVoList}" var="book" varStatus="status" >
-									  <tr <%--  onclick="location.href='<%=path%>/home/toHomePage.action?id=${book.id}';" --%>>
-									    <% i++; %>
-										<td style="display: none;"> <%=i %></td>
-										<td width="13%"><a href="<%=path%>/book/bookDetails.action?id=${book.id}"><b>${book.name}</b></a></td>
-										<td>${book.campus} </td>
-										<td>${book.author} / ${book.edition} / ${book.semester} </td>
-										<td width="15%">${book.transaction} </td>
-										<td><span class="badge badge-info"><b>$ ${book.price}</b></span> / <span class="badge badge-warning">原价：$ ${book.originalPrice}</span></td>
-										<td width="15%"><span class="badge badge-success">${book.conditions}</span> / ${book.createTimeCompare}</td>
-										<td width="5%"><a href="<%=path%>/home/toHomePage.action?id=${book.id}"><span class="badge badge-purple">查看详情</span></a></td>
-									  </tr>
-								</c:forEach>
-								
-							</tbody>
-							<tfoot>
-								<tr>
-									<th style="display: none;">序号</th>
-									<th>书名</th>
-									<th>书籍来源地点</th>
-									<th><b>作者 / 版本 / 学期</b></th>
-									<th><b>交易方式</b></th>
-									<th>价钱</th>
-									<th>书籍质量 / 上架时间</th>
-									<th></th>
-								</tr>
-							</tfoot>
-						  </table>
-						</div>
-					</div>
-					<!-- /.box-body -->
+						<!-- /.box-body -->
+						<div class="box-footer">
+							<button type="button"  onclick="validate()" class="btn btn-warning btn-outline mr-1">
+							  <i class="ti-trash"></i> Cancel
+							</button>
+							<button type="submit" class="btn btn-primary btn-outline">
+							  <i class="ti-save-alt"></i> Save
+							</button>
+							<script type="text/javascript">
+							   function validate(){
+								   var formData = new FormData($('#bookInfo')[0]); 
+							        $.ajax({
+										type: "post",
+										url: "<%=path%>/book/saveBook.action",
+										data: formData,
+										cache: false, 
+									    processData: false, 
+									    contentType: false,
+										dataType: 'json',
+										success: function(data) {
+											console.log(data);
+										},
+										error: function() {
+											console.log("error");
+										}
+									}); 
+							    }
+						            	
+							   </script>
+						</div>  
+					</form>
 				  </div>
-				  <!-- /.box -->
-					<!-- /.box-body -->
-				  </div>
-			</div>
-			
+				  <!-- /.box -->			
+			</div>  
+		   </div>			
 		</section>
 		<!-- /.content -->
 	  </div>
@@ -533,60 +455,33 @@
 </div>
 <!-- ./wrapper -->
   	
-	<!-- jQuery 3 -->
+		<!-- jQuery 3 -->
 	<script src="<%=path%>/assets/vendor_components/jquery-3.3.1/jquery-3.3.1.js"></script>
-		<script type="text/javascript">
-		window.onload=function(){
-		    $(".loader").fadeOut();
-		    $(".content-wrapper").show();
-		}
-	</script>
-	  
-	
-	<!-- jQuery UI 1.11.4 -->
-	<script src="<%=path%>/assets/vendor_components/jquery-ui/jquery-ui.js"></script>
 	
 	<!-- popper -->
 	<script src="<%=path%>/assets/vendor_components/popper/dist/popper.min.js"></script>
 	
 	<!-- Bootstrap 4.0-->
-	<script src="<%=path%>/assets/vendor_components/bootstrap/dist/js/bootstrap.js"></script>	
+	<script src="<%=path%>/assets/vendor_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	
-	<!-- date-range-picker -->
-<%-- 	<script src="<%=path%>/assets/vendor_components/moment/min/moment.min.js"></script>
-	<script src="<%=path%>/assets/vendor_components/bootstrap-daterangepicker/daterangepicker.js"></script> --%>
-	
-	<!-- Slimscroll -->
-	<script src="<%=path%>/assets/vendor_components/jquery-slimscroll/jquery.slimscroll.js"></script>
+	<!-- SlimScroll -->
+	<script src="<%=path%>/assets/vendor_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 	
 	<!-- FastClick -->
 	<script src="<%=path%>/assets/vendor_components/fastclick/lib/fastclick.js"></script>
 	
-	<!-- Carousel -->
-	<script src="<%=path%>/assets/vendor_components/OwlCarousel2/dist/owl.carousel.js"></script>
-	
-    <!-- C3 Plugins -->
-    <script src="<%=path%>/assets/vendor_components/c3/d3.min.js"></script>
-    <script src="<%=path%>/assets/vendor_components/c3/c3.min.js"></script>
-	
 	<!-- Ekan Admin App -->
 	<script src="<%=path%>/main/js/template.js"></script>
 	
-	<!-- This is data table -->
-    <script src="<%=path%>/assets/vendor_components/datatable/datatables.min.js"></script>
-	<script src="<%=path%>/main/js/pages/data-table.js"></script>
-	
-	<!-- Ekan Admin dashboard demo (This is only for demo purposes) -->
-	<%-- <script src="<%=path%>/main/js/pages/dashboard.js"></script>
-	<script src="<%=path%>/main/js/pages/dashboard-chart.js"></script> --%>
-	
 	<!-- Ekan Admin for demo purposes -->
-	<script src="<%=path%>/main/js/demo.js"></script>	
+	<script src="<%=path%>/main/js/demo.js"></script>
 	
-	<!-- Prompting -->
-    <script src="<%=path%>/assets/vendor_components/hullabaloo/hullabaloo.js"></script>
+	<!-- Form validator JavaScript -->
+    <script src="<%=path%>/main/js/pages/validation.js"></script>
+    <script src="<%=path%>/main/js/pages/form-validation.js"></script>
     
-    <script src="<%=path%>/main/js/pages/widget-blog.js"></script>
+    <!-- Prompting -->
+    <script src="<%=path%>/assets/vendor_components/hullabaloo/hullabaloo.js"></script>
     
     <script type="text/javascript">
 			$.hulla = new hullabaloo();

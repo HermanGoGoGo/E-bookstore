@@ -11,6 +11,7 @@ import com.herman.ebookstore.common.model.BaseEntity;
  * @email 1146465559@qq.com
  * @date 2019-04-02 17:50:39
  */
+@Entity
 @Table(name = "MSTB_USER")
 public class User extends BaseEntity<User> {
 

@@ -19,5 +19,6 @@
     <result property="transaction" column="transaction"/>
     <result property="purchaserId" column="purchaser_id"/>
     <result property="browseTimes" column="browse_times"/>
+    <result property="image" column="image"/>
   </resultMap>
 </mapper>

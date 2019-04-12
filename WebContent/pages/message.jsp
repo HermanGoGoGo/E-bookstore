@@ -214,7 +214,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="<%=path%>/home/toHomePage.action"><i class="ti-more"></i>购买书</a></li>
-            <li><a href="#"><i class="ti-more"></i>出售书</a></li>
+            <li><a href="<%=path%>/book/sellBook.action"><i class="ti-more"></i>出售书</a></li>
             <li><a href="#"><i class="ti-more"></i>出售书</a></li>
           </ul>
           <a href="#">

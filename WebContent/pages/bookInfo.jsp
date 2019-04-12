@@ -216,7 +216,7 @@
           </a>
           <ul class="treeview-menu">
             <li class="active"><a href="<%=path%>/home/toHomePage.action"><i class="ti-more"></i>购买书</a></li>
-            <li><a href="#"><i class="ti-more"></i>出售书</a></li>
+            <li><a href="<%=path%>/book/sellBook.action"><i class="ti-more"></i>出售书</a></li>
             <li><a href="#"><i class="ti-more"></i>出售书</a></li>
           </ul>
           <a href="#">
@@ -284,70 +284,81 @@
 					</div>
 					<div class="box-body bg-warning">										
 						<div class="px-10 py-30 bg-white text-dark">
-							<h5 class="px-10 mb-15 font-weight-700">Partners Sale</h5>
+							<h5 class="px-10 mb-15 font-weight-700">${bookInfo.name}</h5>
 						     <ul class="flexbox flex-justified">
-							 <li class="px-30">
+							 <li class="px-30 ">
 							    <p> 
-							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-user"></i> 书名：							   
+							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-user"></i> 作者：							   
 							      <small>
-								  	合演
+								  	${bookInfo.author}
+							      </small>
+							      </h6> 
+							    </p>
+							    
+							    <p> 
+							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-user"></i> 价钱：							   
+							      <small>
+								  	${bookInfo.price} /原价：${bookInfo.originalPrice} 
+							      </small>
+							      </h6> 
+							    </p>
+							    
+							    <p> 
+							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-user"></i> 课程：							   
+							      <small>
+								  	${bookInfo.course}
+							      </small>
+							      </h6> 
+							    </p>
+							    
+							    <p> 
+							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-user"></i> 版本：							   
+							      <small>
+								  	${bookInfo.edition} 
+							      </small>
+							      </h6> 
+							    </p>
+							    
+							     <p> 
+							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-user"></i> 学期：							   
+							      <small>
+								  	${bookInfo.semester}
+							      </small>
+							      </h6> 
+							    </p>
+							    
+							     <p> 
+							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-user"></i> 交易方式：							   
+							      <small>
+								  	${bookInfo.transaction}
 							      </small>
 							      </h6> 
 							    </p>
 							    <p> 
-							     <h6 class="mb-0 text-bold">书名：							   
-							      <small>
-								  	合演
-							      </small>
+							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-user"></i> 描述：			
 							      </h6> 
 							    </p>
-							    <p> 
-							     <h6 class="mb-0 text-bold">书名：							   
-							      <small>
-								  	合演
-							      </small>
-							      </h6> 
+							    <p class="px-40 box-text">
+							         <small>${bookInfo.description}</small>
 							    </p>
-							    <p> 
-							     <h6 class="mb-0 text-bold">书名：							   
-							      <small>
-								  	合演
-							      </small>
-							      </h6> 
-							    </p>
-							   <p class="my-10">
-							     <small>
-								  <i class="fa fa-user"></i> by <a href="#">dashu</a> 
-							     </small>
-							   </p>
-							   <p class="box-text" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">nihao</p>
 							   <div class="flexbox align-items-center mt-3">
-							   <input type="file" class="form-control">
-							      <a href="<%=path%>/home/toHomePage.action?id=${hotBook.id}" class="btn btn-flat btn-primary btn-sm">查看详情</a>
-							   </div>
+							      <a class="btn btn-xs btn-round btn-bold btn-primary" href="#">联系卖家</a>
+							      <div class="gap-items-4">
+							      <a href="#"><i class="fa fa-user"></i>by ：${bookInfo.userId}</a> 
+							      <a>
+							         <i class="ion-heart text-danger font-size-11"></i>
+							         <span class="font-size-11 text-fade ml-1">${bookInfo.browseTimes}</span>
+							      </a>
+							      </div>
+							   </div>						   
 							 </li>
 							 <li class="px-10">
-							   <form enctype="multipart/form-data" method="post" id="upload" action="<%=path%>/book/saveBook.action">
-									  <input id="file" type="file" name="image" id="image" > 
-									  <input type="button" value="上传" onclick="validate()"  />
-							   </form>
-							   <script type="text/javascript">
-							   function validate() {
-
-								   var a=document.getElementById("file");
-									  var form=document.getElementById("upload");
-									  if(a.value==""){		   
-										   alert("请先选择图片");
-								           return false;
-										  }
-									  else{
-										  form.submit();
-										  console.log("成功");
-										  return false;
-									  }
-							     }
-						            	
-							   </script>
+							   <div class="col-6 text-center m-auto">
+							   <h6 class="font-size-12 mt-5">${bookInfo.name}</h6>
+							   <figure class="img-hov-zoomin">
+								<img src="<%=path%>${bookInfo.image}" alt="" class="img-fluid user-img">
+								</figure>
+							   </div>
 							 </li>
 						   </ul>						
 						</div>

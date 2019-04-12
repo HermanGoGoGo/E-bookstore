@@ -13,6 +13,7 @@ import java.util.Date;
  * @email 1146465559@qq.com
  * @date 2019-03-13 16:43:30
  */
+@Entity
 @Table(name = "HSTB_MESSAGE")
 public class Message extends BaseEntity<Message> {
 

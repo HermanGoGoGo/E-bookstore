@@ -13,6 +13,7 @@ import java.util.Date;
  * @email 1146465559@qq.com
  * @date 2019-03-13 16:59:24
  */
+@Entity
 @Table(name = "MSTB_SDKINFO")
 public class Sdk extends BaseEntity<Sdk> {
 

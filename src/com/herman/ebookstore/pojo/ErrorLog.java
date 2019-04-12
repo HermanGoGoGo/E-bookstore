@@ -13,6 +13,7 @@ import java.util.Date;
  * @email 1146465559@qq.com
  * @date 2019-03-13 16:21:37
  */
+@Entity
 @Table(name = "MSTB_ERROR_LOG_INFO")
 public class ErrorLog extends BaseEntity<ErrorLog> {
 
