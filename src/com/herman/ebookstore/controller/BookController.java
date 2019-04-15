@@ -157,4 +157,25 @@ public class BookController {
 		return "pages/sellBook";
 		
 	}
+	
+	@RequestMapping("buyBook")
+	public String buyBook(String bookId,String userId,HttpServletRequest request,Model model) {
+		Object usercode = request.getSession().getAttribute("usercode");
+		UserDto currentUser = new UserDto();
+		MessageDto messageDto = new MessageDto();
+		List<MessageDto> messageDtos = new ArrayList<MessageDto>();
+		if(usercode != null && !"".equals(usercode)) {
+			messageDto.setReceiveUserId(usercode.toString());
+			messageDto.setStatus("0");
+			currentUser.setUsercode(usercode.toString());
+			currentUser =this.userService.selectMinuteOne(currentUser);
+			messageDtos = this.messageService.findAllMessageByDto(messageDto);
+		}else {
+			
+		}
+		model.addAttribute("messageDtos", messageDtos);
+		model.addAttribute("currentUser", currentUser);	
+		return "pages/buyBook";
+		
+	}
 }

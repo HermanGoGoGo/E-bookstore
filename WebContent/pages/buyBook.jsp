@@ -1,4 +1,4 @@
-﻿﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -22,7 +22,7 @@
     <meta name="author" content="">
     <link rel="icon" href="<%=path%>/images/favicon.ico">
 
-    <title>e书网 - </title>
+    <title>e书网 - 书籍交易</title>
     
 	<!-- Bootstrap 4.0-->
 	<link rel="stylesheet" href="<%=path%>/assets/vendor_components/bootstrap/dist/css/bootstrap.css">
@@ -35,15 +35,16 @@
 	<!-- Bootstrap extend-->
 	<link rel="stylesheet" href="<%=path%>/main/css/bootstrap-extend.css">
 	
-		<!-- owlcarousel-->
-	<link rel="stylesheet" href="<%=path%>/assets/vendor_components/OwlCarousel2/dist/assets/owl.carousel.css">
-	<link rel="stylesheet" href="<%=path%>/assets/vendor_components/OwlCarousel2/dist/assets/owl.theme.default.css">
-	
 	<!-- theme style -->
 	<link rel="stylesheet" href="<%=path%>/main/css/master_style.css">
 	
 	<!-- Ekan Admin skins -->
 	<link rel="stylesheet" href="<%=path%>/main/css/skins/_all-skins.css">
+	
+<%-- 	<link rel="stylesheet" href="<%=path%>/css/spop.min.css" /> --%>
+
+    <!--alerts CSS -->
+    <link href="<%=path%>/assets/vendor_components/sweetalert/sweetalert.css" rel="stylesheet" type="text/css">
 	
 
     <!-- Data Table-->
@@ -79,13 +80,13 @@
     <nav class="navbar navbar-static-top">
       <!-- Sidebar toggle button-->
 	  <div>
-		  <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+		  <a href="<%=path%>/message/showOneMessage.action" class="sidebar-toggle" data-toggle="push-menu" role="button">
 			<i class="ti-align-left"></i>
 		  </a>
 <!-- 		  <a id="toggle_res_search" data-toggle="collapse" data-target="#search_form" class="res-only-view" href="javascript:void(0);"><i class="mdi mdi-magnify"></i></a>
 		  <form id="search_form" role="search" class="top-nav-search pull-left collapse ml-20">
 				<div class="input-group">
-					<input type="text" name="searchByBookName" class="form-control" placeholder="请输入书名">
+					<input type="text" name="sendUserId" class="form-control" placeholder="输入一卡通号">
 						<span class="input-group-btn">
 							<button type="button" class="btn  btn-default" data-target="#search_form" data-toggle="collapse" aria-label="Close" aria-expanded="true" ><i class="mdi mdi-magnify"></i></button>
 						</span>
@@ -137,7 +138,7 @@
 				</ul>
 			  </li>
 			  <li class="footer">				  
-				  <a class="bg-light" href="<%=path%>/message/showOneMessage.action">查看所有的信息</a>
+				  <a href="<%=path%>/message/showOneMessage.action" class="bg-light">查看所有的信息</a>
 			  </li>
 			</ul>
 		  </li>
@@ -215,7 +216,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="<%=path%>/home/toHomePage.action"><i class="ti-more"></i>购买书</a></li>
+            <li><a href="<%=path%>/home/toHomePage.action"><i class="ti-more"></i>购买书</a></li>
             <li><a href="<%=path%>/book/sellBook.action"><i class="ti-more"></i>出售书</a></li>
             <li><a href="#"><i class="ti-more"></i>出售书</a></li>
           </ul>
@@ -227,7 +228,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<%=path%>/message/showOneMessage.action"><i class="ti-more"></i>消息中心</a></li>
+            <li class="active"><a href="<%=path%>/message/showOneMessage.action"><i class="ti-more"></i>信息中心</a></li>
           </ul>
         </li>  
         
@@ -250,12 +251,12 @@
 		<div class="content-header">
 			<div class="d-flex align-items-center">
 				<div class="mr-auto">
-					<h3 class="page-title">购买书</h3>
+					<h3 class="page-title">交易中心</h3>
 					<div class="d-inline-block align-items-center">
 						<nav>
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="#"><i class="mdi mdi-home-outline"></i></a></li>
-								<li class="breadcrumb-item active" aria-current="page">书籍详情</li>
+								<li class="breadcrumb-item active" aria-current="page">书籍交易</li>
 							</ol>
 						</nav>
 					</div>
@@ -265,109 +266,158 @@
 
 		<!-- Main content -->
 		<section class="content">
-		   		<div class="col-12 col-xl-8 m-auto">
-				<div class="box">		
-					<div class="box-header bg-warning">
-						<h4 class="box-title">图书详情</h4>
-						<ul class="box-controls pull-right">
-						  <li class="dropdown">
-							<a data-toggle="dropdown" href="#" class="btn btn-rounded btn-outline btn-white px-10">Stats</a>
-							<div class="dropdown-menu dropdown-menu-right">
-							  <a class="dropdown-item" href="#"><i class="ti-import"></i> Import</a>
-							  <a class="dropdown-item" href="#"><i class="ti-export"></i> Export</a>
-							  <a class="dropdown-item" href="#"><i class="ti-printer"></i> Print</a>
-							  <div class="dropdown-divider"></div>
-							  <a class="dropdown-item" href="#"><i class="ti-settings"></i> Settings</a>
-							</div>
-						  </li>
-						</ul>
-					</div>
-					<div class="box-body bg-warning">										
-						<div class="px-10 py-30 bg-white text-dark">
-							<h5 class="px-10 mb-15 font-weight-700">${bookInfo.name}</h5>
-						     <ul class="flexbox flex-justified">
-							 <li class="px-30 ">
-							    <p> 
-							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-user"></i> 作者：							   
-							      <small>
-								  	${bookInfo.author}
-							      </small>
-							      </h6> 
-							    </p>
-							    
-							    <p> 
-							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-user"></i> 价钱：							   
-							      <small>
-								  	${bookInfo.price} /原价：${bookInfo.originalPrice} 
-							      </small>
-							      </h6> 
-							    </p>
-							    
-							    <p> 
-							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-user"></i> 课程：							   
-							      <small>
-								  	${bookInfo.course}
-							      </small>
-							      </h6> 
-							    </p>
-							    
-							    <p> 
-							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-user"></i> 版本：							   
-							      <small>
-								  	${bookInfo.edition} 
-							      </small>
-							      </h6> 
-							    </p>
-							    
-							     <p> 
-							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-user"></i> 学期：							   
-							      <small>
-								  	${bookInfo.semester}
-							      </small>
-							      </h6> 
-							    </p>
-							    
-							     <p> 
-							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-user"></i> 交易方式：							   
-							      <small>
-								  	${bookInfo.transaction}
-							      </small>
-							      </h6> 
-							    </p>
-							    <p> 
-							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-user"></i> 描述：			
-							      </h6> 
-							    </p>
-							    <p class="px-40 box-text">
-							         <small>${bookInfo.description}</small>
-							    </p>
-							   <div class="flexbox align-items-center mt-3">
-							      <a class="btn btn-xs btn-round btn-bold btn-primary" href="#">联系卖家</a>
-							      <a class="btn btn-xs btn-round btn-bold btn-primary" href="#">收藏图书</a>
-							      <div class="gap-items-4">
-							      <a href="#" data-toggle="tooltip" data-original-title="查看信息"><i class="fa fa-user"></i>by ：${bookInfo.userId}</a> 
-							      <a >
-							         <i class="ion-heart text-danger font-size-11" ></i>
-							         <span data-toggle="tooltip" data-original-title="浏览次数" class="font-size-11 text-fade ml-1">${bookInfo.browseTimes}</span>
-							      </a>
-							      </div>
-							   </div>						   
-							 </li>
-							 <li class="px-10">
-							   <div class="col-6 text-center m-auto">
-							   <h6 class="font-size-12 mt-5">${bookInfo.name}</h6>
-							   <figure class="img-hov-zoomin">
-								<img src="<%=path%>${bookInfo.image}" alt="" class="img-fluid user-img">
-								</figure>
-							   </div>
-							 </li>
-						   </ul>						
+			<div class="row">
+			  <div class="col-md-4">
+				<div class="box ribbon-box">
+				  <div class="ribbon-two ribbon-two-dark"><span>交易详情</span></div>
+				  <div class="box-body p-0">				  	
+						<h4 class="media-heading mt-15 mb-0 py-10 px-40 text-danger"><small>注意事项：请确认已达成双方协议后再点击取消交易以及完成交易；取消交易一方取消即可；完成交易需双方均点击完成交易</small></h4>
+						<div class="media">
+						  <div class="media-body">
+						    <h6 class="px-30 py-10 mb-0 text-bold"> 书籍信息</h6>
+						    <img class="align-self-start w-160" src="../../images/gallery/thumb-sm/5.jpg" alt="Generic placeholder image">
+						    <a class="btn btn-sm btn-bold btn-danger mt-15" id="sa-closeTran">取消交易</a>
+						  </div>
+						  <div class="media-body">
+							 <h6 class="py-10 mb-0 text-bold"> 书名：<small class="text-bold">nihao</small>	</h6>
+							 <h6 class="py-10 mb-0 text-bold"> 书名：<small class="text-bold">nihao</small>	</h6>
+							 <h6 class="py-10 mb-0 text-bold"> 书名：<small class="text-bold">nihao</small>	</h6>
+							 <h6 class="py-10 mb-0 text-bold"> 书名：<small class="text-bold">nihao</small>	</h6>
+							 <h6 class="py-10 mb-0 text-bold"> 书名：<small class="text-bold">nihao</small>	</h6>
+							<a class="btn btn-sm btn-bold btn-success mt-15" id="sa-completionTran">完成交易</a>
+							<script type="text/javascript">
+						   
+							</script>
+						  </div>
 						</div>
-					</div>
-					
+						<div class="media">
+						<div class="media-body">
+						    <h6 class="px-30 py-10 mb-0 text-bold"> 交易人信息	</h6>
+						    <img class="align-self-start w-120" src="<%=path%>/images/user1-128x128.jpg" alt="Generic placeholder image">
+						</div>
+						<div class="media-body">
+						<h6 class="py-10 mb-0 text-bold"> 书名：<small class="text-bold">nihao</small>	</h6>
+							 <h6 class="py-10 mb-0 text-bold"> 书名：<small class="text-bold">nihao</small>	</h6>
+							 <h6 class="py-10 mb-0 text-bold"> 书名：<small class="text-bold">nihao</small>	</h6>
+						</div>
+						</div>
+				  </div>
 				</div>
-			</div>  
-			
+			  </div>
+			  
+<%-- 			  <div class="col-lg-4 col-md-8">
+					<div class="box">
+					  <div class="media-list media-list-divided media-list-hover">
+					  <c:forEach items="${listOfAllUser}" var="userMessage" varStatus="status" >
+					  	<div class="media align-items-center">
+						  <a class="avatar avatar-lg status-success" href="<%=path%>/message/showOneMessage.action?sendUserId=${userMessage.sendUserId}">
+							<img src="<%=path%>${userMessage.sendUserImage}" >
+						  </a>
+
+						  <div class="media-body">
+							<p>
+							  <a href="<%=path%>/message/showOneMessage.action?sendUserId=${userMessage.sendUserId}"><strong>${userMessage.sendUserName}</strong></a>
+							  <small class="sidetitle">${userMessage.showTime}</small>
+							</p>
+							<p style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">${userMessage.messInfo}</p>
+							<small class="badge badge-success">最新消息${userMessage.status}</small>
+						  </div>
+
+						  <div class="media-right gap-items">
+							<a class="media-action lead" href="#" data-toggle="tooltip" title=""><i class="ti-shopping-cart"></i></a>
+							<a class="media-action lead" href="#" data-toggle="tooltip" title="Receipts"><i class="ti-receipt"></i></a>
+						  </div>
+						</div>
+					  </c:forEach>
+					  </div>
+					</div>
+			  </div> --%>
+			  <div class="col-xl-8 col-12">
+			  <!-- DIRECT CHAT PRIMARY -->
+			  <div class="box direct-chat direct-chat-info">
+				<div class="box-header with-border">
+				  <h4 class="box-title">${messageReq.sendUserName}</h4>
+					<ul class="box-controls pull-right ">
+					  <li><a class="box-btn-close" href="<%=path%>/home/toHomePage.action"></a></li>
+					  <!--<li><a class="box-btn-slide" href="#"></a></li>-->
+					  <!--<li><a class="box-btn-fullscreen" href="#"></a></li>-->
+            <!--<li><a class="" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle"><i class="fa fa-comments"></i></a></li>-->
+					  <!--<li><span data-toggle="tooltip" title="1 New Messages" class="badge badge-pill badge-info">5</span></li>-->
+					</ul>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body " >
+				  <!-- Conversations are loaded here -->
+				  <div class="direct-chat-messages" >
+					<!-- Message. Default to the left -->
+				    <c:forEach items="${listMessages}" var="messages" varStatus="status" >
+				    <c:if test="${messages.sendUserId != currentUser.usercode}">
+				    <div class="direct-chat-msg mb-30">
+					  <div class="clearfix mb-15">
+					  <span class="direct-chat-name">${messages.sendUserName}</span>	
+					  </div>
+					  <!-- /.direct-chat-info -->
+					  <a  href="<%=path%>/message/showOneMessage.action?sendUserId=${messages.sendUserId}">
+					  <img class="direct-chat-img avatar" src="<%=path%>${messages.sendUserImage}" alt="message user image">
+					  </a>
+					  <!-- /.direct-chat-img -->
+					  <div class="direct-chat-text">
+						<p >${messages.messInfo} </p>
+						<p class="direct-chat-timestamp"><time datetime="2019">${messages.showTime} / ${messages.createTimeShow}</time></p>
+					  </div>
+
+					  <!-- /.direct-chat-text -->
+					</div>
+					<!-- /.direct-chat-msg -->
+				    </c:if>
+				    <c:if test="${messages.sendUserId == currentUser.usercode}">
+				    <!-- Message to the right -->
+					<div class="direct-chat-msg right mb-30" >
+					  <div class="clearfix mb-15">
+					  <span class="direct-chat-name pull-right">${messages.sendUserName}</span>	
+					  </div>
+					   <img class="direct-chat-img avatar "  src="<%=path%>${messages.sendUserImage}" alt="message user image">
+					  <div class="direct-chat-text">
+						<p >${messages.messInfo}</p>
+						<p class="direct-chat-timestamp"><time datetime="2019">${messages.showTime} / ${messages.createTimeShow}</time></p>
+					  </div>
+					  <!-- /.direct-chat-text -->
+					</div>					
+					<!-- /.direct-chat-msg -->
+				    </c:if>
+				    </c:forEach>
+				  </div>
+				  <!--/.direct-chat-messages-->
+				</div>
+				<!-- /.box-body -->
+				<div class="box-footer">
+				  <form action="<%=path%>/message/showOneMessage.action" method="post">
+					<div class="input-group">
+	    			<!--   <input type="text" name="receiveUserId" id="receiveUserId"  value="2201504242" class="form-control" style="display: none;">-->
+					  <input type="text" name="sendUserId" id="sendUserId" value="${messageReq.sendUserId}" class="form-control" style="display: none;">
+					  <input type="text" name="message" id="message" placeholder="Type Message ..." class="form-control">
+						  <c:if test="${messageReq.sendUserName !='全部消息'}">
+						  <div class="input-group-addon">
+							<div class="align-self-end gap-items">
+							  <a class="publisher-btn" onclick="sendMessage()"><i class="fa fa-paper-plane"></i></a>
+							  <script type="text/javascript"> 
+							          function sendMessage() {										
+							          var sendUserId = $("#sendUserId").val(),
+							          message = $("#message").val();							          
+							          window.location.href="<%=path%>/message/showOneMessage.action?sendUserId="+sendUserId+"&message=" + message;
+							          }
+                              </script> 
+							</div>
+						  </div>
+						  </c:if>
+					</div>
+				  </form>
+				</div>
+				<!-- /.box-footer-->
+			  </div>
+			  <!--/.direct-chat -->
+			</div>
+		    </div>							
 		</section>
 		<!-- /.content -->
 	  </div>
@@ -427,7 +477,8 @@
   	
 	<!-- jQuery 3 -->
 	<script src="<%=path%>/assets/vendor_components/jquery-3.3.1/jquery-3.3.1.js"></script>
-	  	
+	  
+	
 	<!-- jQuery UI 1.11.4 -->
 	<script src="<%=path%>/assets/vendor_components/jquery-ui/jquery-ui.js"></script>
 	
@@ -446,9 +497,6 @@
 	
 	<!-- FastClick -->
 	<script src="<%=path%>/assets/vendor_components/fastclick/lib/fastclick.js"></script>
-	
-	<!-- Carousel -->
-	<script src="<%=path%>/assets/vendor_components/OwlCarousel2/dist/owl.carousel.js"></script>
 	
     <!-- C3 Plugins -->
     <script src="<%=path%>/assets/vendor_components/c3/d3.min.js"></script>
@@ -471,51 +519,116 @@
 	<!-- Prompting -->
     <script src="<%=path%>/assets/vendor_components/hullabaloo/hullabaloo.js"></script>
     
-    <script src="<%=path%>/main/js/pages/widget-blog.js"></script>
+    <!-- Sweet-Alert  -->
+    <script src="<%=path%>/assets/vendor_components/sweetalert/sweetalert.min.js"></script>
+    <script src="<%=path%>/assets/vendor_components/sweetalert/jquery.sweet-alert.custom.js"></script>
+    
+    <%-- <script src="<%=path%>/js/spop.min.js"></script> --%>
     
     <script type="text/javascript">
-			$.hulla = new hullabaloo();
-			//var usercode = '${currentUser.usercode}';
+    $('#sa-closeTran').click(function(){
+        swal({   
+            title: "确认取消交易?",   
+            text: "此操作不可逆，确保交易双方已达成协议!",   
+            type: "warning",   
+            showCancelButton: true,   
+            confirmButtonColor: "#DD6B55",   
+            confirmButtonText: "取消交易", 
+            cancelButtonText: "返回",
+            closeOnConfirm: false 
+        }, function(){   
+        	 $.ajax({
+     			type: "post",
+     			url: "<%=path%>/home/homePage.action",
+     			data: {
+     			},
+     			dataType: 'json',
+     			success: function(data) {
+     				swal("取消成功!", "您已成功取消交易.", "success"); 
+     			},
+     			error: function() {
+    				console.log("error");
+    			}
+    		}); 
+        });
+    });
+    
+    $('#sa-completionTran').click(function(){
+        swal({   
+            title: "确认完成交易?",   
+            text: "此操作不可逆，确保交易双方达成协议以及确定交易方式!",   
+            type: "warning",   
+            showCancelButton: true,     
+            confirmButtonText: "完成交易", 
+            cancelButtonText: "返回",
+            closeOnConfirm: false 
+        }, function(){   
+        	 $.ajax({
+     			type: "post",
+     			url: "<%=path%>/home/homePage.action",
+     			data: {
+     			},
+     			dataType: 'json',
+     			success: function(data) {
+     				swal("交易成功!", "您已成功交易本书.", "success"); 
+     			},
+     			error: function() {
+    				console.log("error");
+    			}
+    		}); 
+        });
+    });
+    
+/*     window.onload=function(){
+    	//div.scrollTop = div.scrollHeight;
+    	$('.slimScrollBar').css("top","100%");
+    	$('#inner-content-div').scrollTop( $('#inner-content-div')[0].scrollHeight );
+    	//console.log(scrollTop1);
+    	//$('.slimScrollBar').Top(100 );
+    	//$('.box-body').scrollTop='100px';
+	} */
+    $.hulla = new hullabaloo();
+	//var usercode = '${currentUser.usercode}';
 
-			function checkTime(){
-		        $.ajax({
-					type: "post",
-					url: "<%=path%>/base/getUserMessage.action",
-					data: {
-					},
-					dataType: 'json',
-					success: function(data) {
-						console.log(data);
-		            	if(data.status == '200'){
-		            		$("#menuForAllMessages li").remove();
-		            		$.hulla.send("您有最新消息请查看收件箱", "success");
-		            		var str = "";
-		                    for(var i=0;i<data.obj.length;i++){
-		                        str += "<li>" +
-		                                "<a href='<%=path%>/message/showOneMessage.action?sendUserId=" + data.obj[i].sendUserId + " '>" +
-		                                "<div class=\"pull-left\">" +
-		                                "<img src=\"<%=path%>"+data.obj[i].sendUserImage +"\" class=\"rounded-circle\" alt=\"User Image\">" +
-		                                "</div>" +
-		                                "<div class=\"mail-contnet\">" +
-		                                "<h4> " +data.obj[i].sendUserName +
-		                                "<small><i class=\"fa fa-clock-o\"></i> "+data.obj[i].showTime +"</small>"+
-		                                "</h4>" +
-		                                " <span style=\"overflow: hidden;text-overflow: ellipsis;white-space: nowrap;\">"+data.obj[i].messInfo+"</span> " +
-		                                "</div>" +
-		                                "</a>" +
-		                                "</li>";
-		            	}
-		                $("#menuForAllMessages").append(str);
-		                console.log(str);
-		            	}
-					},
-					error: function() {
-						console.log("error");
-					}
-				}); 
-		    }
-		
-		    setInterval("checkTime()","3000"); 
+	function checkTime(){
+        $.ajax({
+			type: "post",
+			url: "<%=path%>/base/getUserMessage.action",
+			data: {
+			},
+			dataType: 'json',
+			success: function(data) {
+				console.log(data);
+          	    if(data.status == '200'){
+                $("#menuForAllMessages li").remove();
+            		$.hulla.send("您有最新消息请查看", "success");
+            		var str = "";
+                    for(var i=0;i<data.obj.length;i++){
+                        str += "<li>" +
+                                "<a href='<%=path%>/message/showOneMessage.action?sendUserId=" + data.obj[i].sendUserId + " '>" +
+                                "<div class=\"pull-left\">" +
+                                "<img src=\"<%=path%>"+data.obj[i].sendUserImage +"\" class=\"rounded-circle\" alt=\"User Image\">" +
+                                "</div>" +
+                                "<div class=\"mail-contnet\">" +
+                                "<h4> " +data.obj[i].sendUserName +
+                                "<small><i class=\"fa fa-clock-o\"></i> "+data.obj[i].showTime +"</small>"+
+                                "</h4>" +
+                                " <span>"+data.obj[i].messInfo+"</span> " +
+                                "</div>" +
+                                "</a>" +
+                                "</li>";
+                                } 
+                console.log(str); 
+                $.hulla.send("您有最新消息请查看收件箱", "success");
+            	}
+			},
+			error: function() {
+				console.log("error");
+			}
+		}); 
+    }
+
+    setInterval("checkTime()","3000"); 
 
 	</script>
 </body>
