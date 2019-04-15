@@ -244,7 +244,7 @@
 		</div>
 
 		<!-- Main content -->
-		<section class="content">
+		<section class="content bg-temple-white">
 		   <div class="row">
 		   	<div class="col-lg-8 col-12 m-auto">
 				  <div class="box">

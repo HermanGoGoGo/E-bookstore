@@ -407,7 +407,7 @@
 				</div>
 				<!-- /.box-body -->
 				<div class="box-footer">
-				  <form action="<%=path%>/message/showOneMessage.action" method="get">
+				  <form action="<%=path%>/message/showOneMessage.action" method="post">
 					<div class="input-group">
 	    			<!--   <input type="text" name="receiveUserId" id="receiveUserId"  value="2201504242" class="form-control" style="display: none;">-->
 					  <input type="text" name="sendUserId" id="sendUserId" value="${messageReq.sendUserId}" class="form-control" style="display: none;">

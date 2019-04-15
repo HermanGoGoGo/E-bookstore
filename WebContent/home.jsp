@@ -96,7 +96,7 @@
 				</div>
 			</div>
 		</div>
-<div class="wrapper" >
+<div class="wrapper " >
   <header class="main-header">
     <!-- Logo -->
     <a href="<%=path%>/home/toHomePage.action" class="logo">
@@ -339,7 +339,7 @@
 		</div>
 
 		<!-- Main content -->
-		<section class="content">
+		<section class="content bg-food-white">
 		    <h3 class="page-header">书籍统计</h3>
 			<div class="row">
 				<div class="col-xl-4 col-12">
@@ -384,7 +384,7 @@
 		    <div class="news-slider owl-carousel">
 		       <% int j = 0; String style="";%>
 		       <c:forEach items="${hotBookList}" var="hotBook" varStatus="status" >
-			   <div class="box ">
+			   <div class="box ribbon-box">
 			        <%  j++;
 			        if(j%2==0) {
 			        	style ="bg-pale-primary";
@@ -392,9 +392,10 @@
 			        	style ="";
 			        }
 			        %>
-					<div class="box-body <%=style%>"> 
+			        <div class="ribbon-two ribbon-two-danger"><span>第<%=j%>名</span></div>
+					<div class="box-body <%=style%> "> 
 						<div class="text-left ">
-							<h4 class="box-title ">${hotBook.name}</h4>
+							<h4 class="box-title px-20">${hotBook.name}</h4>
 							<p class="my-10">
 							  <small>
 								  <i class="fa fa-user"></i> by <a href="#">${hotBook.username}</a> 
@@ -403,7 +404,7 @@
 							</p>
 							<p class="box-text" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">${hotBook.description}</p>
 							<div class="flexbox align-items-center mt-3">
-							<a href="<%=path%>/home/toHomePage.action?id=${hotBook.id}" class="btn btn-flat btn-primary btn-sm">查看详情</a>
+							<a href="<%=path%>/book/bookDetails.action?id=${hotBook.id}" class="btn btn-flat btn-primary btn-sm">查看详情</a>
 							<a>
 							<i class="ion-heart text-danger font-size-11"></i>
 							<span class="font-size-11 text-fade ml-1">${hotBook.browseTimes}</span>
@@ -449,7 +450,7 @@
 										<td width="15%">${book.transaction} </td>
 										<td><span class="badge badge-info"><b>$ ${book.price}</b></span> / <span class="badge badge-warning">原价：$ ${book.originalPrice}</span></td>
 										<td width="15%"><span class="badge badge-success">${book.conditions}</span> / ${book.createTimeCompare}</td>
-										<td width="5%"><a href="<%=path%>/home/toHomePage.action?id=${book.id}"><span class="badge badge-purple">查看详情</span></a></td>
+										<td width="5%"><a href="<%=path%>/book/bookDetails.action?id=${book.id}"><span class="badge badge-purple">查看详情</span></a></td>
 									  </tr>
 								</c:forEach>
 								
