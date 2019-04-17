@@ -27,6 +27,10 @@ public class Message extends BaseEntity<Message> {
     @Column(name = "receive_user_id")
     private String receiveUserId;
     
+    //书籍id
+    @Column(name = "book_id")
+    private String bookId;
+    
     //发送用户id
     @Column(name = "send_user_id")
     private String sendUserId;
@@ -66,5 +70,15 @@ public class Message extends BaseEntity<Message> {
 	public String getStatus() {
 		return status;
 	}
+
+	public String getBookId() {
+		return bookId;
+	}
+
+	public void setBookId(String bookId) {
+		this.bookId = bookId;
+	}
+	
+	
 	
 }

@@ -26,7 +26,7 @@ public interface MessageService extends Service<Message> {
 	
 	/** 
 	 * @Method_Name: findAllMessageByDto 
-	 * @Description: TODO(条件查询所有信息)
+	 * @Description: TODO(条件查询所有未读信息)
 	 * @Description: * @param messageDto
 	 * @Description: * @return List<MessageDto>
 	 * @date 2019年4月3日
@@ -82,4 +82,14 @@ public interface MessageService extends Service<Message> {
 	 * @author 黄金宝 
 	 */
 	public List<MessageDto> findAllMessageReceiveUserId(MessageDto messageDto);
+	
+	/** 
+	 * @Method_Name: findBookMessageByReAndSe 
+	 * @Description: TODO(根据bookid查询相关双方信息)
+	 * @Description: * @param messageDto
+	 * @Description: * @return List<MessageDto>
+	 * @date 2019年4月16日
+	 * @author 黄金宝 
+	 */
+	public List<MessageDto> findBookMessageByReAndSe(MessageDto messageDto);
 }

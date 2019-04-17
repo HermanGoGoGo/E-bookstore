@@ -22,23 +22,32 @@
     <meta name="author" content="">
     <link rel="icon" href="<%=path%>/images/favicon.ico">
 
-    <title>e书网 - 出售书</title>
-	
+    <title>e书网 - 个人书库</title>
+    
 	<!-- Bootstrap 4.0-->
-	<link rel="stylesheet" href="<%=path%>/assets/vendor_components/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="<%=path%>/assets/vendor_components/bootstrap/dist/css/bootstrap.css">
+	
+	<link rel="stylesheet"  type="text/css" href="<%=path%>/main/css/style-1.css">	
+	
+    <!-- c3 CSS -->
+    <link rel="stylesheet" type="text/css" href="<%=path%>/assets/vendor_components/c3/c3.min.css">
 	
 	<!-- Bootstrap extend-->
 	<link rel="stylesheet" href="<%=path%>/main/css/bootstrap-extend.css">
-
-	<!-- Theme style -->
+	
+		<!-- owlcarousel-->
+	<link rel="stylesheet" href="<%=path%>/assets/vendor_components/OwlCarousel2/dist/assets/owl.carousel.css">
+	<link rel="stylesheet" href="<%=path%>/assets/vendor_components/OwlCarousel2/dist/assets/owl.theme.default.css">
+	
+	<!-- theme style -->
 	<link rel="stylesheet" href="<%=path%>/main/css/master_style.css">
 	
-	<link rel="stylesheet"  type="text/css" href="<%=path%>/main/css/style-1.css">	
-
-<!--alerts CSS -->
-    <link href="<%=path%>/assets/vendor_components/sweetalert/sweetalert.css" rel="stylesheet" type="text/css">
 	<!-- Ekan Admin skins -->
 	<link rel="stylesheet" href="<%=path%>/main/css/skins/_all-skins.css">
+	
+
+    <!-- Data Table-->
+	<link rel="stylesheet" type="text/css" href="<%=path%>/assets/vendor_components/datatable/datatables.min.css"/>
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -73,6 +82,15 @@
 		  <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
 			<i class="ti-align-left"></i>
 		  </a>
+<!-- 		  <a id="toggle_res_search" data-toggle="collapse" data-target="#search_form" class="res-only-view" href="javascript:void(0);"><i class="mdi mdi-magnify"></i></a>
+		  <form id="search_form" role="search" class="top-nav-search pull-left collapse ml-20">
+				<div class="input-group">
+					<input type="text" name="searchByBookName" class="form-control" placeholder="请输入书名">
+						<span class="input-group-btn">
+							<button type="button" class="btn  btn-default" data-target="#search_form" data-toggle="collapse" aria-label="Close" aria-expanded="true" ><i class="mdi mdi-magnify"></i></button>
+						</span>
+				</div>
+		  </form>  -->
 		
 	  </div>
 		
@@ -215,8 +233,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<%=path%>/home/toHomePage.action"><i class="ti-more"></i>购买书</a></li>
-            <li class="active"><a href="<%=path%>/book/sellBook.action"><i class="ti-more"></i>出售书</a></li>
+            <li class="active"><a href="<%=path%>/home/toHomePage.action"><i class="ti-more"></i>购买书</a></li>
+            <li><a href="<%=path%>/book/sellBook.action"><i class="ti-more"></i>出售书</a></li>
             <li><a href="#"><i class="ti-more"></i>出售书</a></li>
           </ul>
           <a href="#">
@@ -250,12 +268,12 @@
 		<div class="content-header">
 			<div class="d-flex align-items-center">
 				<div class="mr-auto">
-					<h3 class="page-title">交易中心</h3>
+					<h3 class="page-title">购买书</h3>
 					<div class="d-inline-block align-items-center">
 						<nav>
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="#"><i class="mdi mdi-home-outline"></i></a></li>
-								<li class="breadcrumb-item active" aria-current="page">出售书</li>
+								<li class="breadcrumb-item active" aria-current="page">书籍详情</li>
 							</ol>
 						</nav>
 					</div>
@@ -264,139 +282,52 @@
 		</div>
 
 		<!-- Main content -->
-		<section class="content bg-temple-white">
-		   <div class="row">
-		   	<div class="col-lg-8 col-12 m-auto">
-				  <div class="box">
-					<!-- /.box-header -->
-					<form id="bookInfo" class="form" novalidate action="<%=path%>/book/saveBook.action" method="post" enctype="multipart/form-data">
-						<div class="box-body">
-							<h4 class="box-title text-info" ><i class="ti-book mr-15"></i> 填写售书信息</h4>
-							<h6><small><span class="text-danger px-10">* 为必填项</span></small></h6>
-							<hr class="my-15">
-							<div class="row">
-							  <div class="col-md-6">
-								<div class="form-group">
-								  <label for="name">书名<span class="text-danger">*</span></label>
-								  <input type="text" id="name" name ="name" class="form-control"required data-validation-required-message="This field is required" placeholder="请填写书名">
+		<section class="content">
+		   <div class="col-12">
+			  <div class="box box-default">
+				<div class="box-header with-border">
+				  <h4 class="box-title">Customtab vertical Tab Icon</h4>
+				  <h6 class="box-subtitle">Use default tab with class <code>vtabs & tabs-vertical</code></h6>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<!-- Nav tabs -->
+					<div class="vtabs">
+						<ul class="nav nav-tabs tabs-vertical" role="tablist">
+							<li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home9" role="tab"><span><i class="ion-home mr-15"></i>Home</span></a> </li>
+							<li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile9" role="tab"><span><i class="ion-person mr-15"></i>Person</span></a> </li>
+							<li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages9" role="tab"><span><i class="ion-email mr-15"></i>Email</span></a> </li>
+						</ul>
+						<!-- Tab panes -->
+						<div class="tab-content">
+							<div class="tab-pane active" id="home9" role="tabpanel">
+								<div class="p-15">
+									<h3>Donec vitae laoreet neque, id convallis ante.</h3>
+									<h4>Fusce porta eros a nisl varius, non molestie metus mollis. Pellentesque tincidunt ante sit amet ornare lacinia.</h4>
+									<p>Duis cursus eros lorem, pretium ornare purus tincidunt eleifend. Etiam quis justo vitae erat faucibus pharetra. Morbi in ullamcorper diam. Morbi lacinia, sem vitae dignissim cursus, massa nibh semper magna, nec pellentesque lorem nisl quis ex.</p>
 								</div>
-							  </div>
-							  <div class="col-md-6">
-								<div class="form-group">
-								  <label for="author">作者<span class="text-danger">*</span></label>
-								  <input type="text" id="author" name ="author"  class="form-control" required data-validation-required-message="This field is required" placeholder="请填写作者">
-								</div>
-							  </div>
 							</div>
-							<div class="row">
-							  <div class="col-md-6">
-								<div class="form-group">
-								     <label for="originalPrice">原价<span class="text-danger">*</span></label>
-								    <div class="input-group"> 
-								        <span class="input-group-addon">￥</span>
-									    <input type="number" id="originalPrice" name="originalPrice" class="form-control" required data-validation-required-message="This field is required"> <span class="input-group-addon">.00</span> 
-									</div>
+							<div class="tab-pane" id="profile9" role="tabpanel">
+								<div class="p-15">
+									<h3>Donec vitae laoreet neque, id convallis ante.</h3>
+									<p>Duis cursus eros lorem, pretium ornare purus tincidunt eleifend. Etiam quis justo vitae erat faucibus pharetra. Morbi in ullamcorper diam. Morbi lacinia, sem vitae dignissim cursus, massa nibh semper magna, nec pellentesque lorem nisl quis ex.</p>
+									<h4>Fusce porta eros a nisl varius, non molestie metus mollis. Pellentesque tincidunt ante sit amet ornare lacinia.</h4>
 								</div>
-							  </div>
-							  <div class="col-md-6">
-								<div class="form-group">
-								     <label for="price">售价<span class="text-danger">*</span></label>
-								    <div class="input-group"> 
-								        <span class="input-group-addon">￥</span>
-									    <input type="number" id="price" name="price" class="form-control" required data-validation-required-message="This field is required"> <span class="input-group-addon">.00</span> 
-									</div>
-								</div>
-							  </div>
 							</div>
-							<div class="row">
-							  <div class="col-md-6">
-								<div class="form-group">
-								  <label for="edition">版本</label>
-								  <input type="text" id="edition" name="edition" class="form-control" placeholder="请填写版本">
+							<div class="tab-pane" id="messages9" role="tabpanel">
+								<div class="p-15">
+									<p>Duis cursus eros lorem, pretium ornare purus tincidunt eleifend. Etiam quis justo vitae erat faucibus pharetra. Morbi in ullamcorper diam. Morbi lacinia, sem vitae dignissim cursus, massa nibh semper magna, nec pellentesque lorem nisl quis ex.</p>
+									<h3>Donec vitae laoreet neque, id convallis ante.</h3>
+									<h4>Fusce porta eros a nisl varius, non molestie metus mollis. Pellentesque tincidunt ante sit amet ornare lacinia.</h4>
 								</div>
-							  </div>
-							  <div class="col-md-6">
-								<div class="form-group">
-								  <label for="semester">学期</label>
-								 <select id="semester" name="semester" class="form-control">
-									<option>无</option>
-									<option>2014年第一学期</option>
-									<option>2014年第二学期</option>
-									<option>2014年第三学期</option>
-									<option>2015年第一学期</option>
-									<option>2015年第二学期</option>
-									<option>2015年第三学期</option>
-									<option>2016年第一学期</option>
-									<option>2016年第二学期</option>
-									<option>2016年第三学期</option>
-									<option>2017年第一学期</option>
-									<option>2017年第二学期</option>
-									<option>2017年第三学期</option>
-									<option>2018年第一学期</option>
-									<option>2018年第二学期</option>
-									<option>2018年第三学期</option>
-									<option>2019年第一学期</option>
-									<option>2019年第二学期</option>
-									<option>2019年第三学期</option>
-								  </select>
-								</div>
-							  </div>
-							</div>
-							<div class="row">
-							  <div class="col-md-6">
-								<div class="form-group">
-								  <label for="course">课程</label>
-								  <input type="text" id="course" name ="course"  class="form-control" placeholder="请填写课程">
-								</div>
-							  </div>
-							  <div class="col-md-6">
-								<div class="form-group">
-								  <label for="transaction">交易方式<small class="text-danger sidetitle">默认校区当面交易</small></label>
-								  <select id="transaction" name ="transaction" class="form-control">
-									<option value="0">校区当面交易</option>
-									<option value="1">邮寄</option>
-									<option value="2">校区当面交易或者邮寄</option>
-								  </select>
-								</div>
-							  </div>
-							</div>
-							<div class="row">
-								<div class="col-md-6">
-								  <div class="form-group">
-								   <label for="conditions">状态<small class="text-danger sidetitle">默认9成新</small></label>
-								   <select id="conditions" name ="conditions" class="form-control">
-									 <option value="1">9成新</option>
-									 <option value="0">全新</option>
-									 <option value="2">6成新</option>
-								   </select>
-								  </div>
-							    </div>
-							</div>
-							<div class="form-group">
-							        <label for="image">上传书籍照片<span class="text-danger">*</span></label>
-								      <input type="file" id="image" name ="image" required data-validation-required-message="This field is required">
-								      <label class="file">
-							        </label>
-							</div>
-							<div class="form-group">
-							  <label for="description">书本描述<span class="text-danger">*</span></label>
-							  <textarea id="description" name ="description" rows="5" class="form-control" required data-validation-required-message="This field is required" placeholder="书籍描述"></textarea>
 							</div>
 						</div>
-						<!-- /.box-body -->
-						<div class="box-footer">
-							<button type="button"  onclick="validate()" class="btn btn-warning btn-outline mr-1">
-							  <i class="ti-trash"></i> 保存
-							</button>
-							<script type="text/javascript">
-						            	
-							   </script>
-						</div>  
-					</form>
-				  </div>
-				  <!-- /.box -->			
-			</div>  
-		   </div>			
+					</div>
+				</div>
+				<!-- /.box-body -->
+			  </div>
+			  <!-- /.box -->
+			</div>
 		</section>
 		<!-- /.content -->
 	  </div>
@@ -454,37 +385,46 @@
 </div>
 <!-- ./wrapper -->
   	
-		<!-- jQuery 3 -->
+	<!-- jQuery 3 -->
 	<script src="<%=path%>/assets/vendor_components/jquery-3.3.1/jquery-3.3.1.js"></script>
+	  	
+	<!-- jQuery UI 1.11.4 -->
+	<script src="<%=path%>/assets/vendor_components/jquery-ui/jquery-ui.js"></script>
 	
 	<!-- popper -->
 	<script src="<%=path%>/assets/vendor_components/popper/dist/popper.min.js"></script>
 	
 	<!-- Bootstrap 4.0-->
-	<script src="<%=path%>/assets/vendor_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="<%=path%>/assets/vendor_components/bootstrap/dist/js/bootstrap.js"></script>	
 	
-	<!-- SlimScroll -->
-	<script src="<%=path%>/assets/vendor_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+	<!-- date-range-picker -->
+<%-- 	<script src="<%=path%>/assets/vendor_components/moment/min/moment.min.js"></script>
+	<script src="<%=path%>/assets/vendor_components/bootstrap-daterangepicker/daterangepicker.js"></script> --%>
+	
+	<!-- Slimscroll -->
+	<script src="<%=path%>/assets/vendor_components/jquery-slimscroll/jquery.slimscroll.js"></script>
 	
 	<!-- FastClick -->
 	<script src="<%=path%>/assets/vendor_components/fastclick/lib/fastclick.js"></script>
 	
+	<!-- Carousel -->
+	<script src="<%=path%>/assets/vendor_components/OwlCarousel2/dist/owl.carousel.js"></script>
+	
+    <!-- C3 Plugins -->
+    <script src="<%=path%>/assets/vendor_components/c3/d3.min.js"></script>
+    <script src="<%=path%>/assets/vendor_components/c3/c3.min.js"></script>
+	
 	<!-- Ekan Admin App -->
 	<script src="<%=path%>/main/js/template.js"></script>
 	
-	<!-- Ekan Admin for demo purposes -->
-	<script src="<%=path%>/main/js/demo.js"></script>
 	
-	<!-- Form validator JavaScript -->
-    <script src="<%=path%>/main/js/pages/validation.js"></script>
-    <script src="<%=path%>/main/js/pages/form-validation.js"></script>
-    
-    <!-- Prompting -->
+	<!-- Ekan Admin for demo purposes -->
+	<script src="<%=path%>/main/js/demo.js"></script>	
+	
+	<!-- Prompting -->
     <script src="<%=path%>/assets/vendor_components/hullabaloo/hullabaloo.js"></script>
     
-    <!-- Sweet-Alert  -->
-    <script src="<%=path%>/assets/vendor_components/sweetalert/sweetalert.min.js"></script>
-    <script src="<%=path%>/assets/vendor_components/sweetalert/jquery.sweet-alert.custom.js"></script>
+    <script src="<%=path%>/main/js/pages/widget-blog.js"></script>
     
     <script type="text/javascript">
 			$.hulla = new hullabaloo();
@@ -546,66 +486,6 @@
 		    }
 		
 		    setInterval("checkTime()","3000"); 
-		    
-			 function validate(){
-				   var  name = $("#name").val(),
-				   author = $("#author").val(),
-				   originalPrice = $("#originalPrice").val(),
-				   price = $("#price").val(),
-				   image = $("#image").val(),
-				   description = $("#description").val(),
-				   status = false,
-				   formData = new FormData($('#bookInfo')[0]); 
-				   console.log(name);
-				   
-				   if(name == ""){
-					   swal("书名不能为空", "请重新输入", "error");
-					   status= true;
-				   }else if(author == ""){
-					   swal("作者不能为空", "请重新输入", "error");
-					   status= true;
-				   }else if(originalPrice == ""){
-					   swal("原价不能为空", "请重新输入", "error");
-					   status= true;
-				   }else if(price == ""){
-					   swal("售价不能为空", "请重新输入", "error");
-					   status= true;
-				   }else if(image == ""){
-					   swal("照片不能为空", "请重新输入", "error");
-					   status = true;
-				   }else if(description == ""){
-					   swal("书本描述不能为空", "请重新输入", "error");
-					   status = true;
-				   }
-				   
-				   if(status){
-					   return false;  
-				   }else{
-					   $.ajax({
-							type: "post",
-							url: "<%=path%>/book/saveBook.action",
-							data: formData,
-							cache: false, 
-						    processData: false, 
-						    contentType: false,
-							dataType: 'json',
-							success: function(data) {
-								if(data.status == "200"){
-									swal("提交成功!", "您已成功提交本书，待审核后发布！", "success"); 
-								}else{
-									swal("提交失败!", "出现系统故障请稍后重试！", "error"); 
-								}
-								document.getElementById("bookInfo").reset();
-								
-								//swal("提交成功!", "您已成功提交本书，待审核后发布！", "success"); 
-							},
-							error: function() {
-								swal("提交失败!", "出现系统故障请稍后重试！", "error"); 
-							}
-						});  
-				   }
-				 }
-				   
 
 	</script>
 </body>

@@ -17,6 +17,7 @@ import com.alibaba.fastjson.JSON;
 import com.herman.ebookstore.common.model.BaseForSDK;
 import com.herman.ebookstore.common.model.ResultCode;
 import com.herman.ebookstore.mapper.MessageMapper;
+import com.herman.ebookstore.model.BaseDto;
 import com.herman.ebookstore.model.MessageDto;
 import com.herman.ebookstore.model.UserDto;
 import com.herman.ebookstore.pojo.Message;
@@ -86,29 +87,32 @@ public class BaseController extends BaseForSDK {
 	}
 	
 	@RequestMapping("getUserMessage")
-	public void getUserMessage(HttpServletResponse response,HttpServletRequest request) {
-		Object usercode = request.getSession().getAttribute("usercode");
-		User user =new User();
-		Message message = new Message();
-		MessageDto messageDto =new MessageDto();
-		int index =-1;
-		if(usercode != null && !"".equals(usercode)) {
-			message.setReceiveUserId(usercode.toString());
-			user.setUsercode(usercode.toString());
-			user = this.userService.selectOne(user);
-			this.userService.update(user);
-			index = this.messageService.findOneMessage(message);
-			if(index == 1) {
-				messageDto.setReceiveUserId(usercode.toString());
-				messageDto.setStatus("0");
-				List<MessageDto> messageDtos = this.messageService.findAllMessageByDto(messageDto);
-				new ResponseWriter().writerResponseObject(true, messageDtos, response);
-			}else {
-				new ResponseWriter().writerResponse(false, response);
-			}
-		}else {
-			new ResponseWriter().writerResponse(false, response);
-		}
+	public void getUserMessage(String sendUserId,String bookId, HttpServletResponse response,HttpServletRequest request) {
+		/*
+		 * Object usercode = request.getSession().getAttribute("usercode"); User user
+		 * =new User(); Message message = new Message(); MessageDto messageDto =new
+		 * MessageDto(); List<MessageDto> listNewMessage = new ArrayList<MessageDto>();
+		 * List<MessageDto> listAllMessage = new ArrayList<MessageDto>();
+		 * List<MessageDto> listAllBookMessage = new ArrayList<MessageDto>(); BaseDto
+		 * baseDto =new BaseDto(); int index =-1; if(usercode != null &&
+		 * !"".equals(usercode)) { message.setReceiveUserId(usercode.toString());
+		 * user.setUsercode(usercode.toString()); user =
+		 * this.userService.selectOne(user); this.userService.update(user); index =
+		 * this.messageService.findOneMessage(message); if(index == 1) {
+		 * messageDto.setReceiveUserId(usercode.toString()); messageDto.setStatus("0");
+		 * listNewMessage = this.messageService.findAllMessageByDto(messageDto);
+		 * baseDto.setListNewMessage(listNewMessage);
+		 * if(StringUtils.isNotEmpty(sendUserId)) {
+		 * messageDto.setSendUserId(sendUserId); if(StringUtils.isNotEmpty(bookId)) {
+		 * messageDto.setBookId(bookId); listAllBookMessage =
+		 * this.messageService.findBookMessageByReAndSe(messageDto);
+		 * baseDto.listAllBookMessage(listAllBookMessage); }else { listAllMessage =
+		 * this.messageService.findAllMessageByReAndSe(messageDto);
+		 * baseDto.setListAllMessage(listAllMessage); } } new
+		 * ResponseWriter().writerResponseObject(true, baseDto, response); }else { new
+		 * ResponseWriter().writerResponse(false, response); } }else { new
+		 * ResponseWriter().writerResponse(false, response); }
+		 */
 	}
 	
 	@RequestMapping("base")
@@ -135,4 +139,5 @@ public class BaseController extends BaseForSDK {
 		model.addAttribute("currentUser", currentUser);
 		return "pages/base";
 	}
+	
 }

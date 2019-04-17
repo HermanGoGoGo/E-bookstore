@@ -119,8 +119,9 @@
 				<!-- inner menu: contains the actual data -->
 				<ul class="menu sm-scrol" id="menuForAllMessages">
 			      <c:forEach items="${messageDtos}" var="message" varStatus="status" >
-			      <li>
-					<a href="<%=path%>/message/showOneMessage.action?sendUserId=${message.sendUserId}">
+			      <c:if test="${message.bookId == null}">
+			      <li> 
+			        <a href="<%=path%>/message/showOneMessage.action?sendUserId=${message.sendUserId}">
 					  <div class="pull-left">
 						<img src="<%=path%>${message.sendUserImage}" class="rounded-circle" alt="User Image">
 					  </div>
@@ -133,6 +134,23 @@
 					  </div>
 					</a>
 				  </li>
+			      </c:if>
+			      <c:if test="${message.bookId != null}">
+			      <li class="bg-warning"> 
+			        <a href="<%=path%>/book/buyBook.action?userId=${message.sendUserId}&bookId=${message.bookId}">
+					  <div class="pull-left">
+						<img src="<%=path%>${message.sendUserImage}" class="rounded-circle" alt="User Image">
+					  </div>
+					  <div class="mail-contnet">
+						 <h4>
+						  ${message.sendUserName}
+						  <small><i class="fa fa-clock-o"></i>${message.showTime}</small>
+						 </h4>
+						 <span style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">这个是交易信息：${message.messInfo}</span>
+					  </div>
+					</a>
+				  </li>
+			      </c:if>
 			      </c:forEach>
 				</ul>
 			  </li>
@@ -265,23 +283,15 @@
 
 		<!-- Main content -->
 		<section class="content">
-		   		<div class="col-12 col-xl-8 m-auto">
-				<div class="box">		
-					<div class="box-header bg-warning">
-						<h4 class="box-title">图书详情</h4>
-						<ul class="box-controls pull-right">
-						  <li class="dropdown">
-							<a data-toggle="dropdown" href="#" class="btn btn-rounded btn-outline btn-white px-10">Stats</a>
-							<div class="dropdown-menu dropdown-menu-right">
-							  <a class="dropdown-item" href="#"><i class="ti-import"></i> Import</a>
-							  <a class="dropdown-item" href="#"><i class="ti-export"></i> Export</a>
-							  <a class="dropdown-item" href="#"><i class="ti-printer"></i> Print</a>
-							  <div class="dropdown-divider"></div>
-							  <a class="dropdown-item" href="#"><i class="ti-settings"></i> Settings</a>
-							</div>
-						  </li>
-						</ul>
-					</div>
+		<div class="row">
+				<div class="col-12 col-xl-8 m-auto">
+				<div class="box ribbon-box">
+				    <div class="ribbon-two ribbon-two-dark"><span>图书详情</span></div>	
+				    <div class="box-header with-border bg-warning">
+					<ul class="box-controls pull-right">
+					  <li><a class="box-btn-close" href="<%=path%>/home/toHomePage.action"></a></li>
+					</ul>
+				  </div>	
 					<div class="box-body bg-warning">										
 						<div class="px-10 py-30 bg-white text-dark">
 							<h5 class="px-10 mb-15 font-weight-700">${bookInfo.name}</h5>
@@ -296,7 +306,7 @@
 							    </p>
 							    
 							    <p> 
-							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-user"></i> 价钱：							   
+							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-money"></i> 价钱：							   
 							      <small>
 								  	${bookInfo.price} /原价：${bookInfo.originalPrice} 
 							      </small>
@@ -304,7 +314,7 @@
 							    </p>
 							    
 							    <p> 
-							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-user"></i> 课程：							   
+							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-file-text-o"></i> 课程：							   
 							      <small>
 								  	${bookInfo.course}
 							      </small>
@@ -312,7 +322,7 @@
 							    </p>
 							    
 							    <p> 
-							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-user"></i> 版本：							   
+							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-text-height"></i> 版本：							   
 							      <small>
 								  	${bookInfo.edition} 
 							      </small>
@@ -320,7 +330,7 @@
 							    </p>
 							    
 							     <p> 
-							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-user"></i> 学期：							   
+							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-universal-access Example of truck"></i> 学期：							   
 							      <small>
 								  	${bookInfo.semester}
 							      </small>
@@ -328,29 +338,34 @@
 							    </p>
 							    
 							     <p> 
-							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-user"></i> 交易方式：							   
+							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-truck"></i> 交易方式：							   
 							      <small>
 								  	${bookInfo.transaction}
 							      </small>
 							      </h6> 
 							    </p>
 							    <p> 
-							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-user"></i> 描述：			
+							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-pencil-square"></i> 描述：			
 							      </h6> 
 							    </p>
 							    <p class="px-40 box-text">
 							         <small>${bookInfo.description}</small>
 							    </p>
 							   <div class="flexbox align-items-center mt-3">
-							      <a class="btn btn-xs btn-round btn-bold btn-primary" href="#">联系卖家</a>
-							      <a class="btn btn-xs btn-round btn-bold btn-primary" href="#">收藏图书</a>
-							      <div class="gap-items-4">
-							      <a href="#" data-toggle="tooltip" data-original-title="查看信息"><i class="fa fa-user"></i>by ：${bookInfo.userId}</a> 
-							      <a >
-							         <i class="ion-heart text-danger font-size-11" ></i>
-							         <span data-toggle="tooltip" data-original-title="浏览次数" class="font-size-11 text-fade ml-1">${bookInfo.browseTimes}</span>
-							      </a>
+							      <c:if test="${bookInfo.userId != currentUser.usercode}">
+							     	 <a class="btn btn-xs btn-round btn-bold btn-primary" href="<%=path%>/book/buyBook.action?userId=${bookInfo.userId}&bookId=${bookInfo.id}">联系卖家</a>
+							         <a class="btn btn-xs btn-round btn-bold btn-primary" href="#">收藏图书</a>
+							         <div class="gap-items-4">
+							        <a href="#" data-toggle="tooltip" data-original-title="查看店家信息"><i class="fa fa-user"></i> ：${bookInfo.username}</a> 
+								      <a >
+								         <i class="ion-heart text-danger font-size-11" ></i>
+								         <span data-toggle="tooltip" data-original-title="浏览次数" class="font-size-11 text-fade ml-1">${bookInfo.browseTimes}</span>
+								      </a>
 							      </div>
+							      </c:if>
+							      <c:if test="${bookInfo.userId == currentUser.usercode}">
+							     	<a href="#" data-toggle="tooltip" ><i class="fa fa-user"></i>：这是您自己的书籍喔！ </a>
+							      </c:if>
 							   </div>						   
 							 </li>
 							 <li class="px-10">
@@ -364,10 +379,23 @@
 						   </ul>						
 						</div>
 					</div>
-					
 				</div>
-			</div>  
-			
+			 </div>  
+			 <!-- <div class="col-12 col-xl-4">
+				   		<div class="box ribbon-box ">
+				   		<div class="ribbon-two ribbon-two-warning"><span>店家信息</span></div>
+						  <div class="media">
+						  <img class="align-self-start w-160" src="../../images/user1-128x128.jpg" alt="Generic placeholder image">
+						  <div class="media-body">
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero.</p>
+							<a class="btn btn-sm btn-bold btn-primary mt-15" href="#">Read more</a>
+						  </div>
+						  
+						</div>
+							/.box-body
+						</div>
+			 </div> -->
+			</div>
 		</section>
 		<!-- /.content -->
 	  </div>
@@ -490,23 +518,40 @@
 		            		$("#menuForAllMessages li").remove();
 		            		$.hulla.send("您有最新消息请查看收件箱", "success");
 		            		var str = "";
-		                    for(var i=0;i<data.obj.length;i++){
-		                        str += "<li>" +
-		                                "<a href='<%=path%>/message/showOneMessage.action?sendUserId=" + data.obj[i].sendUserId + " '>" +
+		                    for(var i=0;i<data.obj.listNewMessage.length;i++){
+		                    	if(data.obj.listNewMessage[i].bookId == ""){
+		                    		 str += "<li>" +
+		                                "<a href='<%=path%>/message/showOneMessage.action?sendUserId=" + data.obj.listNewMessage[i].sendUserId + " '>" +
 		                                "<div class=\"pull-left\">" +
-		                                "<img src=\"<%=path%>"+data.obj[i].sendUserImage +"\" class=\"rounded-circle\" alt=\"User Image\">" +
+		                                "<img src=\"<%=path%>"+data.obj.listNewMessage[i].sendUserImage +"\" class=\"rounded-circle\" alt=\"User Image\">" +
 		                                "</div>" +
 		                                "<div class=\"mail-contnet\">" +
-		                                "<h4> " +data.obj[i].sendUserName +
-		                                "<small><i class=\"fa fa-clock-o\"></i> "+data.obj[i].showTime +"</small>"+
+		                                "<h4> " +data.obj.listNewMessage[i].sendUserName +
+		                                "<small><i class=\"fa fa-clock-o\"></i> "+data.obj.listNewMessage[i].showTime +"</small>"+
 		                                "</h4>" +
-		                                " <span style=\"overflow: hidden;text-overflow: ellipsis;white-space: nowrap;\">"+data.obj[i].messInfo+"</span> " +
+		                                " <span style=\"overflow: hidden;text-overflow: ellipsis;white-space: nowrap;\">"+data.obj.listNewMessage[i].messInfo+"</span> " +
 		                                "</div>" +
 		                                "</a>" +
 		                                "</li>";
+		                    	}else{
+		                    		str += "<li class=\"bg-warning\">" +
+	                                "<a href='<%=path%>/book/buyBook.action?userId=" + data.obj.listNewMessage[i].sendUserId + "&bookId="+ data.obj.listNewMessage[i].bookId + " '>" +
+	                                "<div class=\"pull-left\">" +
+	                                "<img src=\"<%=path%>"+data.obj.listNewMessage[i].sendUserImage +"\" class=\"rounded-circle\" alt=\"User Image\">" +
+	                                "</div>" +
+	                                "<div class=\"mail-contnet\">" +
+	                                "<h4> " +data.obj.listNewMessage[i].sendUserName +
+	                                "<small><i class=\"fa fa-clock-o\"></i>"+ data.obj.listNewMessage[i].showTime +"</small>"+
+	                                "</h4>" +
+	                                " <span style=\"overflow: hidden;text-overflow: ellipsis;white-space: nowrap;\">"+"这是交易信息："+data.obj.listNewMessage[i].messInfo+"</span> " +
+	                                "</div>" +
+	                                "</a>" +
+	                                "</li>";
+		                    	}
+		    
 		            	}
 		                $("#menuForAllMessages").append(str);
-		                console.log(str);
+		                //console.log(str);
 		            	}
 					},
 					error: function() {

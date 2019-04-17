@@ -1,41 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.herman.ebookstore.mapper.MessageMapper">
-	<resultMap type="com.herman.ebookstore.pojo.Message"
-		id="BaseResultMap">
-		<id column="MESSID" property="messId" jdbcType="INTEGER" />
-		<result column="MESSINFO" property="messInfo" jdbcType="VARCHAR" />
-		<result column="RECEIVECODE" property="receiveCode" jdbcType="VARCHAR" />
-		<result column="SENDCODE" property="sendCode" jdbcType="VARCHAR" />
-		<result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
-		<result column="UPDATETIME" property="updatetime" jdbcType="TIMESTAMP" />
-		<result column="STATE" property="state" jdbcType="VARCHAR" />
-	</resultMap>
-	<sql id="Base_Column_List">
-		messId,messInfo,receiveCode,sendCode,createtime,updatetime,state
-	</sql>
-	<insert id="insertNewMessage" parameterType="com.herman.ebookstore.pojo.Message">
-		insert into
-		HSTB_MESSAGE(messInfo,receiveCode,sendCode,createtime,state)
-		values(#{messInfo},#{receiveCode},#{sendCode},sysdate(),'0')
-	</insert>
-	<select id="selectMessageByUsercode" parameterType="com.herman.ebookstore.pojo.Message" resultMap="BaseResultMap">
-		select
-		<include refid="Base_Column_List"></include>
-		from HSTB_MESSAGE
-		<where>
-			<if test="messId !=null and messId !='' ">
-				and messId = #{messId}
-			</if>
-			<if test="receiveCode !=null and receiveCode !='' ">
-				and receiveCode = #{receiveCode}
-			</if>
-			<if test="sendCode !=null and sendCode !='' ">
-				and sendCode = #{sendCode}
-			</if>
-			<if test="state !=null and state !='' ">
-				and state = #{state}
-			</if>
-		</where>
-	</select>
+  <resultMap id="MessageMapper" type="com.herman.ebookstore.pojo.Message">
+    <result property="id" column="id"/>
+    <result property="createTime" column="create_time"/>
+    <result property="updateTime" column="update_time"/>
+    <result property="messInfo" column="mess_info"/>
+    <result property="receiveUserId" column="receive_user_id"/>
+    <result property="bookId" column="book_id"/>
+    <result property="sendUserId" column="send_user_id"/>
+    <result property="status" column="status"/>
+  </resultMap>
 </mapper>

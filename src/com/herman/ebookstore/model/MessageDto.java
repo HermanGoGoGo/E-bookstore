@@ -50,6 +50,9 @@ public class MessageDto   {
 
   @JsonProperty("status")
   private String status = null;
+  
+  @JsonProperty("bookId")
+  private String bookId = null;
 
   public MessageDto messInfo(String messInfo) {
     this.messInfo = messInfo;
@@ -251,7 +254,26 @@ public class MessageDto   {
 	  public void setCreateTimeShow(String createTimeShow) {
 	    this.createTimeShow = createTimeShow;
 	  }
+	  
+	  public MessageDto bookId(String bookId) {
+		    this.bookId = bookId;
+		    return this;
+		  }
 
+		  /**
+		   * 书籍id
+		   * @return bookId
+		  **/
+		  @ApiModelProperty(value = "书籍id")
+
+
+		  public String getBookId() {
+		    return bookId;
+		  }
+
+		  public void setBookId(String bookId) {
+		    this.bookId = bookId;
+		  }
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -271,12 +293,13 @@ public class MessageDto   {
         Objects.equals(this.createTime, messageDto.createTime) &&
         Objects.equals(this.showTime, messageDto.showTime) &&
         Objects.equals(this.createTimeShow, messageDto.createTimeShow) &&
+        Objects.equals(this.bookId, messageDto.bookId) &&
         Objects.equals(this.status, messageDto.status);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(messInfo, receiveUserId, sendUserId, sendUserName, sendUserImage, chatUser, createTime, showTime, status ,createTimeShow);
+    return Objects.hash(messInfo, receiveUserId, sendUserId, sendUserName, sendUserImage, chatUser, createTime, showTime, status ,createTimeShow , bookId);
   }
 
   @Override
@@ -294,6 +317,7 @@ public class MessageDto   {
     sb.append("    showTime: ").append(toIndentedString(showTime)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    createTimeShow: ").append(toIndentedString(createTimeShow)).append("\n");
+    sb.append("    bookId: ").append(toIndentedString(bookId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

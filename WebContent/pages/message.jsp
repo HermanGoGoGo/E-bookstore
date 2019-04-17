@@ -117,8 +117,9 @@
 				<!-- inner menu: contains the actual data -->
 				<ul class="menu sm-scrol" id="menuForAllMessages">
 			      <c:forEach items="${messageDtos}" var="message" varStatus="status" >
-			      <li>
-					<a href="<%=path%>/message/showOneMessage.action?sendUserId=${message.sendUserId}">
+			      <c:if test="${message.bookId == null}">
+			      <li> 
+			        <a href="<%=path%>/message/showOneMessage.action?sendUserId=${message.sendUserId}">
 					  <div class="pull-left">
 						<img src="<%=path%>${message.sendUserImage}" class="rounded-circle" alt="User Image">
 					  </div>
@@ -131,6 +132,23 @@
 					  </div>
 					</a>
 				  </li>
+			      </c:if>
+			      <c:if test="${message.bookId != null}">
+			      <li class="bg-warning"> 
+			        <a href="<%=path%>/book/buyBook.action?userId=${message.sendUserId}&bookId=${message.bookId}">
+					  <div class="pull-left">
+						<img src="<%=path%>${message.sendUserImage}" class="rounded-circle" alt="User Image">
+					  </div>
+					  <div class="mail-contnet">
+						 <h4>
+						  ${message.sendUserName}
+						  <small><i class="fa fa-clock-o"></i>${message.showTime}</small>
+						 </h4>
+						 <span style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">这个是交易信息：${message.messInfo}</span>
+					  </div>
+					</a>
+				  </li>
+			      </c:if>
 			      </c:forEach>
 				</ul>
 			  </li>
@@ -538,56 +556,63 @@
     <%-- <script src="<%=path%>/js/spop.min.js"></script> --%>
     
     <script type="text/javascript">
-/*     window.onload=function(){
-    	//div.scrollTop = div.scrollHeight;
-    	$('.slimScrollBar').css("top","100%");
-    	$('#inner-content-div').scrollTop( $('#inner-content-div')[0].scrollHeight );
-    	//console.log(scrollTop1);
-    	//$('.slimScrollBar').Top(100 );
-    	//$('.box-body').scrollTop='100px';
-	} */
     $.hulla = new hullabaloo();
 	//var usercode = '${currentUser.usercode}';
 
-	function checkTime(){
-        $.ajax({
-			type: "post",
-			url: "<%=path%>/base/getUserMessage.action",
-			data: {
-			},
-			dataType: 'json',
-			success: function(data) {
-				console.log(data);
-          	    if(data.status == '200'){
-                <%--  $("#menuForAllMessages li").remove();
-            		$.hulla.send("您有最新消息请查看", "success");
-            		var str = "";
-                    for(var i=0;i<data.obj.length;i++){
-                        str += "<li>" +
-                                "<a href='<%=path%>/message/showOneMessage.action?sendUserId=" + data.obj[i].sendUserId + " '>" +
-                                "<div class=\"pull-left\">" +
-                                "<img src=\"<%=path%>"+data.obj[i].sendUserImage +"\" class=\"rounded-circle\" alt=\"User Image\">" +
-                                "</div>" +
-                                "<div class=\"mail-contnet\">" +
-                                "<h4> " +data.obj[i].sendUserName +
-                                "<small><i class=\"fa fa-clock-o\"></i> "+data.obj[i].showTime +"</small>"+
-                                "</h4>" +
-                                " <span>"+data.obj[i].messInfo+"</span> " +
-                                "</div>" +
-                                "</a>" +
-                                "</li>";
-                                } 
-                console.log(str); --%>
-                var sendUserId = $("#sendUserId").val();
-                window.location.href = "<%=path%>/message/showOneMessage.action?sendUserId=" + sendUserId;
-                $.hulla.send("您有最新消息请查看收件箱", "success");
-            	}
-			},
-			error: function() {
-				console.log("error");
-			}
-		}); 
-    }
+			function checkTime(){
+		        $.ajax({
+					type: "post",
+					url: "<%=path%>/base/getUserMessage.action",
+					data: {
+					},
+					dataType: 'json',
+					success: function(data) {
+						console.log(data);
+		            	if(data.status == '200'){
+		            		$("#menuForAllMessages li").remove();
+		            		$.hulla.send("您有最新消息请查看收件箱", "success");
+		            		var str = "";
+		                    for(var i=0;i<data.obj.listNewMessage.length;i++){
+		                    	if(data.obj.listNewMessage[i].bookId == ""){
+		                    		 str += "<li>" +
+		                                "<a href='<%=path%>/message/showOneMessage.action?sendUserId=" + data.obj.listNewMessage[i].sendUserId + " '>" +
+		                                "<div class=\"pull-left\">" +
+		                                "<img src=\"<%=path%>"+data.obj.listNewMessage[i].sendUserImage +"\" class=\"rounded-circle\" alt=\"User Image\">" +
+		                                "</div>" +
+		                                "<div class=\"mail-contnet\">" +
+		                                "<h4> " +data.obj.listNewMessage[i].sendUserName +
+		                                "<small><i class=\"fa fa-clock-o\"></i> "+data.obj.listNewMessage[i].showTime +"</small>"+
+		                                "</h4>" +
+		                                " <span style=\"overflow: hidden;text-overflow: ellipsis;white-space: nowrap;\">"+data.obj.listNewMessage[i].messInfo+"</span> " +
+		                                "</div>" +
+		                                "</a>" +
+		                                "</li>";
+		                    	}else{
+		                    		str += "<li class=\"bg-warning\">" +
+	                                "<a href='<%=path%>/book/buyBook.action?userId=" + data.obj.listNewMessage[i].sendUserId + "&bookId="+ data.obj.listNewMessage[i].bookId + " '>" +
+	                                "<div class=\"pull-left\">" +
+	                                "<img src=\"<%=path%>"+data.obj.listNewMessage[i].sendUserImage +"\" class=\"rounded-circle\" alt=\"User Image\">" +
+	                                "</div>" +
+	                                "<div class=\"mail-contnet\">" +
+	                                "<h4> " +data.obj.listNewMessage[i].sendUserName +
+	                                "<small><i class=\"fa fa-clock-o\"></i>"+ data.obj.listNewMessage[i].showTime +"</small>"+
+	                                "</h4>" +
+	                                " <span style=\"overflow: hidden;text-overflow: ellipsis;white-space: nowrap;\">"+"这是交易信息："+data.obj.listNewMessage[i].messInfo+"</span> " +
+	                                "</div>" +
+	                                "</a>" +
+	                                "</li>";
+		                    	}
+		    
+		            	}
+		                $("#menuForAllMessages").append(str);
+		                //console.log(str);
+		            	}
+					},
+					error: function() {
+						console.log("error");
+					}
+				}); 
+		    }
 
     setInterval("checkTime()","3000"); 
 

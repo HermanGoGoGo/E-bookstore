@@ -87,4 +87,10 @@ public class BookServiceImpl extends AbstractService<Book> implements BookServic
 		return this.bookMapper.addHotBrowseTimes(book);
 	}
 
+	@Override
+	public BookDto findOneBook(Book book) {
+		// TODO Auto-generated method stub
+		return this.bookMapper.findOneBook(book);
+	}
+
 }

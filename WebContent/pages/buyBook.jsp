@@ -1,4 +1,4 @@
-﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8" %>
 
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -120,8 +120,9 @@
 				<!-- inner menu: contains the actual data -->
 				<ul class="menu sm-scrol" id="menuForAllMessages">
 			      <c:forEach items="${messageDtos}" var="message" varStatus="status" >
-			      <li>
-					<a href="<%=path%>/message/showOneMessage.action?sendUserId=${message.sendUserId}">
+			      <c:if test="${message.bookId == null}">
+			      <li> 
+			        <a href="<%=path%>/message/showOneMessage.action?sendUserId=${message.sendUserId}">
 					  <div class="pull-left">
 						<img src="<%=path%>${message.sendUserImage}" class="rounded-circle" alt="User Image">
 					  </div>
@@ -134,6 +135,23 @@
 					  </div>
 					</a>
 				  </li>
+			      </c:if>
+			      <c:if test="${message.bookId != null}">
+			      <li class="bg-warning"> 
+			        <a href="<%=path%>/book/buyBook.action?userId=${message.sendUserId}&bookId=${message.bookId}">
+					  <div class="pull-left">
+						<img src="<%=path%>${message.sendUserImage}" class="rounded-circle" alt="User Image">
+					  </div>
+					  <div class="mail-contnet">
+						 <h4>
+						  ${message.sendUserName}
+						  <small><i class="fa fa-clock-o"></i>${message.showTime}</small>
+						 </h4>
+						 <span style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">这个是交易信息：${message.messInfo}</span>
+					  </div>
+					</a>
+				  </li>
+			      </c:if>
 			      </c:forEach>
 				</ul>
 			  </li>
@@ -267,39 +285,35 @@
 		<!-- Main content -->
 		<section class="content">
 			<div class="row">
-			  <div class="col-md-4">
+			  <div class="col-xl-5 col-12">
 				<div class="box ribbon-box">
 				  <div class="ribbon-two ribbon-two-dark"><span>交易详情</span></div>
 				  <div class="box-body p-0">				  	
-						<h4 class="media-heading mt-15 mb-0 py-10 px-40 text-danger"><small>注意事项：请确认已达成双方协议后再点击取消交易以及完成交易；取消交易一方取消即可；完成交易需双方均点击完成交易</small></h4>
+						<h4 class="media-heading mt-15 mb-0 py-10 px-40 text-danger"><small>注意事项：请确认已达成双方协议后再点击取消交易以及完成交易；取消交易一方取消即可；完成交易需先由买家确认交易，卖家再确认交易来完成交易书籍。</small></h4>
 						<div class="media">
 						  <div class="media-body">
-						    <h6 class="px-30 py-10 mb-0 text-bold"> 书籍信息</h6>
-						    <img class="align-self-start w-160" src="../../images/gallery/thumb-sm/5.jpg" alt="Generic placeholder image">
-						    <a class="btn btn-sm btn-bold btn-danger mt-15" id="sa-closeTran">取消交易</a>
+						    <h6 class="px-30 py-10 mb-0 text-bold">${bookDto.name}</h6>
+						    <img class="align-self-start w-160" src="<%=path %>${bookDto.image}" alt="">
 						  </div>
 						  <div class="media-body">
-							 <h6 class="py-10 mb-0 text-bold"> 书名：<small class="text-bold">nihao</small>	</h6>
-							 <h6 class="py-10 mb-0 text-bold"> 作者：<small class="text-bold">nihao</small>	</h6>
-							 <h6 class="py-10 mb-0 text-bold"> 书名：<small class="text-bold">nihao</small>	</h6>
-							 <h6 class="py-10 mb-0 text-bold"> 书名：<small class="text-bold">nihao</small>	</h6>
-							 <h6 class="py-10 mb-0 text-bold"> 书名：<small class="text-bold">nihao</small>	</h6>
-							<a class="btn btn-sm btn-bold btn-success mt-15" id="sa-completionTran">完成交易</a>
+							 <h6 class="py-10 mb-0 text-bold"> 书籍作者：<small class="text-bold">${bookDto.author}</small>	</h6>
+							 <h6 class="py-10 mb-0 text-bold"> 查看店家：<small class="text-bold"><a href="#" data-toggle="tooltip" data-original-title="点击查看店家信息">${bookDto.username}</a> </small>	</h6>
+							 <h6 class="py-10 mb-0 text-bold"> 书籍来源：<small class="text-bold">${bookDto.campus}</small>	</h6>
+							 <h6 class="py-10 mb-0 text-bold"> 书籍状态：<small class="text-bold">${bookDto.conditions}</small>	</h6>
+							 <h6 class="py-10 mb-0 text-bold"> 交易方式：<small class="text-bold">${bookDto.transaction}</small>	</h6>
+							 <h6 class="py-10 mb-0 text-bold"> 售价/原价：<small class="badge"><b>￥ ${bookDto.price}</b></small> / <small class="badge badge-danger">￥ ${bookDto.originalPrice}</small></h6>
+							 <div class="flexbox align-items-center mt-3">
+								 <a class="btn btn-sm btn-bold btn-danger mt-15" id="sa-closeTran">取消交易</a>
+								 <a class="btn btn-sm btn-bold btn-success mt-15" id="sa-completionTran">完成交易</a>
+								 <a class="py-10">
+								     <i class="ion-heart text-danger font-size-11" ></i>
+								     <span data-toggle="tooltip" data-original-title="浏览次数" class="font-size-11 text-fade ml-1">${bookDto.browseTimes}</span>
+								 </a>
+							 </div>
 							<script type="text/javascript">
 						   
 							</script>
 						  </div>
-						</div>
-						<div class="media">
-						<div class="media-body">
-						    <h6 class="px-30 py-10 mb-0 text-bold"> 交易人信息	</h6>
-						    <img class="align-self-start w-120" src="<%=path%>/images/user1-128x128.jpg" alt="Generic placeholder image">
-						</div>
-						<div class="media-body">
-						<h6 class="py-10 mb-0 text-bold"> 书名：<small class="text-bold">nihao</small>	</h6>
-							 <h6 class="py-10 mb-0 text-bold"> 书名：<small class="text-bold">nihao</small>	</h6>
-							 <h6 class="py-10 mb-0 text-bold"> 书名：<small class="text-bold">nihao</small>	</h6>
-						</div>
 						</div>
 				  </div>
 				</div>
@@ -332,7 +346,7 @@
 					  </div>
 					</div>
 			  </div> --%>
-			  <div class="col-xl-8 col-12">
+			  <div class="col-xl-7 col-12">
 			  <!-- DIRECT CHAT PRIMARY -->
 			  <div class="box direct-chat direct-chat-info">
 				<div class="box-header with-border">
@@ -350,7 +364,7 @@
 				  <!-- Conversations are loaded here -->
 				  <div class="direct-chat-messages" >
 					<!-- Message. Default to the left -->
-				    <c:forEach items="${listMessages}" var="messages" varStatus="status" >
+				    <c:forEach items="${listMessageDtos}" var="messages" varStatus="status" >
 				    <c:if test="${messages.sendUserId != currentUser.usercode}">
 				    <div class="direct-chat-msg mb-30">
 					  <div class="clearfix mb-15">
@@ -391,12 +405,11 @@
 				</div>
 				<!-- /.box-body -->
 				<div class="box-footer">
-				  <form action="<%=path%>/message/showOneMessage.action" method="post">
+				  <form action="<%=path%>/book/buyBook.action?userId=${messageReq.sendUserId}&bookId=${bookDto.id}" method="post" accept-charset="UTF-8">
 					<div class="input-group">
-	    			<!--   <input type="text" name="receiveUserId" id="receiveUserId"  value="2201504242" class="form-control" style="display: none;">-->
-					  <input type="text" name="sendUserId" id="sendUserId" value="${messageReq.sendUserId}" class="form-control" style="display: none;">
-					  <input type="text" name="message" id="message" placeholder="Type Message ..." class="form-control">
-						  <c:if test="${messageReq.sendUserName !='全部消息'}">
+	    			  <%-- <input type="text" name="userId" id="userId"  value="${bookDto.userId}" class="form-control" style="display: none;">
+					  <input type="text" name="bookId" id="bookId" value="${bookDto.id}" class="form-control" style="display: none;"> --%>
+					  <input type="text" name="messageInfo" id="messageInfo" placeholder="Type Message ..." class="form-control">
 						  <div class="input-group-addon">
 							<div class="align-self-end gap-items">
 							  <a class="publisher-btn" onclick="sendMessage()"><i class="fa fa-paper-plane"></i></a>
@@ -404,12 +417,11 @@
 							          function sendMessage() {										
 							          var sendUserId = $("#sendUserId").val(),
 							          message = $("#message").val();							          
-							          window.location.href="<%=path%>/message/showOneMessage.action?sendUserId="+sendUserId+"&message=" + message;
+							         <%--  window.location.href="<%=path%>/message/showOneMessage.action?sendUserId="+sendUserId+"&message=" + message; --%>
 							          }
                               </script> 
 							</div>
 						  </div>
-						  </c:if>
 					</div>
 				  </form>
 				</div>
@@ -590,43 +602,60 @@
     $.hulla = new hullabaloo();
 	//var usercode = '${currentUser.usercode}';
 
-	function checkTime(){
-        $.ajax({
-			type: "post",
-			url: "<%=path%>/base/getUserMessage.action",
-			data: {
-			},
-			dataType: 'json',
-			success: function(data) {
-				console.log(data);
-          	    if(data.status == '200'){
-                $("#menuForAllMessages li").remove();
-            		$.hulla.send("您有最新消息请查看", "success");
-            		var str = "";
-                    for(var i=0;i<data.obj.length;i++){
-                        str += "<li>" +
-                                "<a href='<%=path%>/message/showOneMessage.action?sendUserId=" + data.obj[i].sendUserId + " '>" +
-                                "<div class=\"pull-left\">" +
-                                "<img src=\"<%=path%>"+data.obj[i].sendUserImage +"\" class=\"rounded-circle\" alt=\"User Image\">" +
-                                "</div>" +
-                                "<div class=\"mail-contnet\">" +
-                                "<h4> " +data.obj[i].sendUserName +
-                                "<small><i class=\"fa fa-clock-o\"></i> "+data.obj[i].showTime +"</small>"+
-                                "</h4>" +
-                                " <span>"+data.obj[i].messInfo+"</span> " +
-                                "</div>" +
-                                "</a>" +
-                                "</li>";
-                                } 
-                console.log(str); 
-                $.hulla.send("您有最新消息请查看收件箱", "success");
-            	}
-			},
-			error: function() {
-				console.log("error");
-			}
-		}); 
-    }
+				function checkTime(){
+		        $.ajax({
+					type: "post",
+					url: "<%=path%>/base/getUserMessage.action",
+					data: {
+					},
+					dataType: 'json',
+					success: function(data) {
+						console.log(data);
+		            	if(data.status == '200'){
+		            		$("#menuForAllMessages li").remove();
+		            		$.hulla.send("您有最新消息请查看收件箱", "success");
+		            		var str = "";
+		                    for(var i=0;i<data.obj.listNewMessage.length;i++){
+		                    	if(data.obj.listNewMessage[i].bookId == ""){
+		                    		 str += "<li>" +
+		                                "<a href='<%=path%>/message/showOneMessage.action?sendUserId=" + data.obj.listNewMessage[i].sendUserId + " '>" +
+		                                "<div class=\"pull-left\">" +
+		                                "<img src=\"<%=path%>"+data.obj.listNewMessage[i].sendUserImage +"\" class=\"rounded-circle\" alt=\"User Image\">" +
+		                                "</div>" +
+		                                "<div class=\"mail-contnet\">" +
+		                                "<h4> " +data.obj.listNewMessage[i].sendUserName +
+		                                "<small><i class=\"fa fa-clock-o\"></i> "+data.obj.listNewMessage[i].showTime +"</small>"+
+		                                "</h4>" +
+		                                " <span style=\"overflow: hidden;text-overflow: ellipsis;white-space: nowrap;\">"+data.obj.listNewMessage[i].messInfo+"</span> " +
+		                                "</div>" +
+		                                "</a>" +
+		                                "</li>";
+		                    	}else{
+		                    		str += "<li class=\"bg-warning\">" +
+	                                "<a href='<%=path%>/book/buyBook.action?userId=" + data.obj.listNewMessage[i].sendUserId + "&bookId="+ data.obj.listNewMessage[i].bookId + " '>" +
+	                                "<div class=\"pull-left\">" +
+	                                "<img src=\"<%=path%>"+data.obj.listNewMessage[i].sendUserImage +"\" class=\"rounded-circle\" alt=\"User Image\">" +
+	                                "</div>" +
+	                                "<div class=\"mail-contnet\">" +
+	                                "<h4> " +data.obj.listNewMessage[i].sendUserName +
+	                                "<small><i class=\"fa fa-clock-o\"></i>"+ data.obj.listNewMessage[i].showTime +"</small>"+
+	                                "</h4>" +
+	                                " <span style=\"overflow: hidden;text-overflow: ellipsis;white-space: nowrap;\">"+"这是交易信息："+data.obj.listNewMessage[i].messInfo+"</span> " +
+	                                "</div>" +
+	                                "</a>" +
+	                                "</li>";
+		                    	}
+		    
+		            	}
+		                $("#menuForAllMessages").append(str);
+		                //console.log(str);
+		            	}
+					},
+					error: function() {
+						console.log("error");
+					}
+				}); 
+		    }
 
     setInterval("checkTime()","3000"); 
 

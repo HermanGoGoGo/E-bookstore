@@ -155,8 +155,9 @@
 				<!-- inner menu: contains the actual data -->
 				<ul class="menu sm-scrol" id="menuForAllMessages">
 			      <c:forEach items="${messageDtos}" var="message" varStatus="status" >
-			      <li>
-					<a href="<%=path%>/message/showOneMessage.action?sendUserId=${message.sendUserId}">
+			      <c:if test="${message.bookId == null}">
+			      <li> 
+			        <a href="<%=path%>/message/showOneMessage.action?sendUserId=${message.sendUserId}">
 					  <div class="pull-left">
 						<img src="<%=path%>${message.sendUserImage}" class="rounded-circle" alt="User Image">
 					  </div>
@@ -169,6 +170,23 @@
 					  </div>
 					</a>
 				  </li>
+			      </c:if>
+			      <c:if test="${message.bookId != null}">
+			      <li class="bg-warning"> 
+			        <a href="<%=path%>/book/buyBook.action?userId=${message.sendUserId}&bookId=${message.bookId}">
+					  <div class="pull-left">
+						<img src="<%=path%>${message.sendUserImage}" class="rounded-circle" alt="User Image">
+					  </div>
+					  <div class="mail-contnet">
+						 <h4>
+						  ${message.sendUserName}
+						  <small><i class="fa fa-clock-o"></i>${message.showTime}</small>
+						 </h4>
+						 <span style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">这个是交易信息：${message.messInfo}</span>
+					  </div>
+					</a>
+				  </li>
+			      </c:if>
 			      </c:forEach>
 				</ul>
 			  </li>
@@ -190,15 +208,15 @@
 				            		var str = "";
 				                    for(var i=0;i<data.obj.length;i++){
 				                        str += "<li>" +
-				                                "<a href='<%=path%>/message/showOneMessage.action?sendUserId=" + data.obj[i].sendUserId + " '>" +
+				                                "<a href='<%=path%>/message/showOneMessage.action?sendUserId=" + data.obj.listNewMessage[i].sendUserId + " '>" +
 				                                "<div class=\"pull-left\">" +
-				                                "<img src=\"<%=path%>"+data.obj[i].sendUserImage +"\" class=\"rounded-circle\" alt=\"User Image\">" +
+				                                "<img src=\"<%=path%>"+data.obj.listNewMessage[i].sendUserImage +"\" class=\"rounded-circle\" alt=\"User Image\">" +
 				                                "</div>" +
 				                                "<div class=\"mail-contnet\">" +
-				                                "<h4> " +data.obj[i].sendUserName +
-				                                "<small><i class=\"fa fa-clock-o\"></i> "+data.obj[i].showTime +"</small>"+
+				                                "<h4> " +data.obj.listNewMessage[i].sendUserName +
+				                                "<small><i class=\"fa fa-clock-o\"></i> "+data.obj.listNewMessage[i].showTime +"</small>"+
 				                                "</h4>" +
-				                                " <span>"+data.obj[i].messInfo+"</span> " +
+				                                " <span>"+data.obj.listNewMessage[i].messInfo+"</span> " +
 				                                "</div>" +
 				                                "</a>" +
 				                                "</li>";
@@ -606,23 +624,40 @@
 		            		$("#menuForAllMessages li").remove();
 		            		$.hulla.send("您有最新消息请查看收件箱", "success");
 		            		var str = "";
-		                    for(var i=0;i<data.obj.length;i++){
-		                        str += "<li>" +
-		                                "<a href='<%=path%>/message/showOneMessage.action?sendUserId=" + data.obj[i].sendUserId + " '>" +
+		                    for(var i=0;i<data.obj.listNewMessage.length;i++){
+		                    	if(data.obj.listNewMessage[i].bookId == ""){
+		                    		 str += "<li>" +
+		                                "<a href='<%=path%>/message/showOneMessage.action?sendUserId=" + data.obj.listNewMessage[i].sendUserId + " '>" +
 		                                "<div class=\"pull-left\">" +
-		                                "<img src=\"<%=path%>"+data.obj[i].sendUserImage +"\" class=\"rounded-circle\" alt=\"User Image\">" +
+		                                "<img src=\"<%=path%>"+data.obj.listNewMessage[i].sendUserImage +"\" class=\"rounded-circle\" alt=\"User Image\">" +
 		                                "</div>" +
 		                                "<div class=\"mail-contnet\">" +
-		                                "<h4> " +data.obj[i].sendUserName +
-		                                "<small><i class=\"fa fa-clock-o\"></i> "+data.obj[i].showTime +"</small>"+
+		                                "<h4> " +data.obj.listNewMessage[i].sendUserName +
+		                                "<small><i class=\"fa fa-clock-o\"></i> "+data.obj.listNewMessage[i].showTime +"</small>"+
 		                                "</h4>" +
-		                                " <span style=\"overflow: hidden;text-overflow: ellipsis;white-space: nowrap;\">"+data.obj[i].messInfo+"</span> " +
+		                                " <span style=\"overflow: hidden;text-overflow: ellipsis;white-space: nowrap;\">"+data.obj.listNewMessage[i].messInfo+"</span> " +
 		                                "</div>" +
 		                                "</a>" +
 		                                "</li>";
+		                    	}else{
+		                    		str += "<li class=\"bg-warning\">" +
+	                                "<a href='<%=path%>/book/buyBook.action?userId=" + data.obj.listNewMessage[i].sendUserId + "&bookId="+ data.obj.listNewMessage[i].bookId + " '>" +
+	                                "<div class=\"pull-left\">" +
+	                                "<img src=\"<%=path%>"+data.obj.listNewMessage[i].sendUserImage +"\" class=\"rounded-circle\" alt=\"User Image\">" +
+	                                "</div>" +
+	                                "<div class=\"mail-contnet\">" +
+	                                "<h4> " +data.obj.listNewMessage[i].sendUserName +
+	                                "<small><i class=\"fa fa-clock-o\"></i>"+ data.obj.listNewMessage[i].showTime +"</small>"+
+	                                "</h4>" +
+	                                " <span style=\"overflow: hidden;text-overflow: ellipsis;white-space: nowrap;\">"+"这是交易信息："+data.obj.listNewMessage[i].messInfo+"</span> " +
+	                                "</div>" +
+	                                "</a>" +
+	                                "</li>";
+		                    	}
+		    
 		            	}
 		                $("#menuForAllMessages").append(str);
-		                console.log(str);
+		                //console.log(str);
 		            	}
 					},
 					error: function() {

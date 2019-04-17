@@ -18,10 +18,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import com.herman.ebookstore.model.BookDto;
 import com.herman.ebookstore.model.MessageDto;
 import com.herman.ebookstore.model.UserDto;
 import com.herman.ebookstore.pojo.Book;
+import com.herman.ebookstore.pojo.HstbSellBook;
+import com.herman.ebookstore.pojo.Message;
+import com.herman.ebookstore.pojo.User;
 import com.herman.ebookstore.service.BookService;
+import com.herman.ebookstore.service.HstbSellBookService;
 import com.herman.ebookstore.service.MessageService;
 import com.herman.ebookstore.service.SdkService;
 import com.herman.ebookstore.service.UserService;
@@ -45,6 +50,9 @@ public class BookController {
 	private MessageService messageService;
 	
 	@Autowired
+	private HstbSellBookService hstbSellBookService;
+	
+	@Autowired
 	private BookService bookService;
 	@RequestMapping("bookDetails")
 	public String bookDetails(String id,HttpServletRequest request,Model model) {
@@ -52,6 +60,7 @@ public class BookController {
 		UserDto currentUser = new UserDto();
 		MessageDto messageDto = new MessageDto();
 		Book book = new Book();
+		BookDto bookInfo =new BookDto();
 		List<MessageDto> messageDtos = new ArrayList<MessageDto>();
 		if(usercode != null && !"".equals(usercode)) {
 			messageDto.setReceiveUserId(usercode.toString());
@@ -62,14 +71,14 @@ public class BookController {
 			if(StringUtils.isNotEmpty(id)) {
 				book.setId(id);
 				this.bookService.addHotBrowseTimes(book);
-				book= this.bookService.findById(id);
+				bookInfo= this.bookService.findOneBook(book);
 			}
 		}else {
 			
 		}
 		model.addAttribute("messageDtos", messageDtos);
 		model.addAttribute("currentUser", currentUser);
-		model.addAttribute("bookInfo", book);
+		model.addAttribute("bookInfo", bookInfo);
 		return "pages/bookInfo";		
 	}
 	
@@ -91,7 +100,7 @@ public class BookController {
 						HttpServletResponse response) {
 		try {
 			Object usercode = request.getSession().getAttribute("usercode");
-			Book bookInfo = new Book();
+			HstbSellBook bookInfo = new HstbSellBook();
 			
 			if(usercode != null && !"".equals(usercode)) {
 				//获取上传后原图的相对地址
@@ -122,9 +131,11 @@ public class BookController {
 					bookInfo.setDescription(description);
 					bookInfo.setTransaction(transaction);
 					bookInfo.setSemester(semester);
-					bookInfo.setStatus("1");
+					//bookInfo.setStatus("1");
 					bookInfo.setImage("/" + imagePath +picName + extName);
-					this.bookService.save(bookInfo);
+					this.hstbSellBookService.save(bookInfo);
+					//先自动认为通过审核
+					this.hstbSellBookService.passBook(bookInfo);
 					new ResponseWriter().writerResponse(true, response);
 				}
 			}else {
@@ -159,7 +170,71 @@ public class BookController {
 	}
 	
 	@RequestMapping("buyBook")
-	public String buyBook(String bookId,String userId,HttpServletRequest request,Model model) {
+	public String buyBook(String bookId,String userId,String messageInfo,HttpServletRequest request,Model model) {
+		Object usercode = request.getSession().getAttribute("usercode");
+		UserDto currentUser = new UserDto();
+		//返回前端发送信息人的信息
+		User sendUser = new User();
+		Message message = new Message();
+		MessageDto messageDto = new MessageDto();
+		BookDto bookDto = new BookDto();
+		Book book = new Book();
+		List<MessageDto> messageDtos = new ArrayList<MessageDto>();
+		List<MessageDto> listMessageDtos = new ArrayList<MessageDto>();
+		if(usercode != null && !"".equals(usercode)) {
+			if(StringUtils.isNotEmpty(messageInfo)&& !userId.equals(usercode)) {
+				Message messageDto1 = new Message();
+				messageDto1.setReceiveUserId(userId);
+				messageDto1.setSendUserId(usercode.toString());
+				messageDto1.setMessInfo(messageInfo);
+				messageDto1.setBookId(bookId);
+				this.messageService.save(messageDto1);
+				//new ResponseWriter().writerResponse(true, response);
+				return "redirect:/book/buyBook.action?userId="+userId +"&bookId="+bookId;
+			}
+			messageDto.setReceiveUserId(usercode.toString());
+			messageDto.setStatus("0");
+			currentUser.setUsercode(usercode.toString());
+			currentUser =this.userService.selectMinuteOne(currentUser);
+			messageDtos = this.messageService.findAllMessageByDto(messageDto);
+			if(StringUtils.isNotEmpty(userId) && StringUtils.isNotEmpty(bookId)) {
+				messageDto.setBookId(bookId);
+				messageDto.setSendUserId(userId);
+				listMessageDtos= this.messageService.findBookMessageByReAndSe(messageDto);
+				book.setId(bookId);
+				bookDto = this.bookService.findOneBook(book);	
+				if(listMessageDtos.size()==0) {
+					book.setPurchaserId(usercode.toString());
+					book.setStatus("3");
+					this.bookService.update(book);
+					message.setSendUserId(usercode.toString());
+					message.setReceiveUserId(userId);
+					message.setBookId(bookId);
+					message.setMessInfo("请问一下在嘛？");
+					 this.messageService.save(message);
+					listMessageDtos= this.messageService.findBookMessageByReAndSe(messageDto);
+				}
+				this.messageService.clearStatus(messageDto);
+				sendUser.setUsercode(userId);
+				sendUser = this.userService.selectOne(sendUser);
+				messageDto.setSendUserName(sendUser.getUsername());
+			}else {
+				
+			}
+		}else {
+			
+		}
+		model.addAttribute("messageDtos", messageDtos);
+		model.addAttribute("bookDto", bookDto);
+		model.addAttribute("messageReq", messageDto);
+		model.addAttribute("currentUser", currentUser);	
+		model.addAttribute("listMessageDtos", listMessageDtos);	
+		return "pages/buyBook";
+		
+	}
+	
+	@RequestMapping("selfBook")
+	public String selfBook(HttpServletRequest request,Model model) {
 		Object usercode = request.getSession().getAttribute("usercode");
 		UserDto currentUser = new UserDto();
 		MessageDto messageDto = new MessageDto();
@@ -174,8 +249,8 @@ public class BookController {
 			
 		}
 		model.addAttribute("messageDtos", messageDtos);
-		model.addAttribute("currentUser", currentUser);	
-		return "pages/buyBook";
-		
+		model.addAttribute("currentUser", currentUser);
+		return "pages/selfBook";		
 	}
+	
 }

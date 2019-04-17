@@ -86,7 +86,7 @@ public class MessageController {
 					messageDto.setSendUserName("输入的用户不存在");
 				}else if (index == 1) {
 					//判断前端是否发送信息，发送信息了的话保存信息并重新刷新页面
-					if(StringUtils.isNotEmpty(message)) {
+					if(StringUtils.isNotEmpty(message) && !sendUserId.equals(usercode)) {
 						Message messageDto1 = new Message();
 						messageDto1.setReceiveUserId(sendUserId);
 						messageDto1.setSendUserId(usercode.toString());
@@ -132,5 +132,10 @@ public class MessageController {
 		}else {
 			new ResponseWriter().writerResponse(false,response);
 		}
+	}
+	
+	@RequestMapping("sendBookMessage")
+	public void sendBookMessage(String booId , String sentUserId, String message,HttpServletRequest request,HttpServletResponse response) {
+		
 	}
 }

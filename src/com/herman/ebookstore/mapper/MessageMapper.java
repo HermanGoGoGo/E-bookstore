@@ -109,6 +109,17 @@ public interface MessageMapper extends Mapper<Message> {
 			" ORDER BY m.create_time  desc, m.id desc ")
 	public List<MessageDto> findAllMessageReceiveUserId(MessageDto messageDto);
 	
+	/** 
+	 * @Method_Name: findBookMessageByReAndSe 
+	 * @Description: TODO(查询bookId相关的message)
+	 * @Description: * @param messageDto void
+	 * @date 2019年4月16日
+	 * @author 黄金宝 
+	 */
+	@SelectProvider(type = messageSqlBuilder.class, method = "findBookMessageByReAndSe")	
+	public List<MessageDto> findBookMessageByReAndSe(MessageDto messageDto);
+	
+	
 	class messageSqlBuilder {
 		public String findAllMessageByDto(MessageDto messageDto) {
 			return new SQL() {
@@ -136,11 +147,30 @@ public interface MessageMapper extends Mapper<Message> {
 					FROM("HSTB_MESSAGE m");
 					LEFT_OUTER_JOIN("MSTB_USER u ON u.usercode=m.send_user_id");
 					if(null != messageDto.getReceiveUserId() &&  null != messageDto.getSendUserId()) {
-						WHERE("(m.receive_user_id =#{receiveUserId} And m.send_user_id =#{sendUserId}) OR(m.receive_user_id =#{sendUserId} And m.send_user_id =#{receiveUserId})");
+						WHERE("((m.receive_user_id =#{receiveUserId} And m.send_user_id =#{sendUserId}) OR(m.receive_user_id =#{sendUserId} And m.send_user_id =#{receiveUserId}))");
 					}
 					if(null != messageDto.getStatus()) {
 						WHERE("m.status= #{status}");
 					}
+					ORDER_BY("m.create_time desc, m.id desc");
+				}			
+				
+			}.toString();
+		}
+		
+		public String findBookMessageByReAndSe(MessageDto messageDto) {
+			return new SQL() {
+				{
+					SELECT("m.*,m.create_time as createTimeShow,u.username as sendUserName,u.image as sendUserImage");
+					FROM("HSTB_MESSAGE m");
+					LEFT_OUTER_JOIN("MSTB_USER u ON u.usercode=m.send_user_id");
+					if(null != messageDto.getReceiveUserId() &&  null != messageDto.getSendUserId()) {
+						WHERE("((m.receive_user_id =#{receiveUserId} And m.send_user_id =#{sendUserId}) OR(m.receive_user_id =#{sendUserId} And m.send_user_id =#{receiveUserId}))");
+					}
+					/*
+					 * if(null != messageDto.getStatus()) { WHERE("m.status= #{status}"); }
+					 */
+					WHERE("m.book_id= #{bookId}");
 					ORDER_BY("m.create_time desc, m.id desc");
 				}			
 				
@@ -157,6 +187,9 @@ public interface MessageMapper extends Mapper<Message> {
 					}
 					if(null != messageDto.getSendUserId()) {
 						WHERE("send_user_id = #{sendUserId}");
+					}
+					if(null != messageDto.getBookId()) {
+						WHERE("book_id = #{bookId}");
 					}
 				}
 			}.toString();

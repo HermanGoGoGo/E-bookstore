@@ -83,6 +83,9 @@ public class BookDto   {
   
   @JsonProperty("browseTimes")
   private String browseTimes = null;
+  
+  @JsonProperty("image")
+  private String image = null;
 
   public BookDto id(String id) {
     this.id = id;
@@ -487,7 +490,26 @@ public class BookDto   {
 	    this.city = city;
 	  }
 
+	  public BookDto image(String image) {
+		    this.image = image;
+		    return this;
+		  }
 
+		  /**
+		      * 照片url
+		   * @return image
+		  **/
+		  @ApiModelProperty(value = "所在城市")
+
+
+		  public String getImage() {
+		    return image;
+		  }
+
+		  public void setImage(String image) {
+		    this.image = image;
+		  }
+		  
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -516,12 +538,13 @@ public class BookDto   {
         Objects.equals(this.universityId, bookDto.universityId) &&
         Objects.equals(this.campus, bookDto.campus) &&
         Objects.equals(this.city, bookDto.city) &&
+        Objects.equals(this.image, bookDto.image) &&
         Objects.equals(this.browseTimes, bookDto.browseTimes);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, createTime, createTimeCompare, name, author, originalPrice, price, description, conditions, edition, semester, course, transaction, purchaserId, userId, username, universityId, campus, city , browseTimes);
+    return Objects.hash(id, createTime, createTimeCompare, name, author, originalPrice, price, description, conditions, edition, semester, course, transaction, purchaserId, userId, username, universityId, campus, city , browseTimes, image);
   }
 
   @Override
@@ -549,6 +572,7 @@ public class BookDto   {
     sb.append("    campus: ").append(toIndentedString(campus)).append("\n");
     sb.append("    city: ").append(toIndentedString(city)).append("\n");
     sb.append("    browseTimes: ").append(toIndentedString(browseTimes)).append("\n");
+    sb.append("    image: ").append(toIndentedString(image)).append("\n");
     sb.append("}");
     return sb.toString();
   }

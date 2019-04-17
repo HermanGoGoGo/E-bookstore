@@ -35,8 +35,28 @@ public interface BookMapper extends Mapper<Book> {
 	        + "FROM MSTB_SELL_BOOK b "
 			+ "LEFT JOIN MSTB_USER u ON u.usercode=b.user_id "
 			+ "LEFT JOIN MSTB_UNIVERSITY s ON s.id = u.campus_id " + "WHERE b.`status` ='0' "
-			+ "order by b.create_time desc,b.id desc")
+			+ "order by b.update_time desc,b.id desc")
 	public List<BookDto> findAllBookList();
+	
+	@Select("SELECT b.id,b.create_time,b.update_time,b.user_id,b.name,b.author,b.original_price,b.price,b.edition,b.description,b.course,b.semester,b.image,b.browse_times,"
+			+ "CASE " + 
+			"         WHEN b.conditions = '0' THEN '全新' " + 
+			"         WHEN b.conditions = '1' THEN '9.9成新' " + 
+			"         WHEN b.conditions = '2' THEN '6成新' " + 
+			"         ELSE '出错了' "
+			+ " END AS conditions, "
+			+ "CASE " + 
+			"         WHEN b.transaction = '0' THEN '校区当面交易' " + 
+			"         WHEN b.transaction = '1' THEN '邮寄' " + 
+			"         WHEN b.transaction = '2' THEN '校区当面交易或者邮寄' " + 
+			"         ELSE '出错了' " + 
+			"  END AS transaction, "
+			+ "u.username, s.id, s.campus, s.city "		
+	        + "FROM MSTB_SELL_BOOK b "
+			+ "LEFT JOIN MSTB_USER u ON u.usercode=b.user_id "
+			+ "LEFT JOIN MSTB_UNIVERSITY s ON s.id = u.campus_id " + "WHERE b.`status` ='0' and b.id= #{id} "
+			+ "order by b.update_time desc,b.id desc")
+	public BookDto findOneBook(Book book);
 	
 	@Select("SELECT b.*, b.create_time as createTimeCompare," + "u.username, " + "s.id, " + "s.campus, " + "s.city " 
 	        + "FROM MSTB_SELL_BOOK b "
@@ -86,7 +106,7 @@ public interface BookMapper extends Mapper<Book> {
 						WHERE("s.id = #{campusId}");
 					}
 					WHERE("b.`status` ='0' ");
-					ORDER_BY("b.create_time desc,b.id desc");
+					ORDER_BY("b.update_time desc,b.id desc");
 				}
 			}.toString();
 		}
