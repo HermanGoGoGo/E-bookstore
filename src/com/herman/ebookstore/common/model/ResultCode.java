@@ -34,7 +34,12 @@ public enum ResultCode {
 	/**
 	 * 服务器繁忙
 	 */
-	NETWORK_ERROR(9999,"服务器繁忙");
+	NETWORK_ERROR(9999,"服务器繁忙"),
+	/**
+	 * buyBook
+	 */
+	ALL_NEW_MESSAGE(20001,"有新的人交易书信息"),
+	BOOK_NEW_MESSAGE(20002,"有新的人交易书信息");
 	private final int code;
 
     private final String message;

@@ -99,7 +99,7 @@ public class MessageServiceImpl extends AbstractService<Message> implements Mess
 		List<MessageDto> messageDtos1 = new ArrayList<MessageDto>();
 		for (MessageDto messageDto2 : messageDtos) {
 			long delta = new Date().getTime() - messageDto2.getCreateTime().getTime();
-			if (delta < 4200L) {
+			if (delta < 5200L) {
 				messageDto2.setShowTime("1");
 			} else {
 				messageDto2.setShowTime(RelativeDateFormat.format(messageDto2.getCreateTime()));

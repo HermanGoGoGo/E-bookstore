@@ -3,6 +3,7 @@ package com.herman.ebookstore.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,6 +31,7 @@ import com.herman.ebookstore.service.HstbSellBookService;
 import com.herman.ebookstore.service.MessageService;
 import com.herman.ebookstore.service.SdkService;
 import com.herman.ebookstore.service.UserService;
+import com.herman.ebookstore.util.RelativeDateFormat;
 import com.herman.ebookstore.util.ResponseWriter;
 
 /**
@@ -217,6 +219,12 @@ public class BookController {
 				this.messageService.clearStatus(messageDto);
 				sendUser.setUsercode(userId);
 				sendUser = this.userService.selectOne(sendUser);
+				long delta = new Date().getTime() - sendUser.getUpdateTime().getTime();
+				if (delta < 5200L) {
+					messageDto.setShowTime("在线");
+				} else {
+					messageDto.setShowTime("离线");
+				}
 				messageDto.setSendUserName(sendUser.getUsername());
 			}else {
 				

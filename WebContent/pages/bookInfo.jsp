@@ -519,7 +519,7 @@
 		            		$.hulla.send("您有最新消息请查看收件箱", "success");
 		            		var str = "";
 		                    for(var i=0;i<data.obj.listNewMessage.length;i++){
-		                    	if(data.obj.listNewMessage[i].bookId == ""){
+		                    	if(data.obj.listNewMessage[i].bookId == null){
 		                    		 str += "<li>" +
 		                                "<a href='<%=path%>/message/showOneMessage.action?sendUserId=" + data.obj.listNewMessage[i].sendUserId + " '>" +
 		                                "<div class=\"pull-left\">" +

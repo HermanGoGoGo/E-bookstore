@@ -351,6 +351,7 @@
 			  <div class="box direct-chat direct-chat-info">
 				<div class="box-header with-border">
 				  <h4 class="box-title">${messageReq.sendUserName}</h4>
+				  <small class="sidetitle ">${messageReq.showTime}</small>
 					<ul class="box-controls pull-right ">
 					  <li><a class="box-btn-close" href="<%=path%>/home/toHomePage.action"></a></li>
 					  <!--<li><a class="box-btn-slide" href="#"></a></li>-->
@@ -362,7 +363,7 @@
 				<!-- /.box-header -->
 				<div class="box-body " >
 				  <!-- Conversations are loaded here -->
-				  <div class="direct-chat-messages" >
+				  <div class="direct-chat-messages" id="bookListMessages">
 					<!-- Message. Default to the left -->
 				    <c:forEach items="${listMessageDtos}" var="messages" varStatus="status" >
 				    <c:if test="${messages.sendUserId != currentUser.usercode}">
@@ -371,7 +372,7 @@
 					  <span class="direct-chat-name">${messages.sendUserName}</span>	
 					  </div>
 					  <!-- /.direct-chat-info -->
-					  <a  href="<%=path%>/message/showOneMessage.action?sendUserId=${messages.sendUserId}">
+					  <a href="<%=path%>/message/showOneMessage.action?sendUserId=${messages.sendUserId}">
 					  <img class="direct-chat-img avatar" src="<%=path%>${messages.sendUserImage}" alt="message user image">
 					  </a>
 					  <!-- /.direct-chat-img -->
@@ -413,13 +414,6 @@
 						  <div class="input-group-addon">
 							<div class="align-self-end gap-items">
 							  <a class="publisher-btn" onclick="sendMessage()"><i class="fa fa-paper-plane"></i></a>
-							  <script type="text/javascript"> 
-							          function sendMessage() {										
-							          var sendUserId = $("#sendUserId").val(),
-							          message = $("#message").val();							          
-							         <%--  window.location.href="<%=path%>/message/showOneMessage.action?sendUserId="+sendUserId+"&message=" + message; --%>
-							          }
-                              </script> 
 							</div>
 						  </div>
 					</div>
@@ -601,22 +595,23 @@
 	} */
     $.hulla = new hullabaloo();
 	//var usercode = '${currentUser.usercode}';
-
+	
 				function checkTime(){
 		        $.ajax({
 					type: "post",
-					url: "<%=path%>/base/getUserMessage.action",
+					url: "<%=path%>/base/getUserMessage.action?sendUserId=${messageReq.sendUserId}&bookId=${bookDto.id}",
 					data: {
 					},
 					dataType: 'json',
 					success: function(data) {
 						console.log(data);
+						//$("#bookListMessages").empty();
 		            	if(data.status == '200'){
 		            		$("#menuForAllMessages li").remove();
 		            		$.hulla.send("您有最新消息请查看收件箱", "success");
 		            		var str = "";
 		                    for(var i=0;i<data.obj.listNewMessage.length;i++){
-		                    	if(data.obj.listNewMessage[i].bookId == ""){
+		                    	if(data.obj.listNewMessage[i].bookId == null){
 		                    		 str += "<li>" +
 		                                "<a href='<%=path%>/message/showOneMessage.action?sendUserId=" + data.obj.listNewMessage[i].sendUserId + " '>" +
 		                                "<div class=\"pull-left\">" +
@@ -648,6 +643,76 @@
 		    
 		            	}
 		                $("#menuForAllMessages").append(str);
+		                //console.log(str);
+		            	}else if(data.status == '20002'){
+		            		$("#menuForAllMessages li").remove();
+		            		$("#bookListMessages").empty();
+		            		$.hulla.send("您有最新交易消息请查看", "success");
+		            		var str = "";
+		            		var str1 = "";
+		                    for(var i=0;i<data.obj.listNewMessage.length;i++){
+		                    	if(data.obj.listNewMessage[i].bookId == null ){
+		                    		 str += "<li>" +
+		                                "<a href='<%=path%>/message/showOneMessage.action?sendUserId=" + data.obj.listNewMessage[i].sendUserId + " '>" +
+		                                "<div class=\"pull-left\">" +
+		                                "<img src=\"<%=path%>"+data.obj.listNewMessage[i].sendUserImage +"\" class=\"rounded-circle\" alt=\"User Image\">" +
+		                                "</div>" +
+		                                "<div class=\"mail-contnet\">" +
+		                                "<h4> " +data.obj.listNewMessage[i].sendUserName +
+		                                "<small><i class=\"fa fa-clock-o\"></i> "+data.obj.listNewMessage[i].showTime +"</small>"+
+		                                "</h4>" +
+		                                " <span style=\"overflow: hidden;text-overflow: ellipsis;white-space: nowrap;\">"+data.obj.listNewMessage[i].messInfo+"</span> " +
+		                                "</div>" +
+		                                "</a>" +
+		                                "</li>";
+		                    	}else{
+		                    		str += "<li class=\"bg-warning\">" +
+	                                "<a href='<%=path%>/book/buyBook.action?userId=" + data.obj.listNewMessage[i].sendUserId + "&bookId="+ data.obj.listNewMessage[i].bookId + " '>" +
+	                                "<div class=\"pull-left\">" +
+	                                "<img src=\"<%=path%>"+data.obj.listNewMessage[i].sendUserImage +"\" class=\"rounded-circle\" alt=\"User Image\">" +
+	                                "</div>" +
+	                                "<div class=\"mail-contnet\">" +
+	                                "<h4> " +data.obj.listNewMessage[i].sendUserName +
+	                                "<small><i class=\"fa fa-clock-o\"></i>"+ data.obj.listNewMessage[i].showTime +"</small>"+
+	                                "</h4>" +
+	                                " <span style=\"overflow: hidden;text-overflow: ellipsis;white-space: nowrap;\">"+"这是交易信息："+data.obj.listNewMessage[i].messInfo+"</span> " +
+	                                "</div>" +
+	                                "</a>" +
+	                                "</li>";
+		                    	}
+		    
+		            	}
+		                    for(var i=0;i<data.obj.listAllBookMessage.length;i++){
+		                    	if(data.obj.listAllBookMessage[i].sendUserId != ${currentUser.usercode}){
+		                    		 str1 += " <div class=\"direct-chat-msg mb-30\"> "+
+		                    		 " 	<div class=\"clearfix mb-15\"> "+
+		                    		 " 		<span class=\"direct-chat-name\">"+data.obj.listAllBookMessage[i].sendUserName+"</span>	 "+
+		                    		 " 	</div> "+
+		                    		 " 	<a href=\"<%=path%>/book/buyBook.action?userId=" + data.obj.listAllBookMessage[i].sendUserId + "&bookId="+ data.obj.listAllBookMessage[i].bookId + "\"> "+
+		                    		 " 		<img class=\"direct-chat-img avatar\" src=\"<%=path%>"+data.obj.listAllBookMessage[i].sendUserImage+"\" alt=\"message user image\"> "+
+		                    		 " 	</a> "+
+		                    		 " 	<div class=\"direct-chat-text\"> "+
+		                    		 " 		<p >"+data.obj.listAllBookMessage[i].messInfo+" </p> "+
+		                    		 " 		<p class=\"direct-chat-timestamp\"><time datetime=\"2019\">"+data.obj.listAllBookMessage[i].showTime+" / "+data.obj.listAllBookMessage[i].createTimeShow+"</time></p> "+
+		                    		 " 	</div> "+
+		                    		 " </div> ";
+		                    		 
+		                    	}else if(data.obj.listAllBookMessage[i].sendUserId == ${currentUser.usercode}){
+		                    		str1 += " <div class=\"direct-chat-msg right mb-30\"> "+
+		                    		 " 	<div class=\"clearfix mb-15\"> "+
+		                    		 " 		<span class=\"direct-chat-name pull-right\">"+data.obj.listAllBookMessage[i].sendUserName+"</span>	 "+
+		                    		 " 	</div> "+
+		                    		 " 		<img class=\"direct-chat-img avatar\" src=\"<%=path%>"+data.obj.listAllBookMessage[i].sendUserImage+"\" alt=\"message user image\"> "+
+		                    		 " 	<div class=\"direct-chat-text\"> "+
+		                    		 " 		<p >"+data.obj.listAllBookMessage[i].messInfo+" </p> "+
+		                    		 " 		<p class=\"direct-chat-timestamp\"><time datetime=\"2019\">"+data.obj.listAllBookMessage[i].showTime+" / "+data.obj.listAllBookMessage[i].createTimeShow+"</time></p> "+
+		                    		 " 	</div> "+
+		                    		 " </div> ";
+		                    	}
+		    
+		            	}    
+		                $("#menuForAllMessages").append(str);
+		                $("#bookListMessages").append(str1);
 		                //console.log(str);
 		            	}
 					},

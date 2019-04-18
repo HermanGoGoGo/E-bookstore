@@ -382,7 +382,7 @@
 				<!-- /.box-header -->
 				<div class="box-body " >
 				  <!-- Conversations are loaded here -->
-				  <div class="direct-chat-messages" >
+				  <div class="direct-chat-messages" id="bookListMessages">
 					<!-- Message. Default to the left -->
 				    <c:forEach items="${listMessages}" var="messages" varStatus="status" >
 				    <c:if test="${messages.sendUserId != currentUser.usercode}">
@@ -425,10 +425,8 @@
 				</div>
 				<!-- /.box-body -->
 				<div class="box-footer">
-				  <form action="<%=path%>/message/showOneMessage.action" method="post">
+				  <form action="<%=path%>/message/showOneMessage.action?sendUserId=${messageReq.sendUserId}" method="post">
 					<div class="input-group">
-	    			<!--   <input type="text" name="receiveUserId" id="receiveUserId"  value="2201504242" class="form-control" style="display: none;">-->
-					  <input type="text" name="sendUserId" id="sendUserId" value="${messageReq.sendUserId}" class="form-control" style="display: none;">
 					  <input type="text" name="message" id="message" placeholder="Type Message ..." class="form-control">
 						  <c:if test="${messageReq.sendUserName !='全部消息'}">
 						  <div class="input-group-addon">
@@ -560,20 +558,27 @@
 	//var usercode = '${currentUser.usercode}';
 
 			function checkTime(){
-		        $.ajax({
+				var url = "";
+				if(${messageReq.sendUserName !='全部消息'} ){
+					url = "<%=path%>/base/getUserMessage.action?sendUserId=${messageReq.sendUserId}";
+				}else{
+					url = "<%=path%>/base/getUserMessage.action";
+				}
+				$.ajax({
 					type: "post",
-					url: "<%=path%>/base/getUserMessage.action",
+					url: url,
 					data: {
 					},
 					dataType: 'json',
 					success: function(data) {
 						console.log(data);
+						//$("#bookListMessages").empty();
 		            	if(data.status == '200'){
 		            		$("#menuForAllMessages li").remove();
 		            		$.hulla.send("您有最新消息请查看收件箱", "success");
 		            		var str = "";
 		                    for(var i=0;i<data.obj.listNewMessage.length;i++){
-		                    	if(data.obj.listNewMessage[i].bookId == ""){
+		                    	if(data.obj.listNewMessage[i].bookId == null){
 		                    		 str += "<li>" +
 		                                "<a href='<%=path%>/message/showOneMessage.action?sendUserId=" + data.obj.listNewMessage[i].sendUserId + " '>" +
 		                                "<div class=\"pull-left\">" +
@@ -605,6 +610,76 @@
 		    
 		            	}
 		                $("#menuForAllMessages").append(str);
+		                //console.log(str);
+		            	}else if(data.status == '20001'){
+		            		$("#menuForAllMessages li").remove();
+		            		$("#bookListMessages").empty();
+		            		$.hulla.send("您有最新消息请查看", "success");
+		            		var str = "";
+		            		var str1 = "";
+		                    for(var i=0;i<data.obj.listNewMessage.length;i++){
+		                    	if(data.obj.listNewMessage[i].bookId == null ){
+		                    		 str += "<li>" +
+		                                "<a href='<%=path%>/message/showOneMessage.action?sendUserId=" + data.obj.listNewMessage[i].sendUserId + " '>" +
+		                                "<div class=\"pull-left\">" +
+		                                "<img src=\"<%=path%>"+data.obj.listNewMessage[i].sendUserImage +"\" class=\"rounded-circle\" alt=\"User Image\">" +
+		                                "</div>" +
+		                                "<div class=\"mail-contnet\">" +
+		                                "<h4> " +data.obj.listNewMessage[i].sendUserName +
+		                                "<small><i class=\"fa fa-clock-o\"></i> "+data.obj.listNewMessage[i].showTime +"</small>"+
+		                                "</h4>" +
+		                                " <span style=\"overflow: hidden;text-overflow: ellipsis;white-space: nowrap;\">"+data.obj.listNewMessage[i].messInfo+"</span> " +
+		                                "</div>" +
+		                                "</a>" +
+		                                "</li>";
+		                    	}else{
+		                    		str += "<li class=\"bg-warning\">" +
+	                                "<a href='<%=path%>/book/buyBook.action?userId=" + data.obj.listNewMessage[i].sendUserId + "&bookId="+ data.obj.listNewMessage[i].bookId + " '>" +
+	                                "<div class=\"pull-left\">" +
+	                                "<img src=\"<%=path%>"+data.obj.listNewMessage[i].sendUserImage +"\" class=\"rounded-circle\" alt=\"User Image\">" +
+	                                "</div>" +
+	                                "<div class=\"mail-contnet\">" +
+	                                "<h4> " +data.obj.listNewMessage[i].sendUserName +
+	                                "<small><i class=\"fa fa-clock-o\"></i>"+ data.obj.listNewMessage[i].showTime +"</small>"+
+	                                "</h4>" +
+	                                " <span style=\"overflow: hidden;text-overflow: ellipsis;white-space: nowrap;\">"+"这是交易信息："+data.obj.listNewMessage[i].messInfo+"</span> " +
+	                                "</div>" +
+	                                "</a>" +
+	                                "</li>";
+		                    	}
+		    
+		            	}
+		                    for(var i=0;i<data.obj.listAllMessage.length;i++){
+		                    	if(data.obj.listAllMessage[i].sendUserId != ${currentUser.usercode}){
+		                    		 str1 += " <div class=\"direct-chat-msg mb-30\"> "+
+		                    		 " 	<div class=\"clearfix mb-15\"> "+
+		                    		 " 		<span class=\"direct-chat-name\">"+data.obj.listAllMessage[i].sendUserName+"</span>	 "+
+		                    		 " 	</div> "+
+		                    		 " 	<a href=\"<%=path%>/message/showOneMessage.action?sendUserId=" + data.obj.listAllMessage[i].sendUserId + " \"> "+
+		                    		 " 		<img class=\"direct-chat-img avatar\" src=\"<%=path%>"+data.obj.listAllMessage[i].sendUserImage+"\" alt=\"message user image\"> "+
+		                    		 " 	</a> "+
+		                    		 " 	<div class=\"direct-chat-text\"> "+
+		                    		 " 		<p >"+data.obj.listAllMessage[i].messInfo+" </p> "+
+		                    		 " 		<p class=\"direct-chat-timestamp\"><time datetime=\"2019\">"+data.obj.listAllMessage[i].showTime+" / "+data.obj.listAllMessage[i].createTimeShow+"</time></p> "+
+		                    		 " 	</div> "+
+		                    		 " </div> ";
+		                    		 
+		                    	}else if(data.obj.listAllMessage[i].sendUserId == ${currentUser.usercode}){
+		                    		str1 += " <div class=\"direct-chat-msg right mb-30\"> "+
+		                    		 " 	<div class=\"clearfix mb-15\"> "+
+		                    		 " 		<span class=\"direct-chat-name pull-right\">"+data.obj.listAllMessage[i].sendUserName+"</span>	 "+
+		                    		 " 	</div> "+
+		                    		 " 		<img class=\"direct-chat-img avatar\" src=\"<%=path%>"+data.obj.listAllMessage[i].sendUserImage+"\" alt=\"message user image\"> "+
+		                    		 " 	<div class=\"direct-chat-text\"> "+
+		                    		 " 		<p >"+data.obj.listAllMessage[i].messInfo+" </p> "+
+		                    		 " 		<p class=\"direct-chat-timestamp\"><time datetime=\"2019\">"+data.obj.listAllMessage[i].showTime+" / "+data.obj.listAllMessage[i].createTimeShow+"</time></p> "+
+		                    		 " 	</div> "+
+		                    		 " </div> ";
+		                    	}
+		    
+		            	}    
+		                $("#menuForAllMessages").append(str);
+		                $("#bookListMessages").append(str1);
 		                //console.log(str);
 		            	}
 					},

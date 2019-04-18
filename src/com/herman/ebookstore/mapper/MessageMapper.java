@@ -149,9 +149,9 @@ public interface MessageMapper extends Mapper<Message> {
 					if(null != messageDto.getReceiveUserId() &&  null != messageDto.getSendUserId()) {
 						WHERE("((m.receive_user_id =#{receiveUserId} And m.send_user_id =#{sendUserId}) OR(m.receive_user_id =#{sendUserId} And m.send_user_id =#{receiveUserId}))");
 					}
-					if(null != messageDto.getStatus()) {
-						WHERE("m.status= #{status}");
-					}
+					/*
+					 * if(null != messageDto.getStatus()) { WHERE("m.status= #{status}"); }
+					 */
 					ORDER_BY("m.create_time desc, m.id desc");
 				}			
 				
