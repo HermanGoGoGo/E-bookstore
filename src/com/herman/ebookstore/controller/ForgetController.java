@@ -134,17 +134,23 @@ public class ForgetController extends BaseForSDK {
 	@RequestMapping("getUser")
 	public void getUser(String usercode, HttpServletResponse response, Model model) {
 		UserDto userDto = new UserDto();
+		//判断传过来的usercode是不是为空
 		if (StringUtils.isNotEmpty(usercode)) {
 			userDto.setUsercode(usercode);
+			//根据用户的usercode查询单个用户信息
 			userDto = this.userService.selectMinuteOne(userDto);
+			//判断是否查到信息
 			if (userDto != null) {
+				//查到的用户status如果为0则未激活返回未激活状态码
 				if ("0".equals(userDto.getStatus())) {
 					new ResponseWriter().writerResponse(ResultCode.USERCODE_ACTIVATION.getCode(),
 							ResultCode.USERCODE_ACTIVATION.getMessage(), response);
+				//查到的用户status如果为1则账户已激活返回true
 				} else if ("1".equals(userDto.getStatus())) {
 					new ResponseWriter().writerResponseObject(true, userDto, response);
 				}
 			} else {
+				//用户查询不到则返回用户不存在
 				new ResponseWriter().writerResponse(ResultCode.USERCODE_NOTEXIT.getCode(),
 						ResultCode.USERCODE_NOTEXIT.getMessage(), response);
 			}

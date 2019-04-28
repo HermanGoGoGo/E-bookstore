@@ -65,4 +65,14 @@ public interface BookService extends Service<Book> {
 	 * @author 黄金宝 
 	 */
 	public BookDto findOneBook(Book book);
+	
+	/** 
+	 * @Method_Name: findBookBy 
+	 * @Description: TODO(根据条件查找书籍)
+	 * @Description: * @param bookDto
+	 * @Description: * @return List<BookDto>
+	 * @date 2019年4月28日
+	 * @author 黄金宝 
+	 */
+	public List<BookDto> findBookBy(BookDto bookDto);
 }

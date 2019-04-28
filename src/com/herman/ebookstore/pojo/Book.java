@@ -9,7 +9,7 @@ import com.herman.ebookstore.common.model.BaseEntity;
  * 
  * @author herman
  * @email 1146465559@qq.com
- * @date 2019-04-10 15:23:08
+ * @date 2019-04-24 19:34:19
  */
 @Entity
 @Table(name = "MSTB_SELL_BOOK")
@@ -17,13 +17,13 @@ public class Book extends BaseEntity<Book> {
 
 	private static final long serialVersionUID = 1L;
 	
-    //用户id
-    @Column(name = "user_id")
-    private String userId;
-    
     //历史表id
     @Column(name = "hstb_book_id")
     private String hstbBookId;
+    
+    //用户id
+    @Column(name = "user_id")
+    private String userId;
     
     //书名
     @Column(name = "name")
@@ -41,7 +41,7 @@ public class Book extends BaseEntity<Book> {
     @Column(name = "price")
     private Integer price;
     
-    //状态，是否销售0：正在销售；1：已售出；2：暂停销售
+    //状态，书籍状态；0：正在销售；1：已售出；2：暂停销售；3：正在交易；4：交易买家确认交易；5：交易卖家确认交易；
     @Column(name = "status")
     private String status;
     
@@ -73,28 +73,28 @@ public class Book extends BaseEntity<Book> {
     @Column(name = "purchaser_id")
     private String purchaserId;
     
-    //书籍浏览次数
+    //浏览次数
     @Column(name = "browse_times")
     private Integer browseTimes;
     
-    //照片url
+    //书籍照片url
     @Column(name = "image")
     private String image;
     
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	public String getUserId() {
-		return userId;
-	}
-	
 	public void setHstbBookId(String hstbBookId) {
 		this.hstbBookId = hstbBookId;
 	}
 
 	public String getHstbBookId() {
 		return hstbBookId;
+	}
+	
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getUserId() {
+		return userId;
 	}
 	
 	public void setName(String name) {
@@ -200,15 +200,13 @@ public class Book extends BaseEntity<Book> {
 	public Integer getBrowseTimes() {
 		return browseTimes;
 	}
+	
+	public void setImage(String image) {
+		this.image = image;
+	}
 
 	public String getImage() {
 		return image;
 	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-	
-	
 	
 }

@@ -344,6 +344,15 @@
 							      </small>
 							      </h6> 
 							    </p>
+							    
+							    <p> 
+							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-truck"></i> 状态：							   
+							      <small>
+								  	${bookInfo.status}
+							      </small>
+							      </h6> 
+							    </p>
+							    
 							    <p> 
 							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-pencil-square"></i> 描述：			
 							      </h6> 

@@ -22,7 +22,7 @@
     <meta name="author" content="">
     <link rel="icon" href="<%=path%>/images/favicon.ico">
 
-    <title>e书网 - 个人书库</title>
+    <title>e书网 - 个人订单</title>
     
 	<!-- Bootstrap 4.0-->
 	<link rel="stylesheet" href="<%=path%>/assets/vendor_components/bootstrap/dist/css/bootstrap.css">
@@ -273,7 +273,7 @@
 						<nav>
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="#"><i class="mdi mdi-home-outline"></i></a></li>
-								<li class="breadcrumb-item active" aria-current="page">个人书库</li>
+								<li class="breadcrumb-item active" aria-current="page">个人订单</li>
 							</ol>
 						</nav>
 					</div>
@@ -283,123 +283,14 @@
 
 		<!-- Main content -->
 		<section class="content">
-		
-		      <h3 class="page-header">个人图书</h3>
-		      <div class="news-slider owl-carousel">
-		       <c:forEach items="${oneselfBooks}" var="oneselfBooks" varStatus="status" >
-		             <div class="box ribbon-box">
-		            <c:if test="${oneselfBooks.status=='正在销售' }">
-				    <div class="ribbon-two ribbon-two-primary"></div><div class="ribbon-two ribbon-two-primary"><span>${oneselfBooks.status}</span></div>
-				    <div class="box-header bg-warning">		
-				        <h4 class="box-title px-30">${oneselfBooks.name}</h4>		
-				    </div>
-				    </c:if>
-				    <c:if test="${oneselfBooks.status=='已售出' }">
-				    <div class="ribbon-two ribbon-two-warning "></div><div class="ribbon-two ribbon-two-warning "><span>${oneselfBooks.status}</span></div>
-				    <div class="box-header bg-success">		
-				        <h4 class="box-title px-30">${oneselfBooks.name}</h4>		
-				    </div>
-				    </c:if>
-				    <c:if test="${oneselfBooks.status=='正在交易' || oneselfBooks.status=='交易买家确认交易' || oneselfBooks.status=='交易卖家确认交易'}">
-				    <div class="ribbon-two ribbon-two-dark "></div><div class="ribbon-two ribbon-two-dark "><span>${oneselfBooks.status}</span></div>
-				    <div class="box-header bg-danger">		
-				        <h4 class="box-title px-30">${oneselfBooks.name}</h4>		
-				    </div>
-				    </c:if>
-				    <c:if test="${oneselfBooks.status=='暂停销售' }">
-				    <div class="ribbon-two ribbon-two-info "></div><div class="ribbon-two ribbon-two-info "><span>${oneselfBooks.status}</span></div>
-				    <div class="box-header bg-dark ">		
-				        <h4 class="box-title px-30">${oneselfBooks.name}</h4>		
-				    </div>
-				    </c:if>
-					<div class="box-body "> 
-						<div class="text-left">
-							<p class="my-10">
-							  <small>
-								  <i class="fa fa-user"></i> by <a href="#">${oneselfBooks.username}</a> 
-								  <span class="px-10">| </span><i class="fa fa-calendar"></i> ${oneselfBooks.createTimeCompare}
-							  </small>
-							</p>
-							<ul class="flexbox flex-justified">
-								<li class="px-10 ">
-									   <img class="card-img-top img-responsive" src="<%=path%>${oneselfBooks.image}" alt="Card image cap">
-								</li>
-								<li class="px-10 ">
-									  <p> 
-							              <h6 class="px-0  mb-0 text-bold">作者：							   
-							              <small>
-								  	           ${oneselfBooks.author}
-							              </small>
-							              </h6> 
-							          </p>
-							          <p> 
-							              <h6 class="px-0  mb-0 text-bold">价钱：							   
-							              <small>
-								  	           ${oneselfBooks.price} /原价：${oneselfBooks.originalPrice} 
-							              </small>
-							              </h6> 
-							          </p>
-							          <p> 
-							              <h6 class="px-0  mb-0 text-bold">课程：							   
-							              <small>
-								  	          ${oneselfBooks.course}
-							              </small>
-							              </h6> 
-							          </p>
-							          <p> 
-							              <h6 class="px-0  mb-0 text-bold">交易方式：							   
-							              <small>
-								  	           ${oneselfBooks.transaction}
-							              </small>
-							              </h6> 
-							          </p>
-							          <p> 
-							              <h6 class="px-0  mb-0 text-bold">交易状态：							   
-							              <small>
-								  	           ${oneselfBooks.status}
-							              </small>
-							              </h6> 
-							          </p>
-								</li>
-							</ul>							
-						</div>
-						<c:if test="${oneselfBooks.status=='正在销售' }">
-						    <div class="flexbox align-items-center mt-3 py-10">
-						     <a href="<%=path%>/book/bookDetails.action?id=${oneselfBooks.id}" class="btn btn-flat btn-primary btn-sm">查看详情</a>
-						     <a href="#" class="btn btn-flat btn-primary btn-sm">暂停销售</a>
-						    </div>
-					    </c:if>
-					    <c:if test="${oneselfBooks.status=='已售出' }">
-					        <div class="flexbox align-items-center mt-3 py-10">
-						     <a href="<%=path%>/book/bookDetails.action?id=${oneselfBooks.id}" class="btn btn-flat btn-primary btn-sm">查看详情</a>
-						    </div>
-					    </c:if>
-					    <c:if test="${oneselfBooks.status=='正在交易' || oneselfBooks.status=='交易买家确认交易' || oneselfBooks.status=='交易卖家确认交易'}">
-					    <div class="ribbon-two ribbon-two-dark "></div><div class="ribbon-two ribbon-two-dark "><span>${oneselfBooks.status}</span></div>
-					        <div class="flexbox align-items-center mt-3 py-10">
-						     <a href="<%=path%>/book/bookDetails.action?id=${oneselfBooks.id}" class="btn btn-flat btn-primary btn-sm">查看详情</a>
-						     <a href="<%=path%>/book/buyBook.action?userId=${oneselfBooks.purchaserId}&bookId=${oneselfBooks.id}" class="btn btn-flat btn-primary btn-sm">联系买家</a>
-						    </div>
-					    </c:if>
-					    <c:if test="${oneselfBooks.status=='暂停销售' }">
-					        <div class="flexbox align-items-center mt-3 py-10">
-						     <a href="<%=path%>/book/bookDetails.action?id=${oneselfBooks.id}" class="btn btn-flat btn-primary btn-sm">查看详情</a>
-						     <a href="#" class="btn btn-flat btn-primary btn-sm">恢复销售</a>
-						    </div>
-					    </c:if>
-					</div>
-					<!-- /.box-body -->
-				   </div>
-		       </c:forEach>
-			  </div>
+
 			  
-			  
-			  <h3 class="page-header">正在交易图书</h3>
+			  <h3 class="page-header">正在购买图书</h3>
 		      <div class="news-slider owl-carousel">
 		       <c:forEach items="${sellBooks}" var="oneselfBooks" varStatus="status" >
 		             <div class="box ribbon-box">
-				    <div class="ribbon-two ribbon-two-dark "></div><div class="ribbon-two ribbon-two-dark "><span>正在交易</span></div>
-				    <div class="box-header bg-danger">		
+				    <div class="ribbon-two ribbon-two-info "></div><div class="ribbon-two ribbon-two-info "><span>正在交易</span></div>
+				    <div class="box-header bg-purple  ">		
 				        <h4 class="box-title px-30">${oneselfBooks.name}</h4>		
 				    </div>
 					<div class="box-body "> 
@@ -454,22 +345,22 @@
 							</ul>							
 						</div>
 					    <div class="ribbon-two ribbon-two-dark "></div><div class="ribbon-two ribbon-two-dark "><span>${oneselfBooks.status}</span></div>
-					         <div class="flexbox align-items-center mt-3 py-10">
+					        <div class="flexbox align-items-center mt-3 py-10">
 						     <a href="<%=path%>/book/bookDetails.action?id=${oneselfBooks.id}" class="btn btn-flat btn-primary btn-sm">查看详情</a>
-						     <a href="<%=path%>/book/buyBook.action?userId=${oneselfBooks.purchaserId}&bookId=${oneselfBooks.id}" class="btn btn-flat btn-primary btn-sm">联系买家</a>
-						</div>
+						     <a href="<%=path%>/book/buyBook.action?userId=${oneselfBooks.userId}&bookId=${oneselfBooks.id}" class="btn btn-flat btn-primary btn-sm">联系卖家</a>
+						     <a href="#" class="btn btn-flat btn-primary btn-sm">确认收货</a>
+						    </div>
 					</div>
 					<!-- /.box-body -->
 				   </div>
 		       </c:forEach>
 			  </div>
-			  
-			  <h3 class="page-header">暂停销售图书</h3>
+			<h3 class="page-header">已购买图书</h3>
 		      <div class="news-slider owl-carousel">
-		       <c:forEach items="${stopBooks}" var="oneselfBooks" varStatus="status" >
+		       <c:forEach items="${buyBooks}" var="oneselfBooks" varStatus="status" >
 		             <div class="box ribbon-box">
-				    <div class="ribbon-two ribbon-two-dark "></div><div class="ribbon-two ribbon-two-dark "><span>${oneselfBooks.status}</span></div>
-				    <div class="box-header bg-info">		
+				    <div class="ribbon-two ribbon-two-info "></div><div class="ribbon-two ribbon-two-info "><span>已购买</span></div>
+				    <div class="box-header bg-purple  ">		
 				        <h4 class="box-title px-30">${oneselfBooks.name}</h4>		
 				    </div>
 					<div class="box-body "> 
@@ -524,10 +415,10 @@
 							</ul>							
 						</div>
 					    <div class="ribbon-two ribbon-two-dark "></div><div class="ribbon-two ribbon-two-dark "><span>${oneselfBooks.status}</span></div>
-					         <div class="flexbox align-items-center mt-3 py-10">
+					        <div class="flexbox align-items-center mt-3 py-10">
 						     <a href="<%=path%>/book/bookDetails.action?id=${oneselfBooks.id}" class="btn btn-flat btn-primary btn-sm">查看详情</a>
-						      <a href="<%=path%>/book/bookDetails.action?id=${oneselfBooks.id}" class="btn btn-flat btn-primary btn-sm">恢复出售</a>
-						</div>
+						     <a href="<%=path%>/book/buyBook.action?userId=${oneselfBooks.userId}&bookId=${oneselfBooks.id}" class="btn btn-flat btn-primary btn-sm">联系卖家</a>
+						    </div>
 					</div>
 					<!-- /.box-body -->
 				   </div>

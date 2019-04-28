@@ -177,35 +177,51 @@ public class BookController {
 		UserDto currentUser = new UserDto();
 		//返回前端发送信息人的信息
 		User sendUser = new User();
+		//消息实体
 		Message message = new Message();
+		//消息model
 		MessageDto messageDto = new MessageDto();
+		//书籍信息model
 		BookDto bookDto = new BookDto();
+		//书籍实体
 		Book book = new Book();
+		//最新消息list
 		List<MessageDto> messageDtos = new ArrayList<MessageDto>();
+		//书籍交易list
 		List<MessageDto> listMessageDtos = new ArrayList<MessageDto>();
+		//判断用户code是否为空
 		if(usercode != null && !"".equals(usercode)) {
+			//判断是否是发送信息的请求
 			if(StringUtils.isNotEmpty(messageInfo)&& !userId.equals(usercode)) {
+				//有发送信息的请求则保存信息，并重定向到本方法体
 				Message messageDto1 = new Message();
 				messageDto1.setReceiveUserId(userId);
 				messageDto1.setSendUserId(usercode.toString());
 				messageDto1.setMessInfo(messageInfo);
 				messageDto1.setBookId(bookId);
+				//保存信息
 				this.messageService.save(messageDto1);
 				//new ResponseWriter().writerResponse(true, response);
+				//重定向
 				return "redirect:/book/buyBook.action?userId="+userId +"&bookId="+bookId;
-			}
+			}	
 			messageDto.setReceiveUserId(usercode.toString());
 			messageDto.setStatus("0");
 			currentUser.setUsercode(usercode.toString());
+			//查询当前用户信息
 			currentUser =this.userService.selectMinuteOne(currentUser);
+			//查询当前用户最新消息
 			messageDtos = this.messageService.findAllMessageByDto(messageDto);
 			if(StringUtils.isNotEmpty(userId) && StringUtils.isNotEmpty(bookId)) {
 				messageDto.setBookId(bookId);
 				messageDto.setSendUserId(userId);
+				//查询交易双方交易书籍消息
 				listMessageDtos= this.messageService.findBookMessageByReAndSe(messageDto);
 				book.setId(bookId);
+				//查询书籍信息
 				bookDto = this.bookService.findOneBook(book);	
 				if(listMessageDtos.size()==0) {
+					//如果交易双方没有消息，则自定义第一次消息
 					book.setPurchaserId(usercode.toString());
 					book.setStatus("3");
 					this.bookService.update(book);
@@ -216,9 +232,11 @@ public class BookController {
 					 this.messageService.save(message);
 					listMessageDtos= this.messageService.findBookMessageByReAndSe(messageDto);
 				}
+				//将交易信息更新为已读
 				this.messageService.clearStatus(messageDto);
 				sendUser.setUsercode(userId);
 				sendUser = this.userService.selectOne(sendUser);
+				//检测交易对方是否在线
 				long delta = new Date().getTime() - sendUser.getUpdateTime().getTime();
 				if (delta < 5200L) {
 					messageDto.setShowTime("在线");
@@ -246,19 +264,70 @@ public class BookController {
 		Object usercode = request.getSession().getAttribute("usercode");
 		UserDto currentUser = new UserDto();
 		MessageDto messageDto = new MessageDto();
+		BookDto bookDto =new BookDto();
 		List<MessageDto> messageDtos = new ArrayList<MessageDto>();
+		//罗列全部书籍
+		List<BookDto> oneselfBooks = new ArrayList<BookDto>();
+		//罗列正在交易书籍
+		List<BookDto> sellBooks = new ArrayList<BookDto>();
+		//罗列暂停销售书籍
+		List<BookDto> stopBooks = new ArrayList<BookDto>();
 		if(usercode != null && !"".equals(usercode)) {
 			messageDto.setReceiveUserId(usercode.toString());
 			messageDto.setStatus("0");
 			currentUser.setUsercode(usercode.toString());
 			currentUser =this.userService.selectMinuteOne(currentUser);
 			messageDtos = this.messageService.findAllMessageByDto(messageDto);
-		}else {
-			
+			bookDto.setUserId(usercode.toString());
+			//全部书籍
+			oneselfBooks= this.bookService.findBookBy(bookDto);
+			//bookDto.setUserId(null);
+			//bookDto.setPurchaserId(usercode.toString());
+			bookDto.setStatus("3");
+			//正在交易书籍
+			sellBooks =this.bookService.findBookBy(bookDto);
+			bookDto.setStatus("2");
+			//暂停销售书籍
+			stopBooks =this.bookService.findBookBy(bookDto);	
+		}else {			
 		}
 		model.addAttribute("messageDtos", messageDtos);
 		model.addAttribute("currentUser", currentUser);
+		model.addAttribute("oneselfBooks", oneselfBooks);
+		model.addAttribute("sellBooks", sellBooks);
+		model.addAttribute("stopBooks", stopBooks);
 		return "pages/selfBook";		
+	}
+	
+	
+	@RequestMapping("orderBook")
+	public String orderBook(HttpServletRequest request,Model model) {
+		Object usercode = request.getSession().getAttribute("usercode");
+		UserDto currentUser = new UserDto();
+		MessageDto messageDto = new MessageDto();
+		BookDto bookDto =new BookDto();
+		List<MessageDto> messageDtos = new ArrayList<MessageDto>();
+		//List<BookDto> oneselfBooks = new ArrayList<BookDto>();
+		List<BookDto> sellBooks = new ArrayList<BookDto>();
+		List<BookDto> buyBooks = new ArrayList<BookDto>();
+		if(usercode != null && !"".equals(usercode)) {
+			messageDto.setReceiveUserId(usercode.toString());
+			messageDto.setStatus("0");
+			currentUser.setUsercode(usercode.toString());
+			currentUser =this.userService.selectMinuteOne(currentUser);
+			messageDtos = this.messageService.findAllMessageByDto(messageDto);
+			bookDto.setPurchaserId(usercode.toString());
+			bookDto.setStatus("3");
+			sellBooks =this.bookService.findBookBy(bookDto);
+			bookDto.setStatus("1");
+			buyBooks =this.bookService.findBookBy(bookDto);	
+		}else {			
+		}
+		model.addAttribute("messageDtos", messageDtos);
+		model.addAttribute("currentUser", currentUser);
+		model.addAttribute("sellBooks", sellBooks);
+		model.addAttribute("buyBooks", buyBooks);
+		return "pages/orderBook";		
 	}
 	
 }

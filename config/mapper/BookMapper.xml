@@ -5,8 +5,8 @@
     <result property="id" column="id"/>
     <result property="createTime" column="create_time"/>
     <result property="updateTime" column="update_time"/>
-    <result property="userId" column="user_id"/>
     <result property="hstbBookId" column="hstb_book_id"/>
+    <result property="userId" column="user_id"/>
     <result property="name" column="name"/>
     <result property="author" column="author"/>
     <result property="originalPrice" column="original_price"/>

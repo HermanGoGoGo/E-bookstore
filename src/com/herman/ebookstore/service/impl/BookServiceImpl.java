@@ -93,4 +93,10 @@ public class BookServiceImpl extends AbstractService<Book> implements BookServic
 		return this.bookMapper.findOneBook(book);
 	}
 
+	@Override
+	public List<BookDto> findBookBy(BookDto bookDto) {
+		// TODO Auto-generated method stub
+		return this.bookMapper.findBookBy(bookDto);
+	}
+
 }

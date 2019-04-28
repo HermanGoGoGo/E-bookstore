@@ -86,17 +86,22 @@ public class RegisterController extends BaseForSDK {
 		if (StringUtils.isNotEmpty(usercode)) {
 			sdk.setUid(usercode);
 			sdk.setMobile(phonenumber);
+			//用户名不为空则去查询当前用户最新一条验证码
 			sdk = this.sdkService.selectOneSDKInfo(sdk);
 		}
+		//验证码状态位000000表示获取验证码成功且返回正常
 		if ("000000".equals(sdk.getCode())) {
 			if (code.equals(sdk.getParam())) {
 				// user.setUsercode(usercode);
+				//查询用户是否存在
 				user = this.userService.findBy("usercode", usercode);
 				// index = this.userService.selectCountByCondition(user);
 				if (user == null) {
+					//用户不存在，返回用户在教务系统不存在
 					new ResponseWriter().writerResponse(ResultCode.USERCODE_NOTEXIT.getCode(),
 							ResultCode.USERCODE_NOTEXIT.getMessage(), response);
 				} else {
+					//用户存在且未激活，则设置相应信息到MSTB_USER表
 					if ("0".equals(user.getStatus())) {
 						user.setUsername(username);
 						user.setPassword(MD5Util.MD5Encode(password, "utf8"));
@@ -107,6 +112,7 @@ public class RegisterController extends BaseForSDK {
 						this.userService.update(user);
 						new ResponseWriter().writerResponse(true, response);
 					} else {
+						//用户存在且激活，则返回已激活
 						new ResponseWriter().writerResponse(ResultCode.USERCODE_EXIT.getCode(),
 								ResultCode.USERCODE_EXIT.getMessage(), response);
 					}

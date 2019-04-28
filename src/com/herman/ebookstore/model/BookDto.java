@@ -86,6 +86,9 @@ public class BookDto   {
   
   @JsonProperty("image")
   private String image = null;
+  
+  @JsonProperty("status")
+  private String status = null;
 
   public BookDto id(String id) {
     this.id = id;
@@ -499,7 +502,7 @@ public class BookDto   {
 		      * 照片url
 		   * @return image
 		  **/
-		  @ApiModelProperty(value = "所在城市")
+		  @ApiModelProperty(value = "照片url")
 
 
 		  public String getImage() {
@@ -509,6 +512,26 @@ public class BookDto   {
 		  public void setImage(String image) {
 		    this.image = image;
 		  }
+		  
+		  public BookDto status(String status) {
+			    this.status = status;
+			    return this;
+			  }
+
+			  /**
+			      * 状态
+			   * @return status
+			  **/
+			  @ApiModelProperty(value = "status")
+
+
+			  public String getStatus() {
+			    return status;
+			  }
+
+			  public void setStatus(String status) {
+			    this.status = status;
+			  }
 		  
   @Override
   public boolean equals(java.lang.Object o) {
@@ -539,12 +562,13 @@ public class BookDto   {
         Objects.equals(this.campus, bookDto.campus) &&
         Objects.equals(this.city, bookDto.city) &&
         Objects.equals(this.image, bookDto.image) &&
+        Objects.equals(this.status, bookDto.status) &&
         Objects.equals(this.browseTimes, bookDto.browseTimes);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, createTime, createTimeCompare, name, author, originalPrice, price, description, conditions, edition, semester, course, transaction, purchaserId, userId, username, universityId, campus, city , browseTimes, image);
+    return Objects.hash(id, createTime, createTimeCompare, name, author, originalPrice, price, description, conditions, edition, semester, course, transaction, purchaserId, userId, username, universityId, campus, city , browseTimes, image ,status);
   }
 
   @Override
@@ -573,6 +597,7 @@ public class BookDto   {
     sb.append("    city: ").append(toIndentedString(city)).append("\n");
     sb.append("    browseTimes: ").append(toIndentedString(browseTimes)).append("\n");
     sb.append("    image: ").append(toIndentedString(image)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("}");
     return sb.toString();
   }
