@@ -22,7 +22,7 @@
     <meta name="author" content="">
     <link rel="icon" href="<%=path%>/images/favicon.ico">
 
-    <title>e书网 - </title>
+    <title>e书网 - 个人详情界面</title>
     
 	<!-- Bootstrap 4.0-->
 	<link rel="stylesheet" href="<%=path%>/assets/vendor_components/bootstrap/dist/css/bootstrap.css">
@@ -35,7 +35,7 @@
 	<!-- Bootstrap extend-->
 	<link rel="stylesheet" href="<%=path%>/main/css/bootstrap-extend.css">
 	
-		<!-- owlcarousel-->
+	<!-- owlcarousel-->
 	<link rel="stylesheet" href="<%=path%>/assets/vendor_components/OwlCarousel2/dist/assets/owl.carousel.css">
 	<link rel="stylesheet" href="<%=path%>/assets/vendor_components/OwlCarousel2/dist/assets/owl.theme.default.css">
 	
@@ -82,15 +82,6 @@
 		  <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
 			<i class="ti-align-left"></i>
 		  </a>
-<!-- 		  <a id="toggle_res_search" data-toggle="collapse" data-target="#search_form" class="res-only-view" href="javascript:void(0);"><i class="mdi mdi-magnify"></i></a>
-		  <form id="search_form" role="search" class="top-nav-search pull-left collapse ml-20">
-				<div class="input-group">
-					<input type="text" name="searchByBookName" class="form-control" placeholder="请输入书名">
-						<span class="input-group-btn">
-							<button type="button" class="btn  btn-default" data-target="#search_form" data-toggle="collapse" aria-label="Close" aria-expanded="true" ><i class="mdi mdi-magnify"></i></button>
-						</span>
-				</div>
-		  </form>  -->
 		
 	  </div>
 		
@@ -119,9 +110,8 @@
 				<!-- inner menu: contains the actual data -->
 				<ul class="menu sm-scrol" id="menuForAllMessages">
 			      <c:forEach items="${messageDtos}" var="message" varStatus="status" >
-			      <c:if test="${message.bookId == null}">
-			      <li> 
-			        <a href="<%=path%>/message/showOneMessage.action?sendUserId=${message.sendUserId}">
+			      <li>
+					<a href="<%=path%>/message/showOneMessage.action?sendUserId=${message.sendUserId}">
 					  <div class="pull-left">
 						<img src="<%=path%>${message.sendUserImage}" class="rounded-circle" alt="User Image">
 					  </div>
@@ -134,23 +124,6 @@
 					  </div>
 					</a>
 				  </li>
-			      </c:if>
-			      <c:if test="${message.bookId != null}">
-			      <li class="bg-warning"> 
-			        <a href="<%=path%>/book/buyBook.action?userId=${message.sendUserId}&bookId=${message.bookId}">
-					  <div class="pull-left">
-						<img src="<%=path%>${message.sendUserImage}" class="rounded-circle" alt="User Image">
-					  </div>
-					  <div class="mail-contnet">
-						 <h4>
-						  ${message.sendUserName}
-						  <small><i class="fa fa-clock-o"></i>${message.showTime}</small>
-						 </h4>
-						 <span style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">这个是交易信息：${message.messInfo}</span>
-					  </div>
-					</a>
-				  </li>
-			      </c:if>
 			      </c:forEach>
 				</ul>
 			  </li>
@@ -233,8 +206,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="<%=path%>/home/toHomePage.action"><i class="ti-more"></i>购买书</a></li>
-            <li><a href="<%=path%>/book/sellBook.action"><i class="ti-more"></i>出售书</a></li>
+            <li ><a href="<%=path%>/home/toHomePage.action"><i class="ti-more"></i>购买书</a></li>
+            <li ><a href="<%=path%>/book/sellBook.action"><i class="ti-more"></i>出售书</a></li>
             <li><a href="#"><i class="ti-more"></i>笔记</a></li>
           </ul>
           <a href="#">
@@ -245,14 +218,14 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<%=path%>/message/showOneMessage.action"><i class="ti-more"></i>消息中心</a></li>
-            <li><a href="<%=path%>/book/selfBook.action"><i class="ti-more"></i>个人书库</a></li>
+            <li ><a href="<%=path%>/message/showOneMessage.action"><i class="ti-more"></i>消息中心</a></li>
+            <li ><a href="<%=path%>/book/selfBook.action"><i class="ti-more"></i>个人书库</a></li>
             <li><a href="<%=path%>/book/orderBook.action"><i class="ti-more"></i>个人订单</a></li>
-            <li><a href="<%=path%>/userInfo.action"><i class="ti-more"></i>个人信息</a></li>
+            <li class="active"><a href="<%=path%>/userInfo.action"><i class="ti-more"></i>个人信息</a></li>
             <li><a href="<%=path%>/page.action?type=forget"><i class="ti-more"></i>修改密码</a></li>
             <li><a href="<%=path%>/page.action?type=register"><i class="ti-more"></i>注册</a></li>
           </ul>
-        </li> 
+        </li>    
         
       </ul>
     </section>
@@ -273,12 +246,12 @@
 		<div class="content-header">
 			<div class="d-flex align-items-center">
 				<div class="mr-auto">
-					<h3 class="page-title">购买书</h3>
+					<h3 class="page-title">个人详情</h3>
 					<div class="d-inline-block align-items-center">
 						<nav>
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="#"><i class="mdi mdi-home-outline"></i></a></li>
-								<li class="breadcrumb-item active" aria-current="page">书籍详情</li>
+								<li class="breadcrumb-item active" aria-current="page">个人中心</li>
 							</ol>
 						</nav>
 					</div>
@@ -288,128 +261,70 @@
 
 		<!-- Main content -->
 		<section class="content">
-		<div class="row">
-				<div class="col-12 col-xl-8 m-auto">
-				<div class="box ribbon-box">
-				    <div class="ribbon-two ribbon-two-dark"><span>图书详情</span></div>	
-				    <div class="box-header with-border bg-warning">
-					<ul class="box-controls pull-right">
-					  <li><a class="box-btn-close" href="<%=path%>/home/toHomePage.action"></a></li>
-					</ul>
-				  </div>	
-					<div class="box-body bg-warning">										
-						<div class="px-10 py-30 bg-white text-dark">
-							<h5 class="px-10 mb-15 font-weight-700">${bookInfo.name}</h5>
-						     <ul class="flexbox flex-justified">
-							 <li class="px-30 ">
-							    <p> 
-							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-user"></i> 作者：							   
-							      <small>
-								  	${bookInfo.author}
-							      </small>
-							      </h6> 
-							    </p>
-							    
-							    <p> 
-							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-money"></i> 价钱：							   
-							      <small>
-								  	${bookInfo.price} /原价：${bookInfo.originalPrice} 
-							      </small>
-							      </h6> 
-							    </p>
-							    
-							    <p> 
-							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-file-text-o"></i> 课程：							   
-							      <small>
-								  	${bookInfo.course}
-							      </small>
-							      </h6> 
-							    </p>
-							    
-							    <p> 
-							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-text-height"></i> 版本：							   
-							      <small>
-								  	${bookInfo.edition} 
-							      </small>
-							      </h6> 
-							    </p>
-							    
-							     <p> 
-							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-universal-access Example of truck"></i> 学期：							   
-							      <small>
-								  	${bookInfo.semester}
-							      </small>
-							      </h6> 
-							    </p>
-							    
-							     <p> 
-							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-truck"></i> 交易方式：							   
-							      <small>
-								  	${bookInfo.transaction}
-							      </small>
-							      </h6> 
-							    </p>
-							    
-							    <p> 
-							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-truck"></i> 状态：							   
-							      <small>
-								  	${bookInfo.status}
-							      </small>
-							      </h6> 
-							    </p>
-							    
-							    <p> 
-							     <h6 class="px-30  mb-0 text-bold"><i class="fa fa-pencil-square"></i> 描述：			
-							      </h6> 
-							    </p>
-							    <p class="px-40 box-text">
-							         <small>${bookInfo.description}</small>
-							    </p>
-							   <div class="flexbox align-items-center mt-3">
-							      <c:if test="${bookInfo.userId != currentUser.usercode}">
-							     	 <a class="btn btn-xs btn-round btn-bold btn-primary" href="<%=path%>/book/buyBook.action?userId=${bookInfo.userId}&bookId=${bookInfo.id}">联系卖家</a>
-							         <a class="btn btn-xs btn-round btn-bold btn-primary" href="#">收藏图书</a>
-							         <div class="gap-items-4">
-							        <a href="#" data-toggle="tooltip" data-original-title="查看店家信息"><i class="fa fa-user"></i> ：${bookInfo.username}</a> 
-								      <a >
-								         <i class="ion-heart text-danger font-size-11" ></i>
-								         <span data-toggle="tooltip" data-original-title="浏览次数" class="font-size-11 text-fade ml-1">${bookInfo.browseTimes}</span>
-								      </a>
-							      </div>
-							      </c:if>
-							      <c:if test="${bookInfo.userId == currentUser.usercode}">
-							     	<a href="#" data-toggle="tooltip" ><i class="fa fa-user"></i>：这是您自己的书籍喔！ </a>
-							      </c:if>
-							   </div>						   
-							 </li>
-							 <li class="px-10">
-							   <div class="col-6 text-center m-auto">
-							   <h6 class="font-size-12 mt-5">${bookInfo.name}</h6>
-							   <figure class="img-hov-zoomin">
-								<img src="<%=path%>${bookInfo.image}" alt="" class="img-fluid user-img">
-								</figure>
-							   </div>
-							 </li>
-						   </ul>						
-						</div>
-					</div>
-				</div>
-			 </div>  
-			 <!-- <div class="col-12 col-xl-4">
-				   		<div class="box ribbon-box ">
-				   		<div class="ribbon-two ribbon-two-warning"><span>店家信息</span></div>
-						  <div class="media">
-						  <img class="align-self-start w-160" src="../../images/user1-128x128.jpg" alt="Generic placeholder image">
-						  <div class="media-body">
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero.</p>
-							<a class="btn btn-sm btn-bold btn-primary mt-15" href="#">Read more</a>
+		   <div class="col-12 col-lg-8 col-xl-8 m-auto">
+					  <div class="box box-inverse bg-img" style="background-image: url(../../images/gallery/full/1.jpg);" data-overlay="2">
+						  <div class="flexbox px-20 pt-20">
+							<label class="toggler toggler-danger text-white">
+							  <input type="checkbox">
+							  <i class="fa fa-heart"></i>
+							</label>
+							<div class="dropdown">
+							  <a data-toggle="dropdown" href="#"><i class="ti-more-alt rotate-90 text-white"></i></a>
+							</div>
 						  </div>
-						  
+
+						  <div class="box-body text-center pb-50">
+							<a href="#">
+							  <img class="avatar avatar-xxl avatar-bordered" src="../../images/avatar/5.jpg" alt="">
+							</a>
+							<h4 class="mt-2 mb-0"><a class="hover-primary text-white" href="#">Roben Parkar</a></h4>
+							<span><i class="fa fa-map-marker w-20"></i> Miami</span>
+						  </div>
+
+						  <ul class="box-body flexbox flex-justified text-center" data-overlay="4">
+							<li>
+							  <span class="opacity-60">Followers</span><br>
+							  <span class="font-size-20">8.6K</span>
+							</li>
+							<li>
+							  <span class="opacity-60">Following</span><br>
+							  <span class="font-size-20">8457</span>
+							</li>
+							<li>
+							  <span class="opacity-60">Tweets</span><br>
+							  <span class="font-size-20">2154</span>
+							</li>
+						  </ul>
+						</div>			
+					  <!-- Profile Image -->					              
+					  <div class="box">
+						<div class="box-body"> 
+							<div class="media-list media-list-hover media-list-divided w-p100">
+								<h4 class="media media-single p-15">
+								  <i class="fa fa-arrow-circle-o-right mr-10"></i><span class="title">My Profile</span>
+								</h4>
+								<h4 class="media media-single p-15">
+								  <i class="fa fa-arrow-circle-o-right mr-10"></i><span class="title">Invests</span>
+								</h4>
+								<h4 class="media media-single p-15">
+								  <i class="fa fa-arrow-circle-o-right mr-10"></i><span class="title">The Wallet</span>
+								</h4>
+								<h4 class="media media-single p-15">
+								  <i class="fa fa-arrow-circle-o-right mr-10"></i><span class="title">Deposit</span>
+								</h4>
+								<h4 class="media media-single p-15">
+								  <i class="fa fa-arrow-circle-o-right mr-10"></i><span class="title">Reports</span>
+								</h4>
+								<h4 class="media media-single p-15">
+								  <i class="fa fa-arrow-circle-o-right mr-10"></i><span class="title">Services</span>
+								</h4>
+								<h4 class="media media-single p-15">
+								  <i class="fa fa-arrow-circle-o-right mr-10"></i><span class="title">Support</span>
+								</h4>
+							</div>
 						</div>
-							/.box-body
-						</div>
-			 </div> -->
-			</div>
+					  </div>           
+			
 		</section>
 		<!-- /.content -->
 	  </div>
@@ -532,40 +447,23 @@
 		            		$("#menuForAllMessages li").remove();
 		            		$.hulla.send("您有最新消息请查看收件箱", "success");
 		            		var str = "";
-		                    for(var i=0;i<data.obj.listNewMessage.length;i++){
-		                    	if(data.obj.listNewMessage[i].bookId == null){
-		                    		 str += "<li>" +
-		                                "<a href='<%=path%>/message/showOneMessage.action?sendUserId=" + data.obj.listNewMessage[i].sendUserId + " '>" +
+		                    for(var i=0;i<data.obj.length;i++){
+		                        str += "<li>" +
+		                                "<a href='<%=path%>/message/showOneMessage.action?sendUserId=" + data.obj[i].sendUserId + " '>" +
 		                                "<div class=\"pull-left\">" +
-		                                "<img src=\"<%=path%>"+data.obj.listNewMessage[i].sendUserImage +"\" class=\"rounded-circle\" alt=\"User Image\">" +
+		                                "<img src=\"<%=path%>"+data.obj[i].sendUserImage +"\" class=\"rounded-circle\" alt=\"User Image\">" +
 		                                "</div>" +
 		                                "<div class=\"mail-contnet\">" +
-		                                "<h4> " +data.obj.listNewMessage[i].sendUserName +
-		                                "<small><i class=\"fa fa-clock-o\"></i> "+data.obj.listNewMessage[i].showTime +"</small>"+
+		                                "<h4> " +data.obj[i].sendUserName +
+		                                "<small><i class=\"fa fa-clock-o\"></i> "+data.obj[i].showTime +"</small>"+
 		                                "</h4>" +
-		                                " <span style=\"overflow: hidden;text-overflow: ellipsis;white-space: nowrap;\">"+data.obj.listNewMessage[i].messInfo+"</span> " +
+		                                " <span style=\"overflow: hidden;text-overflow: ellipsis;white-space: nowrap;\">"+data.obj[i].messInfo+"</span> " +
 		                                "</div>" +
 		                                "</a>" +
 		                                "</li>";
-		                    	}else{
-		                    		str += "<li class=\"bg-warning\">" +
-	                                "<a href='<%=path%>/book/buyBook.action?userId=" + data.obj.listNewMessage[i].sendUserId + "&bookId="+ data.obj.listNewMessage[i].bookId + " '>" +
-	                                "<div class=\"pull-left\">" +
-	                                "<img src=\"<%=path%>"+data.obj.listNewMessage[i].sendUserImage +"\" class=\"rounded-circle\" alt=\"User Image\">" +
-	                                "</div>" +
-	                                "<div class=\"mail-contnet\">" +
-	                                "<h4> " +data.obj.listNewMessage[i].sendUserName +
-	                                "<small><i class=\"fa fa-clock-o\"></i>"+ data.obj.listNewMessage[i].showTime +"</small>"+
-	                                "</h4>" +
-	                                " <span style=\"overflow: hidden;text-overflow: ellipsis;white-space: nowrap;\">"+"这是交易信息："+data.obj.listNewMessage[i].messInfo+"</span> " +
-	                                "</div>" +
-	                                "</a>" +
-	                                "</li>";
-		                    	}
-		    
 		            	}
 		                $("#menuForAllMessages").append(str);
-		                //console.log(str);
+		                console.log(str);
 		            	}
 					},
 					error: function() {

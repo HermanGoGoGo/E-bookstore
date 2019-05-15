@@ -1,8 +1,13 @@
 package com.herman.ebookstore.common.model;
 
+
 /**
- * 响应码枚举，参考HTTP状态码的语义
- */
+* @ClassName: ResultCode
+* @Description: TODO(响应码枚举)
+* @author 黄金宝
+* @date 2019年3月14日
+*
+*/
 public enum ResultCode {
     SUCCESS(200,"成功"),//成功
     FAIL(400,"失败"),//失败

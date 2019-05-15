@@ -46,7 +46,9 @@ public class LoginController extends BaseForSDK {
 
 	@RequestMapping("page")
 	public String toLoginPage(HttpServletRequest request,Model model,String type) {
-		request.getSession().invalidate();
+		if(type != null && "login".equals(type)) {		
+			request.getSession().invalidate();
+		}
 		/*
 		 * List<University> universityList = this.universityService.selectAll();
 		 * model.addAttribute("universityList",universityList);

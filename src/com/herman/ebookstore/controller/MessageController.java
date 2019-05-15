@@ -70,6 +70,7 @@ public class MessageController {
 				messageDto.setMessInfo("个人消息");
 				//设置内容
 				messageDto.setSendUserName("全部消息");
+				//查询所有信息
 				listMessages = this.messageService.findAllMessageReceiveUserId(messageDto);
 			}else {
 				//如果发送人id等于接收人id则返回

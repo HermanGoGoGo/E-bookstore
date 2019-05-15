@@ -323,9 +323,9 @@
             <li><a href="<%=path%>/message/showOneMessage.action"><i class="ti-more"></i>消息中心</a></li>
             <li><a href="<%=path%>/book/selfBook.action"><i class="ti-more"></i>个人书库</a></li>
             <li><a href="<%=path%>/book/orderBook.action"><i class="ti-more"></i>个人订单</a></li>
-            <li><a href="#"><i class="ti-more"></i>个人信息</a></li>
-            <li><a href="#"><i class="ti-more"></i>修改密码</a></li>
-            <li><a href="#"><i class="ti-more"></i>注册</a></li>
+            <li><a href="<%=path%>/userInfo.action"><i class="ti-more"></i>个人信息</a></li>
+            <li><a href="<%=path%>/page.action?type=forget"><i class="ti-more"></i>修改密码</a></li>
+            <li><a href="<%=path%>/page.action?type=register"><i class="ti-more"></i>注册</a></li>
           </ul>
         </li>  
         
