@@ -550,12 +550,19 @@
         }, function(){   
         	 $.ajax({
      			type: "post",
-     			url: "<%=path%>/home/homePage.action",
+     			url: "<%=path%>/book/cancelTransaction.action?bookId=${bookDto.id}",
      			data: {
      			},
      			dataType: 'json',
      			success: function(data) {
-     				swal("取消成功!", "您已成功取消交易.", "success"); 
+     				if(data.status =='200'){
+     					swal("取消成功!", "您已成功取消交易.", "success"); 
+     					setTimeout(function () {
+     						window.location.href="<%=path%>/home/toHomePage.action";
+     					  }, 1000);
+     				}else{
+     					swal("取消失败!", "不可取消", "error"); 
+     				}
      			},
      			error: function() {
     				console.log("error");
@@ -576,12 +583,20 @@
         }, function(){   
         	 $.ajax({
      			type: "post",
-     			url: "<%=path%>/home/homePage.action",
+     			url: "<%=path%>/book/confirmTransaction.action?bookId=${bookDto.id}",
      			data: {
      			},
      			dataType: 'json',
      			success: function(data) {
-     				swal("交易成功!", "您已成功交易本书.", "success"); 
+     				if(data.status =='200'){
+     					swal("交易成功!", "您已成功交易本书.", "success");
+     					setTimeout(function () {
+     						window.location.href="<%=path%>/home/toHomePage.action";
+   					  }, 1000);
+     				}else{
+     					swal("交易失败!", "请勿重复点击或待买家确认后卖家才能进行确认", "error"); 
+     				}
+     				
      			},
      			error: function() {
     				console.log("error");

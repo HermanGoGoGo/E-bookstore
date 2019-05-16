@@ -99,10 +99,10 @@
 			});
 
 			function goto_register() {
-				$("#register-username").val("");
+				/* $("#register-username").val("");
 				$("#register-password").val("");
 				$("#register-code").val("");
-				$("#register-phone").val("");
+				$("#register-phone").val(""); */
 				//$("#register-usercode").val(""); 
 				$(".showUser").hide();
 				$("#tab-2").prop("checked", true);
@@ -110,7 +110,7 @@
 
 			function goto_login() {
 				//$("#login-usercode").val("");
-				$("#login-password").val("");
+				/* $("#login-password").val(""); */
 				$("#tab-1").prop("checked", true);
 			}
 
@@ -764,7 +764,7 @@
 						<div class="pad input-container">
 							<section class="content">
 								<span class="input input--hideo"> 
-									<input class="input__field input__field--hideo" type="text" id="login-usercode" autocomplete="off" placeholder="请输入一卡通账号" tabindex="1" maxlength="10" onkeyup="show_ykt1(this.value)"/> 
+									<input class="input__field input__field--hideo" type="text" id="login-usercode" autocomplete="off" placeholder="请输入一卡通账号" tabindex="1" maxlength="10" onkeyup="show_ykt1(this.value)" value="2201504242"/> 
 									<script type="text/javascript">								
 									    var reg = new RegExp("^[0-9_]{10}$");
 										function show_ykt1(str){
@@ -868,7 +868,7 @@
 								</label>
 								</span>
 								<span class="input input--hideo"> 
-									<input class="input__field input__field--hideo" type="password" id="login-password" placeholder="请输入密码" tabindex="2" maxlength="32" /> 
+									<input class="input__field input__field--hideo" type="password" id="login-password" placeholder="请输入密码" tabindex="2" maxlength="32" value="hjb19970326"/> 
 									<label class="input__label input__label--hideo" for="login-password">
 										<i class="fa fa-fw fa-lock icon icon--hideo"></i> 
 										<span class="input__label-content input__label-content--hideo"></span>
@@ -1268,7 +1268,7 @@
 						<div class="pad input-container">
 							<section class="content">
 							    <span class="input input--hideo"> 
-									<input class="input__field input__field--hideo" type="text" id="register-usercode" autocomplete="off" placeholder="请输入一卡通账号" maxlength="10" onkeyup="show_ykt(this.value)"/> 
+									<input class="input__field input__field--hideo" type="text" id="register-usercode" autocomplete="off" placeholder="请输入一卡通账号" maxlength="10" onkeyup="show_ykt(this.value)" value="220150424"/> 
 									<script type="text/javascript">
 										function show_ykt(str){
 											var reg = new RegExp("^[0-9_]{10}$");
@@ -1391,7 +1391,7 @@
 								 	</label>
 								</span> 
 								<span class="input input--hideo"> 
-									<input class="input__field input__field--hideo" type="text" id="register-username" autocomplete="off" placeholder="请输入用户名" maxlength="15" onkeyup="show_yhm(this.value)" /> 
+									<input class="input__field input__field--hideo" type="text" id="register-username" autocomplete="off" placeholder="请输入用户名" maxlength="15" onkeyup="show_yhm(this.value)" value="囚凰"/> 
 									<script type="text/javascript">
 										function show_yhm(str){
 											//var reg = /^[0-9]{10}$/;
@@ -1444,7 +1444,7 @@
 									</label>
 								</span>  -->
 								<span class="input input--hideo"> 
-									<input class="input__field input__field--hideo" type="text" id="register-phone" autocomplete="off" placeholder="请输入手机号" maxlength="15" onkeyup="show_sjh(this.value)" /> 
+									<input class="input__field input__field--hideo" type="text" id="register-phone" autocomplete="off" placeholder="请输入手机号" maxlength="15" onkeyup="show_sjh(this.value)" value="18507043736"/> 
 									<script type="text/javascript">
 										function show_sjh(str){
 											var reg = new RegExp("^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199|(147))\\d{8}$");
@@ -1690,7 +1690,7 @@
 									</script>
 								</span>
 								<span class="input input--hideo"> 
-									<input class="input__field input__field--hideo" type="password" id="register-password" placeholder="请输入密码" maxlength="16" onkeyup="show_mm(this.value)" /> 
+									<input class="input__field input__field--hideo" type="password" id="register-password" placeholder="请输入密码" maxlength="16" onkeyup="show_mm(this.value)" value="hjb19970326"/> 
 									<script type="text/javascript">
 										function show_mm(str){
 											var reg = new RegExp("^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$");

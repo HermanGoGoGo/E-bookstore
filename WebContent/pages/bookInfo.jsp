@@ -22,7 +22,7 @@
     <meta name="author" content="">
     <link rel="icon" href="<%=path%>/images/favicon.ico">
 
-    <title>e书网 - </title>
+    <title>e书网 - 书籍详情 </title>
     
 	<!-- Bootstrap 4.0-->
 	<link rel="stylesheet" href="<%=path%>/assets/vendor_components/bootstrap/dist/css/bootstrap.css">

@@ -283,13 +283,13 @@
 							  <div class="col-md-6">
 								<div class="form-group">
 								  <label for="name">书名<span class="text-danger">*</span></label>
-								  <input type="text" id="name" name ="name" class="form-control"required data-validation-required-message="This field is required" placeholder="请填写书名">
+								  <input type="text" id="name" name ="name" class="form-control"required data-validation-required-message="This field is required" placeholder="请填写书名" value="java语言程序设计">
 								</div>
 							  </div>
 							  <div class="col-md-6">
 								<div class="form-group">
 								  <label for="author">作者<span class="text-danger">*</span></label>
-								  <input type="text" id="author" name ="author"  class="form-control" required data-validation-required-message="This field is required" placeholder="请填写作者">
+								  <input type="text" id="author" name ="author"  class="form-control" required data-validation-required-message="This field is required" placeholder="请填写作者" value="梁勇">
 								</div>
 							  </div>
 							</div>
@@ -299,7 +299,7 @@
 								     <label for="originalPrice">原价<span class="text-danger">*</span></label>
 								    <div class="input-group"> 
 								        <span class="input-group-addon">￥</span>
-									    <input type="number" id="originalPrice" name="originalPrice" class="form-control" required data-validation-required-message="This field is required"> <span class="input-group-addon">.00</span> 
+									    <input type="number" id="originalPrice" name="originalPrice" class="form-control" required data-validation-required-message="This field is required" value="89"> <span class="input-group-addon">.00</span> 
 									</div>
 								</div>
 							  </div>
@@ -308,7 +308,7 @@
 								     <label for="price">售价<span class="text-danger">*</span></label>
 								    <div class="input-group"> 
 								        <span class="input-group-addon">￥</span>
-									    <input type="number" id="price" name="price" class="form-control" required data-validation-required-message="This field is required"> <span class="input-group-addon">.00</span> 
+									    <input type="number" id="price" name="price" class="form-control" required data-validation-required-message="This field is required" value="33"> <span class="input-group-addon">.00</span> 
 									</div>
 								</div>
 							  </div>
@@ -317,7 +317,7 @@
 							  <div class="col-md-6">
 								<div class="form-group">
 								  <label for="edition">版本</label>
-								  <input type="text" id="edition" name="edition" class="form-control" placeholder="请填写版本">
+								  <input type="text" id="edition" name="edition" class="form-control" placeholder="请填写版本" value="基础版">
 								</div>
 							  </div>
 							  <div class="col-md-6">
@@ -350,8 +350,8 @@
 							<div class="row">
 							  <div class="col-md-6">
 								<div class="form-group">
-								  <label for="course">课程</label>
-								  <input type="text" id="course" name ="course"  class="form-control" placeholder="请填写课程">
+								  <label for="course">课程</label> 
+								  <input type="text" id="course" name ="course"  class="form-control" placeholder="请填写课程" value="java程序设计">
 								</div>
 							  </div>
 							  <div class="col-md-6">
@@ -385,7 +385,7 @@
 							</div>
 							<div class="form-group">
 							  <label for="description">书本描述<span class="text-danger">*</span></label>
-							  <textarea id="description" name ="description" rows="5" class="form-control" required data-validation-required-message="This field is required" placeholder="书籍描述"></textarea>
+							  <textarea id="description" name ="description" rows="5" class="form-control" required data-validation-required-message="This field is required" placeholder="书籍描述" ></textarea>
 							</div>
 						</div>
 						<!-- /.box-body -->

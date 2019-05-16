@@ -353,7 +353,7 @@
 					        <div class="flexbox align-items-center mt-3 py-10">
 						     <a href="<%=path%>/book/bookDetails.action?id=${oneselfBooks.id}" class="btn btn-flat btn-primary btn-sm">查看详情</a>
 						     <a href="<%=path%>/book/buyBook.action?userId=${oneselfBooks.userId}&bookId=${oneselfBooks.id}" class="btn btn-flat btn-primary btn-sm">联系卖家</a>
-						     <a href="#" class="btn btn-flat btn-primary btn-sm">确认收货</a>
+						     <a href="#" class="btn btn-flat btn-primary btn-sm">取消交易</a>
 						    </div>
 					</div>
 					<!-- /.box-body -->
@@ -423,6 +423,7 @@
 					        <div class="flexbox align-items-center mt-3 py-10">
 						     <a href="<%=path%>/book/bookDetails.action?id=${oneselfBooks.id}" class="btn btn-flat btn-primary btn-sm">查看详情</a>
 						     <a href="<%=path%>/book/buyBook.action?userId=${oneselfBooks.userId}&bookId=${oneselfBooks.id}" class="btn btn-flat btn-primary btn-sm">联系卖家</a>
+						     <a href="#" class="btn btn-flat btn-primary btn-sm"></a>
 						    </div>
 					</div>
 					<!-- /.box-body -->

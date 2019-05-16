@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,12 +20,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import com.alibaba.fastjson.JSON;
 import com.herman.ebookstore.model.BookDto;
 import com.herman.ebookstore.model.MessageDto;
 import com.herman.ebookstore.model.UserDto;
 import com.herman.ebookstore.pojo.Book;
 import com.herman.ebookstore.pojo.HstbSellBook;
 import com.herman.ebookstore.pojo.Message;
+import com.herman.ebookstore.pojo.Sdk;
 import com.herman.ebookstore.pojo.User;
 import com.herman.ebookstore.service.BookService;
 import com.herman.ebookstore.service.HstbSellBookService;
@@ -222,9 +225,13 @@ public class BookController {
 				bookDto = this.bookService.findOneBook(book);	
 				if(listMessageDtos.size()==0) {
 					//如果交易双方没有消息，则自定义第一次消息
-					book.setPurchaserId(usercode.toString());
-					book.setStatus("3");
-					this.bookService.update(book);
+					message.setSendUserId(usercode.toString());
+					message.setReceiveUserId(userId);
+					message.setBookId(bookId);
+					message.setMessInfo("请问一下在嘛？");
+					 this.messageService.save(message);
+					listMessageDtos= this.messageService.findBookMessageByReAndSe(messageDto);
+				}else {
 					message.setSendUserId(usercode.toString());
 					message.setReceiveUserId(userId);
 					message.setBookId(bookId);
@@ -232,6 +239,9 @@ public class BookController {
 					 this.messageService.save(message);
 					listMessageDtos= this.messageService.findBookMessageByReAndSe(messageDto);
 				}
+				book.setPurchaserId(usercode.toString());
+				book.setStatus("3");
+				this.bookService.update(book);
 				//将交易信息更新为已读
 				this.messageService.clearStatus(messageDto);
 				sendUser.setUsercode(userId);
@@ -330,4 +340,69 @@ public class BookController {
 		return "pages/orderBook";		
 	}
 	
+	
+	@RequestMapping("confirmTransaction")
+	public void confirmTransaction(String bookId, HttpServletResponse response ,HttpServletRequest request) {
+		Object usercode = request.getSession().getAttribute("usercode");
+		Book book =new Book();
+		Message message =new Message();
+		if(usercode != null && !"".equals(usercode)) {
+			book =this.bookService.findById(bookId);
+			if(book.getStatus().equals("3") ) {
+				if(book.getPurchaserId().equals(usercode)) {
+					book.setStatus("4");
+					this.bookService.update(book);
+					message.setBookId(bookId);
+					message.setSendUserId(usercode.toString());
+					message.setReceiveUserId(book.getUserId());
+					message.setMessInfo("买家已确认交易，请您尽快确认交易");
+					this.messageService.save(message);
+					new ResponseWriter().writerResponse(true, response);
+				}else if (book.getUserId().equals(usercode)){
+					new ResponseWriter().writerResponse(false, response);
+				}
+			}else if(book.getStatus().equals("4") && book.getUserId().equals(usercode)) {
+				book.setStatus("5");
+				this.bookService.update(book);
+				message.setBookId(bookId);
+				message.setSendUserId(usercode.toString());
+				message.setReceiveUserId(book.getPurchaserId());
+				message.setMessInfo("卖家已确认交易，交易完成");
+				this.messageService.save(message);
+				new ResponseWriter().writerResponse(true, response);
+			}else {
+				new ResponseWriter().writerResponse(false, response);
+			}
+		}
+
+	}
+	
+	
+	@RequestMapping("cancelTransaction")
+	public void cancelTransaction(String bookId, HttpServletResponse response ,HttpServletRequest request) {
+		Object usercode = request.getSession().getAttribute("usercode");
+		Book book =new Book();
+		Message message =new Message();
+		if(usercode != null && !"".equals(usercode)) {
+			book =this.bookService.findById(bookId);
+			if(book.getStatus().equals("3") || book.getStatus().equals("4")) {
+				book.setStatus("0");
+				book.setPurchaserId("");
+				this.bookService.update(book);
+				message.setBookId(bookId);
+				message.setSendUserId(usercode.toString());
+				if(book.getUserId().equals(usercode)) {
+					message.setReceiveUserId(book.getPurchaserId());
+				}else {
+					message.setReceiveUserId(book.getUserId());
+				}
+				message.setMessInfo("对方已经取消交易");
+				this.messageService.save(message);
+				new ResponseWriter().writerResponse(true, response);
+			}else {
+				new ResponseWriter().writerResponse(false, response);
+			}
+		}
+
+	}
 }
