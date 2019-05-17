@@ -225,13 +225,9 @@ public class BookController {
 				bookDto = this.bookService.findOneBook(book);	
 				if(listMessageDtos.size()==0) {
 					//如果交易双方没有消息，则自定义第一次消息
-					message.setSendUserId(usercode.toString());
-					message.setReceiveUserId(userId);
-					message.setBookId(bookId);
-					message.setMessInfo("请问一下在嘛？");
-					 this.messageService.save(message);
-					listMessageDtos= this.messageService.findBookMessageByReAndSe(messageDto);
-				}else {
+					book.setPurchaserId(usercode.toString());
+					book.setStatus("3");
+					this.bookService.update(book);
 					message.setSendUserId(usercode.toString());
 					message.setReceiveUserId(userId);
 					message.setBookId(bookId);
@@ -239,9 +235,6 @@ public class BookController {
 					 this.messageService.save(message);
 					listMessageDtos= this.messageService.findBookMessageByReAndSe(messageDto);
 				}
-				book.setPurchaserId(usercode.toString());
-				book.setStatus("3");
-				this.bookService.update(book);
 				//将交易信息更新为已读
 				this.messageService.clearStatus(messageDto);
 				sendUser.setUsercode(userId);
